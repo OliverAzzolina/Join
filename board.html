@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board</title>
+    <link rel="stylesheet" href="/css/board.css">
+    <script src="/js/board.js"></script>
+</head>
+<body onload="renderTodos()">
+    <nav>
+        <img src="" alt="Join Logo">
+        <a href="summary.html"><img src="" alt="">Summary</a>
+        <a href="summary.html"><img src="" alt="">Add Task</a>
+        <a href="summary.html"><img src="" alt="">Board</a>
+        <a href="summary.html"><img src="" alt="">Contacts</a>
+    </nav>
+    <main>
+        <div id="header">
+            <p>Kanban Project Management Tool</p>
+            <div>
+                <button><img src="" alt="?"></button>
+                <button>SM</button>
+            </div>
+        </div>
+
+        <div id="board">
+            <div id="board-header">
+                <h1>Board</h1>
+                <div>                
+                    <input type="text" placeholder="Find Task">
+                    <button><img src="" alt=""></button>
+                    <button>Add task +</button>
+                </div>
+
+            </div>
+            
+            <div class="board-section">
+
+            <div class="todos-section">
+                <div class="todos-header">
+                    <p>To Do</p>
+                    <button>+</button>
+                </div>
+                    <div id="todo-container" class="todos-container-empty">
+                        
+                    </div>
+            </div>
+
+            <div class="todos-section">
+                <div class="todos-header">
+                    <p>In progress</p>
+                    <button>+</button>
+                </div>
+                    <div id="in-progress-container" class="todos-container">
+                        
+                    </div>
+            </div>
+
+            <div class="todos-section">
+                <div class="todos-header">
+                    <p>Await feedback</p>
+                    <button>+</button>
+                </div>
+                    <div id="await-feedback-container" class="todos-container"></div>
+            </div>
+            
+            <div class="todos-section">
+                <div class="todos-header">
+                    <p>Done</p>
+                    <button>+</button>
+                </div>
+                    <div id="done-container" class="todos-container"></div>
+            </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>
