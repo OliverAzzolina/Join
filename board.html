@@ -42,7 +42,7 @@
                     <p>To Do</p>
                     <button>+</button>
                 </div>
-                    <div id="todo-container" class="todos-container-empty">
+                    <div id="todo-container" class="todos-container-empty" ondrop="moveTo('Open')" ondragover="allowDrop(event)">
                         
                     </div>
             </div>
@@ -52,7 +52,7 @@
                     <p>In progress</p>
                     <button>+</button>
                 </div>
-                    <div id="in-progress-container" class="todos-container">
+                    <div id="in-progress-container" class="todos-container todos-container-empty" ondrop="moveTo('In progress')" ondragover="allowDrop(event)">
                         
                     </div>
             </div>
@@ -62,7 +62,7 @@
                     <p>Await feedback</p>
                     <button>+</button>
                 </div>
-                    <div id="await-feedback-container" class="todos-container"></div>
+                    <div id="await-feedback-container" class="todos-container todos-container-empty" ondrop="moveTo('Await')" ondragover="allowDrop(event)"></div>
             </div>
             
             <div class="todos-section">
@@ -70,11 +70,14 @@
                     <p>Done</p>
                     <button>+</button>
                 </div>
-                    <div id="done-container" class="todos-container"></div>
+                    <div id="done-container" class="todos-container todos-container-empty" ondrop="moveTo('Done')" ondragover="allowDrop(event)"></div>
             </div>
             </div>
         </div>
 
     </main>
+
+    <div id="overlay" style="display: none" onclick="closeDetailCard()"></div>
+
 </body>
 </html>
