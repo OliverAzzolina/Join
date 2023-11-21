@@ -9,26 +9,16 @@
 </head>
 <body onload="renderTodos()">
     <nav>
-        <img src="" alt="Join Logo">
-        <a href="summary.html"><img src="" alt="">Summary</a>
-        <a href="summary.html"><img src="" alt="">Add Task</a>
-        <a href="summary.html"><img src="" alt="">Board</a>
-        <a href="summary.html"><img src="" alt="">Contacts</a>
+
     </nav>
     <main>
-        <div id="header">
-            <p>Kanban Project Management Tool</p>
-            <div>
-                <button><img src="" alt="?"></button>
-                <button>SM</button>
-            </div>
-        </div>
+
 
         <div id="board">
             <div id="board-header">
                 <h1>Board</h1>
                 <div>                
-                    <input type="text" placeholder="Find Task">
+                    <input id="search" onkeyup="filterTodos()" type="text" placeholder="Find Task">
                     <button><img src="" alt=""></button>
                     <button>Add task +</button>
                 </div>
@@ -42,7 +32,7 @@
                     <p>To Do</p>
                     <button>+</button>
                 </div>
-                    <div id="todo-container" class="todos-container-empty" ondrop="moveTo('Open')" ondragover="allowDrop(event)">
+                    <div id="open" class="todos-container-empty" ondrop="moveTo('open')" ondragover="allowDrop(event)">
                         
                     </div>
             </div>
@@ -52,7 +42,7 @@
                     <p>In progress</p>
                     <button>+</button>
                 </div>
-                    <div id="in-progress-container" class="todos-container todos-container-empty" ondrop="moveTo('In progress')" ondragover="allowDrop(event)">
+                    <div id="in-progress" class="todos-container todos-container-empty" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)">
                         
                     </div>
             </div>
@@ -62,7 +52,7 @@
                     <p>Await feedback</p>
                     <button>+</button>
                 </div>
-                    <div id="await-feedback-container" class="todos-container todos-container-empty" ondrop="moveTo('Await')" ondragover="allowDrop(event)"></div>
+                    <div id="await-feedback" class="todos-container todos-container-empty" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)"></div>
             </div>
             
             <div class="todos-section">
@@ -70,7 +60,7 @@
                     <p>Done</p>
                     <button>+</button>
                 </div>
-                    <div id="done-container" class="todos-container todos-container-empty" ondrop="moveTo('Done')" ondragover="allowDrop(event)"></div>
+                    <div id="done" class="todos-container todos-container-empty" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
             </div>
             </div>
         </div>
