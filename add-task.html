@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add-Task</title>
+</head>
+<body>
+    <h1>Add Task</h1>
+
+    <p>Title</p> <!-- TODO: add suffix -->
+    <input type="text" placeholder="Enter a title">
+
+    <p>Description</p>
+    <input type="text" placeholder="Enter a Description">
+
+    <p>Prio</p>
+    <button>Urgent</button> <!-- TODO: add icon -->
+    <button>Medium</button> <!-- TODO: add icon -->
+    <button>Low</button> <!-- TODO: add icon -->
+
+    <p>Due date</p> <!-- TODO: add suffix -->
+    <input type="date" placeholder="dd/mm/yyyy"> <!-- TODO: add icon -->
+
+    <p>Category</p> <!-- TODO: add suffix-->
+        <select><!-- TODO: add logic (pre-created categories?!) -->
+            <option value="" disabled selected>Select task category</option>
+            <option value="">Technical Task</option>
+            <option value="">User Story</option>
+        </select>
+    
+    <p>Assigned to</p>
+    <select> <!-- TODO: add logic (user DB) -->
+        <option value="" disabled selected>Select contacts to assign</option>
+        <option value="">Technical Task</option>
+        <option value="">User Story</option>
+    </select>
+
+    <p>Subtasks</p>
+    <input type="text" placeholder="Add new subtask"> <!-- TODO: add logic -->
+    
+</body>
+</html>
