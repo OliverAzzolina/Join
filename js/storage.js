@@ -1,5 +1,5 @@
 const STORAGE_TOKEN = process.env.STORAGE_TOKEN;
-const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
+const STORAGE_URL = process.env.STORAGE_URL;
 
 
 async function setItem(key, value) {
