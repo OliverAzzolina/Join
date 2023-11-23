@@ -46,7 +46,7 @@ function init(){
 }
 
 function loadContacts(){
-    let contactList = document.getElementById('contact-list');
+    let contactList = document.getElementById('contacts');
     contactList.innerHTML = '';
     for (let i = 0; i < contacts.length; i++) {
         let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
@@ -61,7 +61,7 @@ function renderContactList(i, initials, name, email){
     <div id="contact${i}" class="contact" onclick="openContactInfo(${i})">
         <div class="name-logo">${initials}</div>
         <div class="contact-name">
-        ${name}
+        <span>${name}</span>
         <a href="${email}">${email}</a>
         </div>    
     </div>
@@ -81,24 +81,65 @@ function openContactInfo(i){
 function renderContactInfo(i, initials, name, email, phone){
     return `
     <div class="name-section">
-            <div class="name-logo name-logo-detail">${initials}</div>
+        <div class="name-logo name-logo-detail">
+            ${initials}
+        </div>
+        <div class="flex-row">    
             <div class="name">
-            ${name}
+                <span>${name}</span>
             </div>
-              <div class="ancors-name">
-                <a href="#">Edit</a><a href="#">Delete</a>
-              </div>
+            <div class="edit-contact">
+                <button onmouseover="hover('a')" onmouseout="unhover('a')"><img id="edit-img" src="/assets/img/icons/edit.png" alt=""><span>Edit</span></button>
+                <button onmouseover="hover('b')" onmouseout="unhover('b')"><img id="delete-img" src="/assets/img/icons/delete.png" alt=""><span>Delete</span></button>
             </div>
-          </div>
-          <div class="contact-information">
-            <p>Contact Information</p>
-            <div class="email">
-              <p>Email:</p>
-              <a href="${email}">${email}</a>
-            </div>
-            <div class="phone">
-              <p>Phone</p>
-              <a href="${phone}">${phone}</a>
-            </div>
-          </div>`
+        </div>
+    </div>        
+    <div class="contact-information">
+        <p>Contact Information</p>
+        <div class="email">
+          <p>Email:</p>
+          <a href="${email}">${email}</a>
+        </div>
+        <div class="phone">
+          <p>Phone</p>
+          <a href="${phone}">${phone}</a>
+        </div>
+    </div>`
 }
+
+function hover(img){
+  if(img == 'a'){
+    document.getElementById('edit-img').setAttribute('src', '/assets/img/icons/edit_hover.png');
+  }else{
+    document.getElementById('delete-img').setAttribute('src', '/assets/img/icons/delete_hover.png');
+  }
+}
+
+function unhover(img){
+    if(img == 'a'){
+        document.getElementById('edit-img').setAttribute('src', '/assets/img/icons/edit.png');
+      }else{
+        document.getElementById('delete-img').setAttribute('src', '/assets/img/icons/delete.png');
+      }
+}
+
+function openAddNewContact(){
+   
+    
+        document.getElementById('overlay').style.display = "flex"; 
+        document.getElementById('overlay').innerHTML = generateOverlay();
+        
+}
+
+function closeAddContact(){
+    document.getElementById('overlay').style.display = "none";
+  }
+  
+  function generateOverlay(){
+    return `
+      `;
+  }
+
+  function doNotClose(event){
+    event.stopPropagation();
+  }
