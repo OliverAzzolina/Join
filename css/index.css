@@ -2,7 +2,7 @@ body {
     width: 100vw;
     height: 100vh;
     margin: 0;
-    background-color: rgb(225, 222, 222);
+    background-color:#F6F7F8;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,15 +16,56 @@ body {
     left: 77px;
 }
 
+.top-bar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    padding-top: 67px;
+    margin-right: 200px;
+}
+
+.top-bar span {
+    margin-right: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.top-bar button {
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: #2A3647;
+    color: white;
+}
+
 .content {
     width: 625px;
     height: 493px;
     background-color: #FFFFFF;
     box-sizing: border-box;
-    border-radius: 12px;
+    border-radius: 30px;
     padding-left: 116px;
     padding-right: 116px;
-    padding-top: 96px;
+    padding-top: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+
+.content h2 {
+    text-align: center;
+    font-size: 61px;
+    font-weight: 700;
+    margin-top: 50px;
+    margin-bottom: 17px;
+}
+
+.underline {
+    height: 3px; 
+    width: 150px; 
+    background-color: blue; 
+    margin: 0 auto; 
+    margin-top: 5px; 
+    margin-bottom: 25px;
 }
 
 .form-group {
@@ -35,20 +76,42 @@ body {
     align-items: flex-start;
 }
 
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 400px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 355px;
+    height: 20px; 
+    margin-top: -10px;
+}
+
 .form-group input[type="email"], .form-group input[type="password"] {
     width: 100%;
     padding: 10px;
+    padding-left: 40px; 
     margin-bottom: 10px;
     border-radius: 12px;
+    border: 1px solid #ccc; 
 }
 
 .form-group label {
     display: flex;
     align-items: center;
+    padding-left: 22px;
+}
+
+.label {
+    padding-left: 22px;
 }
 
 .form-group label input[type="checkbox"] {
-    margin-right: 5px;
+    margin-right: 150px;
+    
 }
 
 .button-group {
@@ -61,4 +124,33 @@ body {
 .button-group button {
     padding: 10px 20px;
     border-radius: 12px;
+    background-color: #2A3647;
+    color: white;
+    padding-top: 12px;
+    margin-top: 45px;
+}
+
+
+.footer {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 20px; 
+}
+
+.footer p {
+    margin: 0;
+    color:#A8A8A8; 
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.guest-login {
+    background-color: rgb(148, 31, 31);
+    color: black;
+    border: 1px solid #ccc; 
 }
