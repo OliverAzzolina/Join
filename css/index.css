@@ -1,0 +1,64 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-color: rgb(225, 222, 222);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    position: absolute;
+    width: 100.03px;
+    height: 121.97px;
+    top: 80px;
+    left: 77px;
+}
+
+.content {
+    width: 625px;
+    height: 493px;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 12px;
+    padding-left: 116px;
+    padding-right: 116px;
+    padding-top: 96px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-group input[type="email"], .form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+}
+
+.form-group label input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    border-radius: 12px;
+}
