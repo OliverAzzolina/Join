@@ -13,10 +13,9 @@
         <div id="board">
             <div id="board-header">
                 <h1>Board</h1>
-                <div>                
+                <div id="board-header-right">              
                     <input id="search" onkeyup="filterTodos()" type="text" placeholder="Find Task">
-                    <button><img src="" alt=""></button>
-                    <button>Add task +</button>
+                    <button onclick="">Add task +</button>
                 </div>
 
             </div>
@@ -26,7 +25,7 @@
             <div class="todos-section">
                 <div class="todos-header">
                     <p>To Do</p>
-                    <button>+</button>
+                    <button onmouseover="hover('add-task-board-button1')" onmouseout="unhover('add-task-board-button1')"><img id="add-task-board-button1" src="assets/img/icons/plus_button.png" alt=""></button>
                 </div>
                     <div id="open" class="todos-container-empty" ondrop="moveTo('open')" ondragover="allowDrop(event)">
                         
@@ -36,7 +35,7 @@
             <div class="todos-section">
                 <div class="todos-header">
                     <p>In progress</p>
-                    <button>+</button>
+                    <button onmouseover="hover('add-task-board-button2')" onmouseout="unhover('add-task-board-button2')"><img id="add-task-board-button2" src="assets/img/icons/plus_button.png" alt=""></button>
                 </div>
                     <div id="in-progress" class="todos-container todos-container-empty" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)">
                         
@@ -46,7 +45,7 @@
             <div class="todos-section">
                 <div class="todos-header">
                     <p>Await feedback</p>
-                    <button>+</button>
+                    <button onmouseover="hover('add-task-board-button3')" onmouseout="unhover('add-task-board-button3')"><img id="add-task-board-button3" src="assets/img/icons/plus_button.png" alt=""></button>
                 </div>
                     <div id="await-feedback" class="todos-container todos-container-empty" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)"></div>
             </div>
@@ -54,7 +53,7 @@
             <div class="todos-section">
                 <div class="todos-header">
                     <p>Done</p>
-                    <button>+</button>
+                    <button onmouseover="hover('add-task-board-button4')" onmouseout="unhover('add-task-board-button4')"><img id="add-task-board-button4" src="assets/img/icons/plus_button.png" alt=""></button>
                 </div>
                     <div id="done" class="todos-container todos-container-empty" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
             </div>

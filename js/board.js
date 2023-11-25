@@ -122,6 +122,15 @@ function filterTodos() {
     FilteredTodos(search);
   }
 }
+
+function hover(id){
+  document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button_hover.png');
+}
+
+function unhover(id){
+  document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button.png');
+}
+
    
 function FilteredTodos(search){ 
   refreshTodos();

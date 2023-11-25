@@ -11,9 +11,10 @@
     <main>
       <div class="left">
         <div id="contact-list" class="contacts-list">
-          <div class="add-contact-button">
-            <button class="add-contact-button" onclick="openAddNewContact()"><span>Add new contact</span><img src="/assets/img/icons/person_add.png" alt=""></button>
-          </div>
+            <button class="add-contact-button" onclick="openAddNewContact()">
+              <span>Add new contact</span>
+              <img src="/assets/img/icons/person_add.png" alt="">
+            </button>
           <div id="contacts" class="contacts-list"></div>
         </div>
       </div>
@@ -21,39 +22,14 @@
       <div class="right">
         <div class="detail-headline">
           <h1><b>Contacts</b></h1>
+          <div class="blue-line-vertical"></div>
           <h4>Better with a team</h4>
         </div>
 
           <div id="contact-detail" class="contact-detail"></div>
 
       </div>
-      <div id="overlay" style="display: flex" onclick="closeAddContact()">
-      
-        <div class="add-contact-card" onclick="doNotClose(event)">
-
-          <div class="add-contact-card-left">
-              <img src="/assets/img/icons/Capa 2.png" alt="">
-              <div>
-                <span>Add contact</span>
-                <span>Tasks are better with a Team!</span>
-              </div>
-          </div>
-      
-          <div class="add-contact-card-right">
-            <img src="assets/img/icons/Frame 79.png" alt="">
-              <div class="actions-container">
-                <div class="add-contact-inputs" >
-                  <input type="text" placeholder="Name" class="input-icon-name">
-                  <input type="email" placeholder="Email" class="input-icon-mail">
-                  <input  type="text" placeholder="Phone" class="input-icon-phone">
-                </div>
-                <div class="add-contact-buttons">
-                  <button class="cancel-button"><span>Cancel</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
-                  <button class="create-button"><span>Create contact</span><img src="assets/img/icons/check.png" alt=""></button>
-                </div>
-              </div>
-          </div>
-      </div>
+      <div id="overlay" style="display: none" onclick="closeAddContact()"></div>
       
       </div>
     </main>

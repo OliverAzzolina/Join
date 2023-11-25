@@ -1,5 +1,5 @@
-const STORAGE_TOKEN = process.env.STORAGE_TOKEN;
-const STORAGE_URL = process.env.STORAGE_URL;
+const STORAGE_TOKEN = process.env.STORAGE_TOKEN
+const STORAGE_URL = process.env.STORAGE_URL
 
 
 async function setItem(key, value) {
@@ -11,3 +11,5 @@ async function getItem(key) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
     return fetch(url).then(response => response.json());
 }
+
+

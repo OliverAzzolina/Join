@@ -6,6 +6,7 @@ body {
 
 main {
   display: flex;
+  justify-content: center;
   flex-direction: row;
   width: 1440px;
   height: 1024px;
@@ -24,8 +25,8 @@ main {
   display: flex;
   flex-direction: column;
   background-color: rgb(246, 247, 248);
-  padding-top: 32px;
-  padding-left: 16px;
+  padding-top: 100px;
+  padding-left: 42px;
 }
 
 .add-contact-button{
@@ -62,14 +63,15 @@ main {
     gap: 16px;
     width: 352px;
     height: 78px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
+    box-sizing: border-box;
+    padding: 15px 24px 15px 24px;
     
 }
 
 .contact:hover{
-    background-color: rgb(42,54,71);
-    color: white;
+    background-color: rgba(211, 211, 211, 0.25);
 }
 
 .contact-name{
@@ -84,32 +86,67 @@ main {
     height: 42px;
     width: 42px;
     gap: 10px;
-    background-color: orange;
+    background-color: #FF7A00;
     color: white;
     border-radius: 50%;
     border: 2px solid white;
 }
 
+.name-logo span{
+  font-size: 12px;
+  font-weight: 400;
+}
+
 .detail-headline {
   display: flex;
-  gap: 16px;
+  gap: 30px;
   align-items: center;
 }
 
-.name{
+.detail-headline h1{
+  font-size: 61px;
+  font-weight: 700;
+  margin: 0;
+
+}
+
+.detail-headline h4{
+font-size: 27px;
+font-weight: 400;
+margin: 0;
+}
+
+.blue-line-vertical{
+  height: 59px;
+  border: 1px solid #29ABE2;
+}
+
+.contact-detail{
+  gap: 21px;
+  margin-top: 32px;
+}
+
+.name span{
   font-size: 47px;
+  font-weight: 500;
 }
 
 .name-section{
     display: flex;
     align-items: center;
     gap: 24px;
+    height: 120px;
 }
 
 .name-logo-detail{
-    height: 24px;
-    width: 24px;
-    padding: 20px;
+    height: 120px;
+    width: 120px;
+    border: 3px solid white;
+}
+
+.name-logo-detail span{
+  font-size: 47px;
+  font-weight: 500;
 }
 
 .contact-information p{
@@ -117,18 +154,31 @@ main {
     margin-bottom: 16px;
 }
 
+.email a{
+  text-decoration: none;
+  color: #29ABE2;
+}
+
 .edit-contact{
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
+  width: 159px;
 }
 
 .edit-contact button{
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 13px;
   height: 24px;
+  width: 62px;
   background-color: transparent;
   border: none;
+}
+
+.edit-contact button span{
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .edit-contact button:hover{
@@ -163,9 +213,11 @@ main {
   background-color: #2A3647;
   width: 467px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
   flex-direction: column;
   padding:  66px 48px 66px 48px;
+  box-sizing: border-box;
 }
 
 .add-contact-card-right{
@@ -234,16 +286,53 @@ font-weight: 700;
   border-radius: 10px;
   color: white;
   display: flex;
-align-items: center;
-justify-content: space-evenly;
-font-size: 21px;
-font-weight: 700;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 21px;
+  font-weight: 700;
+  border: none;
+}
+
+.create-button:hover{
+  cursor: pointer;
+  background-color: #29ABE2;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4) );
+}
+
+.cancel-button:hover{
+  cursor: pointer;
+ border-color: #29ABE2;
+ color:  #29ABE2;
+ filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4) );
 }
 
 .add-contact-buttons{
   display: flex;
   flex-direction: row;
   gap: 24px;
+}
+
+.titles{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title{
+  font-size: 61px;
+  font-weight: 700;
+  color: white;
+}
+
+.subtitle{
+  font-size: 27px;
+  font-weight: 400;
+  color: white;
+}
+
+.blue-line-horizontal{
+  width: 90px;
+  border: 1px solid #29ABE2;
 }
 
 
