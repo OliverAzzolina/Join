@@ -1,5 +1,5 @@
-const STORAGE_TOKEN = process.env.STORAGE_TOKEN
-const STORAGE_URL = process.env.STORAGE_URL
+const STORAGE_TOKEN = 'V29BBR8Q1MPW81TMTAAB2UZEWWQE2ZVVT3GWGNDL'; //process.env.STORAGE_TOKEN
+const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';//process.env.STORAGE_URL
 
 
 async function setItem(key, value) {
@@ -9,7 +9,12 @@ async function setItem(key, value) {
 
 async function getItem(key) {
     const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-    return fetch(url).then(response => response.json());
+    return fetch(url).then(res => res.json()).then(res => {
+        // Verbesserter code
+        if (res.data) { 
+            return res.data.value;
+        } throw `Could not find data with key "${key}".`;
+    });
 }
 
 

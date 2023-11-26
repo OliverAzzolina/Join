@@ -1,50 +1,21 @@
-let contacts = [
-    {
-        name: 'Anton Mayer',
-        email: 'antonm@gmail.com',
-        phone: '+49 1111 111 11 1'
-    },
-    {
-        name: 'Anja Schulz',
-        email: 'schulz@hotmail.com',
-        phone: '+49 3333 333 33 3'
-    },
-    {
-        name: 'Benedigt Ziegler',
-        email: 'benedigt@gmail.com',
-        phone: '+49 4444 444 44 4'
-    },
-    {
-        name: 'David Eisenberg',
-        email: 'davidberg@gmail.com',
-        phone: '+49 2222 222 22 2'
-    },
-    {
-        name: 'Eva Fischer',
-        email: 'eva@gmail.com',
-        phone: '+49 5555 555 55 5'
-    },
-    {
-        name: 'Emmanuel Mauer',
-        email: 'emmanuelma@gmail.com',
-        phone: '+49 6666 666 66 6'
-    },
-    {
-        name: 'Marcel Bauer',
-        email: 'bauer@gmail.com',
-        phone: '+49 7777 777 77 7'
-    },
-    {
-        name: 'Tatjana Wolf',
-        email: 'wolf@gmail.com',
-        phone: '+49 8888 888 88 8'
-    },
-];
+let contacts = [];
 
-function init(){
-    loadContacts();
+async function init(){
+    loadContactsFromStorage();
 }
 
+//LOAD Storage
+async function loadContactsFromStorage(){
+  try{
+      contacts = JSON.parse(await getItem('contacts'));
+  }catch(e){
+    console.warn('loading error:', e)
+  }
+  sortContacts();
+  loadContacts();
+}
+
+//LOAD Contacts
 function loadContacts(){
     let contactList = document.getElementById('contacts');
     contactList.innerHTML = '';
@@ -52,22 +23,26 @@ function loadContacts(){
         let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
         let name = contacts[i]['name'];
         let email = contacts[i]['email'];
-        contactList.innerHTML += renderContactList(i, initials, name, email); 
+        let randomColor = '#' + contacts[i]['randomColor'];
+        contactList.innerHTML += renderContactList(i, initials, name, email, randomColor); 
     }
+    sortContacts();
 }
 
-function renderContactList(i, initials, name, email){
-    return `
-    <div id="contact${i}" class="contact" onclick="openContactInfo(${i})">
-        <div class="name-logo"><span>${initials}</span></div>
-        <div class="contact-name">
-        <span>${name}</span>
-        <a href="${email}">${email}</a>
-        </div>    
-    </div>
-    `;
+//SORT Contacts
+function sortContacts(){
+  contacts.sort((a, b) => {
+    if (a.name.toUpperCase() < b.name.toUpperCase()) {
+     return -1;
+    } else if (a.name.toUpperCase() > b.name.toUpperCase()) {
+     return 1;
+    } else {
+     return 0;
+    }
+   });
 }
 
+//OPEN Contact Info
 function openContactInfo(i){
     let contactDetail = document.getElementById('contact-detail');
     contactDetail.innerHTML = '';
@@ -75,13 +50,93 @@ function openContactInfo(i){
         let name = contacts[i]['name'];
         let email = contacts[i]['email'];
         let phone = contacts[i]['phone'];
-        contactDetail.innerHTML = renderContactInfo(i, initials, name, email, phone);
+        let randomColor = '#' + contacts[i]['randomColor'];
+        contactDetail.innerHTML = renderContactInfo(i, initials, name, email, phone, randomColor);
 }
 
-function renderContactInfo(i, initials, name, email, phone){
+//OPEN Add new Contact Overlay
+function openAddNewContact(){
+  document.getElementById('overlay').style.display = "flex"; 
+  document.getElementById('overlay').innerHTML = generateOverlay();   
+}
+
+// CLOSE Add new Contact Overlay
+function closeAddContact(){
+    document.getElementById('overlay').style.display = "none";
+}
+
+//ADD New Contact
+async function addNewContact(){
+  generateRandomColor();
+  contacts.push({
+    name: contactname.value,
+    email: email.value,
+    phone: phone.value,
+    randomColor: randomColor,
+  });
+  
+  await setItem('contacts', JSON.stringify(contacts));
+  document.getElementById('overlay').style.display = "none";
+  sortContacts();
+  loadContacts();
+}
+
+function generateRandomColor(){
+  return randomColor = Math.floor(Math.random()*16777215).toString(16);
+  
+}
+
+//DELETE Contact
+function deleteContact(i){
+  contacts.splice(i, 1);
+  document.getElementById('contact-detail').innerHTML = '';
+  document.getElementById('overlay').style.display = "none";
+  setItem('contacts', JSON.stringify(contacts));
+  loadContacts();
+}
+
+//EDIT Contact
+function EditContact(i){
+      document.getElementById('overlay').style.display = "flex"; 
+      let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
+      let name = contacts[i]['name'];
+      let email = contacts[i]['email'];
+      let phone = contacts[i]['phone'];
+      let randomColor = '#' + contacts[i]['randomColor'];
+      document.getElementById('overlay').innerHTML = generateEditOverlay(i, initials, name, email, phone, randomColor);
+      
+}
+
+//SAVE Contact
+function saveContact(i){
+  contacts[i]['name'] = document.getElementById('editName').value;
+  contacts[i]['email'] = document.getElementById('editEmail').value;
+  contacts[i]['phone'] = document.getElementById('editPhone').value;
+  contacts.push();
+  setItem('contacts', JSON.stringify(contacts));
+  document.getElementById('overlay').style.display = "none";
+  loadContacts(); 
+  openContactInfo(i);
+}
+
+//CONTACT list HTML
+function renderContactList(i, initials, name, email, randomColor){
+  return `
+  <div id="contact${i}" class="contact" onclick="openContactInfo(${i})">
+      <div id="name-logo-bg${i}" class="name-logo" style= "background-color: ${randomColor}"><span>${initials}</span></div>
+      <div class="contact-name">
+      <span>${name}</span>
+      <a href="${email}">${email}</a>
+      </div>    
+  </div>
+  `;
+}
+
+// Contact Info HTML
+function renderContactInfo(i, initials, name, email, phone, randomColor){
     return `
     <div class="name-section">
-        <div class="name-logo name-logo-detail">
+        <div id="name-logo-bg${i}" class="name-logo name-logo-detail" style= "background-color: ${randomColor}">
         <span>${initials}</span>
         </div>
         <div class="flex-row">    
@@ -107,145 +162,85 @@ function renderContactInfo(i, initials, name, email, phone){
     </div>`
 }
 
-//ADD
-function openAddNewContact(){
-        document.getElementById('overlay').style.display = "flex"; 
-        document.getElementById('overlay').innerHTML = generateOverlay();   
+//ADD Overlay
+function generateOverlay(){
+  return `
+  <div class="add-contact-card" onclick="doNotClose(event)">
+
+  <div class="add-contact-card-left">
+      <img src="/assets/img/icons/Capa 2.png" alt="">
+      <div class="titles">
+        <span class="title">Add contact</span>
+        <span class="subtitle">Tasks are better with a Team!</span>
+        <div class="blue-line-horizontal"></div>
+      </div>
+  </div>
+  <div class="add-contact-card-right">
+    <img src="assets/img/icons/Frame 79.png" alt="">
+    <form onsubmit="addNewContact(); return false">
+      <div class="actions-container">
+        <div class="add-contact-inputs" >
+          <input id="contactname" type="text" placeholder="Name" class="input-icon-name" required>
+          <input id="email" type="email" placeholder="Email" class="input-icon-mail" required>
+          <input id="phone" type="text" placeholder="Phone" class="input-icon-phone" required>
+        </div>
+        <div class="add-contact-buttons">
+          <button type="button" onclick="closeAddContact()" class="cancel-button"><span>Cancel</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
+          <button type="submit" class="create-button"><span>Create contact</span><img src="assets/img/icons/check.png" alt=""></button>
+        </div>
+      </div>
+      </form>
+  </div>`;
 }
 
-function closeAddContact(){
-    document.getElementById('overlay').style.display = "none";
+//EDIT Overlay
+function generateEditOverlay(i, initials, name, email, phone, randomColor){
+  return `
+  <div class="add-contact-card" onclick="doNotClose(event)">
+  <div class="add-contact-card-left">
+  <img src="/assets/img/icons/Capa 2.png" alt="">
+      <div class="titles">
+        <span class="title">Edit contact</span>
+        <span class="subtitle">Tasks are better with a Team!</span>
+        <div class="blue-line-horizontal"></div>
+      </div>
+  </div>
+  <div class="add-contact-card-right">
+  <div id="name-logo-bg${i}" class="name-logo name-logo-detail" style= "background-color: ${randomColor}">
+  <span>${initials}</span>
+  </div>
+    <form onsubmit="saveContact(${i}); return false">
+      <div class="actions-container">
+        <div class="add-contact-inputs" >
+          <input id="editName" type="text" placeholder="Name" class="input-icon-name" value="${name}" required>
+          <input id="editEmail" type="email" placeholder="Email" class="input-icon-mail" value="${email}" required>
+          <input id="editPhone" type="text" placeholder="Phone" class="input-icon-phone" value="${phone}" required>
+        </div>
+        <div class="add-contact-buttons">
+          <button type="button" onclick="deleteContact(${i})" class="cancel-button"><span>Delete</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
+          <button type="submit" class="create-button"><span>Save</span><img src="assets/img/icons/check.png" alt=""></button>
+        </div>
+      </div>
+      </form
+  </div>`;
+}
+
+function hover(img){
+  if(img == 'a'){
+     document.getElementById('edit-img').setAttribute('src', '/assets/img/icons/edit_hover.png');
+  }else{
+    document.getElementById('delete-img').setAttribute('src', '/assets/img/icons/delete_hover.png');
   }
+}
   
-  
-  function generateOverlay(){
-    return `
-    <div class="add-contact-card" onclick="doNotClose(event)">
-
-    <div class="add-contact-card-left">
-        <img src="/assets/img/icons/Capa 2.png" alt="">
-        <div class="titles">
-          <span class="title">Add contact</span>
-          <span class="subtitle">Tasks are better with a Team!</span>
-          <div class="blue-line-horizontal"></div>
-        </div>
-    </div>
-
-    <div class="add-contact-card-right">
-      <img src="assets/img/icons/Frame 79.png" alt="">
-      <form onsubmit="addNewContact(); return false">
-        <div class="actions-container">
-          <div class="add-contact-inputs" >
-            <input id="name" type="text" placeholder="Name" class="input-icon-name" required>
-            <input id="email" type="email" placeholder="Email" class="input-icon-mail" required>
-            <input id="phone" type="text" placeholder="Phone" class="input-icon-phone" required>
-          </div>
-          <div class="add-contact-buttons">
-            <button type="button" onclick="closeAddContact()" class="cancel-button"><span>Cancel</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
-            <button type="submit" class="create-button"><span>Create contact</span><img src="assets/img/icons/check.png" alt=""></button>
-          </div>
-        </div>
-        </form>
-    </div>`;
-  }
-
-  function doNotClose(event){
-    event.stopPropagation();
-  }
-
-  function addNewContact(){
-    let name = document.getElementById('name');
-    let email = document.getElementById('email');
-    let phone = document.getElementById('phone');
-
-    let contact = {
-        'name' : name.value,
-        'email': email.value,
-        'phone': phone.value,
-    };
-
-    contacts.push(contact);
-    
-    name.value = '';
-    email.value = '';
-    phone.value = '';
-    document.getElementById('overlay').style.display = "none";
-    loadContacts();
-  }
-
-  function deleteContact(i){
-    let contact = contacts[i];
-    contacts.splice(i, 1);
-    document.getElementById('contact-detail').innerHTML = '';
-    document.getElementById('overlay').style.display = "none";
-    loadContacts();
-  }
-
-  //EDIT
-  function EditContact(i){
-        document.getElementById('overlay').style.display = "flex"; 
-        let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
-        let name = contacts[i]['name'];
-        let email = contacts[i]['email'];
-        let phone = contacts[i]['phone'];
-        document.getElementById('overlay').innerHTML = generateEditOverlay(i, initials, name, email, phone);
-  }
-
-  function generateEditOverlay(i, initials, name, email, phone){
-    return `
-    <div class="add-contact-card" onclick="doNotClose(event)">
-
-    <div class="add-contact-card-left">
-    <img src="/assets/img/icons/Capa 2.png" alt="">
-        <div class="titles">
-          <span class="title">Edit contact</span>
-          <span class="subtitle">Tasks are better with a Team!</span>
-          <div class="blue-line-horizontal"></div>
-        </div>
-    </div>
-
-    <div class="add-contact-card-right">
-    <div class="name-logo name-logo-detail">
-    <span>${initials}</span>
-    </div>
-      <form onsubmit="saveContact(${i}); return false">
-        <div class="actions-container">
-          <div class="add-contact-inputs" >
-            <input id="editName" type="text" placeholder="Name" class="input-icon-name" value="${name}" required>
-            <input id="editEmail" type="email" placeholder="Email" class="input-icon-mail" value="${email}" required>
-            <input id="editPhone" type="text" placeholder="Phone" class="input-icon-phone" value="${phone}" required>
-          </div>
-          <div class="add-contact-buttons">
-            <button type="button" onclick="deleteContact(${i})" class="cancel-button"><span>Delete</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
-            <button type="submit" class="create-button"><span>Save</span><img src="assets/img/icons/check.png" alt=""></button>
-          </div>
-        </div>
-        </form>
-    </div>`;
-  }
-
-  function saveContact(i){
-    contacts[i]['name'] = document.getElementById('editName').value;
-    contacts[i]['email'] = document.getElementById('editEmail').value;
-    contacts[i]['phone'] = document.getElementById('editPhone').value;
-    contacts.push();
-    document.getElementById('overlay').style.display = "none";
-    loadContacts(); 
-    openContactInfo(i);
-  }
-
-  function hover(img){
+function unhover(img){
     if(img == 'a'){
-      document.getElementById('edit-img').setAttribute('src', '/assets/img/icons/edit_hover.png');
-    }else{
-      document.getElementById('delete-img').setAttribute('src', '/assets/img/icons/delete_hover.png');
-    }
-  }
-  
-  function unhover(img){
-      if(img == 'a'){
-          document.getElementById('edit-img').setAttribute('src', '/assets/img/icons/edit.png');
-        }else{
-          document.getElementById('delete-img').setAttribute('src', '/assets/img/icons/delete.png');
-        }
-  }
+        document.getElementById('edit-img').setAttribute('src', '/assets/img/icons/edit.png');
+      }else{
+        document.getElementById('delete-img').setAttribute('src', '/assets/img/icons/delete.png');
+      }
+}
+
+function doNotClose(event){
+  event.stopPropagation();
+}
