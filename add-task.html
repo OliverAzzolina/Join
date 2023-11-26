@@ -4,40 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add-Task</title>
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/add-task.css">
+    <script src="js/add-task.js"></script>
 </head>
-<body>
-    <h1>Add Task</h1>
+<body onload="init()">
+    <h1 id="add-task-headline">Add Task</h1>
 
-    <p>Title</p> <!-- TODO: add suffix -->
-    <input type="text" placeholder="Enter a title">
+    <form id="add-task-form" onsubmit="addTask()"> <!-- TODO: HTML 5 Form Validation? -->
 
-    <p>Description</p>
-    <input type="text" placeholder="Enter a Description">
+        <div id="add-task-title-container">
+            <p id="add-task-title-headline" class="add-task-form-title">Title</p><p class="add-task-form-suffix">*</p>
+        </div> 
 
-    <p>Prio</p>
-    <button>Urgent</button> <!-- TODO: add icon -->
-    <button>Medium</button> <!-- TODO: add icon -->
-    <button>Low</button> <!-- TODO: add icon -->
+        <input id="add-task-title-input" class="add-task-form-input" required type="text" placeholder="Enter a title">
+           
+        <p id="add-task-description-headline" class="add-task-form-title">Description</p>
+        <input id="add-task-description-input" class="add-task-form-input" required type="text" placeholder="Enter a Description">
 
-    <p>Due date</p> <!-- TODO: add suffix -->
-    <input type="date" placeholder="dd/mm/yyyy"> <!-- TODO: add icon -->
+        <p id="add-task-prio-headline" class="add-task-form-title">Prio</p>
+        <div id="add-task-form-btn-container">
+            <button class="add-task-form-btn">
+                <p class="add-task-form-btn-text">Urgent</p>
+                <img src="assets/img/icons/Prio alta.png" alt="">
+            </button>
+            <button class="add-task-form-btn">
+                <p class="add-task-form-btn-text">Medium</p>
+                <img src="assets/img/icons/Prio media.png" alt="">
+            </button>
+            <button class="add-task-form-btn">
+                <p class="add-task-form-btn-text">Low</p>
+                <img src="assets/img/icons/Prio baja.png" alt="">
+            </button>
+        </div>
 
-    <p>Category</p> <!-- TODO: add suffix-->
-        <select><!-- TODO: add logic (pre-created categories?!) -->
-            <option value="" disabled selected>Select task category</option>
-            <option value="">Technical Task</option>
-            <option value="">User Story</option>
+        <div id="add-task-date-container">
+            <p id="add-task-date-headline" class="add-task-form-title">Due date</p><p class="add-task-form-suffix">*</p>
+        </div>
+        <input class="add-task-form-input" required type="date"> <!-- TODO: add icon (replace default icon) -->
+
+        <div id="add-task-date-container">
+            <p id="add-task-category-headline" class="add-task-form-title">Category</p><p class="add-task-form-suffix">*</p>
+        </div>
+            <select class="add-task-form-dropdown"><!-- TODO: add logic (pre-created categories?!) -->
+                <option value="" disabled selected>Select task category</option>
+                <option value="">Technical Task</option>
+                <option value="">User Story</option>
+            </select>
+        
+        <p class="add-task-form-title">Assigned to</p>
+        <select class="add-task-form-dropdown"> <!-- TODO: add logic (user DB) -->
+            <option value="" disabled selected>Select contacts to assign</option>
+            <option value="">Anna A.</option>
+            <option value="">Bruno B.</option>
+            <option value="">Christopher C.</option>
+            <option value="">Dennis D.</option>
+            <option value="">Elias E.</option>
         </select>
-    
-    <p>Assigned to</p>
-    <select> <!-- TODO: add logic (user DB) -->
-        <option value="" disabled selected>Select contacts to assign</option>
-        <option value="">Technical Task</option>
-        <option value="">User Story</option>
-    </select>
 
-    <p>Subtasks</p>
-    <input type="text" placeholder="Add new subtask"> <!-- TODO: add logic -->
-    
+        <p class="add-task-form-title">Subtasks</p>
+        <input class="add-task-form-input" type="text" placeholder="Add new subtask"> <!-- TODO: add logic -->
+    </form>
 </body>
 </html>
