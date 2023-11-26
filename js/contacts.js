@@ -126,7 +126,7 @@ function renderContactList(i, initials, name, email, randomColor){
       <div id="name-logo-bg${i}" class="name-logo" style= "background-color: ${randomColor}"><span>${initials}</span></div>
       <div class="contact-name">
       <span>${name}</span>
-      <a href="${email}">${email}</a>
+      <a href="mailto:${email}">${email}</a>
       </div>    
   </div>
   `;
@@ -150,14 +150,14 @@ function renderContactInfo(i, initials, name, email, phone, randomColor){
         </div>
     </div>        
     <div class="contact-information">
-        <p>Contact Information</p>
+        <p id="ci-head">Contact Information</p>
         <div class="email">
-          <p>Email:</p>
-          <a href="${email}">${email}</a>
+          <p>Email</p>
+          <a href="mailto:${email}">${email}</a>
         </div>
         <div class="phone">
           <p>Phone</p>
-          <a href="${phone}">${phone}</a>
+          <a href="tel:${phone}">${phone}</a>
         </div>
     </div>`
 }
