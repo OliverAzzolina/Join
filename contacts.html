@@ -7,56 +7,70 @@
     <link rel="stylesheet" href="/css/contacts.css" />
     <script src="js/storage.js"></script>
     <script src="js/contacts.js"></script>
-    <link rel="stylesheet" href="css/header.css">
-
+    <link rel="stylesheet" href="css/header.css" />
   </head>
-  <div class="header">
-    <div><p class="logotext">Kanban Project Management Tool</p></div>
-    <div>
-        <span><img class="help"src="./img/Pasted Graphic 3.png" alt=""></span>
-        <span><img class="kreis"src="./img/Pasted Graphic 2.png" alt=""></span>
-    </div>
+  <body onload="init()">
     
-       
-</div>
-<div class="sidebar">
-    <div>
-        <img class="logo" src="./img/logo-white.svg" alt="">
+    <div class="header">
+      <div><p class="logotext">Kanban Project Management Tool</p></div>
+      <div>
+        <span
+          ><img class="help" src="./img/Pasted Graphic 3.png" alt=""
+        /></span>
+        <span
+          ><img class="kreis" src="./img/Pasted Graphic 2.png" alt=""
+        /></span>
+      </div>
     </div>
-    <div class="menu-section">
+
+    <div class="sidebar">
+      <div><img class="logo" src="./img/logo-white.svg" alt="" /></div>
+      <div class="menu-section">
         <ul>
-            <li>
-                <img class="icon" src="./img/summary_sidebar.svg" alt="Summary Icon">
-                <a href="summary.html">Summary</a>
-            </li>
-            <li>
-                <img class="icon" src="./img/add_task_sidebar.svg" alt="Add Task Icon">
-                <a href="about.html">Ad Task</a>
-            </li>
-            <li>
-                <img class="icon" src="./img/Board_sidebar.svg" alt="Board Icon">
-                <a href="board.html">Board</a>
-            </li>
-            <li>
-                <img class="icon" src="./img/Contacts_sidebar.svg" alt="Contacts Icon">
-                <a href="join.html">Contacts</a>
-            </li>
+          <li>
+            <img
+              class="icon"
+              src="./img/summary_sidebar.svg"
+              alt="Summary Icon"
+            />
+            <a href="summary.html">Summary</a>
+          </li>
+          <li>
+            <img
+              class="icon"
+              src="./img/add_task_sidebar.svg"
+              alt="Add Task Icon"
+            />
+            <a href="about.html">Ad Task</a>
+          </li>
+          <li>
+            <img class="icon" src="./img/Board_sidebar.svg" alt="Board Icon" />
+            <a href="board.html">Board</a>
+          </li>
+          <li>
+            <img
+              class="icon"
+              src="./img/Contacts_sidebar.svg"
+              alt="Contacts Icon"
+            />
+            <a href="join.html">Contacts</a>
+          </li>
         </ul>
-    </div>
-    <li class="footer-section">
+      </div>
+
+      <li class="footer-section">
         <a class="footertext" href="join.html">Privacy Policy</a>
         <a class="footertext" href="desktop.html">legal Notice</a>
+      </li>
+    </div>
 
-    </li>
-<div>
-  <body onload="init()">
     <main>
       <div class="left">
         <div id="contact-list" class="contacts-list">
-            <button class="add-contact-button" onclick="openAddNewContact()">
-              <span>Add new contact</span>
-              <img src="/assets/img/icons/person_add.png" alt="">
-            </button>
+          <button class="add-contact-button" onclick="openAddNewContact()">
+            <span>Add new contact</span>
+            <img src="/assets/img/icons/person_add.png" alt="" />
+          </button>
           <div id="contacts" class="contacts-list"></div>
         </div>
       </div>
@@ -68,12 +82,9 @@
           <h4>Better with a team</h4>
         </div>
 
-          <div id="contact-detail" class="contact-detail"></div>
-
+        <div id="contact-detail" class="contact-detail"></div>
       </div>
       <div id="overlay" style="display: none" onclick="closeAddContact()"></div>
-      
-      </div>
     </main>
   </body>
 </html>

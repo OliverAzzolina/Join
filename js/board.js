@@ -1,7 +1,7 @@
 let todos = [
   {
-    title: "Titel",
-    description: "Hier kommt die Beschriebung hin",
+    title: "Kochwelt Page & Recipe Recommender",
+    description: "Build start page with recipe recommendation...",
     assignedto: ['AM', 'EM', 'MB'],
     duedate: "10/05/2023",
     prio: "Medium",
@@ -19,6 +19,49 @@ let todos = [
     subtasks: 2,
     status: "in-progress",
   }
+];
+
+let contacts = [
+  {
+      name: 'Anton Mayer',
+      email: 'antonm@gmail.com',
+      phone: '+49 1111 111 11 1'
+  },
+  {
+      name: 'Anja Schulz',
+      email: 'schulz@hotmail.com',
+      phone: '+49 3333 333 33 3'
+  },
+  {
+      name: 'Benedigt Ziegler',
+      email: 'benedigt@gmail.com',
+      phone: '+49 4444 444 44 4'
+  },
+  {
+      name: 'David Eisenberg',
+      email: 'davidberg@gmail.com',
+      phone: '+49 2222 222 22 2'
+  },
+  {
+      name: 'Eva Fischer',
+      email: 'eva@gmail.com',
+      phone: '+49 5555 555 55 5'
+  },
+  {
+      name: 'Emmanuel Mauer',
+      email: 'emmanuelma@gmail.com',
+      phone: '+49 6666 666 66 6'
+  },
+  {
+      name: 'Marcel Bauer',
+      email: 'bauer@gmail.com',
+      phone: '+49 7777 777 77 7'
+  },
+  {
+      name: 'Tatjana Wolf',
+      email: 'wolf@gmail.com',
+      phone: '+49 8888 888 88 8'
+  },
 ];
 
 let currentDraggedElement;
@@ -53,13 +96,25 @@ function refreshTodos(){
 
 function generateTodo(i){
     return `<div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})" onclick="openTodoDetails(${i})">
-    <p id="category${i}" class="category">${todos[i]["category"]}</p>
-    <p>${todos[i]["title"]}</p>
-    <p>${todos[i]["description"]}</p>
-    <p>${todos[i]["subtasks"]} Subtasks</p>
-    <p>${todos[i]["assignedto"]}</p>
+    <span id="category${i}" class="category">${todos[i]["category"]}</span>
+    <div class="title-description">
+    <span class="todo-title">${todos[i]["title"]}</span>
+    <span class="todo-description">${todos[i]["description"]}</span>
+    </div>
+    <span>${todos[i]["subtasks"]} Subtasks</span>
+    <div class="assigned-prio">
+    <select>
+      <option>${todos[i]["assignedto"]}</option>
+    </select>
+    <img src="assets/img/icons/Prio media.png" alt="">
+    </div>
     </div>
     `;
+    //TO-DOs:
+    //subtasks line
+    //dropDown
+    //prio img
+
 }
 
 //drag&drop
