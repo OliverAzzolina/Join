@@ -10,9 +10,9 @@ let todos = [
     status: "open",
   },
   {
-    title: "Überschrift",
-    description: "blabla",
-    assignedto: ['AM', 'EM', 'MB'],
+    title: "Title",
+    description: "Description",
+    assignedto: ['AZ', 'RF', 'XY'],
     duedate: "10/05/2023",
     prio: "Medium",
     category: "Technical Task",
@@ -66,16 +66,18 @@ let contacts = [
 
 let currentDraggedElement;
 
+
 function renderTodos() {
-  
   for (let i = 0; i < todos.length; i++) {
     let status = todos[i]["status"];
     if (status == status) {
       document.getElementById(`${status}`).innerHTML += generateTodo(i);
       checkCategory(i);
+      renderAssignedTo(i);
     }
   }
 }
+
 
 function checkCategory(i){
   let category = todos[i]["category"];
@@ -87,6 +89,20 @@ function checkCategory(i){
   }
 }
 
+
+function renderAssignedTo(i){
+  let assignedTo = document.getElementById(`todo-assigned-to${i}`);
+  assignedTo.innerHTML = '';
+
+  for (let index = 0; index < todos[i]['assignedto'].length; index++) {
+    const editor = todos[i]['assignedto'][index];
+    assignedTo.innerHTML += `
+    <div id="mini-logo${editor[i]}" class="mini-logo">${editor}</div>
+    `;
+  }
+}
+
+
 function refreshTodos(){
   document.getElementById("open").innerHTML = '';
   document.getElementById("in-progress").innerHTML = '';
@@ -94,20 +110,20 @@ function refreshTodos(){
   document.getElementById("done").innerHTML = '';
 }
 
+
 function generateTodo(i){
-    return `<div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})" onclick="openTodoDetails(${i})">
-    <span id="category${i}" class="category">${todos[i]["category"]}</span>
-    <div class="title-description">
-    <span class="todo-title">${todos[i]["title"]}</span>
-    <span class="todo-description">${todos[i]["description"]}</span>
-    </div>
-    <span>${todos[i]["subtasks"]} Subtasks</span>
-    <div class="assigned-prio">
-    <select>
-      <option>${todos[i]["assignedto"]}</option>
-    </select>
-    <img src="assets/img/icons/Prio media.png" alt="">
-    </div>
+    return `
+    <div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})" onclick="openTodoDetails(${i})">
+      <span id="category${i}" class="category">${todos[i]["category"]}</span>
+      <div class="title-description">
+        <span class="todo-title">${todos[i]["title"]}</span>
+        <span class="todo-description">${todos[i]["description"]}</span>
+      </div>
+        <span>${todos[i]["subtasks"]} Subtasks</span>
+      <div class="assigned-prio">
+        <div class="todo-assigned-to" id="todo-assigned-to${i}"></div>
+        <img src="assets/img/icons/Prio media.png" alt="">
+      </div>
     </div>
     `;
     //TO-DOs:
@@ -117,14 +133,17 @@ function generateTodo(i){
 
 }
 
+
 //drag&drop
 function startDragging(i){
  currentDraggedElement = i;
 }
 
+
 function allowDrop(ev){
   ev.preventDefault();
 }
+
 
 function moveTo(status){
   todos[currentDraggedElement]['status'] = status;
@@ -132,12 +151,14 @@ function moveTo(status){
   renderTodos();
 }
 
+
 //Detail-Todo
 function openTodoDetails(i){
   document.getElementById('overlay').style.display = "flex"; 
   document.getElementById('overlay').innerHTML = generateOverlay(i);
   checkOverlayCategory(i);
 }
+
 
 function checkOverlayCategory(i){
   let category = todos[i]["category"];
@@ -149,9 +170,11 @@ function checkOverlayCategory(i){
   }
 }
 
+
 function closeDetailCard(){
   document.getElementById('overlay').style.display = "none";
 }
+
 
 function generateOverlay(i){
   return `<div id="todo-card${i}"  class="detail-todo-card" >
@@ -166,6 +189,7 @@ function generateOverlay(i){
     `;
 }
 
+
 //SEARCH
 function filterTodos() {
   let search = document.getElementById("search").value.toLowerCase();
@@ -178,9 +202,11 @@ function filterTodos() {
   }
 }
 
+
 function hover(id){
   document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button_hover.png');
 }
+
 
 function unhover(id){
   document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button.png');
@@ -199,6 +225,7 @@ function FilteredTodos(search){
     }
   }
 }
+
 
 function renderFilteredTodos(i){
   let status = todos[i]["status"];

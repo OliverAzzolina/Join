@@ -192,3 +192,17 @@ width: 252px;
     gap: 8px;
 }
 
+.todo-assigned-to{
+    display: flex;
+}
+
+.mini-logo{
+    height: 32px;
+    width: 32px;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
