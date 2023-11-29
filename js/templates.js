@@ -1,6 +1,6 @@
 function exampleHTML(testVariable1, testVariable2) {
     htmlText = "";
-    htmlText = `
+    htmlText = /*html*/`
     <div class="test" onclick="functionName('${testVariable1}', ${testVariable2})">
         <div class="meal">
             <h2>${testVariable1}</h2>
@@ -19,7 +19,7 @@ function exampleHTML(testVariable1, testVariable2) {
 
 function exampleHTML() {
     htmlText = "";
-    htmlText = `
+    htmlText = /*html*/`
     <div class="test">
         <img src="img/plus.svg" alt="Hinzufügen"/>
     </div>`;
@@ -57,5 +57,6 @@ function navbarHTML() {
             <a class="footertext" href="join.html">Privacy Policy</a>
             <a class="footertext" href="desktop.html">legal Notice</a>
         </li>
-    </div>`
+    </div>`;
+    return htmlText;
 }
