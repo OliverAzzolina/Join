@@ -1,4 +1,4 @@
-let todos = [
+let tasks = [
   {
     title: "Kochwelt Page & Recipe Recommender",
     description: "Build start page with recipe recommendation...",
@@ -21,55 +21,62 @@ let todos = [
   }
 ];
 
-let contacts = [
-  {
-      name: 'Anton Mayer',
-      email: 'antonm@gmail.com',
-      phone: '+49 1111 111 11 1'
-  },
-  {
-      name: 'Anja Schulz',
-      email: 'schulz@hotmail.com',
-      phone: '+49 3333 333 33 3'
-  },
-  {
-      name: 'Benedigt Ziegler',
-      email: 'benedigt@gmail.com',
-      phone: '+49 4444 444 44 4'
-  },
-  {
-      name: 'David Eisenberg',
-      email: 'davidberg@gmail.com',
-      phone: '+49 2222 222 22 2'
-  },
-  {
-      name: 'Eva Fischer',
-      email: 'eva@gmail.com',
-      phone: '+49 5555 555 55 5'
-  },
-  {
-      name: 'Emmanuel Mauer',
-      email: 'emmanuelma@gmail.com',
-      phone: '+49 6666 666 66 6'
-  },
-  {
-      name: 'Marcel Bauer',
-      email: 'bauer@gmail.com',
-      phone: '+49 7777 777 77 7'
-  },
-  {
-      name: 'Tatjana Wolf',
-      email: 'wolf@gmail.com',
-      phone: '+49 8888 888 88 8'
-  },
-];
-
+let contacts = [];
 let currentDraggedElement;
+
+async function init(){
+    loadContactsFromStorage();
+}
+
+//LOAD Storage
+async function loadContactsFromStorage(){
+  try{
+      contacts = JSON.parse(await getItem('contacts'));
+  }catch(e){
+    console.warn('loading error:', e)
+  }
+  sortContacts();
+}
+
+//SORT Contacts
+function sortContacts(){
+  contacts.sort((a, b) => {
+    if (a.name.toUpperCase() < b.name.toUpperCase()) {
+     return -1;
+    } else if (a.name.toUpperCase() > b.name.toUpperCase()) {
+     return 1;
+    } else {
+     return 0;
+    }
+   });
+}
+
+//LOAD Contacts
+function loadContacts(){
+  let contactList = document.getElementById('assigned-editors');
+  contactList.innerHTML = '';
+  for (let i = 0; i < contacts.length; i++) {
+      let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
+      let randomColor = '#' + contacts[i]['randomColor'];
+      let name = contacts[i]['name'];
+      contactList.innerHTML += `
+      <li>
+        <div class="drop-name-initials">
+          <div class="drop-initials">${initials}</div>
+          <span> ${name}</span>
+        </div>
+          <input type="checkbox">
+      </li>`;
+     
+  }
+  sortContacts();
+}
+
 
 
 function renderTodos() {
-  for (let i = 0; i < todos.length; i++) {
-    let status = todos[i]["status"];
+  for (let i = 0; i < tasks.length; i++) {
+    let status = tasks[i]["status"];
     if (status == status) {
       document.getElementById(`${status}`).innerHTML += generateTodo(i);
       checkCategory(i);
@@ -80,7 +87,7 @@ function renderTodos() {
 
 
 function checkCategory(i){
-  let category = todos[i]["category"];
+  let category = tasks[i]["category"];
   if(category == 'User Story'){
     document.getElementById(`category${i}`).style.backgroundColor = "rgb(0,56,255)";
   }
@@ -94,8 +101,8 @@ function renderAssignedTo(i){
   let assignedTo = document.getElementById(`todo-assigned-to${i}`);
   assignedTo.innerHTML = '';
 
-  for (let index = 0; index < todos[i]['assignedto'].length; index++) {
-    const editor = todos[i]['assignedto'][index];
+  for (let index = 0; index < tasks[i]['assignedto'].length; index++) {
+    const editor = tasks[i]['assignedto'][index];
     assignedTo.innerHTML += `
     <div id="mini-logo${editor[i]}" class="mini-logo">${editor}</div>
     `;
@@ -114,12 +121,12 @@ function refreshTodos(){
 function generateTodo(i){
     return `
     <div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})" onclick="openTodoDetails(${i})">
-      <span id="category${i}" class="category">${todos[i]["category"]}</span>
+      <span id="category${i}" class="category">${tasks[i]["category"]}</span>
       <div class="title-description">
-        <span class="todo-title">${todos[i]["title"]}</span>
-        <span class="todo-description">${todos[i]["description"]}</span>
+        <span class="todo-title">${tasks[i]["title"]}</span>
+        <span class="todo-description">${tasks[i]["description"]}</span>
       </div>
-        <span>${todos[i]["subtasks"]} Subtasks</span>
+        <span>${tasks[i]["subtasks"]} Subtasks</span>
       <div class="assigned-prio">
         <div class="todo-assigned-to" id="todo-assigned-to${i}"></div>
         <img src="assets/img/icons/Prio media.png" alt="">
@@ -128,7 +135,7 @@ function generateTodo(i){
     `;
     //TO-DOs:
     //subtasks line
-    //dropDown
+  
     //prio img
 
 }
@@ -161,7 +168,7 @@ function openTodoDetails(i){
 
 
 function checkOverlayCategory(i){
-  let category = todos[i]["category"];
+  let category = tasks[i]["category"];
   if(category == 'User Story'){
     document.getElementById(`overlay-category${i}`).style.backgroundColor = "rgb(0,56,255)";
   }
@@ -177,14 +184,17 @@ function closeDetailCard(){
 
 
 function generateOverlay(i){
-  return `<div id="todo-card${i}"  class="detail-todo-card" >
-    <p id="overlay-category${i}" class="category">${todos[i]["category"]}</p>
-    <h1>${todos[i]["title"]}</h1>
-    <p>${todos[i]["description"]}</p>
-    <p>Due date:  ${todos[i]["duedate"]}</p>
-    <p>Priority:  ${todos[i]["prio"]}</p>
-    <p>${todos[i]["assignedto"]}</p>
-    <p>${todos[i]["subtasks"]}</p>
+  return `<div id="todo-card${i}" class="detail-todo-card" onclick="doNotClose(event)">
+  <div class="detail-card-top">  
+    <p id="overlay-category${i}" class="category">${tasks[i]["category"]}</p>
+    <button class="close-button" onclick="closeDetailCard()"><img src="assets/img/icons/close.png" alt="close"></button>
+  </div>
+    <span class="detail-title">${tasks[i]["title"]}</span><br>
+    <span class="f-s20-w400">${tasks[i]["description"]}</span><br>
+    <span class="f-s20-w400">Due date:  ${tasks[i]["duedate"]}</span><br>
+    <span class="f-s20-w400">Priority:  ${tasks[i]["prio"]}</span><br>
+    <span class="f-s20-w400">Assigned to:<br>${tasks[i]["assignedto"]}</span><br>
+    <span class="f-s20-w400">${tasks[i]["subtasks"]}</span>
     </div>
     `;
 }
@@ -215,9 +225,9 @@ function unhover(id){
    
 function FilteredTodos(search){ 
   refreshTodos();
-  for (let i = 0; i < todos.length; i++) {
-    let title = todos[i]['title'].toLowerCase();
-    let description = todos[i]['description'].toLowerCase();
+  for (let i = 0; i < tasks.length; i++) {
+    let title = tasks[i]['title'].toLowerCase();
+    let description = tasks[i]['description'].toLowerCase();
     if (title.toLowerCase().includes(search)||description.toLowerCase().includes(search)) {
       renderFilteredTodos(i);
     }else{
@@ -226,9 +236,8 @@ function FilteredTodos(search){
   }
 }
 
-
 function renderFilteredTodos(i){
-  let status = todos[i]["status"];
+  let status = tasks[i]["status"];
   if (status == status) {
     document.getElementById(`${status}`).innerHTML += generateTodo(i);
     checkCategory(i);
@@ -242,4 +251,29 @@ function renderFilteredTodos(i){
 //    document.getElementById('notfound').style.display = "none";
 //  }
 //} 
-    
+
+function openAddTaskCard(){
+  document.getElementById('add-task-overlay').style.display = 'flex';
+}
+
+
+function closeAddTaskCard(){
+  document.getElementById('add-task-overlay').style.display = 'none';
+
+}
+
+
+function doNotClose(event){
+  event.stopPropagation();
+}
+
+
+function showDropdownContacts(){
+  let dropdown = document.getElementById('assigned-editors');
+  if(dropdown.style.display == 'none'){
+    dropdown.style.display = 'block';
+  }else{
+    dropdown.style.display = 'none';
+  } 
+}
+
