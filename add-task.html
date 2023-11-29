@@ -64,64 +64,73 @@
     </div>
 
 
+
+
+
     <div id="add-task-container">
         <h1 id="add-task-headline">Add Task</h1>
+        <form id="add-task-form" onsubmit="addTask(event)"> <!-- TODO: HTML 5 Form Validation? -->
+            <div id="add-task-left-container" class="add-task-box">
 
-        <form id="add-task-form" onsubmit="addTask(event)"> <!-- onsubmit jetzt mit event-Parameter --><!-- TODO: HTML 5 Form Validation? -->
+                <div id="add-task-title-headline-container">
+                    <p id="add-task-title-headline" class="add-task-form-title">Title</p><p class="add-task-form-suffix">*</p>
+                </div> 
 
-            <div id="add-task-title-container">
-                <p id="add-task-title-headline" class="add-task-form-title">Title</p><p class="add-task-form-suffix">*</p>
-            </div> 
+                <input id="add-task-title-input" class="add-task-form-input" required type="text" placeholder="Enter a title">
 
-            <input id="add-task-title-input" class="add-task-form-input" required type="text" placeholder="Enter a title">
-
-            <p id="add-task-description-headline" class="add-task-form-title">Description</p>
-            <input id="add-task-description-input" class="add-task-form-input" required type="text" placeholder="Enter a Description">
-
-            <p id="add-task-prio-headline" class="add-task-form-title">Prio</p>
-            <div id="add-task-form-btn-container">
-                <button type="button" class="add-task-form-btn" task-priority="Urgent">
-                    <p class="add-task-form-btn-text">Urgent</p>
-                    <img src="assets/img/icons/Prio alta.png" alt="">
-                </button>
-                <button type="button" class="add-task-form-btn" task-priority="Medium">
-                    <p class="add-task-form-btn-text">Medium</p>
-                    <img src="assets/img/icons/Prio media.png" alt="">
-                </button>
-                <button type="button" class="add-task-form-btn" task-priority="Low">
-                    <p class="add-task-form-btn-text">Low</p>
-                    <img src="assets/img/icons/Prio baja.png" alt="">
-                </button>
-            </div>            
-
-            <div id="add-task-date-container">
-                <p id="add-task-date-headline" class="add-task-form-title">Due date</p><p class="add-task-form-suffix">*</p>
-            </div>
-            <input id="add-task-date-input" class="add-task-form-input" required type="date"> <!-- TODO: add icon (replace default icon) -->
-
-            <div id="add-task-date-container">
-                <p id="add-task-category-headline" class="add-task-form-title">Category</p><p class="add-task-form-suffix">*</p>
-            </div>
-                <select class="add-task-form-dropdown"><!-- TODO: add logic (pre-created categories?!) -->
-                    <option disabled selected>Select task category</option>
-                    <option value="Technical Task">Technical Task</option>
-                    <option value="">User Story</option>
+                <p id="add-task-description-headline" class="add-task-form-title">Description</p>
+                <textarea id="add-task-description-textarea" class="add-task-form-input" name="add-task-description" placeholder="Enter a Description" cols="30" rows="10" ></textarea>
+    
+                <p class="add-task-form-title">Assigned to</p>
+                <select class="add-task-form-dropdown"> <!-- TODO: add logic (user DB) -->
+                    <option disabled selected>Select contacts to assign</option>
+                    <option value="Anna A.">Anna A.</option>
+                    <option value="">Bruno B.</option>
+                    <option value="">Christopher C.</option>
+                    <option value="">Dennis D.</option>
+                    <option value="">Elias E.</option>
                 </select>
-            
-            <p class="add-task-form-title">Assigned to</p>
-            <select class="add-task-form-dropdown"> <!-- TODO: add logic (user DB) -->
-                <option disabled selected>Select contacts to assign</option>
-                <option value="Anna A.">Anna A.</option>
-                <option value="">Bruno B.</option>
-                <option value="">Christopher C.</option>
-                <option value="">Dennis D.</option>
-                <option value="">Elias E.</option>
-            </select>
 
-            <p class="add-task-form-title">Subtasks</p>
-            <input class="add-task-form-input" type="text" placeholder="Add new subtask"> <!-- TODO: add logic -->
-            <button type="submit" class="submit-btn">Submit Task</button>
+            </div>
+            <img id="add-task-divider" src="img/add-task-divider.svg" alt="">
+            <div id="add-task-right-container" class="add-task-box">
+                
+                <div id="add-task-date-container">
+                    <p id="add-task-date-headline" class="add-task-form-title">Due date</p><p class="add-task-form-suffix">*</p>
+                </div>
+                <input id="add-task-date-input" class="add-task-form-input" required type="date"> <!-- TODO: add icon (replace default icon) -->
+
+                <p id="add-task-prio-headline" class="add-task-form-title">Prio</p>
+                <div id="add-task-form-btn-container">
+                    <button type="button" class="add-task-form-btn" task-priority="Urgent">
+                        <p class="add-task-form-btn-text">Urgent</p>
+                        <img src="assets/img/icons/Prio alta.png" alt="">
+                    </button>
+                    <button type="button" class="add-task-form-btn" task-priority="Medium">
+                        <p class="add-task-form-btn-text">Medium</p>
+                        <img src="assets/img/icons/Prio media.png" alt="">
+                    </button>
+                    <button type="button" class="add-task-form-btn" task-priority="Low">
+                        <p class="add-task-form-btn-text">Low</p>
+                        <img src="assets/img/icons/Prio baja.png" alt="">
+                    </button>
+                </div>
+
+                <div id="add-task-date-container">
+                    <p id="add-task-category-headline" class="add-task-form-title">Category</p><p class="add-task-form-suffix">*</p>
+                </div>
+                    <select class="add-task-form-dropdown"><!-- TODO: add logic (pre-created categories?!) -->
+                        <option disabled selected>Select task category</option>
+                        <option value="Technical Task">Technical Task</option>
+                        <option value="">User Story</option>
+                    </select>
+    
+                    <p class="add-task-form-title">Subtasks</p>
+                    <input class="add-task-form-input" type="text" placeholder="Add new subtask"> <!-- TODO: add logic -->
+        
+            </div>
         </form>
     </div>
+    
 </body>
 </html>
