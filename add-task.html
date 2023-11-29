@@ -67,7 +67,7 @@
     <div id="add-task-container">
         <h1 id="add-task-headline">Add Task</h1>
 
-        <form id="add-task-form" onsubmit="addTask()"> <!-- TODO: HTML 5 Form Validation? -->
+        <form id="add-task-form" onsubmit="addTask(event)"> <!-- onsubmit jetzt mit event-Parameter --><!-- TODO: HTML 5 Form Validation? -->
 
             <div id="add-task-title-container">
                 <p id="add-task-title-headline" class="add-task-form-title">Title</p><p class="add-task-form-suffix">*</p>
@@ -80,38 +80,38 @@
 
             <p id="add-task-prio-headline" class="add-task-form-title">Prio</p>
             <div id="add-task-form-btn-container">
-                <button class="add-task-form-btn">
+                <button type="button" class="add-task-form-btn" task-priority="Urgent">
                     <p class="add-task-form-btn-text">Urgent</p>
                     <img src="assets/img/icons/Prio alta.png" alt="">
                 </button>
-                <button class="add-task-form-btn">
+                <button type="button" class="add-task-form-btn" task-priority="Medium">
                     <p class="add-task-form-btn-text">Medium</p>
                     <img src="assets/img/icons/Prio media.png" alt="">
                 </button>
-                <button class="add-task-form-btn">
+                <button type="button" class="add-task-form-btn" task-priority="Low">
                     <p class="add-task-form-btn-text">Low</p>
                     <img src="assets/img/icons/Prio baja.png" alt="">
                 </button>
-            </div>
+            </div>            
 
             <div id="add-task-date-container">
                 <p id="add-task-date-headline" class="add-task-form-title">Due date</p><p class="add-task-form-suffix">*</p>
             </div>
-            <input class="add-task-form-input" required type="date"> <!-- TODO: add icon (replace default icon) -->
+            <input id="add-task-date-input" class="add-task-form-input" required type="date"> <!-- TODO: add icon (replace default icon) -->
 
             <div id="add-task-date-container">
                 <p id="add-task-category-headline" class="add-task-form-title">Category</p><p class="add-task-form-suffix">*</p>
             </div>
                 <select class="add-task-form-dropdown"><!-- TODO: add logic (pre-created categories?!) -->
-                    <option value="" disabled selected>Select task category</option>
-                    <option value="">Technical Task</option>
+                    <option disabled selected>Select task category</option>
+                    <option value="Technical Task">Technical Task</option>
                     <option value="">User Story</option>
                 </select>
             
             <p class="add-task-form-title">Assigned to</p>
             <select class="add-task-form-dropdown"> <!-- TODO: add logic (user DB) -->
-                <option value="" disabled selected>Select contacts to assign</option>
-                <option value="">Anna A.</option>
+                <option disabled selected>Select contacts to assign</option>
+                <option value="Anna A.">Anna A.</option>
                 <option value="">Bruno B.</option>
                 <option value="">Christopher C.</option>
                 <option value="">Dennis D.</option>
@@ -120,6 +120,7 @@
 
             <p class="add-task-form-title">Subtasks</p>
             <input class="add-task-form-input" type="text" placeholder="Add new subtask"> <!-- TODO: add logic -->
+            <button type="submit" class="submit-btn">Submit Task</button>
         </form>
     </div>
 </body>
