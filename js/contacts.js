@@ -1,4 +1,4 @@
-let contacts = [];
+// let contacts = []; <--- Moved to arrays.js
 
 async function init(){
     loadContactsFromStorage();
