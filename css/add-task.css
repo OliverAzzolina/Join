@@ -96,6 +96,11 @@ textarea::placeholder {
   line-height: 24px
 }
 
+#add-task-description-textarea {
+  min-width: 398px;
+  max-width: 398px;
+}
+
 .add-task-form-dropdown {
     display: flex;
     width: 440px;
