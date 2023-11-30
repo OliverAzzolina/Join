@@ -70,6 +70,7 @@
     <div id="add-task-container">
         <h1 id="add-task-headline">Add Task</h1>
         <form id="add-task-form" onsubmit="addTask(event)"> <!-- TODO: HTML 5 Form Validation? -->
+            <div id="add-task-L-R-Container">
             <div id="add-task-left-container" class="add-task-box">
 
                 <div id="add-task-title-headline-container">
@@ -124,13 +125,27 @@
                         <option value="Technical Task">Technical Task</option>
                         <option value="">User Story</option>
                     </select>
-    
                     <p class="add-task-form-title">Subtasks</p>
                     <input class="add-task-form-input" type="text" placeholder="Add new subtask"> <!-- TODO: add logic -->
-        
+            </div>
+        </div>
+            <div id="add-task-form-footer">
+                <div id="add-task-requirement-footer">
+                    <p class="add-task-form-suffix">*</p>
+                    <p>This field is required</p>
+                </div>
+                <div id="add-task-form-buttons">
+                    <button type="button" id="add-task-clear-button">
+                        <p class="add-task-form-btn-text">Clear</p>
+                        <img src="img/clear-task-icon.png" alt="">
+                    </button>
+                    <button type="button" id="add-task-create-button">
+                        <p class="add-task-form-btn-text">Create Task</p>
+                        <img src="img/create-task-icon.png" alt="">
+                    </button>
+                </div>
             </div>
         </form>
     </div>
-    
 </body>
 </html>
