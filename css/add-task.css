@@ -10,6 +10,8 @@ h1 {
 #add-task-container {
   margin-top: 206px;
   margin-left: 328px;
+  width: 1116px;
+  height: 870px;
 }
 
 #add-task-headline {
@@ -24,11 +26,16 @@ h1 {
 #add-task-form {
   display: flex;
   justify-content: space-around;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 
-  width: 1440px;
-  height: 600px;
+  width: 1116px;
+  height: 870px;
+}
+
+#add-task-L-R-Container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .add-task-box {
@@ -40,6 +47,8 @@ h1 {
 
 #add-task-divider {
   height: 424px;
+  margin-left: 48px;
+  margin-right: 48px;
 }
 
 #add-task-title-headline-container {
@@ -140,3 +149,31 @@ textarea::placeholder {
   line-height: 120%;
 }
 
+#add-task-form-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#add-task-clear-button {
+  height: 51px;
+  padding: 0px 32px;
+  border-radius: 8px;
+  border: 1px solid #2a3647;
+  font-weight: 700;
+  background-color: #ffffff;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+#add-task-create-button {
+  height: 51px;
+  padding: 0px 32px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2a3647;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 21px;
+  cursor: pointer;
+}
