@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/font.css">
     <link rel="stylesheet" href="css/add-task.css">
     <link rel="stylesheet" href="css/header.css">
+    <script src="js/storage.js"></script>
+    <script src="js/arrays.js"></script>
     <script src="js/add-task.js"></script>
 </head>
 <body>
@@ -83,13 +85,8 @@
                 <textarea id="add-task-description-textarea" class="add-task-form-input" name="add-task-description" placeholder="Enter a Description" cols="30" rows="10" ></textarea>
     
                 <p class="add-task-form-title">Assigned to</p>
-                <select class="add-task-form-dropdown"> <!-- TODO: add logic (user DB) -->
+                <select id="add-task-contact-list-dropdown" class="add-task-form-dropdown"> <!-- TODO: add logic (user DB) -->
                     <option disabled selected>Select contacts to assign</option>
-                    <option value="Anna A.">Anna A.</option>
-                    <option value="">Bruno B.</option>
-                    <option value="">Christopher C.</option>
-                    <option value="">Dennis D.</option>
-                    <option value="">Elias E.</option>
                 </select>
 
             </div>
