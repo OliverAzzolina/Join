@@ -1,0 +1,231 @@
+body {
+    position: relative; 
+    background-color: rgb(246, 247, 248);
+}
+
+.main-content {
+    width: 560px;
+    height: auto; 
+    color: rgb(66, 66, 213);
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.summary-content {
+    width: 625px; 
+    height: 73px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px; 
+    gap: 3px;
+    margin-left: 54px;
+}
+
+.left-text {
+    color: #2A3647;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 61px;
+}
+
+.right-text {
+    color: #2A3647;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 27px;
+}
+
+.middle-text {
+    color: #29ABE2;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 59px;  
+}
+
+.middle-text2 {
+    position: absolute;
+    color: #D1D1D1;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 59px;
+    padding-right: 33px;
+    margin-top: -35px;
+    margin-left: 34px;
+}
+
+.todo1 {
+    width: 560px;
+    height: 168px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 18px;
+    margin-bottom: 20px;  
+}
+
+.todo2 {
+    width: 560px;
+    height: 168px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 30px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.to-do {
+    width: 168px;
+    height: 168px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+}
+
+.todo2-left {
+    width: 264px;
+    height: 168px;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.todo2-left .icon {
+    width: 69px;
+    height: 69px;
+    margin-right: 10px;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.number {
+    font-size: 64px; 
+    font-weight: 600;
+    color: #000000;
+}
+
+.todo-left .icon {
+    width: 69px;
+    height: 69px;
+    margin-right: 10px;
+}
+
+.done-right .icon {
+    width: 69px;
+    height: 69px;
+    margin-right: 10px;
+}
+
+.label {
+    font-weight: 400;
+    text-align: center;
+    color: #000000;
+}
+
+.todo-right {
+    width: 214px;
+    height: 168px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 30px;
+    text-align: center;
+    margin-right: 22px;
+}
+
+.date {
+    font-size: 21px;
+    font-weight: 700px;
+    color: #000;
+}
+
+.todo-left {
+    width: 264px;
+    height: 168px;
+    background-color: white;
+    border-radius: 30px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.done-right {
+    width: 264px;
+    height: 168px;
+    background-color: white;
+    border-radius: 30px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.greeting-script {
+    width: 200px;
+    height: 100px;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 300px;
+    left: calc(50% + 380px + 30px);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.greeting-script p {
+    white-space: nowrap;
+}
+
+.to-do2 {
+    width: 168px;
+    height: 168px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+}
+
+.to-do3 {
+    width: 168px;
+    height: 168px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+}
