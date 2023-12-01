@@ -3,8 +3,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-
-
 .sidebar {
     width: 232px;
     height: 100vh;
@@ -33,8 +31,6 @@ body {
     left: 0;
     box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
 }
-
-
 
 .content {
     margin-left: 200px;
@@ -80,30 +76,27 @@ body {
     gap: 16px;
     width: 200px;
     height: 46px;
-    
-
-}
-
-
-
-.sidebar ul li a {
-    text-decoration: none;
-    color: white;
-    padding-top: 88px;
-    font-size: 18px;
-    text-align: left;
-    margin-top: 5px;
-   
 }
 
 .sidebar ul li {
     list-style-type: none;
     margin-bottom: 6px;
+    display: flex; /* Flexbox für die Listenelemente aktivieren */
+    align-items: center; /* Vertikale Zentrierung der Inhalte */
     padding-top: 25px;
-
 }
+
 .icon {
+    margin-right: 10px; /* Etwas Abstand zwischen Icon und Text hinzufügen */
     padding-top: 8px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    text-align: left;
+    margin-top: 5px;
 }
 
 .footer-section {
