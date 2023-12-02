@@ -1,3 +1,9 @@
+    //TO-DOs:
+    //prio img at card + detail card
+    //assigned to linking
+    //subtasks add task and detail card
+    // css animations
+
 let tasks = [
   {
     title: "Kochwelt Page & Recipe Recommender",
@@ -27,9 +33,8 @@ let currentDraggedElement;
 
 async function init(){
     loadContactsFromStorage();
-    renderTodos();
+    renderTasks();
 }
-
 
 //LOAD Storage
 async function loadContactsFromStorage(){
@@ -40,7 +45,6 @@ async function loadContactsFromStorage(){
   }
   sortContacts();
 }
-
 
 //SORT Contacts
 function sortContacts(){
@@ -55,11 +59,9 @@ function sortContacts(){
    });
 }
 
-
 //LOAD Contacts
 function loadContacts(){
   let contactList = document.getElementById('assigned-editors');
-  contactList.innerHTML = '';
   for (let i = 0; i < contacts.length; i++) {
       let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
       let randomColor = '#' + contacts[i]['randomColor'];
@@ -83,13 +85,14 @@ function loadContacts(){
 function checkIfAssigned(i){
   let checkbox = document.getElementById(`checkbox${i}`).checked;
  
+  if(checkbox == false){
+    setUnAssigned(i); 
+  }
+
   if(checkbox == true){
     setAssigned(i);
-  }else{
-    setUnAssigned(i);
   }
 }
-
 
 function setAssigned(i){
   let assignedContact = document.getElementById(`assigned-contact${i}`);
@@ -98,6 +101,35 @@ function setAssigned(i){
   checkImg.src ="/assets/img/icons/check_button_checked.png";
 }
 
+function showDropdownContacts(){
+  let dropdown = document.getElementById('assigned-editors');
+  if(dropdown.style.display == 'none'){
+    dropdown.style.display = 'block';
+    clearAssignedTo();
+  }else{
+    dropdown.style.display = 'none';
+    addAssignedEditors();
+  } 
+}
+
+function addAssignedEditors(){
+  let showAssignedEditors = document.getElementById('show-assigned-editors-container');
+  for (let i = 0; i < contacts.length; i++) {
+    const checkedEditor = contacts[i];
+    let randomColor = '#' + checkedEditor['randomColor'];
+    let initials = checkedEditor['name'].split(" ").map((n)=>n[0]).join("");
+    let checkbox = document.getElementById(`checkbox${i}`).checked;
+    if(checkbox == true){
+      showAssignedEditors.innerHTML += `
+      <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
+      `;
+    }
+  }
+  }
+
+  function clearAssignedTo(){
+    document.getElementById('show-assigned-editors-container').innerHTML = '';
+  }
 
 function setUnAssigned(i){
   let assignedContact = document.getElementById(`assigned-contact${i}`);
@@ -106,20 +138,18 @@ function setUnAssigned(i){
   checkImg.src ="/assets/img/icons/check_button.png";
 }
 
-
-function renderTodos(subTasksDone) {
+function renderTasks(subTasksDone) {
   for (let i = 0; i < tasks.length; i++) {
     let status = tasks[i]["status"];
     if (status == status) {
       
-      document.getElementById(`${status}`).innerHTML += generateTodo(i, subTasksDone);
+      document.getElementById(`${status}`).innerHTML += generateTask(i, subTasksDone);
       generateSubtasks(i)
       checkCategory(i);
       renderAssignedTo(i);
     }
   }
 }
-
 
 function checkCategory(i){
   let category = tasks[i]["category"];
@@ -130,7 +160,6 @@ function checkCategory(i){
     document.getElementById(`category${i}`).style.backgroundColor = "rgb(31,215,193)";
   }
 }
-
 
 function renderAssignedTo(i){
   let assignedTo = document.getElementById(`todo-assigned-to${i}`);
@@ -144,18 +173,16 @@ function renderAssignedTo(i){
   }
 }
 
-
-function refreshTodos(){
+function refreshTasks(){
   document.getElementById("open").innerHTML = '';
   document.getElementById("in-progress").innerHTML = '';
   document.getElementById("await-feedback").innerHTML = '';
   document.getElementById("done").innerHTML = '';
 }
 
-
-function generateTodo(i){
+function generateTask(i){
     return `
-    <div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})" onclick="openTodoDetails(${i})">
+    <div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})" onclick="openTaskDetails(${i})">
       <span id="category${i}" class="category">${tasks[i]["category"]}</span>
       <div class="title-description">
         <span class="todo-title">${tasks[i]["title"]}</span>
@@ -173,9 +200,6 @@ function generateTodo(i){
       </div>
     </div>
     `;
-    //TO-DOs:
-    //subtasks line
-    //prio img
 }
 
 function generateSubtasks(i){
@@ -187,32 +211,27 @@ function generateSubtasks(i){
     subProgressBar.style.width = percent + '%';
 }
 
-
 //drag&drop
 function startDragging(i){
  currentDraggedElement = i;
 }
 
-
 function allowDrop(ev){
   ev.preventDefault();
 }
 
-
 function moveTo(status){
  tasks[currentDraggedElement]['status'] = status;
-  refreshTodos();
-  renderTodos();
+  refreshTasks();
+  renderTasks();
 }
 
-
 //Detail-Todo
-function openTodoDetails(i){
+function openTaskDetails(i){
   document.getElementById('overlay').style.display = "flex"; 
   document.getElementById('overlay').innerHTML = generateOverlay(i);
   checkOverlayCategory(i);
 }
-
 
 function checkOverlayCategory(i){
   let category = tasks[i]["category"];
@@ -224,11 +243,9 @@ function checkOverlayCategory(i){
   }
 }
 
-
 function closeDetailCard(){
   document.getElementById('overlay').style.display = "none";
 }
-
 
 function generateOverlay(i){
   return `<div id="todo-card${i}" class="detail-todo-card" onclick="doNotClose(event)">
@@ -246,75 +263,57 @@ function generateOverlay(i){
     `;
 }
 
-
 //SEARCH
-function filterTodos() {
+function filterTasks() {
   let search = document.getElementById("search").value.toLowerCase();
-  refreshTodos();
+  refreshTasks();
   if (search == "") {
     //document.getElementById('notfound').style.display = "none";
-    renderTodos();
+    renderTasks();
   }else{
-    FilteredTodos(search);
+    FilteredTasks(search);
   }
 }
-
 
 function hover(id){
   document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button_hover.png');
 }
 
-
 function unhover(id){
   document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button.png');
 }
 
-   
-function FilteredTodos(search){ 
-  refreshTodos();
+function FilteredTasks(search){ 
+  refreshTasks();
   for (let i = 0; i < tasks.length; i++) {
     let title = tasks[i]['title'].toLowerCase();
     let description = tasks[i]['description'].toLowerCase();
     if (title.toLowerCase().includes(search)||description.toLowerCase().includes(search)) {
-      renderFilteredTodos(i);
+      renderFilteredTasks(i);
     }else{
       //?checkIfEmpty();
     }
   }
 }
 
-
-function renderFilteredTodos(i){
+function renderFilteredTasks(i){
   let status = tasks[i]["status"];
   if (status == status) {
-    document.getElementById(`${status}`).innerHTML += generateTodo(i);
+    document.getElementById(`${status}`).innerHTML += generateTask(i);
     checkCategory(i);
   }
 }
 
-
 function openAddTaskCard(){
   document.getElementById('add-task-overlay').style.display = 'flex';
+  loadContacts();
 }
-
 
 function closeAddTaskCard(){
+  document.getElementById('assigned-editors').innerHTML = '';
   document.getElementById('add-task-overlay').style.display = 'none';
-
 }
-
 
 function doNotClose(event){
   event.stopPropagation();
 }
-
-
-function showDropdownContacts(){
-  let dropdown = document.getElementById('assigned-editors');
-  if(dropdown.style.display == 'none'){
-    dropdown.style.display = 'block';
-  }else{
-    dropdown.style.display = 'none';
-  } 
-}
-

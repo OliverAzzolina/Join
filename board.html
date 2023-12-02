@@ -71,7 +71,7 @@
                 <div id="board-header-top">
                         <h1>Board</h1>
                     <div id="board-header-right">              
-                        <input id="search" onkeyup="filterTodos()" type="text" placeholder="Find Task">
+                        <input id="search" onkeyup="filterTasks()" type="text" placeholder="Find Task">
                         <button onclick="openAddTaskCard()">Add task +</button>
                     </div>
                 </div>
@@ -144,11 +144,12 @@
 
                 <div id="add-task-assigned-to-container">
                   <span class="add-task-form-title">Assigned to</span>
-                  <div id="contacts-dropdown" onclick="loadContacts(), showDropdownContacts()">
+                  <div id="contacts-dropdown" onclick="showDropdownContacts()">
                     <span>Select contacts to assign</span>
                     <img src="assets/img/icons/arrow_drop_down.png" alt="">
                   </div>
                   <ul style="display: none;" id="assigned-editors" class="assigned-editors"></ul>
+                  <div id="show-assigned-editors-container" onclick="clearAssignedTo()"></div>
                 </div>
               </div>
 

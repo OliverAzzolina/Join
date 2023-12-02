@@ -533,6 +533,10 @@ cursor: pointer;
   border-radius: 10px;
 }
 
+#show-assigned-editors-container{
+  display: flex;
+}
+
 .drop-name-initials {
   display: flex;
   flex-direction: row;
@@ -558,8 +562,6 @@ cursor: pointer;
   border: 2px solid white;
   color: white;
 }
-
-
 
 .cancel-button {
   width: 126px;
