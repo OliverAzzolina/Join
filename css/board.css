@@ -247,6 +247,35 @@ body {
   justify-content: center;
 }
 
+.sub-progress-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sub-progress-container span{
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  color: #000000;
+}
+
+.subtasks-progress-bar-container{
+  height: 10px;
+  width: 128px;
+  background-color: #F4F4F4;
+  border-radius: 8px;
+}
+
+.subtasks-progress-bar{
+  height: 10px;
+  width: 100%;
+  background-color: #29abe2;
+  border-radius: 8px;
+
+}
+
 #add-task-overlay {
   position: absolute;
   z-index: 996;
@@ -530,12 +559,7 @@ cursor: pointer;
   color: white;
 }
 
-input[type="checkbox" i]{
-  outline: 2px solid #2A3647;
 
-
-
-}
 
 .cancel-button {
   width: 126px;

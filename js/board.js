@@ -6,7 +6,8 @@ let tasks = [
     duedate: "10/05/2023",
     prio: "Medium",
     category: "User Story",
-    subtasks: 2,
+    subtasks: ['Implement Recipe Recommendation','Start Page Layout'],
+    subTasksDone: ['Implement Recipe Recommendation'],
     status: "open",
   },
   {
@@ -16,7 +17,8 @@ let tasks = [
     duedate: "10/05/2023",
     prio: "Medium",
     category: "Technical Task",
-    subtasks: 2,
+    subtasks: ['Task1','Task2', 'Task3'],
+    subTasksDone: ['Task1', 'Task2'],
     status: "in-progress",
   }
 ];
@@ -105,11 +107,13 @@ function setUnAssigned(i){
 }
 
 
-function renderTodos() {
+function renderTodos(subTasksDone) {
   for (let i = 0; i < tasks.length; i++) {
     let status = tasks[i]["status"];
     if (status == status) {
-      document.getElementById(`${status}`).innerHTML += generateTodo(i);
+      
+      document.getElementById(`${status}`).innerHTML += generateTodo(i, subTasksDone);
+      generateSubtasks(i)
       checkCategory(i);
       renderAssignedTo(i);
     }
@@ -157,7 +161,12 @@ function generateTodo(i){
         <span class="todo-title">${tasks[i]["title"]}</span>
         <span class="todo-description">${tasks[i]["description"]}</span>
       </div>
-        <span>${tasks[i]["subtasks"]} Subtasks</span>
+      <div class="sub-progress-container">
+        <div class="subtasks-progress-bar-container">
+          <div class="subtasks-progress-bar" id="subtasks-progress${i}"></div>
+        </div>
+        <span>${tasks[i]["subTasksDone"].length}/${tasks[i]["subtasks"].length} Subtasks</span>
+      </div>
       <div class="assigned-prio">
         <div class="todo-assigned-to" id="todo-assigned-to${i}"></div>
         <img src="assets/img/icons/Prio media.png" alt="">
@@ -167,6 +176,15 @@ function generateTodo(i){
     //TO-DOs:
     //subtasks line
     //prio img
+}
+
+function generateSubtasks(i){
+  let subProgressBar = document.getElementById(`subtasks-progress${i}`);
+  subProgressBar.innerHTML = '';
+  let openSubTasks = tasks[i]['subtasks'].length;
+  let subTasksDone = tasks[i]['subTasksDone'].length;
+  let percent = subTasksDone / openSubTasks * 100;
+    subProgressBar.style.width = percent + '%';
 }
 
 
