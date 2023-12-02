@@ -2,7 +2,7 @@ let tasks = [
   {
     title: "Kochwelt Page & Recipe Recommender",
     description: "Build start page with recipe recommendation...",
-    assignedto: ['AM', 'EM', 'MB'],
+    assignedto: [],
     duedate: "10/05/2023",
     prio: "Medium",
     category: "User Story",
@@ -21,12 +21,13 @@ let tasks = [
   }
 ];
 
-let contacts = [];
 let currentDraggedElement;
 
 async function init(){
     loadContactsFromStorage();
+    renderTodos();
 }
+
 
 //LOAD Storage
 async function loadContactsFromStorage(){
@@ -37,6 +38,7 @@ async function loadContactsFromStorage(){
   }
   sortContacts();
 }
+
 
 //SORT Contacts
 function sortContacts(){
@@ -51,6 +53,7 @@ function sortContacts(){
    });
 }
 
+
 //LOAD Contacts
 function loadContacts(){
   let contactList = document.getElementById('assigned-editors');
@@ -60,18 +63,46 @@ function loadContacts(){
       let randomColor = '#' + contacts[i]['randomColor'];
       let name = contacts[i]['name'];
       contactList.innerHTML += `
-      <li>
+     <label for="checkbox${i}">
+      <li id="assigned-contact${i}" onclick="checkIfAssigned(${i})">
+      <input style="display: none" type="checkbox" id="checkbox${i}">
         <div class="drop-name-initials">
-          <div class="drop-initials">${initials}</div>
+          <div class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
           <span> ${name}</span>
         </div>
-          <input type="checkbox">
-      </li>`;
-     
+          <img id="checked${i}" src="/assets/img/icons/check_button.png" alt="">
+      </li>
+     </label>
+  `;
   }
-  sortContacts();
+    sortContacts();
 }
 
+function checkIfAssigned(i){
+  let checkbox = document.getElementById(`checkbox${i}`).checked;
+ 
+  if(checkbox == true){
+    setAssigned(i);
+  }else{
+    setUnAssigned(i);
+  }
+}
+
+
+function setAssigned(i){
+  let assignedContact = document.getElementById(`assigned-contact${i}`);
+  let checkImg = document.getElementById(`checked${i}`);
+  assignedContact.style = "background-color: #2A3647; color: white"
+  checkImg.src ="/assets/img/icons/check_button_checked.png";
+}
+
+
+function setUnAssigned(i){
+  let assignedContact = document.getElementById(`assigned-contact${i}`);
+  let checkImg = document.getElementById(`checked${i}`);
+  assignedContact.style = "color: black";
+  checkImg.src ="/assets/img/icons/check_button.png";
+}
 
 
 function renderTodos() {
@@ -135,9 +166,7 @@ function generateTodo(i){
     `;
     //TO-DOs:
     //subtasks line
-  
     //prio img
-
 }
 
 
@@ -153,7 +182,7 @@ function allowDrop(ev){
 
 
 function moveTo(status){
-  todos[currentDraggedElement]['status'] = status;
+ tasks[currentDraggedElement]['status'] = status;
   refreshTodos();
   renderTodos();
 }
@@ -236,6 +265,7 @@ function FilteredTodos(search){
   }
 }
 
+
 function renderFilteredTodos(i){
   let status = tasks[i]["status"];
   if (status == status) {
@@ -244,13 +274,6 @@ function renderFilteredTodos(i){
   }
 }
 
-//function checkIfEmpty(){
-//  if(document.getElementById('').innerHTML == ''){
-//    document.getElementById('notfound').style.display = "flex";
-//  } else{
-//    document.getElementById('notfound').style.display = "none";
-//  }
-//} 
 
 function openAddTaskCard(){
   document.getElementById('add-task-overlay').style.display = 'flex';
