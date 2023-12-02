@@ -11,42 +11,46 @@
 <body>
     <div class="top-bar">
         <span>Not a Join User?</span>
-        <button type="button">Sign Up</button>
+        <button type="button" id="signUpButton">Sign Up</button>
     </div>
 <img src="./img/1.png" alt="Logo" class="logo">
 <div class="content">
     <h2>Log in</h2>
-    <div class="underline"></div>indextest.html
+    <div class="underline"></div>
 
-    <form>
+    <form onsubmit="login(); return false">
         <div class="form-group">
             <div class="input-with-icon">
                 <img src="img/mail.png" alt="Email Icon" class="input-icon">
-                <input type="email" placeholder="Email">
+                <input type="email" placeholder="Email" required id="email">
             </div>
         </div>
         <div class="form-group">
             <div class="input-with-icon">
                 <img src="img/lock.png" alt="Password Icon" class="input-icon">
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" required id="password">
             </div>
         </div>
         <div class="checkbox-group">
             <label>
                 <input type="checkbox">
-                Remember me
+                Remember me 
             </label>
         </div>
         <div class="button-group">
             <button type="submit">Log in</button>
-            <button type="button" class="guest-login">Guest Log in</button>
+            <button type="button" class="guest-login" id="guestLoginButton">Guest Log in</button>
         </div>
     </form>
+
+    <div id="msgBox"></div>
+
 </div>
 <div class="footer">
     <p>Privacy Policy</p>
     <p>Legal Notice</p>
 </div>
- 
+    <script src="./js/register.js"></script>
+    <script src="./js/login.js"></script>
 </body>
 </html>
