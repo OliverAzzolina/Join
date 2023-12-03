@@ -1,6 +1,6 @@
 body {
-  margin: 0;
   font-family: "Inter";
+  width: 1440px;
 }
 
 #board {
@@ -79,6 +79,7 @@ body {
   justify-content: space-between;
   gap: 24px;
   height: 688px;
+  overflow: auto;
 }
 
 .board-section p {
@@ -118,10 +119,24 @@ body {
 }
 
 .todos-container-empty {
-  background-color: rgb(231, 231, 231);
-  height: 24px;
-  border: 1px dashed rgb(182, 182, 182);
-  border-radius: 8px;
+  height: 48px;
+  background-color: #E7E7E7;
+  border: 1px dashed #A8A8A8;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todos-container-empty span{
+  font-size: 16px;
+  line-height: 19.2px;
+  font-weight: 400;
+  color: #A8A8A8;
+}
+
+.todos-container{
+  height: 400px;
 }
 
 .todo-card {
@@ -237,6 +252,14 @@ body {
   display: flex;
 }
 
+.detailSub{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 16px 6px 16px;
+  box-sizing: border-box;
+}
+
 .mini-logo {
   height: 32px;
   width: 32px;
@@ -273,7 +296,6 @@ body {
   width: 100%;
   background-color: #29abe2;
   border-radius: 8px;
-
 }
 
 #add-task-overlay {
@@ -632,5 +654,4 @@ align-items: flex-end;
 #add-task-requirement-footer{
   display: flex;
   flex-direction: row;
-
 }

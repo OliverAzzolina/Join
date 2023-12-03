@@ -13,7 +13,7 @@ let tasks = [
     prio: "Medium",
     category: "User Story",
     subtasks: ['Implement Recipe Recommendation','Start Page Layout'],
-    subTasksDone: ['Implement Recipe Recommendation'],
+    subTasksDone: [],
     status: "open",
   },
   {
@@ -24,7 +24,7 @@ let tasks = [
     prio: "Medium",
     category: "Technical Task",
     subtasks: ['Task1','Task2', 'Task3'],
-    subTasksDone: ['Task1', 'Task2'],
+    subTasksDone: [],
     status: "in-progress",
   }
 ];
@@ -125,11 +125,11 @@ function addAssignedEditors(){
       `;
     }
   }
-  }
+}
 
-  function clearAssignedTo(){
-    document.getElementById('show-assigned-editors-container').innerHTML = '';
-  }
+function clearAssignedTo(){
+  document.getElementById('show-assigned-editors-container').innerHTML = '';
+}
 
 function setUnAssigned(i){
   let assignedContact = document.getElementById(`assigned-contact${i}`);
@@ -142,13 +142,30 @@ function renderTasks(subTasksDone) {
   for (let i = 0; i < tasks.length; i++) {
     let status = tasks[i]["status"];
     if (status == status) {
-      
       document.getElementById(`${status}`).innerHTML += generateTask(i, subTasksDone);
-      generateSubtasks(i)
+      updateDoneSubs(i);
+      generateSubtasks(i);
       checkCategory(i);
       renderAssignedTo(i);
     }
   }
+  checkIfBoardEmpty();
+}
+
+function checkIfBoardEmpty(){
+  checkOpen('open');
+  checkOpen('in-progress');
+  checkOpen('await-feedback');
+  checkOpen('done');
+}
+
+function checkOpen(id){
+let board = document.getElementById(`${id}`);
+    if(board.innerHTML == ''){
+      document.getElementById(`${id}-empty`).style.display = "flex";
+     }else{
+      document.getElementById(`${id}-empty`).style.display = "none";
+     }
 }
 
 function checkCategory(i){
@@ -192,7 +209,7 @@ function generateTask(i){
         <div class="subtasks-progress-bar-container">
           <div class="subtasks-progress-bar" id="subtasks-progress${i}"></div>
         </div>
-        <span>${tasks[i]["subTasksDone"].length}/${tasks[i]["subtasks"].length} Subtasks</span>
+        <span><span id="subsDoneOfAll${i}"></span> / ${tasks[i]["subtasks"].length} Subtasks</span>
       </div>
       <div class="assigned-prio">
         <div class="todo-assigned-to" id="todo-assigned-to${i}"></div>
@@ -208,7 +225,17 @@ function generateSubtasks(i){
   let openSubTasks = tasks[i]['subtasks'].length;
   let subTasksDone = tasks[i]['subTasksDone'].length;
   let percent = subTasksDone / openSubTasks * 100;
-    subProgressBar.style.width = percent + '%';
+  subProgressBar.style.width = percent + '%';
+}
+
+function updateDoneSubs(i){
+  let subTasksDone = tasks[i].subTasksDone.length;
+  if(subTasksDone == 0){
+    document.getElementById(`subsDoneOfAll${i}`).innerHTML = '0';
+  }else{
+    document.getElementById(`subsDoneOfAll${i}`).innerHTML =`${subTasksDone}`;
+  }
+  
 }
 
 //drag&drop
@@ -224,6 +251,7 @@ function moveTo(status){
  tasks[currentDraggedElement]['status'] = status;
   refreshTasks();
   renderTasks();
+  checkIfBoardEmpty();
 }
 
 //Detail-Todo
@@ -231,6 +259,8 @@ function openTaskDetails(i){
   document.getElementById('overlay').style.display = "flex"; 
   document.getElementById('overlay').innerHTML = generateOverlay(i);
   checkOverlayCategory(i);
+  generateDetailSubtasks(i);
+  checkIfSubsDone(i);
 }
 
 function checkOverlayCategory(i){
@@ -247,6 +277,46 @@ function closeDetailCard(){
   document.getElementById('overlay').style.display = "none";
 }
 
+function generateDetailSubtasks(i){
+  let detailSub = document.getElementById(`checklistSubDetail`);
+  detailSub.innerHTML = '';
+
+    for (let j = 0; j < tasks[i]["subtasks"].length; j++) {
+      let subtask = tasks[i]["subtasks"][j];
+      detailSub.innerHTML += `
+      <div class="detailSub" onclick="setChecked(${j}, ${i})">
+        <img id="detailSub${j}"  src="/assets/img/icons/check_button.png">
+        <span>${subtask}</span>
+      </div>`;
+    } //besser mit >label> <input type="checkbox" display="none"> und .checked Abfrage???
+}
+
+function setChecked(j, i){
+  let subtask = tasks[i]['subtasks'][j];
+  let subtaskDone = tasks[i]['subTasksDone'][j];
+  if(subtask == subtaskDone){
+    document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button.png';
+    tasks[i]['subTasksDone'].splice(j, 1);
+  }else{
+    tasks[i]['subTasksDone'].push(subtask);
+    document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button_checked_bl.png';
+  }
+  generateSubtasks(i);
+  updateDoneSubs(i);
+}
+
+function checkIfSubsDone(i){
+  let subtasks = tasks[i]['subtasks'];
+  let subtasksDone = tasks[i]['subTasksDone'];
+  for (let j = 0; j < tasks[i]['subtasks'].length; j++) {
+    const subtask = subtasks[j];
+    const subtaskDone = subtasksDone[j];
+    if(subtask == subtaskDone){
+      document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button_checked_bl.png'
+    }
+  }
+}
+
 function generateOverlay(i){
   return `<div id="todo-card${i}" class="detail-todo-card" onclick="doNotClose(event)">
   <div class="detail-card-top">  
@@ -258,7 +328,7 @@ function generateOverlay(i){
     <span class="f-s20-w400">Due date:  ${tasks[i]["duedate"]}</span><br>
     <span class="f-s20-w400">Priority:  ${tasks[i]["prio"]}</span><br>
     <span class="f-s20-w400">Assigned to:<br>${tasks[i]["assignedto"]}</span><br>
-    <span class="f-s20-w400">${tasks[i]["subtasks"]}</span>
+    <span class="f-s20-w400">Subtasks<div id="checklistSubDetail"></div></span>
     </div>
     `;
 }
