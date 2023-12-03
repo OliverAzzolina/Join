@@ -4,31 +4,6 @@
     //subtasks add task and detail card
     // css animations
 
-let tasks = [
-  {
-    title: "Kochwelt Page & Recipe Recommender",
-    description: "Build start page with recipe recommendation...",
-    assignedto: [],
-    duedate: "10/05/2023",
-    prio: "Medium",
-    category: "User Story",
-    subtasks: ['Implement Recipe Recommendation','Start Page Layout'],
-    subTasksDone: [],
-    status: "open",
-  },
-  {
-    title: "Title",
-    description: "Description",
-    assignedto: ['AZ', 'RF', 'XY'],
-    duedate: "10/05/2023",
-    prio: "Medium",
-    category: "Technical Task",
-    subtasks: ['Task1','Task2', 'Task3'],
-    subTasksDone: [],
-    status: "in-progress",
-  }
-];
-
 let currentDraggedElement;
 
 async function init(){
