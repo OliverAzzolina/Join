@@ -96,13 +96,13 @@ h1 {
 }
 
 #add-task-create-subtask-icon {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 #add-task-create-subtask-icon:hover {
-  background-color: #eeeeee;
-  border-radius: 15px;
-  cursor: pointer;
+    background-color: #eeeeee;
+    border-radius: 15px;
+    cursor: pointer;
 }
 
 #add-task-container {
