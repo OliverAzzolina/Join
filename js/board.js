@@ -210,7 +210,6 @@ function updateDoneSubs(i){
   }else{
     document.getElementById(`subsDoneOfAll${i}`).innerHTML =`${subTasksDone}`;
   }
-  
 }
 
 //drag&drop
@@ -304,8 +303,115 @@ function generateOverlay(i){
     <span class="f-s20-w400">Priority:  ${tasks[i]["prio"]}</span><br>
     <span class="f-s20-w400">Assigned to:<br>${tasks[i]["assignedto"]}</span><br>
     <span class="f-s20-w400">Subtasks<div id="checklistSubDetail"></div></span>
+    <div class="overlay-buttons">
+      <button onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="/assets/img/icons/delete.png">Delete</button>
+      <div class="overlay-buttons-splitter"></div>
+      <button onclick="openEditOverlay(${i})" onmouseover="hover('edit-img')" onmouseout="unhover('edit-img')"><img id="edit-img" src="/assets/img/icons/edit.png">Edit</button>
+    </div>
     </div>
     `;
+}
+
+function openEditOverlay(i){
+  loadTaskData(i);
+  loadContacts();
+}
+
+function loadTaskData(i){
+  //let assignedto = tasks[i]['assignedto'][j]; function renderEditAssignedTo()
+  //let prio = tasks[i]['prio']; function proImg()
+  //let subtasks = tasks[i]['subtasks']; function renderEditSubtasks()
+  document.getElementById('overlay').innerHTML = generateEditOverlay(i);
+}
+
+function closeEditOverlay(){
+  document.getElementById('overlay').style.display = "none";
+}
+
+function SaveTask(){
+
+}
+
+function AddTask(){
+  
+}
+
+function generateEditOverlay(i){
+  return`
+  <div id="edit-task-overlay"  onclick="closeDetailCard()">
+  <div class= "detail-todo-card" onclick="doNotClose(event)">
+    
+  <div id="edit-task-overlay-header">
+  <button onclick="closeEditOverlay()" class="close-button">
+  <img src="/assets/img/icons/close.png" alt=""></button>
+  </div>
+    <form id="edit-task-form" onsubmit="addTask()"> 
+      <div id="edit-input-container-tasks">
+          
+          <div id="add-task-title-container">
+              <div>
+                <span id="add-task-title-headline" class="add-task-form-title">Title</span>
+              </div>
+              <input id="add-task-title-input" class="add-task-form-input" required type="text" value='${tasks[i]['title']}' placeholder="Enter a title">
+          </div> 
+
+          <div id="add-task-description-container">
+            <span id="add-task-description-headline" class="add-task-form-title">Description</span>
+            <textarea id="add-task-description-input" class="add-task-form-input" required  rows="5" cols="40">${tasks[i]['description']}</textarea>
+          </div>
+
+          <div id="add-task-date-container">
+            <div>
+              <span id="add-task-date-headline" class="add-task-form-title">Due date</span>
+            </div>
+              <input class="add-task-form-input" required type="date" value=${tasks[i]['duedate']}>
+          </div>
+
+          <div id="add-task-prio-container">
+          <span id="add-task-prio-headline" class="add-task-form-title">Prio</span>
+          <div id="add-task-form-btn-container">
+            <button class="add-task-form-btn">
+              <span class="add-task-form-btn-text">Urgent</span>
+              <img src="assets/img/icons/Prio alta.png" alt="">
+            </button>
+            <button class="add-task-form-btn">
+              <span class="add-task-form-btn-text">Medium</span>
+              <img src="assets/img/icons/Prio media.png" alt="">
+            </button>
+            <button class="add-task-form-btn">
+              <span class="add-task-form-btn-text">Low</span>
+              <img src="assets/img/icons/Prio baja.png" alt="">
+            </button>
+          </div>
+        </div>
+
+          <div id="add-task-assigned-to-container">
+            <span class="add-task-form-title">Assigned to</span>
+            <div id="contacts-dropdown" onclick="showDropdownContacts()">
+              <span>Select contacts to assign</span>
+              <img src="assets/img/icons/arrow_drop_down.png" alt="">
+            </div>
+            <ul style="display: none;" id="assigned-editors" class="assigned-editors"></ul>
+            <div id="show-assigned-editors-container" onclick="clearAssignedTo()"></div>
+          </div>
+          
+          <div id="add-task-sub-container">
+            <span class="add-task-form-title">Subtasks</span>
+            <input class="add-task-form-input" type="text" placeholder="Add new subtask">
+          </div>
+       
+      </div>
+    </form>
+
+    <div id="edit-task-overlay-footer">
+      <div class="edit-task-buttons">
+        <button type="submit" class="ok-button"><span>Ok</span><img src="assets/img/icons/check.png" alt=""></button>
+      </div>
+    </div>
+
+  </div>
+</div>
+  `;
 }
 
 //SEARCH
@@ -321,11 +427,29 @@ function filterTasks() {
 }
 
 function hover(id){
-  document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button_hover.png');
+ let button = document.getElementById(id);
+  if(id == 'edit-img'){
+    button.setAttribute('src', '/assets/img/icons/edit_hover.png');
+  }else
+  if(id == 'delete-img'){
+    button.setAttribute('src', '/assets/img/icons/delete_hover.png');
+  }else{
+    document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button_hover.png');
+  }
+  
 }
 
 function unhover(id){
-  document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button.png');
+  let button = document.getElementById(id);
+  if(id == 'edit-img'){
+    button.setAttribute('src', '/assets/img/icons/edit.png');
+  }else
+  if(id == 'delete-img'){
+    button.setAttribute('src', '/assets/img/icons/delete.png');
+  }else{
+    document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button.png');
+  }
+  
 }
 
 function FilteredTasks(search){ 

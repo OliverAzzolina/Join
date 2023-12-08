@@ -4,7 +4,7 @@ let tasks = [
       title: "Kochwelt Page & Recipe Recommender",
       description: "Build start page with recipe recommendation...",
       assignedto: [],
-      duedate: "10/05/2023",
+      duedate: "2023-05-10",
       prio: "Medium",
       category: "User Story",
       subtasks: ['Implement Recipe Recommendation','Start Page Layout'],

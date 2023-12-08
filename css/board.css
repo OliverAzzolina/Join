@@ -655,3 +655,124 @@ align-items: flex-end;
   display: flex;
   flex-direction: row;
 }
+
+.overlay-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.overlay-buttons button{
+  background-color: unset;
+  border: unset;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+}
+
+.overlay-buttons button:hover{
+  cursor: pointer;
+  color: #29ABE2;
+  font-weight: 700;
+
+}
+
+.overlay-buttons button img{
+  height: 24px;
+  width: 24px;
+}
+
+.overlay-buttons-splitter{
+  height: 100%;
+  border: 1px solid #D1D1D1;
+}
+
+#edit-input-container-tasks{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 697px;
+  width: fit-content;
+  overflow: auto;
+  gap: 24px;padding-right: 16px;
+}
+
+#edit-task-overlay-header{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  
+}
+::-webkit-scrollbar-track {
+  background: unset;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #A8A8A8;
+  border-radius: 8px;
+  
+  
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Buttons */
+::-webkit-scrollbar-button:single-button {
+  display: block;
+  background-repeat: no-repeat;
+}
+
+/* Up */
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+  height: 12px;
+  width: 16px;
+  background-position: center 4px;
+  background-image: url("/assets/img/icons/scrollbar_up.png");
+  
+}
+
+/* Down */
+::-webkit-scrollbar-button:single-button:vertical:increment {
+  height: 12px;
+  width: 16px;
+  background-position: center 2px;
+  background-image: url("/assets/img/icons/scrollbar_down.png");
+}
+
+.ok-button{
+  height: 57px;
+  background-color: #2a3647;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 21px;
+  font-weight: 700;
+  border: none;
+  padding: 16px;
+  gap: 4px;
+}
+
+.ok-button:hover {
+  cursor: pointer;
+  background-color: #29abe2;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
+}
+
+#edit-task-overlay-footer{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  }
