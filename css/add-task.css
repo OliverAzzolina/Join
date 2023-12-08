@@ -1,6 +1,6 @@
 body {
   font-family: "Inter", sans-serif;
-  background-color: #ffffff;
+  background-color: #f6f7f8;
 }
 
 .d-none {
@@ -79,6 +79,16 @@ h1 {
   position: relative;
   display: flex;
   align-items: center;
+  width: 408px;
+  height: 20px;
+  margin-top: 10px;
+  padding: 6px 16px;
+}
+
+.add-task-subtask:hover {
+  border-radius: 10px;
+  background: #eeeeee;
+  transition: 0.5s;
 }
 
 .add-task-subtask-icons {
@@ -86,6 +96,22 @@ h1 {
   right: 16px;
   display: flex;
   gap: 5px;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.add-task-subtask-icons:hover {
+  opacity: 1;
+}
+
+.editable-input {
+  display: flex;
+  width: 440px;
+  padding: 4px 4px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid #29abe2;
+  background: #fff;
 }
 
 #add-task-create-subtask-icon-box {
@@ -110,7 +136,7 @@ h1 {
   margin-left: 328px;
   width: 1116px;
   height: 870px;
-  background-color: white;
+  background-color: #f6f7f8;
   border-radius: 30px;
   padding: 64px 74px 64px 74px;
   box-sizing: border-box;
@@ -205,6 +231,11 @@ textarea::placeholder {
   border-radius: 10px;
   border: 1px solid #d1d1d1;
   background: #fff;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .add-task-form-dropdown:hover,
