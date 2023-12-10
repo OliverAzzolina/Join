@@ -14,9 +14,17 @@
     <div class="header">
         <div><p class="logotext">Kanban Project Management Tool</p></div>
         <div>
-            <span><img class="help"src="./img/Pasted Graphic 3.png" alt=""></span>
-            <span><img class="kreis"src="./img/login-icon.png" alt=""></span>
+            <span><img class="help" src="./img/Pasted Graphic 3.png" alt=""></span>
+            <span><img class="kreis" src="./img/login-icon.png" alt="" onclick="toggleDropdown()"></span>
+    
+            
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="legal-notice.html">Legal Notice</a>
+                <a href="private.html">Private</a>
+                <a href="sign-up.html">Log Out</a>
+            </div>
         </div>
+    </div>
 
     <div class="sidebar">
         <div>
@@ -66,6 +74,8 @@
 </div> 
 
 <script src="./js/privacy.js"></script>
+<script src="./js/dropdown-menu.js"></script>
+
 
 </body>
 </html>
