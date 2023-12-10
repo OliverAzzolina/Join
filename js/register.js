@@ -9,14 +9,19 @@ function addUser() {
     
     users.push({'name': name, 'email': email, 'password': password});
 
-   // window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert';
+    showRegistrationSuccessMessage();  
+}
+
+function showRegistrationSuccessMessage() {
+    alert("Sie haben sich erfolgreich registriert!");
+    window.location.href = 'login.html';  // Weiterleitung zur signup.html
 }
 
 function setupLoginButtonListener() {
     let loginButton = document.getElementById('loginButton');
     if (loginButton) {
         loginButton.addEventListener('click', function() {
-            window.location.href = 'login.html';
+            window.location.href = 'login.html'; 
         });
     }
 }
