@@ -15,6 +15,7 @@ body {
     top: 200px;
     left: 50%;
     transform: translateX(-50%);
+    font-family: 'Inter', sans-serif;
 }
 
 .content-container {
@@ -228,4 +229,34 @@ body {
     background-color: white;
     border: 2px solid rgba(0, 0, 0, 0.1);
     border-radius: 30px;
+}
+
+.todo-left:hover, .todo-left:hover * {
+    background-color: #2A3647;
+    color: white;
+}
+
+.done-right:hover, .done-right:hover * {
+    background-color: #2A3647;
+    color: white;
+}
+
+.todo2:hover, .todo2:hover * {
+    background-color: #2A3647;
+    color: white;
+}
+
+.to-do:hover, .to-do:hover * {
+    background-color: #2A3647;
+    color: white;
+}
+
+.to-do2:hover, .to-do2:hover * {
+    background-color: #2A3647;
+    color: white;
+}
+
+.to-do3:hover, .to-do3:hover * {
+    background-color: #2A3647;
+    color: white;
 }

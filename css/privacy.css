@@ -1,0 +1,47 @@
+.pcontent-container {
+    position: absolute;
+    top: 160px;
+    left: 328px;
+    width: 1016px;
+    height: 90vh;
+    overflow: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 35px;
+}
+
+.p-content {
+    background-color: white;
+    width: 100%;
+    color: black;
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 27px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+
+p {
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+
+.title {
+    font-size: 61px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.redirect-icon {
+    position: absolute;
+    right: 20px;
+    top: 50px;
+    cursor: pointer;
+}
