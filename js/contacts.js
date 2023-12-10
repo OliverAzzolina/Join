@@ -83,7 +83,6 @@ async function addNewContact(){
 
 function generateRandomColor(){
   return randomColor = Math.floor(Math.random()*16777215).toString(16);
-  
 }
 
 //DELETE Contact
@@ -103,8 +102,7 @@ function EditContact(i){
       let email = contacts[i]['email'];
       let phone = contacts[i]['phone'];
       let randomColor = '#' + contacts[i]['randomColor'];
-      document.getElementById('overlay').innerHTML = generateEditOverlay(i, initials, name, email, phone, randomColor);
-      
+      document.getElementById('overlay').innerHTML = generateEditOverlay(i, initials, name, email, phone, randomColor);  
 }
 
 //SAVE Contact

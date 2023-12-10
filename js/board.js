@@ -1,6 +1,4 @@
     //TO-DOs:
-    //prio img at card + detail card
-    //assigned to linking
     //subtasks add task and detail card
     // css animations
 
@@ -8,10 +6,21 @@ let currentDraggedElement;
 
 async function init(){
     loadContactsFromStorage();
-    renderTasks();
+    loadTasksfromStorage();
+    
 }
 
-//LOAD Storage
+//LOAD Tasks from Storage
+async function loadTasksfromStorage(){
+  try{
+    tasks = JSON.parse(await getItem('tasks'));
+  }catch(e){
+    console.warn('loading error:', e)
+  }
+  renderTasks();
+}
+
+//LOAD Contacts from Storage
 async function loadContactsFromStorage(){
   try{
       contacts = JSON.parse(await getItem('contacts'));
@@ -57,9 +66,32 @@ function loadContacts(){
     sortContacts();
 }
 
+function renderTasks() {
+  for (let i = 0; i < tasks.length; i++) {
+    let status = tasks[i]["status"];
+    if (status == status) {
+      document.getElementById(`${status}`).innerHTML += generateTask(i);
+      setPrioImg(i);
+      updateDoneSubs(i);
+      generateSubtasks(i);
+      checkCategory(i);
+      renderAssignedTo(i);
+    }
+  }
+  checkIfBoardEmpty();
+}
+
+function checkIfBoardEmpty(){
+  checkOpen('open');
+  checkOpen('in-progress');
+  checkOpen('await-feedback');
+  checkOpen('done');
+}
+
+
 function checkIfAssigned(i){
   let checkbox = document.getElementById(`checkbox${i}`).checked;
- 
+ console.log(checkbox)
   if(checkbox == false){
     setUnAssigned(i); 
   }
@@ -76,36 +108,6 @@ function setAssigned(i){
   checkImg.src ="/assets/img/icons/check_button_checked.png";
 }
 
-function showDropdownContacts(){
-  let dropdown = document.getElementById('assigned-editors');
-  if(dropdown.style.display == 'none'){
-    dropdown.style.display = 'block';
-    clearAssignedTo();
-  }else{
-    dropdown.style.display = 'none';
-    addAssignedEditors();
-  } 
-}
-
-function addAssignedEditors(){
-  let showAssignedEditors = document.getElementById('show-assigned-editors-container');
-  for (let i = 0; i < contacts.length; i++) {
-    const checkedEditor = contacts[i];
-    let randomColor = '#' + checkedEditor['randomColor'];
-    let initials = checkedEditor['name'].split(" ").map((n)=>n[0]).join("");
-    let checkbox = document.getElementById(`checkbox${i}`).checked;
-    if(checkbox == true){
-      showAssignedEditors.innerHTML += `
-      <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
-      `;
-    }
-  }
-}
-
-function clearAssignedTo(){
-  document.getElementById('show-assigned-editors-container').innerHTML = '';
-}
-
 function setUnAssigned(i){
   let assignedContact = document.getElementById(`assigned-contact${i}`);
   let checkImg = document.getElementById(`checked${i}`);
@@ -113,25 +115,50 @@ function setUnAssigned(i){
   checkImg.src ="/assets/img/icons/check_button.png";
 }
 
-function renderTasks(subTasksDone) {
-  for (let i = 0; i < tasks.length; i++) {
-    let status = tasks[i]["status"];
-    if (status == status) {
-      document.getElementById(`${status}`).innerHTML += generateTask(i, subTasksDone);
-      updateDoneSubs(i);
-      generateSubtasks(i);
-      checkCategory(i);
-      renderAssignedTo(i);
-    }
-  }
-  checkIfBoardEmpty();
+function showDropdownContacts(index){
+  let dropdown = document.getElementById('assigned-editors');
+  if(dropdown.style.display == 'none'){
+    dropdown.style.display = 'block';
+    clearAssignedTo(index);
+  }else{
+    dropdown.style.display = 'none';
+    addAssignedEditors(index);
+  } 
 }
 
-function checkIfBoardEmpty(){
-  checkOpen('open');
-  checkOpen('in-progress');
-  checkOpen('await-feedback');
-  checkOpen('done');
+function addAssignedEditors(index){
+  let showAssignedEditors = document.getElementById('show-assigned-editors-edit-container');
+  for (let i = 0; i < contacts.length; i++) {
+    const checkedEditor = contacts[i];
+    let checkbox = document.getElementById(`checkbox${i}`).checked;
+    if(checkbox == true){
+      let name = checkedEditor['name'];
+      let randomColor = '#' + checkedEditor['randomColor'];
+      let initials = checkedEditor['name'].split(" ").map((n)=>n[0]).join("");
+      showAssignedEditors.innerHTML += `
+      <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
+      `;
+      pushAssignedTo(index, initials, randomColor, name);
+    }
+  }
+}
+
+function renderAssignedTo(index){
+  let assignedTo = document.getElementById(`todo-assigned-to${index}`);
+  assignedTo.innerHTML = '';
+
+  for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
+    const checkedEditor = tasks[index]['assignedto'][i]['initials'];
+    let randomColor = tasks[index]['assignedto'][i]['randomColor'];
+    assignedTo.innerHTML += `
+    <div id="mini-logo${i}" style="background-color: ${randomColor}" class="mini-logo">${checkedEditor}</div>
+    `;
+  }
+}
+
+function clearAssignedTo(index){
+  document.getElementById('show-assigned-editors-edit-container').innerHTML = '';
+  tasks[index]['assignedto'].splice(0, tasks[index]['assignedto'].length);
 }
 
 function checkOpen(id){
@@ -150,18 +177,6 @@ function checkCategory(i){
   }
   if(category == 'Technical Task'){
     document.getElementById(`category${i}`).style.backgroundColor = "rgb(31,215,193)";
-  }
-}
-
-function renderAssignedTo(i){
-  let assignedTo = document.getElementById(`todo-assigned-to${i}`);
-  assignedTo.innerHTML = '';
-
-  for (let index = 0; index < tasks[i]['assignedto'].length; index++) {
-    const editor = tasks[i]['assignedto'][index];
-    assignedTo.innerHTML += `
-    <div id="mini-logo${editor[i]}" class="mini-logo">${editor}</div>
-    `;
   }
 }
 
@@ -188,27 +203,39 @@ function generateTask(i){
       </div>
       <div class="assigned-prio">
         <div class="todo-assigned-to" id="todo-assigned-to${i}"></div>
-        <img src="assets/img/icons/Prio media.png" alt="">
+        <img id="prioImg${i}" src="" alt="">
       </div>
     </div>
     `;
 }
 
+function setPrioImg(i){
+  let prioImg = document.getElementById(`prioImg${i}`);
+  let prio = tasks[i]['prio'];
+  prioImg.src =`/assets/img/icons/${prio}.png`;
+}
+
 function generateSubtasks(i){
   let subProgressBar = document.getElementById(`subtasks-progress${i}`);
   subProgressBar.innerHTML = '';
+  let subTasksDone = tasks[i]['subTasksDone'];
+  let checkedTrue = 0
+  for (let j = 0; j < subTasksDone.length; j++) {
+    if(subTasksDone[j].checked == true){
+      checkedTrue++;
+    }
+  }
   let openSubTasks = tasks[i]['subtasks'].length;
-  let subTasksDone = tasks[i]['subTasksDone'].length;
-  let percent = subTasksDone / openSubTasks * 100;
+  let percent = checkedTrue / openSubTasks * 100;
   subProgressBar.style.width = percent + '%';
+  updateDoneSubs(i, checkedTrue)
 }
 
-function updateDoneSubs(i){
-  let subTasksDone = tasks[i].subTasksDone.length;
-  if(subTasksDone == 0){
+function updateDoneSubs(i, checkedTrue){
+  if(checkedTrue == undefined){
     document.getElementById(`subsDoneOfAll${i}`).innerHTML = '0';
   }else{
-    document.getElementById(`subsDoneOfAll${i}`).innerHTML =`${subTasksDone}`;
+    document.getElementById(`subsDoneOfAll${i}`).innerHTML =`${checkedTrue}`;
   }
 }
 
@@ -232,9 +259,17 @@ function moveTo(status){
 function openTaskDetails(i){
   document.getElementById('overlay').style.display = "flex"; 
   document.getElementById('overlay').innerHTML = generateOverlay(i);
+  setPrioDetailImg(i);
   checkOverlayCategory(i);
   generateDetailSubtasks(i);
   checkIfSubsDone(i);
+  renderAssignedToDetail(i);
+}
+
+function setPrioDetailImg(i){
+  let prioDetailImg = document.getElementById(`prioDetailImg${i}`);
+  let prio = tasks[i]['prio'];
+  prioDetailImg.src = `/assets/img/icons/${prio}.png`;
 }
 
 function checkOverlayCategory(i){
@@ -258,34 +293,47 @@ function generateDetailSubtasks(i){
     for (let j = 0; j < tasks[i]["subtasks"].length; j++) {
       let subtask = tasks[i]["subtasks"][j];
       detailSub.innerHTML += `
-      <div class="detailSub" onclick="setChecked(${j}, ${i})">
-        <img id="detailSub${j}"  src="/assets/img/icons/check_button.png">
+      <li id="subtaskIndex${j}" class="detailSub" onclick="checkIfSubChecked(${j}, ${i})">
+      <div>
+       <img id="detailSub${j}" src="/assets/img/icons/check_button.png">
         <span>${subtask}</span>
-      </div>`;
-    } //besser mit >label> <input type="checkbox" display="none"> und .checked Abfrage???
+        </div>
+      </li>
+  `;
+    } // j = subtask index & i = task index
 }
 
-function setChecked(j, i){
+function checkIfSubChecked(j, i){
+  //let subCheckbox = document.getElementById(`subCheckbox${j}`).checked;
+  //console.log(subCheckbox)
   let subtask = tasks[i]['subtasks'][j];
-  let subtaskDone = tasks[i]['subTasksDone'][j];
-  if(subtask == subtaskDone){
-    document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button.png';
-    tasks[i]['subTasksDone'].splice(j, 1);
+  let subTasksDone = tasks[i]['subTasksDone'][j];
+  if(subTasksDone.checked == false){
+    setChecked(j, i, subTasksDone)
   }else{
-    tasks[i]['subTasksDone'].push(subtask);
-    document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button_checked_bl.png';
+    setUnChecked(j, i, subTasksDone)
   }
-  generateSubtasks(i);
+  setItem('tasks', JSON.stringify(tasks));
+  generateSubtasks(i, j);
   updateDoneSubs(i);
+
 }
+
+function setChecked(j, i, subTasksDone){
+  subTasksDone.checked = true;
+  document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button_checked_bl.png';
+}
+
+function setUnChecked(j, i, subTasksDone){
+    subTasksDone.checked = false;
+      document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button.png';
+  }
 
 function checkIfSubsDone(i){
-  let subtasks = tasks[i]['subtasks'];
   let subtasksDone = tasks[i]['subTasksDone'];
-  for (let j = 0; j < tasks[i]['subtasks'].length; j++) {
-    const subtask = subtasks[j];
-    const subtaskDone = subtasksDone[j];
-    if(subtask == subtaskDone){
+  for (let j = 0; j < tasks[i]['subTasksDone'].length; j++) {
+    const checkedSub = tasks[i]['subTasksDone'][j].checked;
+    if(checkedSub == true){
       document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button_checked_bl.png'
     }
   }
@@ -300,9 +348,9 @@ function generateOverlay(i){
     <span class="detail-title">${tasks[i]["title"]}</span><br>
     <span class="f-s20-w400">${tasks[i]["description"]}</span><br>
     <span class="f-s20-w400">Due date:  ${tasks[i]["duedate"]}</span><br>
-    <span class="f-s20-w400">Priority:  ${tasks[i]["prio"]}</span><br>
-    <span class="f-s20-w400">Assigned to:<br>${tasks[i]["assignedto"]}</span><br>
-    <span class="f-s20-w400">Subtasks<div id="checklistSubDetail"></div></span>
+    <span class=" prio-img f-s20-w400">Priority:  ${tasks[i]["prio"].charAt(0).toUpperCase() + tasks[i]["prio"].slice(1)}<img class="prio-detail-img" id="prioDetailImg${i}" src=""></span><br>
+    <span class="f-s20-w400">Assigned to:<br><div id="detailAssignedTo"></div></span><br>
+    <span class="f-s20-w400">Subtasks<ul id="checklistSubDetail"></ul></span>
     <div class="overlay-buttons">
       <button onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="/assets/img/icons/delete.png">Delete</button>
       <div class="overlay-buttons-splitter"></div>
@@ -318,25 +366,117 @@ function openEditOverlay(i){
 }
 
 function loadTaskData(i){
-  //let assignedto = tasks[i]['assignedto'][j]; function renderEditAssignedTo()
-  //let prio = tasks[i]['prio']; function proImg()
+  let title = tasks[i]['title'];
+  let description = tasks[i]['description'];
+  let duedate = tasks[i]['duedate'];
   //let subtasks = tasks[i]['subtasks']; function renderEditSubtasks()
-  document.getElementById('overlay').innerHTML = generateEditOverlay(i);
+  document.getElementById('overlay').innerHTML = generateEditOverlay(i, title, description, duedate);
+  showPrio(i);
+  renderAssignedToEdit(i)
 }
+
+function pushAssignedTo(index, initials, randomColor, name){
+  let assignedToTask = {
+    name: name,
+    initials: initials,
+    randomColor: randomColor,
+  };
+  tasks[index]['assignedto'].push(assignedToTask);
+  renderAssignedToCards(index);
+}
+
+function renderAssignedToCards(index){
+  let showAssignedEditors = document.getElementById('show-assigned-editors-container');
+  for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
+    const checkedEditor = tasks[index]['assignedto'][i]['initials'];
+    let randomColor = tasks[index]['assignedto'][i]['randomColor'];
+    showAssignedEditors.innerHTML += `
+      <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${checkedEditor}</div>
+      `;
+  }
+}
+
+function renderAssignedToDetail(index){
+  let showAssignedEditors = document.getElementById('detailAssignedTo');
+
+  for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
+    const checkedEditor = tasks[index]['assignedto'][i]['initials'];
+    let randomColor = tasks[index]['assignedto'][i]['randomColor'];
+    let name = tasks[index]['assignedto'][i]['name'];
+      showAssignedEditors.innerHTML += `
+      <div class="detail-name-initials"><div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${checkedEditor}</div><span>${name}</span></div>
+      `;
+    }
+  }
+
+function renderAssignedToEdit(index){
+  let showAssignedEditors = document.getElementById('show-assigned-editors-edit-container');
+
+  for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
+    const checkedEditor = tasks[index]['assignedto'][i]['initials'];
+    let randomColor = tasks[index]['assignedto'][i]['randomColor'];
+      showAssignedEditors.innerHTML += `
+      <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${checkedEditor}</div>
+      `;
+    }
+  }
 
 function closeEditOverlay(){
   document.getElementById('overlay').style.display = "none";
 }
 
-function SaveTask(){
+function showPrio(i){
+ let newPrio = tasks[i]['prio'];
+ if(newPrio == 'urgent'){
+  document.getElementById(newPrio).style.backgroundColor = "#FF3D00"
+}else if(newPrio == 'medium'){
+  document.getElementById(newPrio).style.backgroundColor = "#FFA800"
+}else if(newPrio == 'low'){
+  document.getElementById(newPrio).style.backgroundColor = "#7AE229"
+}
 
 }
 
-function AddTask(){
-  
+function setPrio(i, newPrio){
+  //refresh backgroundcolors to white
+  document.getElementById('urgent').style.backgroundColor = "";
+  document.getElementById('medium').style.backgroundColor = "";
+  document.getElementById('low').style.backgroundColor = "";
+  document.getElementById('urgent-text').style.color = "";
+  document.getElementById('medium-text').style.color = "";
+  document.getElementById('low-text').style.color = "";
+
+  tasks[i]['prio'] = newPrio;
+  if(newPrio == 'urgent'){
+    document.getElementById(newPrio).style.backgroundColor = "#FF3D00";
+    document.getElementById('urgent-text').style.color = "#FFFFFF";
+  }else if(newPrio == 'medium'){
+    document.getElementById(newPrio).style.backgroundColor = "#FFA800";
+    document.getElementById('medium-text').style.color = "#FFFFFF";
+  }else if(newPrio == 'low'){
+    document.getElementById(newPrio).style.backgroundColor = "#7AE229";
+    document.getElementById('low-text').style.color = "#FFFFFF";
+  }
 }
 
-function generateEditOverlay(i){
+async function saveTask(i){
+  refreshTasks();
+  tasks[i]['title'] = document.getElementById('edit-task-title-input').value;
+  tasks[i]['description'] = document.getElementById('edit-task-description-input').value;
+  tasks[i]['duedate'] = document.getElementById('edit-task-form-input').value;
+  tasks[i]['prio'];
+  tasks[i]['assignedTo'];
+  tasks.push();
+  await setItem('tasks', JSON.stringify(tasks));
+  loadTasksfromStorage();
+  closeEditOverlay();
+}
+
+async function addNewTask(){
+
+}
+
+function generateEditOverlay(i, title, description, duedate){
   return`
   <div id="edit-task-overlay"  onclick="closeDetailCard()">
   <div class= "detail-todo-card" onclick="doNotClose(event)">
@@ -345,41 +485,41 @@ function generateEditOverlay(i){
   <button onclick="closeEditOverlay()" class="close-button">
   <img src="/assets/img/icons/close.png" alt=""></button>
   </div>
-    <form id="edit-task-form" onsubmit="addTask()"> 
+    <form id="edit-task-form" onsubmit="saveTask(${i}); return false"> 
       <div id="edit-input-container-tasks">
           
           <div id="add-task-title-container">
               <div>
                 <span id="add-task-title-headline" class="add-task-form-title">Title</span>
               </div>
-              <input id="add-task-title-input" class="add-task-form-input" required type="text" value='${tasks[i]['title']}' placeholder="Enter a title">
+              <input id="edit-task-title-input" class="add-task-form-input" required type="text" value='${title}' placeholder="Enter a title">
           </div> 
 
           <div id="add-task-description-container">
             <span id="add-task-description-headline" class="add-task-form-title">Description</span>
-            <textarea id="add-task-description-input" class="add-task-form-input" required  rows="5" cols="40">${tasks[i]['description']}</textarea>
+            <textarea id="edit-task-description-input" class="add-task-form-input" required  rows="5" cols="40">${description}</textarea>
           </div>
 
           <div id="add-task-date-container">
             <div>
               <span id="add-task-date-headline" class="add-task-form-title">Due date</span>
             </div>
-              <input class="add-task-form-input" required type="date" value=${tasks[i]['duedate']}>
+              <input id="edit-task-form-input" class="edit-task-form-input" required type="date" value=${duedate}>
           </div>
 
-          <div id="add-task-prio-container">
+          <div id="add-task-prio-container" onclick="doNotClose(event)">
           <span id="add-task-prio-headline" class="add-task-form-title">Prio</span>
-          <div id="add-task-form-btn-container">
-            <button class="add-task-form-btn">
-              <span class="add-task-form-btn-text">Urgent</span>
+          <div id="add-task-form-btn-container" onclick="doNotClose(event)">
+            <button type="button" id="urgent" onclick="setPrio(${i}, 'urgent'); doNotClose(event)" class="add-task-form-btn">
+              <span id="urgent-text" class="add-task-form-btn-text">Urgent</span>
               <img src="assets/img/icons/Prio alta.png" alt="">
             </button>
-            <button class="add-task-form-btn">
-              <span class="add-task-form-btn-text">Medium</span>
-              <img src="assets/img/icons/Prio media.png" alt="">
+            <button  type="button" id="medium" onclick="setPrio(${i}, 'medium'); doNotClose(event)" class="add-task-form-btn">
+              <span id="medium-text" class="add-task-form-btn-text">Medium</span>
+              <img  src="assets/img/icons/Prio media.png" alt="">
             </button>
-            <button class="add-task-form-btn">
-              <span class="add-task-form-btn-text">Low</span>
+            <button  type="button" id="low" onclick="setPrio(${i}, 'low'); doNotClose(event)" class="add-task-form-btn">
+              <span id="low-text" class="add-task-form-btn-text">Low</span>
               <img src="assets/img/icons/Prio baja.png" alt="">
             </button>
           </div>
@@ -387,12 +527,12 @@ function generateEditOverlay(i){
 
           <div id="add-task-assigned-to-container">
             <span class="add-task-form-title">Assigned to</span>
-            <div id="contacts-dropdown" onclick="showDropdownContacts()">
+            <div id="contacts-dropdown" onclick="showDropdownContacts(${i})">
               <span>Select contacts to assign</span>
               <img src="assets/img/icons/arrow_drop_down.png" alt="">
             </div>
             <ul style="display: none;" id="assigned-editors" class="assigned-editors"></ul>
-            <div id="show-assigned-editors-container" onclick="clearAssignedTo()"></div>
+            <div id="show-assigned-editors-edit-container" onclick="clearAssignedTo(${i})"></div>
           </div>
           
           <div id="add-task-sub-container">
@@ -401,14 +541,12 @@ function generateEditOverlay(i){
           </div>
        
       </div>
-    </form>
-
-    <div id="edit-task-overlay-footer">
+      <div id="edit-task-overlay-footer">
       <div class="edit-task-buttons">
         <button type="submit" class="ok-button"><span>Ok</span><img src="assets/img/icons/check.png" alt=""></button>
       </div>
     </div>
-
+    </form>
   </div>
 </div>
   `;

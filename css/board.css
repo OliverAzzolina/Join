@@ -263,11 +263,15 @@ body {
 .mini-logo {
   height: 32px;
   width: 32px;
-  border: 1px solid black;
+  border: 1px solid #FFFFFF;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
 }
 
 .sub-progress-container{
@@ -559,16 +563,39 @@ cursor: pointer;
   display: flex;
 }
 
+#detailAssignedTo{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.detail-name-initials {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  padding: 7px 16px 7px 16px;
+}
+
+.detail-name-initials span{
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 24px;
+  
+}
+
 .drop-name-initials {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
   font-size: 12px;
 }
 
 .drop-name-initials span{
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 400;
   line-height: 24px;
   
@@ -776,3 +803,13 @@ align-items: flex-end;
   justify-content: flex-end;
   align-items: flex-end;
   }
+
+.prio-detail-img{
+  width: 17px;
+}
+
+.prio-img{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
