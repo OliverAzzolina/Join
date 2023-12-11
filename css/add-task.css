@@ -79,10 +79,13 @@ h1 {
   position: relative;
   display: flex;
   align-items: center;
-  width: 408px;
-  height: 20px;
+  width: 440px;
+  height: 32px;
   margin-top: 10px;
-  padding: 6px 16px;
+}
+
+.add-task-subtask p {
+  padding: 0px 10px;
 }
 
 .add-task-subtask:hover {
@@ -107,12 +110,22 @@ h1 {
 .editable-input {
   display: flex;
   width: 440px;
-  padding: 4px 4px;
+  padding: 4px 16px;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 5px solid #29abe2;
+  border: 0px;
+  border-bottom: 2px solid #29abe2;
   background: #fff;
 }
+
+.editable-input:hover {
+  border-bottom: 2px solid #29abe2;
+}
+
+.editable-input:focus {
+  outline: none;
+}
+
 
 #add-task-create-subtask-icon-box {
   position: absolute;
