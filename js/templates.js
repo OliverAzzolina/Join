@@ -1,33 +1,15 @@
 function subtaskHTML(subtask, index) {
-    html = "";
-    html = /*html*/`
-    <div class="add-task-subtask" id="add-task-subtask${index}">
-        <p class="editable">• ${subtask}</p>
-        <div class="add-task-subtask-icons">
-            <img src="img/subtask delete icon.png" onclick="removeSubtask(${index})">
-            <img src="img/subtask divider icon.png">
-            <img src="img/subtask check icon.png" onclick="removeSubtask(index)">
+    return /*html*/`
+        <div class="add-task-subtask" id="add-task-subtask${index}">
+            <p class="editable">• ${subtask}</p>
+            <div class="add-task-subtask-icons">
+                <img src="img/subtask edit icon.png" class="edit-icon" onclick="editSubtask(${index})">
+                <img src="img/subtask divider icon.png">
+                <img src="img/subtask delete icon.png" class="delete-icon" onclick="removeSubtask(${index})">
+            </div>
         </div>
-    </div>
-    `
-    return html;
+    `;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function exampleHTML(testVariable1, testVariable2) {
