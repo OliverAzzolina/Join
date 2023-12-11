@@ -4,7 +4,19 @@ subtaskTempArray = [];
 document.addEventListener('DOMContentLoaded', function () {
   addEventListener();
   loadContactsFromStorage();
+  loadTasksfromStorage();
 });
+
+
+//LOAD Tasks from Storage
+async function loadTasksfromStorage(){
+  try{
+    tasks = JSON.parse(await getItem('tasks'));
+  }catch(e){
+    console.warn('loading error:', e)
+  }
+}
+
 
 //EVENT LISTENERS
 function addEventListener() {

@@ -1,5 +1,6 @@
     //TO-DOs:
     //subtasks add task and detail card
+    //add task function integration
     // css animations
 
 let currentDraggedElement;
@@ -7,7 +8,6 @@ let currentDraggedElement;
 async function init(){
     loadContactsFromStorage();
     loadTasksfromStorage();
-    
 }
 
 //LOAD Tasks from Storage
