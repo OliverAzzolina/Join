@@ -88,7 +88,6 @@ function checkIfBoardEmpty(){
   checkOpen('done');
 }
 
-
 function checkIfAssigned(i){
   let checkbox = document.getElementById(`checkbox${i}`).checked;
  console.log(checkbox)
@@ -264,6 +263,25 @@ function openTaskDetails(i){
   generateDetailSubtasks(i);
   checkIfSubsDone(i);
   renderAssignedToDetail(i);
+  slideOutOverlay(i);
+}
+
+//Slide IN OUT
+
+function slideOutOverlay(i){
+  var $slider = document.getElementById(`todo-card-detail${i}`);
+  var $toggle = document.getElementById(`slide-out-toggle${i}`);
+  
+  $toggle.addEventListener('click', function() {
+      var isOpen = $slider.classList.contains('slide-in');
+  
+      $slider.setAttribute('class', isOpen ? 'slide-out' +' '+ 'detail-todo-card' +' '+ 'slider'  : 'slide-in');
+     setTimeout(()=>{closeDetailCard()},170); 
+  });
+}
+
+function closeDetailCard(){
+  document.getElementById('overlay').style.display = "none";
 }
 
 function setPrioDetailImg(i){
@@ -280,10 +298,6 @@ function checkOverlayCategory(i){
   if(category == 'Technical Task'){
     document.getElementById(`overlay-category${i}`).style.backgroundColor = "rgb(31,215,193)";
   }
-}
-
-function closeDetailCard(){
-  document.getElementById('overlay').style.display = "none";
 }
 
 function generateDetailSubtasks(i){
@@ -304,8 +318,6 @@ function generateDetailSubtasks(i){
 }
 
 function checkIfSubChecked(j, i){
-  //let subCheckbox = document.getElementById(`subCheckbox${j}`).checked;
-  //console.log(subCheckbox)
   let subtask = tasks[i]['subtasks'][j];
   let subTasksDone = tasks[i]['subTasksDone'][j];
   if(subTasksDone.checked == false){
@@ -313,10 +325,12 @@ function checkIfSubChecked(j, i){
   }else{
     setUnChecked(j, i, subTasksDone)
   }
-  setItem('tasks', JSON.stringify(tasks));
+  
   generateSubtasks(i, j);
   updateDoneSubs(i);
-
+  setItem('tasks', JSON.stringify(tasks));
+  refreshTasks();
+  renderTasks();
 }
 
 function setChecked(j, i, subTasksDone){
@@ -325,9 +339,9 @@ function setChecked(j, i, subTasksDone){
 }
 
 function setUnChecked(j, i, subTasksDone){
-    subTasksDone.checked = false;
-      document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button.png';
-  }
+  subTasksDone.checked = false;
+  document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button.png';
+}
 
 function checkIfSubsDone(i){
   let subtasksDone = tasks[i]['subTasksDone'];
@@ -340,10 +354,10 @@ function checkIfSubsDone(i){
 }
 
 function generateOverlay(i){
-  return `<div id="todo-card${i}" class="detail-todo-card" onclick="doNotClose(event)">
+  return `<div id="todo-card-detail${i}" class="detail-todo-card slider slide-in" onclick="doNotClose(event)">
   <div class="detail-card-top">  
     <p id="overlay-category${i}" class="category">${tasks[i]["category"]}</p>
-    <button class="close-button" onclick="closeDetailCard()"><img src="assets/img/icons/close.png" alt="close"></button>
+    <button id="slide-out-toggle${i}" class="close-button"><img src="assets/img/icons/close.png" alt="close"></button>
   </div>
     <span class="detail-title">${tasks[i]["title"]}</span><br>
     <span class="f-s20-w400">${tasks[i]["description"]}</span><br>
@@ -352,7 +366,7 @@ function generateOverlay(i){
     <span class="f-s20-w400">Assigned to:<br><div id="detailAssignedTo"></div></span><br>
     <span class="f-s20-w400">Subtasks<ul id="checklistSubDetail"></ul></span>
     <div class="overlay-buttons">
-      <button onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="/assets/img/icons/delete.png">Delete</button>
+      <button onclick="deleteTask(${i})" onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="/assets/img/icons/delete.png">Delete</button>
       <div class="overlay-buttons-splitter"></div>
       <button onclick="openEditOverlay(${i})" onmouseover="hover('edit-img')" onmouseout="unhover('edit-img')"><img id="edit-img" src="/assets/img/icons/edit.png">Edit</button>
     </div>
@@ -369,7 +383,6 @@ function loadTaskData(i){
   let title = tasks[i]['title'];
   let description = tasks[i]['description'];
   let duedate = tasks[i]['duedate'];
-  //let subtasks = tasks[i]['subtasks']; function renderEditSubtasks()
   document.getElementById('overlay').innerHTML = generateEditOverlay(i, title, description, duedate);
   showPrio(i);
   renderAssignedToEdit(i)
@@ -428,17 +441,16 @@ function closeEditOverlay(){
 function showPrio(i){
  let newPrio = tasks[i]['prio'];
  if(newPrio == 'urgent'){
-  document.getElementById(newPrio).style.backgroundColor = "#FF3D00"
-}else if(newPrio == 'medium'){
-  document.getElementById(newPrio).style.backgroundColor = "#FFA800"
-}else if(newPrio == 'low'){
-  document.getElementById(newPrio).style.backgroundColor = "#7AE229"
-}
-
+    document.getElementById(newPrio).style.backgroundColor = "#FF3D00"
+    }else if(newPrio == 'medium'){
+    document.getElementById(newPrio).style.backgroundColor = "#FFA800"
+    }else if(newPrio == 'low'){
+    document.getElementById(newPrio).style.backgroundColor = "#7AE229"
+  }
 }
 
 function setPrio(i, newPrio){
-  //refresh backgroundcolors to white
+  //refresh backgroundcolors to white--> SEPERATE FUNCTION NOT CLEAN!
   document.getElementById('urgent').style.backgroundColor = "";
   document.getElementById('medium').style.backgroundColor = "";
   document.getElementById('low').style.backgroundColor = "";
@@ -472,8 +484,11 @@ async function saveTask(i){
   closeEditOverlay();
 }
 
-async function addNewTask(){
+//async function addNewTask(){}
 
+function deleteTask(i){
+  tasks.splice(i, 1);
+  closeDetailCard();
 }
 
 function generateEditOverlay(i, title, description, duedate){
@@ -565,7 +580,7 @@ function filterTasks() {
 }
 
 function hover(id){
- let button = document.getElementById(id);
+  let button = document.getElementById(id);
   if(id == 'edit-img'){
     button.setAttribute('src', '/assets/img/icons/edit_hover.png');
   }else
@@ -574,7 +589,6 @@ function hover(id){
   }else{
     document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button_hover.png');
   }
-  
 }
 
 function unhover(id){
@@ -587,7 +601,6 @@ function unhover(id){
   }else{
     document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button.png');
   }
-  
 }
 
 function FilteredTasks(search){ 
