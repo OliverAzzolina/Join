@@ -488,6 +488,7 @@ async function saveTask(i){
 
 function deleteTask(i){
   tasks.splice(i, 1);
+  closeDetailCard();
 }
 
 function generateEditOverlay(i, title, description, duedate){
