@@ -1,17 +1,18 @@
+selectedPriority = '';
+subtaskTempArray = [];
+
 document.addEventListener('DOMContentLoaded', function () {
   addEventListener();
   loadContactsFromStorage();
 });
 
-selectedPriority = '';
-subtaskTempArray = [];
-
-
+//EVENT LISTENERS
 function addEventListener() {
   btnEventListener();
   subtaskInputEventListener();
   subtaskInputKeypressEventListener();
 }
+
 
 function btnEventListener() {
   document.querySelectorAll('.add-task-form-btn').forEach(function (button) {
@@ -21,6 +22,7 @@ function btnEventListener() {
     });
   });
 }
+
 
 function subtaskInputEventListener() {
   input = document.getElementById("add-task-subtask-input");
@@ -37,6 +39,7 @@ function subtaskInputEventListener() {
   })
 }
 
+
 function subtaskInputKeypressEventListener() {
   var input = document.getElementById("add-task-subtask-input");
 
@@ -48,22 +51,26 @@ function subtaskInputKeypressEventListener() {
   });
 }
 
+
 function updateSubtaskListeners() {
   var subtaskElements = document.querySelectorAll('.add-task-subtask');
 
-  subtaskElements.forEach(function(subtaskElement) {
-      var icons = subtaskElement.querySelector('.add-task-subtask-icons');
+  subtaskElements.forEach(function (subtaskElement) {
+    var icons = subtaskElement.querySelector('.add-task-subtask-icons');
 
-      subtaskElement.addEventListener('mouseover', function() {
-          icons.style.opacity = 1;
-      });
+    subtaskElement.addEventListener('mouseover', function () {
+      icons.style.opacity = 1;
+    });
 
-      subtaskElement.addEventListener('mouseout', function() {
-          icons.style.opacity = 0;
-      });
+    subtaskElement.addEventListener('mouseout', function () {
+      icons.style.opacity = 0;
+    });
   });
 }
 
+
+
+// SUBTASKS FUNCTIONS
 
 function setFocusSubtaskInput() {
   input = document.getElementById("add-task-subtask-input");
@@ -114,49 +121,97 @@ function generateSubtaskElement(subtask, index) {
 
 
 
+// EDIT SUBTASKS !!!WIP!!!
+function editSubtask(subtaskId) {
+  var subtaskElement = document.getElementById(subtaskId);
+  if (subtaskElement) {
+    var editableP = subtaskElement.querySelector('.editable');
+    if (editableP) {
+      convertPToInput(subtaskElement);
+    }
+  }
+}
+
+
 function setupEditableP(container) {
   container.addEventListener('dblclick', function (event) {
     var subtaskElement = event.target.closest('.add-task-subtask');
-    if (subtaskElement) {
-      var editableP = subtaskElement.querySelector('.editable');
-      if (editableP) {
-        convertPToInput(editableP);
-      }
+    if (subtaskElement && subtaskElement.querySelector('.editable')) {
+      convertPToInput(subtaskElement);
     }
   });
 }
 
+function convertPToInput(subtaskElement) {
+  var editableP = subtaskElement.querySelector('.editable');
+  var inputField = createInputField(editableP.innerText);
+  setupInputFieldEvents(inputField, subtaskElement);
+  editableP.parentNode.replaceChild(inputField, editableP);
+  inputField.focus();
+  updateIconsToEditing(subtaskElement);
+}
 
-
-
-function convertPToInput(pElement) {
-  var originalText = pElement.innerText.replace('• ', '');
+function createInputField(text) {
   var inputField = document.createElement("input");
   inputField.type = "text";
-  inputField.value = originalText;
+  inputField.value = text.replace('• ', '');
   inputField.className = "editable-input";
+  return inputField;
+}
 
+function setupInputFieldEvents(inputField, subtaskElement) {
   inputField.addEventListener("blur", function () {
-    convertInputToP(inputField);
+    convertInputToP(inputField, subtaskElement);
   });
-
   inputField.addEventListener("keypress", function (event) {
     if (event.key === 'Enter') {
       inputField.blur();
     }
   });
-
-  pElement.parentNode.replaceChild(inputField, pElement);
-  inputField.focus();
 }
 
-
-function convertInputToP(inputElement) {
-  var updatedText = '• ' + inputElement.value;
-  var newP = document.createElement("p");
-  newP.innerText = updatedText;
-  newP.classList.add("editable");
+function convertInputToP(inputElement, subtaskElement) {
+  var newP = createPElement(inputElement.value);
   inputElement.parentNode.replaceChild(newP, inputElement);
+  updateIconsToNormal(subtaskElement);
+}
+
+function createPElement(text) {
+  var newP = document.createElement("p");
+  newP.innerText = '• ' + text;
+  newP.classList.add("editable");
+  return newP;
+}
+
+function updateIconsToEditing(subtaskElement) {
+  var iconsContainer = subtaskElement.querySelector('.add-task-subtask-icons');
+  iconsContainer.innerHTML = `
+    <img src="img/subtask delete icon.png" class="delete-icon" onclick="attemptRemoveSubtask('${subtaskElement.id}', true)">
+    <img src="img/subtask divider icon.png">
+    <img src="img/subtask check icon.png" class="check-icon" onclick="finishEditing('${subtaskElement.id}')">
+  `;
+}
+
+function attemptRemoveSubtask(subtaskId, isEditing) {
+  if (isEditing) {
+    // Beende den Edit-Mode, bevor der Subtask gelöscht wird
+    var subtaskElement = document.getElementById(subtaskId);
+    if (subtaskElement.querySelector('.editable-input')) {
+      var inputElement = subtaskElement.querySelector('.editable-input');
+      convertInputToP(inputElement, subtaskElement);
+    }
+  }
+  removeSubtask(subtaskId); // Aufruf der ursprünglichen Löschfunktion
+}
+
+
+function updateIconsToNormal(subtaskElement) {
+  var iconsContainer = subtaskElement.querySelector('.add-task-subtask-icons');
+  iconsContainer.innerHTML = `
+    <img src="img/subtask edit icon.png" class="edit-icon" onclick="editSubtask('${subtaskElement.id}')">
+    <img src="img/subtask divider icon.png">
+    <img src="img/subtask delete icon.png" class="delete-icon" onclick="removeSubtask('${subtaskElement.id}')">
+  `;
 }
 
 
@@ -164,36 +219,61 @@ function convertInputToP(inputElement) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-function highlightSelectedButton(selectedButton) {
-  // TODO: highlight the btn
-}
-
-function addTask() {
-  event.preventDefault(); // Prevent the page from reloading
+function addTask(event) {
+  event.preventDefault();
 
   var taskData = {
     title: document.getElementById('add-task-title-input').value,
     description: document.getElementById('add-task-description-input').value,
-    priority: selectedPriority,
-    dueDate: document.getElementById('add-task-date-input').value,
-    category: document.querySelectorAll('.add-task-form-dropdown')[0].value,
-    assignedTo: document.querySelectorAll('.add-task-form-dropdown')[1].value,
-    subtasks: JSON.stringify(subtaskTempArray)
+    assignedto: [],
+    duedate: document.getElementById('add-task-date-input').value,
+    prio: selectedPriority,
+    category: getCategoryValue(),
+    subtasks: subtaskTempArray,
+    subTasksDone: getSubTasksDone(),
+    status: "in-progress",
   };
+  tasks.push(taskData);
+  saveTask();
+}
 
-  console.log(taskData);
+
+function getCategoryValue() {
+  var categoryDropdown = document.querySelector('.add-task-form-dropdown');
+  if (categoryDropdown && categoryDropdown.selectedIndex >= 0) {
+    return categoryDropdown.options[categoryDropdown.selectedIndex].value;
+  } else {
+    return null;
+  }
+}
+
+
+function getSubTasksDone() {
+  returnArray = [];
+  subtaskTempArray.forEach(subtask => {
+    subname = subtask;
+    checked = false;
+    temp = { subname, checked };
+    returnArray.push(temp);
+  });
+  return returnArray;
+};
+
+
+function saveTask() {
+  setItem('tasks', JSON.stringify(tasks));
+  console.log("Task gespeichert");
+}
+
+
+// ADD TASK FUNCTIONS
+
+function highlightSelectedButton(selectedButton) {
+  var buttons = document.querySelectorAll('.add-task-form-btn');
+  buttons.forEach(function (button) {
+    button.classList.remove('selected');
+  });
+  selectedButton.classList.add('selected');
 }
 
 
