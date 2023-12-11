@@ -162,6 +162,7 @@ body {
   width: 100vw;
   height: 100vh;
   top: 0;
+
 }
 
 .detail-todo-card {
@@ -175,7 +176,42 @@ body {
   padding: 48px 40px 48px 40px;
   box-sizing: border-box;
   border-radius: 30px;
+
 }
+
+.slider{
+  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+}
+
+.slide-in{
+  animation: slide-in 0.2s forwards;
+  -webkit-animation: slide-in 0.2s forwards;
+}
+
+@keyframes slide-in {
+  100% { transform: translateY(0%); }
+}
+
+@-webkit-keyframes slide-in {
+  100% { -webkit-transform: translateY(0%); }
+}
+
+.slide-out {
+  animation: slide-out 0.2s forwards;
+  -webkit-animation: slide-out 0.2s forwards;
+}
+
+@keyframes slide-out {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(+150%); }
+}
+
+@-webkit-keyframes slide-out {
+  0% { -webkit-transform: translateX(0%); }
+  100% { -webkit-transform: translateX(+150%); }
+}
+
 
 .detail-card-top {
   display: flex;
@@ -472,6 +508,16 @@ input:hover{
 textarea:hover{
   border-color: #A8A8A8;
   cursor: pointer;
+}
+
+.edit-task-form-input {
+  width: 440px;
+  padding: 12px 21px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  background: #fff;
+  box-sizing: border-box;
 }
 
 #contacts-dropdown:hover{
