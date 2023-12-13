@@ -12,65 +12,50 @@ function subtaskHTML(subtask, index) {
 }
 
 
-function exampleHTML(testVariable1, testVariable2) {
+function headerHTML() {
     htmlText = "";
     htmlText = /*html*/`
-    <div class="test" onclick="functionName('${testVariable1}', ${testVariable2})">
-        <div class="meal">
-            <h2>${testVariable1}</h2>
-            <p>Füllung: ${testVariable2}</p> 
-            <p>Glasur: ${testVariable1}</p>
-            <p>Topping: ${testVariable2}</p>
-            <p>Soße: ${testVariable1}</p>
-            <p>${testVariable2} €</p>
-        </div>
-        <div>
-            <img src="img/plus.svg" alt="Hinzufügen"/>
-        </div>
-    </div>`;
+    <div><p id="header-headline">Kanban Project Management Tool</p></div>
+        <div id="header-icons">
+            <span>
+                <img id="help-icon"src="./img/header_help_icon.png" alt="help">
+            </span>
+            <span>
+                <img id="login-icon"src="./img/header_login_icon.png" alt="">
+            </span>
+        </div>`;
     return htmlText;
 }
 
-function exampleHTML() {
+function sidebarHTML() {
     htmlText = "";
     htmlText = /*html*/`
-    <div class="test">
-        <img src="img/plus.svg" alt="Hinzufügen"/>
-    </div>`;
-    return htmlText;
-}
-
-function navbarHTML() {
-    htmlText = "";
-    htmlText = /*html*/`
-    <div class="sidebar">
         <div>
-            <img class="logo" src="./img/logo-white.svg" alt="">
+            <img id="sidebar-logo" src="./img/logo-white.svg" alt="">
         </div>
-        <div class="menu-section">
+        <div id="menu-section">
             <ul>
                 <li>
-                    <img class="icon" src="./img/summary_sidebar.svg" alt="Summary Icon">
-                    <a href="summary.html">Summary</a>
+                    <img src="./img/summary_sidebar.svg" alt="Summary Icon">
+                    <a href="./summary.html">Summary</a>
                 </li>
                 <li>
-                    <img class="icon" src="./img/add_task_sidebar.svg" alt="Add Task Icon">
-                    <a href="about.html">Ad Task</a>
+                    <img src="./img/add_task_sidebar.svg" alt="Add Task Icon">
+                    <a href="./add-task.html">Add Task</a>
                 </li>
                 <li>
-                    <img class="icon" src="./img/Board_sidebar.svg" alt="Board Icon">
-                    <a href="board.html">Board</a>
+                    <img src="./img/Board_sidebar.svg" alt="Board Icon">
+                    <a href="./board.html">Board</a>
                 </li>
                 <li>
-                    <img class="icon" src="./img/Contacts_sidebar.svg" alt="Contacts Icon">
-                    <a href="join.html">Contacts</a>
+                    <img src="./img/Contacts_sidebar.svg" alt="Contacts Icon">
+                    <a href="./contacts.html">Contacts</a>
                 </li>
             </ul>
         </div>
-        <li class="footer-section">
-            <a class="footertext" href="join.html">Privacy Policy</a>
-            <a class="footertext" href="desktop.html">legal Notice</a>
-        </li>
-    </div>`;
+        <li id="sidebar-footer">
+            <a href="./privacy.html">Privacy Policy</a>
+            <a href="./legal-notice.html">Legal Notice</a>
+        </li>`;
     return htmlText;
 }
