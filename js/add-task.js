@@ -11,15 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-//LOAD Tasks from Storage
-async function loadTasksfromStorage(){
-  try{
-    tasks = JSON.parse(await getItem('tasks'));
-  }catch(e){
-    console.warn('loading error:', e)
-  }
-}
-
 //HTML GENERATION
 function generateHeader() {
   var header = document.getElementById('header-container');
@@ -29,6 +20,16 @@ function generateHeader() {
 function generateSidebar() {
   var sidebar = document.getElementById('sidebar-container');
   sidebar.innerHTML = sidebarHTML();
+}
+
+
+//LOAD Tasks from Storage
+async function loadTasksfromStorage(){
+  try{
+    tasks = JSON.parse(await getItem('tasks'));
+  }catch(e){
+    console.warn('loading error:', e)
+  }
 }
 
 

@@ -5,66 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contacts</title>
     <link rel="stylesheet" href="/css/contacts.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="js/templates.js"></script>
+    <script src="js/utils.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/arrays.js"></script>
     <script src="js/contacts.js"></script>
-    <link rel="stylesheet" href="css/header.css" />
   </head>
   <body onload="init()">
     
-    <div class="header">
-      <div><p class="logotext">Kanban Project Management Tool</p></div>
-      <div>
-        <span
-          ><img class="help" src="./img/Pasted Graphic 3.png" alt=""
-        /></span>
-        <span
-          ><img class="kreis" src="./img/Pasted Graphic 2.png" alt=""
-        /></span>
-      </div>
-    </div>
+    <!-- Header -->
+    <div id="header-container"></div>
 
-    <div class="sidebar">
-      <div><img class="logo" src="./img/logo-white.svg" alt="" /></div>
-      <div class="menu-section">
-        <ul>
-          <li>
-            <img
-              class="icon"
-              src="./img/summary_sidebar.svg"
-              alt="Summary Icon"
-            />
-            <a href="summary.html">Summary</a>
-          </li>
-          <li>
-            <img
-              class="icon"
-              src="./img/add_task_sidebar.svg"
-              alt="Add Task Icon"
-            />
-            <a href="about.html">Ad Task</a>
-          </li>
-          <li>
-            <img class="icon" src="./img/Board_sidebar.svg" alt="Board Icon" />
-            <a href="board.html">Board</a>
-          </li>
-          <li>
-            <img
-              class="icon"
-              src="./img/Contacts_sidebar.svg"
-              alt="Contacts Icon"
-            />
-            <a href="join.html">Contacts</a>
-          </li>
-        </ul>
-      </div>
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
 
-      <li class="footer-section">
-        <a class="footertext" href="join.html">Privacy Policy</a>
-        <a class="footertext" href="desktop.html">legal Notice</a>
-      </li>
-    </div>
-
+    <!-- Main -->
     <main>
       <div class="left">
         <div id="contact-list" class="contacts-list">

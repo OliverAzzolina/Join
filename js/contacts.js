@@ -2,7 +2,20 @@
 
 async function init(){
     loadContactsFromStorage();
+    generateHeader();
+    generateSidebar();
 }
+
+function generateHeader(){
+  let header = document.getElementById('header-container');
+  header.innerHTML = headerHTML();
+}
+
+function generateSidebar(){
+  let sidebar = document.getElementById('sidebar-container');
+  sidebar.innerHTML = sidebarHTML();
+} 
+
 
 //LOAD Storage
 async function loadContactsFromStorage(){

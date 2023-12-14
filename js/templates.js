@@ -1,35 +1,25 @@
-function subtaskHTML(subtask, index) {
-    return /*html*/`
-        <div class="add-task-subtask" id="add-task-subtask${index}">
-            <p class="editable">• ${subtask}</p>
-            <div class="add-task-subtask-icons">
-                <img src="img/subtask edit icon.png" class="edit-icon" onclick="editSubtask(${index})">
-                <img src="img/subtask divider icon.png">
-                <img src="img/subtask delete icon.png" class="delete-icon" onclick="removeSubtask(${index})">
-            </div>
-        </div>
-    `;
-}
-
+// HEADER AND SIDEBAR HTML TEMPLATES
 
 function headerHTML() {
-    htmlText = "";
-    htmlText = /*html*/`
+    return /*html*/`
     <div><p id="header-headline">Kanban Project Management Tool</p></div>
         <div id="header-icons">
             <span>
                 <img id="help-icon"src="./img/header_help_icon.png" alt="help">
             </span>
             <span>
-                <img id="login-icon"src="./img/header_login_icon.png" alt="">
+                <img id="login-icon"src="./img/header_login_icon.png" alt="" onclick="toggleDropdown()">
             </span>
+            <div id="dropdownMenu">
+            <a href="legal-notice.html">Legal Notice</a>
+            <a href="private.html">Private</a>
+            <a href="sign-up.html">Log Out</a>
+        </div>
         </div>`;
-    return htmlText;
 }
 
 function sidebarHTML() {
-    htmlText = "";
-    htmlText = /*html*/`
+    return/*html*/`
         <div>
             <img id="sidebar-logo" src="./img/logo-white.svg" alt="">
         </div>
@@ -57,5 +47,31 @@ function sidebarHTML() {
             <a href="./privacy.html">Privacy Policy</a>
             <a href="./legal-notice.html">Legal Notice</a>
         </li>`;
-    return htmlText;
 }
+
+
+
+// ADD TASK HTML TEMPLATES
+
+function subtaskHTML(subtask, index) {
+    return /*html*/`
+        <div class="add-task-subtask" id="add-task-subtask${index}">
+            <p class="editable">• ${subtask}</p>
+            <div class="add-task-subtask-icons">
+                <img src="img/subtask edit icon.png" class="edit-icon" onclick="editSubtask(${index})">
+                <img src="img/subtask divider icon.png">
+                <img src="img/subtask delete icon.png" class="delete-icon" onclick="removeSubtask(${index})">
+            </div>
+        </div>
+    `;
+}
+
+
+
+// BOARD HTML TEMPLATES
+
+
+
+// CONTACTS HTML TEMPLATES
+
+
