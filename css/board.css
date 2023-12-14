@@ -6,30 +6,38 @@ body {
 }
 
 #board {
-  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: #f6f7f8;
-  height: 100vh;
   margin-top: 96px;
   margin-left: 232px;
+  width: 1208px;
 }
 
 #board-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   flex-direction: column;
-  width: 100%;
-  height: 232px;
+  width: 1208px;
+  
+  box-sizing: border-box;
 }
 
 #board-header-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 1056px;
+  padding-left: 64px;
 }
 
 #board-header-bottom {
   display: flex;
   flex-direction: row;
+  width: 1208px;
+  padding-left: 64px;
+  gap: 26px;
 }
 
 #board-header-right {
@@ -76,10 +84,12 @@ body {
 
 .board-section {
   display: flex;
-  justify-content: space-between;
-  gap: 24px;
+  gap: 26px;
   height: 688px;
+  width: 1208px;
   overflow: auto;
+  padding: 0px 64px 0px 64px;
+  
 }
 
 .board-section p {
@@ -88,13 +98,16 @@ body {
 }
 
 .todos-section {
-  width: 252px;
+  display: flex;
+  flex-direction: column;
+  width: 246px;
+  gap: 26px;
 }
 
 .todos-section-top {
   display: flex;
-  width: 100%;
-  justify-content: space-between;
+  width: 1208px;
+  gap: 26px;
   flex-direction: row;
 }
 
@@ -126,6 +139,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .todos-container-empty span{
@@ -136,7 +150,11 @@ body {
 }
 
 .todos-container{
+  display: flex;
+  flex-direction: column;
+  width: 252px;
   height: 400px;
+  gap: 16px;
 }
 
 .todo-card {
@@ -891,4 +909,24 @@ align-items: flex-end;
 #show-assigned-editors-edit-container{
   display: flex;
   flex-direction: row;
+}
+
+#added-task-message{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  width: 326px;
+  height: 74px;
+  border-radius: 20px;
+  background-color: #2A3647;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+#added-task-message img{
+  height: 30px;
+  width: 30px;
 }

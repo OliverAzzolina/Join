@@ -13,6 +13,7 @@
     <script src="js/storage.js"></script>
     <script src="/js/contacts.js"></script>
     <script src="js/templates.js"></script>
+    <script src="js/add-task-overlay.js"></script>
     <script src="/js/board.js"></script>
 </head>
 <body onload="init()">
@@ -48,7 +49,7 @@
                         </div>
                         <div class="todos-header">
                             <p>Done</p>
-                            <button onclick="openAddTaskCard()" onmouseover="hover('add-task-board-button4')" onmouseout="unhover('add-task-board-button4')"><img id="add-task-board-button4" src="assets/img/icons/plus_button.png" alt=""></button>
+                  
                         </div>
                     </div>
                 </div>
@@ -79,6 +80,7 @@
     <div id="overlay" style="display: none" onclick="closeDetailCard(i)"></div>
     
     <div id="add-task-overlay" style="display: none" onclick="closeAddTaskCard()">
+      <div id="added-task-message" style="display: none"><span>Task added to Board</span><img src="/img/Board_sidebar.svg" alt=""></div>
         <div id="add-task-container" onclick="doNotClose(event)">
           
           <div id="add-task-overlay-header">
@@ -105,12 +107,12 @@
 
                 <div id="add-task-assigned-to-container">
                   <span class="add-task-form-title">Assigned to</span>
-                  <div id="contacts-dropdown" onclick="showDropdownContacts()">
+                  <div id="contacts-dropdown" onclick="showDropdownContactsAddOverlay()">
                     <span>Select contacts to assign</span>
                     <img src="assets/img/icons/arrow_drop_down.png" alt="">
                   </div>
-                  <ul style="display: none;" id="assigned-editors" class="assigned-editors"></ul>
-                  <div id="show-assigned-editors-container" onclick="clearAssignedTo()"></div>
+                  <ul style="display: none;" id="add-assigned-editors" class="assigned-editors"></ul>
+                  <div id="show-assigned-editors-container" onclick="clearAssignedToAddOverlay()"></div>
                 </div>
               </div>
 
@@ -130,17 +132,17 @@
                 <div id="add-task-prio-container">
                   <span id="add-task-prio-headline" class="add-task-form-title">Prio</span>
                   <div id="add-task-form-btn-container">
-                    <button class="add-task-form-btn" type="button" task-priority="urgent">
-                      <span class="add-task-form-btn-text">Urgent</span>
-                      <img src="assets/img/icons/Prio alta.png" alt="" />
+                    <button type="button" id="urgent" onclick="setNewTaskPrio('urgent', '#FF3D00'); doNotClose(event)" class="add-task-form-btn">
+                      <span id="urgent-text-add" class="add-task-form-btn-text">Urgent</span>
+                      <img id="urgent-img-add" src="assets/img/icons/urgent.png" alt="" />
                     </button>
-                    <button class="add-task-form-btn" type="button" task-priority="medium">
-                      <span class="add-task-form-btn-text">Medium</span>
-                      <img src="assets/img/icons/Prio media.png" alt="" />
+                    <button  type="button" id="medium" onclick="setNewTaskPrio('medium', '#FFA800'); doNotClose(event)" class="add-task-form-btn">
+                      <span id="medium-text-add" class="add-task-form-btn-text">Medium</span>
+                      <img id="medium-img-add" src="assets/img/icons/medium.png" alt="" />
                     </button>
-                    <button class="add-task-form-btn" type="button" task-priority="low">
-                      <span class="add-task-form-btn-text">Low</span>
-                      <img src="assets/img/icons/Prio baja.png" alt="" />
+                    <button  type="button" id="low" onclick="setNewTaskPrio('low', '#7AE229'); doNotClose(event)" class="add-task-form-btn">
+                      <span id="low-text-add" class="add-task-form-btn-text">Low</span>
+                      <img id="low-img-add" src="assets/img/icons/low.png" alt="" />
                     </button>
                   </div>
                 </div>
@@ -149,10 +151,10 @@
                   <div>
                     <span id="add-task-category-headline" class="add-task-form-title">Category</span><span class="add-task-form-suffix">*</span>
                   </div>
-                  <select class="add-task-form-dropdown"><!-- TODO: add logic (pre-created categories?!) -->
+                  <select id="add-new-task-category" class="add-task-form-dropdown"><!-- TODO: add logic (pre-created categories?!) -->
                     <option value="" disabled selected>Select task category</option>
-                    <option value="">Technical Task</option>
-                    <option value="">User Story</option>
+                    <option value="Technical Task">Technical Task</option>
+                    <option value="User Story">User Story</option>
                   </select>
                 </div>
                 

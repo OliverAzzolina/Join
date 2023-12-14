@@ -316,7 +316,6 @@ function checkIfSubsDone(i){
   }
 }
 
-
 function openEditOverlay(i){
   loadTaskData(i);
   loadContacts();
@@ -480,31 +479,6 @@ function renderFilteredTasks(i){
     checkCategory(i);
   }
 }
-
-//ADD NEW TASK START
-function openAddTaskCard(){
-  document.getElementById('add-task-overlay').style.display = 'flex';
-  loadContacts();
-}
-
-
-function addNewTask(){
-  let title = document.getElementById('add-task-title-input').value;
-  let description = document.getElementById('add-task-description-input').value;
-  //let assignedto = getAssignedTo()?
-  let duedate = document.getElementById('add-task-date-input').value;
-  //let prio = getTaskPrio()?
-  //let category = getCategory()?
-  //let subtasks =
-  //let subTasksDone =
-  console.log(title, description, duedate);
-}
-
-function closeAddTaskCard(){
-  document.getElementById('assigned-editors').innerHTML = '';
-  document.getElementById('add-task-overlay').style.display = 'none';
-}
-//ADD NEW TASK END
 
 
 function doNotClose(event){
