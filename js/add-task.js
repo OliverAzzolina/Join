@@ -2,10 +2,25 @@ selectedPriority = '';
 subtaskTempArray = [];
 
 document.addEventListener('DOMContentLoaded', function () {
+  console.log('DOM loaded');
+  generateHeader();
+  generateSidebar();
   addEventListener();
   loadContactsFromStorage();
   loadTasksfromStorage();
 });
+
+
+//HTML GENERATION
+function generateHeader() {
+  var header = document.getElementById('header-container');
+  header.innerHTML = headerHTML();
+}
+
+function generateSidebar() {
+  var sidebar = document.getElementById('sidebar-container');
+  sidebar.innerHTML = sidebarHTML();
+}
 
 
 //LOAD Tasks from Storage
@@ -25,7 +40,6 @@ function addEventListener() {
   subtaskInputKeypressEventListener();
 }
 
-
 function btnEventListener() {
   document.querySelectorAll('.add-task-form-btn').forEach(function (button) {
     button.addEventListener('click', function () {
@@ -34,7 +48,6 @@ function btnEventListener() {
     });
   });
 }
-
 
 function subtaskInputEventListener() {
   input = document.getElementById("add-task-subtask-input");
@@ -50,7 +63,6 @@ function subtaskInputEventListener() {
     }
   })
 }
-
 
 function subtaskInputKeypressEventListener() {
   var input = document.getElementById("add-task-subtask-input");
@@ -228,9 +240,6 @@ function updateIconsToNormal(subtaskElement) {
 
 
 
-
-
-
 function addTask(event) {
   event.preventDefault();
 
@@ -276,6 +285,15 @@ function saveTask() {
   setItem('tasks', JSON.stringify(tasks));
   console.log("Task gespeichert");
 }
+
+
+
+
+
+
+
+
+
 
 
 // ADD TASK FUNCTIONS
