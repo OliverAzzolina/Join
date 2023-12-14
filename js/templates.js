@@ -74,3 +74,155 @@ function navbarHTML() {
     </div>`;
     return htmlText;
 }
+
+//BOARD TEMPLATES
+function generateTask(i){
+    return `
+    <div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})" onclick="openTaskDetails(${i})">
+      <span id="category${i}" class="category">${tasks[i]["category"]}</span>
+      <div class="title-description">
+        <span class="todo-title">${tasks[i]["title"]}</span>
+        <span class="todo-description">${tasks[i]["description"]}</span>
+      </div>
+      <div class="sub-progress-container">
+        <div class="subtasks-progress-bar-container">
+          <div class="subtasks-progress-bar" id="subtasks-progress${i}"></div>
+        </div>
+        <span><span id="subsDoneOfAll${i}"></span> / ${tasks[i]["subtasks"].length} Subtasks</span>
+      </div>
+      <div class="assigned-prio">
+        <div class="todo-assigned-to" id="todo-assigned-to${i}"></div>
+        <img id="prioImg${i}" src="" alt="">
+      </div>
+    </div>
+    `;
+}
+
+function generateOverlay(i){
+    return `<div id="todo-card-detail${i}" class="detail-todo-card slider slide-in" onclick="doNotClose(event)">
+    <div class="detail-card-top">  
+      <p id="overlay-category${i}" class="category">${tasks[i]["category"]}</p>
+      <button id="slide-out-toggle${i}" class="close-button"><img src="assets/img/icons/close.png" alt="close"></button>
+    </div>
+      <span class="detail-title">${tasks[i]["title"]}</span><br>
+      <span class="f-s20-w400">${tasks[i]["description"]}</span><br>
+      <span class="f-s20-w400">Due date:  ${tasks[i]["duedate"]}</span><br>
+      <span class=" prio-img f-s20-w400">Priority:  ${tasks[i]["prio"].charAt(0).toUpperCase() + tasks[i]["prio"].slice(1)}<img class="prio-detail-img" id="prioDetailImg${i}" src=""></span><br>
+      <span class="f-s20-w400">Assigned to:<br><div id="detailAssignedTo"></div></span><br>
+      <span class="f-s20-w400">Subtasks<ul id="checklistSubDetail"></ul></span>
+      <div class="overlay-buttons">
+        <button onclick="deleteTask(${i})" onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="/assets/img/icons/delete.png">Delete</button>
+        <div class="overlay-buttons-splitter"></div>
+        <button onclick="openEditOverlay(${i})" onmouseover="hover('edit-img')" onmouseout="unhover('edit-img')"><img id="edit-img" src="/assets/img/icons/edit.png">Edit</button>
+      </div>
+      </div>
+      `;
+}
+
+function generateEditOverlay(i, title, description, duedate){
+    return`
+    <div id="edit-task-overlay"  onclick="closeDetailCard()">
+    <div class= "detail-todo-card" onclick="doNotClose(event)">
+      
+    <div id="edit-task-overlay-header">
+    <button onclick="closeEditOverlay()" class="close-button">
+    <img src="/assets/img/icons/close.png" alt=""></button>
+    </div>
+      <form id="edit-task-form" onsubmit="saveTask(${i}); return false"> 
+        <div id="edit-input-container-tasks">
+            
+            <div id="add-task-title-container">
+                <div>
+                  <span id="add-task-title-headline" class="add-task-form-title">Title</span>
+                </div>
+                <input id="edit-task-title-input" class="add-task-form-input" required type="text" value='${title}' placeholder="Enter a title">
+            </div> 
+  
+            <div id="add-task-description-container">
+              <span id="add-task-description-headline" class="add-task-form-title">Description</span>
+              <textarea id="edit-task-description-input" class="add-task-form-input" required  rows="5" cols="40">${description}</textarea>
+            </div>
+  
+            <div id="add-task-date-container">
+              <div>
+                <span id="add-task-date-headline" class="add-task-form-title">Due date</span>
+              </div>
+                <input id="edit-task-form-input" class="edit-task-form-input" required type="date" value=${duedate}>
+            </div>
+  
+            <div id="add-task-prio-container" onclick="doNotClose(event)">
+            <span id="add-task-prio-headline" class="add-task-form-title">Prio</span>
+            <div id="add-task-form-btn-container" onclick="doNotClose(event)">
+              <button type="button" id="urgent" onclick="setPrio(${i}, 'urgent', '#FF3D00'); doNotClose(event)" class="add-task-form-btn">
+                <span id="urgent-text" class="add-task-form-btn-text">Urgent</span>
+                <img src="assets/img/icons/Prio alta.png" alt="">
+              </button>
+              <button  type="button" id="medium" onclick="setPrio(${i}, 'medium', '#FFA800'); doNotClose(event)" class="add-task-form-btn">
+                <span id="medium-text" class="add-task-form-btn-text">Medium</span>
+                <img  src="assets/img/icons/Prio media.png" alt="">
+              </button>
+              <button  type="button" id="low" onclick="setPrio(${i}, 'low', '#7AE229'); doNotClose(event)" class="add-task-form-btn">
+                <span id="low-text" class="add-task-form-btn-text">Low</span>
+                <img src="assets/img/icons/Prio baja.png" alt="">
+              </button>
+            </div>
+          </div>
+  
+            <div id="add-task-assigned-to-container">
+              <span class="add-task-form-title">Assigned to</span>
+              <div id="contacts-dropdown" onclick="showDropdownContacts(${i})">
+                <span>Select contacts to assign</span>
+                <img src="assets/img/icons/arrow_drop_down.png" alt="">
+              </div>
+              <ul style="display: none;" id="assigned-editors" class="assigned-editors"></ul>
+              <div id="show-assigned-editors-edit-container" onclick="clearAssignedTo(${i})"></div>
+            </div>
+            
+            <div id="add-task-sub-container">
+              <span class="add-task-form-title">Subtasks</span>
+              <input class="add-task-form-input" type="text" placeholder="Add new subtask">
+            </div>
+         
+        </div>
+        <div id="edit-task-overlay-footer">
+        <div class="edit-task-buttons">
+          <button type="submit" class="ok-button"><span>Ok</span><img src="assets/img/icons/check.png" alt=""></button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+    `;
+}
+
+function generateAssignedTo(i, randomColor, checkedEditor){
+    return `
+        <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${checkedEditor}</div>
+    `;
+}
+
+function generateDetailSubtasks(i, j, subtask){
+    return `
+        <li id="subtaskIndex${j}" class="detailSub" onclick="checkIfSubChecked(${j}, ${i})">
+            <div>
+                <img id="detailSub${j}" src="/assets/img/icons/check_button.png">
+                <span>${subtask}</span>
+            </div>
+        </li>
+    `;
+}
+
+function renderContacts(i, randomColor, name, initials){
+    return`
+    <label for="checkbox${i}">
+     <li id="assigned-contact${i}" onclick="checkIfAssigned(${i})">
+     <input style="display: none" type="checkbox" id="checkbox${i}">
+       <div class="drop-name-initials">
+         <div class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
+         <span> ${name}</span>
+       </div>
+         <img id="checked${i}" src="/assets/img/icons/check_button.png" alt="">
+     </li>
+    </label>
+ `;
+  }

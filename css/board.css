@@ -859,3 +859,36 @@ align-items: flex-end;
   align-items: center;
   gap: 10px;
 }
+
+.add-task-subtask-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#add-task-active-subtask-icon-box {
+  position: absolute;
+  right: 16px;
+  display: flex;
+  gap: 5px;
+}
+
+.d-none{
+  display: none !important;
+}
+
+#add-task-create-subtask-icon-box {
+  position: absolute;
+  right: 16px;
+  display: flex;
+  gap: 5px;
+}
+
+#add-task-create-subtask-icon {
+  cursor: pointer;
+}
+
+#show-assigned-editors-edit-container{
+  display: flex;
+  flex-direction: row;
+}

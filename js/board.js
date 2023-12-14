@@ -1,8 +1,3 @@
-    //TO-DOs:
-    //subtasks add task and detail card
-    //add task function integration
-    // css animations
-
 let currentDraggedElement;
 
 async function init(){
@@ -50,18 +45,7 @@ function loadContacts(){
       let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
       let randomColor = '#' + contacts[i]['randomColor'];
       let name = contacts[i]['name'];
-      contactList.innerHTML += `
-     <label for="checkbox${i}">
-      <li id="assigned-contact${i}" onclick="checkIfAssigned(${i})">
-      <input style="display: none" type="checkbox" id="checkbox${i}">
-        <div class="drop-name-initials">
-          <div class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
-          <span> ${name}</span>
-        </div>
-          <img id="checked${i}" src="/assets/img/icons/check_button.png" alt="">
-      </li>
-     </label>
-  `;
+      contactList.innerHTML += renderContacts(i, randomColor, name, initials);
   }
     sortContacts();
 }
@@ -90,7 +74,6 @@ function checkIfBoardEmpty(){
 
 function checkIfAssigned(i){
   let checkbox = document.getElementById(`checkbox${i}`).checked;
- console.log(checkbox)
   if(checkbox == false){
     setUnAssigned(i); 
   }
@@ -101,17 +84,14 @@ function checkIfAssigned(i){
 }
 
 function setAssigned(i){
-  let assignedContact = document.getElementById(`assigned-contact${i}`);
-  let checkImg = document.getElementById(`checked${i}`);
-  assignedContact.style = "background-color: #2A3647; color: white"
-  checkImg.src ="/assets/img/icons/check_button_checked.png";
+  document.getElementById(`assigned-contact${i}`).style = "background-color: #2A3647; color: white";
+  document.getElementById(`checked${i}`).src ="/assets/img/icons/check_button_checked.png";
 }
 
+
 function setUnAssigned(i){
-  let assignedContact = document.getElementById(`assigned-contact${i}`);
-  let checkImg = document.getElementById(`checked${i}`);
-  assignedContact.style = "color: black";
-  checkImg.src ="/assets/img/icons/check_button.png";
+  document.getElementById(`assigned-contact${i}`).style = "color: black";;
+  document.getElementById(`checked${i}`).src ="/assets/img/icons/check_button.png";;
 }
 
 function showDropdownContacts(index){
@@ -186,27 +166,6 @@ function refreshTasks(){
   document.getElementById("done").innerHTML = '';
 }
 
-function generateTask(i){
-    return `
-    <div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})" onclick="openTaskDetails(${i})">
-      <span id="category${i}" class="category">${tasks[i]["category"]}</span>
-      <div class="title-description">
-        <span class="todo-title">${tasks[i]["title"]}</span>
-        <span class="todo-description">${tasks[i]["description"]}</span>
-      </div>
-      <div class="sub-progress-container">
-        <div class="subtasks-progress-bar-container">
-          <div class="subtasks-progress-bar" id="subtasks-progress${i}"></div>
-        </div>
-        <span><span id="subsDoneOfAll${i}"></span> / ${tasks[i]["subtasks"].length} Subtasks</span>
-      </div>
-      <div class="assigned-prio">
-        <div class="todo-assigned-to" id="todo-assigned-to${i}"></div>
-        <img id="prioImg${i}" src="" alt="">
-      </div>
-    </div>
-    `;
-}
 
 function setPrioImg(i){
   let prioImg = document.getElementById(`prioImg${i}`);
@@ -249,9 +208,9 @@ function allowDrop(ev){
 
 function moveTo(status){
  tasks[currentDraggedElement]['status'] = status;
+ setItem('tasks', JSON.stringify(tasks));
   refreshTasks();
   renderTasks();
-  checkIfBoardEmpty();
 }
 
 //Detail-Todo
@@ -260,14 +219,13 @@ function openTaskDetails(i){
   document.getElementById('overlay').innerHTML = generateOverlay(i);
   setPrioDetailImg(i);
   checkOverlayCategory(i);
-  generateDetailSubtasks(i);
+  renderDetailSubtasks(i);
   checkIfSubsDone(i);
   renderAssignedToDetail(i);
   slideOutOverlay(i);
 }
 
 //Slide IN OUT
-
 function slideOutOverlay(i){
   var $slider = document.getElementById(`todo-card-detail${i}`);
   var $toggle = document.getElementById(`slide-out-toggle${i}`);
@@ -300,20 +258,13 @@ function checkOverlayCategory(i){
   }
 }
 
-function generateDetailSubtasks(i){
+function renderDetailSubtasks(i){
   let detailSub = document.getElementById(`checklistSubDetail`);
   detailSub.innerHTML = '';
 
     for (let j = 0; j < tasks[i]["subtasks"].length; j++) {
       let subtask = tasks[i]["subtasks"][j];
-      detailSub.innerHTML += `
-      <li id="subtaskIndex${j}" class="detailSub" onclick="checkIfSubChecked(${j}, ${i})">
-      <div>
-       <img id="detailSub${j}" src="/assets/img/icons/check_button.png">
-        <span>${subtask}</span>
-        </div>
-      </li>
-  `;
+      detailSub.innerHTML += generateDetailSubtasks(i, j, subtask);
     } // j = subtask index & i = task index
 }
 
@@ -344,7 +295,6 @@ function setUnChecked(j, i, subTasksDone){
 }
 
 function checkIfSubsDone(i){
-  let subtasksDone = tasks[i]['subTasksDone'];
   for (let j = 0; j < tasks[i]['subTasksDone'].length; j++) {
     const checkedSub = tasks[i]['subTasksDone'][j].checked;
     if(checkedSub == true){
@@ -353,26 +303,6 @@ function checkIfSubsDone(i){
   }
 }
 
-function generateOverlay(i){
-  return `<div id="todo-card-detail${i}" class="detail-todo-card slider slide-in" onclick="doNotClose(event)">
-  <div class="detail-card-top">  
-    <p id="overlay-category${i}" class="category">${tasks[i]["category"]}</p>
-    <button id="slide-out-toggle${i}" class="close-button"><img src="assets/img/icons/close.png" alt="close"></button>
-  </div>
-    <span class="detail-title">${tasks[i]["title"]}</span><br>
-    <span class="f-s20-w400">${tasks[i]["description"]}</span><br>
-    <span class="f-s20-w400">Due date:  ${tasks[i]["duedate"]}</span><br>
-    <span class=" prio-img f-s20-w400">Priority:  ${tasks[i]["prio"].charAt(0).toUpperCase() + tasks[i]["prio"].slice(1)}<img class="prio-detail-img" id="prioDetailImg${i}" src=""></span><br>
-    <span class="f-s20-w400">Assigned to:<br><div id="detailAssignedTo"></div></span><br>
-    <span class="f-s20-w400">Subtasks<ul id="checklistSubDetail"></ul></span>
-    <div class="overlay-buttons">
-      <button onclick="deleteTask(${i})" onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="/assets/img/icons/delete.png">Delete</button>
-      <div class="overlay-buttons-splitter"></div>
-      <button onclick="openEditOverlay(${i})" onmouseover="hover('edit-img')" onmouseout="unhover('edit-img')"><img id="edit-img" src="/assets/img/icons/edit.png">Edit</button>
-    </div>
-    </div>
-    `;
-}
 
 function openEditOverlay(i){
   loadTaskData(i);
@@ -403,9 +333,7 @@ function renderAssignedToCards(index){
   for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
     const checkedEditor = tasks[index]['assignedto'][i]['initials'];
     let randomColor = tasks[index]['assignedto'][i]['randomColor'];
-    showAssignedEditors.innerHTML += `
-      <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${checkedEditor}</div>
-      `;
+    showAssignedEditors.innerHTML += generateAssignedTo(i, randomColor, checkedEditor);
   }
 }
 
@@ -428,9 +356,7 @@ function renderAssignedToEdit(index){
   for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
     const checkedEditor = tasks[index]['assignedto'][i]['initials'];
     let randomColor = tasks[index]['assignedto'][i]['randomColor'];
-      showAssignedEditors.innerHTML += `
-      <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${checkedEditor}</div>
-      `;
+      showAssignedEditors.innerHTML += generateAssignedTo(i, randomColor, checkedEditor);
     }
   }
 
@@ -449,26 +375,18 @@ function showPrio(i){
   }
 }
 
-function setPrio(i, newPrio){
-  //refresh backgroundcolors to white--> SEPERATE FUNCTION NOT CLEAN!
-  document.getElementById('urgent').style.backgroundColor = "";
-  document.getElementById('medium').style.backgroundColor = "";
-  document.getElementById('low').style.backgroundColor = "";
-  document.getElementById('urgent-text').style.color = "";
-  document.getElementById('medium-text').style.color = "";
-  document.getElementById('low-text').style.color = "";
-
+function setPrio(i, newPrio, buttonColor){
+  resetColors();
   tasks[i]['prio'] = newPrio;
-  if(newPrio == 'urgent'){
-    document.getElementById(newPrio).style.backgroundColor = "#FF3D00";
-    document.getElementById('urgent-text').style.color = "#FFFFFF";
-  }else if(newPrio == 'medium'){
-    document.getElementById(newPrio).style.backgroundColor = "#FFA800";
-    document.getElementById('medium-text').style.color = "#FFFFFF";
-  }else if(newPrio == 'low'){
-    document.getElementById(newPrio).style.backgroundColor = "#7AE229";
-    document.getElementById('low-text').style.color = "#FFFFFF";
-  }
+  document.getElementById(newPrio).style.backgroundColor = buttonColor;
+  document.getElementById(`${newPrio}-text`).style.color = "#FFFFFF";
+}
+
+function resetColors() {
+  ['urgent', 'medium', 'low'].forEach(priority => {
+    document.getElementById(priority).style.backgroundColor = "";
+    document.getElementById(`${priority}-text`).style.color = "";
+  });
 }
 
 async function saveTask(i){
@@ -484,95 +402,21 @@ async function saveTask(i){
   closeEditOverlay();
 }
 
-//async function addNewTask(){}
 
 function deleteTask(i){
   tasks.splice(i, 1);
   closeDetailCard();
+  setItem('tasks', JSON.stringify(tasks));
+  refreshTasks();
+  renderTasks();
 }
 
-function generateEditOverlay(i, title, description, duedate){
-  return`
-  <div id="edit-task-overlay"  onclick="closeDetailCard()">
-  <div class= "detail-todo-card" onclick="doNotClose(event)">
-    
-  <div id="edit-task-overlay-header">
-  <button onclick="closeEditOverlay()" class="close-button">
-  <img src="/assets/img/icons/close.png" alt=""></button>
-  </div>
-    <form id="edit-task-form" onsubmit="saveTask(${i}); return false"> 
-      <div id="edit-input-container-tasks">
-          
-          <div id="add-task-title-container">
-              <div>
-                <span id="add-task-title-headline" class="add-task-form-title">Title</span>
-              </div>
-              <input id="edit-task-title-input" class="add-task-form-input" required type="text" value='${title}' placeholder="Enter a title">
-          </div> 
-
-          <div id="add-task-description-container">
-            <span id="add-task-description-headline" class="add-task-form-title">Description</span>
-            <textarea id="edit-task-description-input" class="add-task-form-input" required  rows="5" cols="40">${description}</textarea>
-          </div>
-
-          <div id="add-task-date-container">
-            <div>
-              <span id="add-task-date-headline" class="add-task-form-title">Due date</span>
-            </div>
-              <input id="edit-task-form-input" class="edit-task-form-input" required type="date" value=${duedate}>
-          </div>
-
-          <div id="add-task-prio-container" onclick="doNotClose(event)">
-          <span id="add-task-prio-headline" class="add-task-form-title">Prio</span>
-          <div id="add-task-form-btn-container" onclick="doNotClose(event)">
-            <button type="button" id="urgent" onclick="setPrio(${i}, 'urgent'); doNotClose(event)" class="add-task-form-btn">
-              <span id="urgent-text" class="add-task-form-btn-text">Urgent</span>
-              <img src="assets/img/icons/Prio alta.png" alt="">
-            </button>
-            <button  type="button" id="medium" onclick="setPrio(${i}, 'medium'); doNotClose(event)" class="add-task-form-btn">
-              <span id="medium-text" class="add-task-form-btn-text">Medium</span>
-              <img  src="assets/img/icons/Prio media.png" alt="">
-            </button>
-            <button  type="button" id="low" onclick="setPrio(${i}, 'low'); doNotClose(event)" class="add-task-form-btn">
-              <span id="low-text" class="add-task-form-btn-text">Low</span>
-              <img src="assets/img/icons/Prio baja.png" alt="">
-            </button>
-          </div>
-        </div>
-
-          <div id="add-task-assigned-to-container">
-            <span class="add-task-form-title">Assigned to</span>
-            <div id="contacts-dropdown" onclick="showDropdownContacts(${i})">
-              <span>Select contacts to assign</span>
-              <img src="assets/img/icons/arrow_drop_down.png" alt="">
-            </div>
-            <ul style="display: none;" id="assigned-editors" class="assigned-editors"></ul>
-            <div id="show-assigned-editors-edit-container" onclick="clearAssignedTo(${i})"></div>
-          </div>
-          
-          <div id="add-task-sub-container">
-            <span class="add-task-form-title">Subtasks</span>
-            <input class="add-task-form-input" type="text" placeholder="Add new subtask">
-          </div>
-       
-      </div>
-      <div id="edit-task-overlay-footer">
-      <div class="edit-task-buttons">
-        <button type="submit" class="ok-button"><span>Ok</span><img src="assets/img/icons/check.png" alt=""></button>
-      </div>
-    </div>
-    </form>
-  </div>
-</div>
-  `;
-}
 
 //SEARCH
 function filterTasks() {
   let search = document.getElementById("search").value.toLowerCase();
   refreshTasks();
   if (search == "") {
-    //document.getElementById('notfound').style.display = "none";
     renderTasks();
   }else{
     FilteredTasks(search);
@@ -624,15 +468,31 @@ function renderFilteredTasks(i){
   }
 }
 
+//ADD NEW TASK START
 function openAddTaskCard(){
   document.getElementById('add-task-overlay').style.display = 'flex';
   loadContacts();
+}
+
+
+function addNewTask(){
+  let title = document.getElementById('add-task-title-input').value;
+  let description = document.getElementById('add-task-description-input').value;
+  //let assignedto = getAssignedTo()?
+  let duedate = document.getElementById('add-task-date-input').value;
+  //let prio = getTaskPrio()?
+  //let category = getCategory()?
+  //let subtasks =
+  //let subTasksDone =
+  console.log(title, description, duedate);
 }
 
 function closeAddTaskCard(){
   document.getElementById('assigned-editors').innerHTML = '';
   document.getElementById('add-task-overlay').style.display = 'none';
 }
+//ADD NEW TASK END
+
 
 function doNotClose(event){
   event.stopPropagation();
