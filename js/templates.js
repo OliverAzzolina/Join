@@ -75,7 +75,6 @@ function subtaskHTML(subtask, index) {
 // CONTACTS HTML TEMPLATES
 
 
-<<<<<<< HEAD
 function navbarHTML() {
     htmlText = "";
     htmlText = /*html*/`
@@ -262,5 +261,3 @@ function renderContacts(i, randomColor, name, initials){
     </label>
  `;
   }
-=======
->>>>>>> 2a019daf0c434e52dae9075b2e2a7c76adefc2b4
