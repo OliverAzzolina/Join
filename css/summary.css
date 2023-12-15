@@ -1,6 +1,8 @@
 body {
     position: relative; 
-    background-color: rgb(246, 247, 248);
+    font-family: "Inter", sans-serif;
+    background-color: #f6f7f8;
+}
 }
 
 .main-content {
@@ -33,6 +35,7 @@ body {
     margin-bottom: 10px; 
     gap: 3px;
     margin-left: 54px;
+    padding-top: 180px;
 }
 
 .left-text {
@@ -201,6 +204,7 @@ body {
     font-weight: 700;
     font-size: 47px;
     font-weight: 500;
+    padding-top: 185px;
 }
 
 .greeting-script p {
