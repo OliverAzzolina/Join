@@ -209,6 +209,12 @@ body {
 
 .greeting-script p {
     white-space: nowrap;
+    display: contents;
+}
+.name {
+    color:  #29ABE2;
+    font-size: 64px;
+    font-weight: 700;
 }
 
 .to-do2 {
