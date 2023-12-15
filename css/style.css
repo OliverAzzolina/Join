@@ -139,7 +139,7 @@
 
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1050px) {
     /* Sidebar-Container ausblenden */
     #sidebar-container {
         display: none;
