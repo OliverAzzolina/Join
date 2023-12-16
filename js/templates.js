@@ -226,7 +226,7 @@ function generateEditOverlay(i, title, description, duedate){
                 <img id="add-task-create-subtask-icon" src="img/subtask add icon.png" alt="" />
               </div>
             </div>
-            <ul id="add-task-subtasks-container"></ul>
+            <ul id="edit-task-subtasks-container"></ul>
           </div>
          
         </div>

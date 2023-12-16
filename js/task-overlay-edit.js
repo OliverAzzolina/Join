@@ -75,13 +75,13 @@ function resetColors() {
 
 //SUBTASKS START
 function renderEditSubtasks(index){
-        let subtasksContainer = document.getElementById('add-task-subtasks-container');
+        let subtasksContainer = document.getElementById('edit-task-subtasks-container');
         subtasksContainer.innerHTML = '';
         for (let i = 0; i < tasks[index]['subtasks'].length; i++) {
           const subtask = tasks[index]['subtasks'][i];
           subtasksContainer.innerHTML += `
-          
-            <li onclick="editSubtask(${i})" id="editable-subtask${i}" class="edit-subtask" >${subtask}</li>
+          <div class="edit-subtask">
+            <li onclick="editSubtask(${i})" id="editable-subtask${i}">${subtask}</li>
       
             <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
               <input id="editSubtaskInput${i}" value="${subtask}" class="add-task-form-input">    
@@ -90,6 +90,7 @@ function renderEditSubtasks(index){
                 <img src="img/subtask divider icon.png" alt="Divider" />
                 <img src="img/subtask check icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
               </div>
+            </div>
             </div>
           `
         }

@@ -319,6 +319,11 @@ ul li div{
   padding: 0;
 }
 
+ul#edit-task-subtasks-container{
+  margin: 0;
+  padding: 10px;
+}
+
 ul#add-task-subtasks-container{
   margin: 0;
   padding: 10px;
@@ -348,6 +353,12 @@ border-radius: 10px;
 .edit-subtask:hover{
   cursor: pointer;
   background-color:#D1D1D1;
+}
+
+#add-task-sub-container{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .mini-logo {
