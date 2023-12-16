@@ -306,12 +306,48 @@ body {
   display: flex;
 }
 
-.detailSub{
+ul li div{
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+ ul#checklistSubDetail{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 0;
+}
+
+ul#add-task-subtasks-container{
+  margin: 0;
+  padding: 10px;
+}
+
+.detailSub{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
   padding: 6px 16px 6px 16px;
   box-sizing: border-box;
+}
+
+.detailSub:hover{
+cursor: pointer;
+background-color:#D1D1D1;
+border-radius: 10px;
+}
+
+.edit-subtask{
+  padding: 6px 16px 6px 16px;
+  border-radius: 10px;
+  padding: 10px 25px;
+}
+
+.edit-subtask:hover{
+  cursor: pointer;
+  background-color:#D1D1D1;
 }
 
 .mini-logo {

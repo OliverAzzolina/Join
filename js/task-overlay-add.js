@@ -187,8 +187,8 @@ function renderSubtasks(){
   for (let i = 0; i < temporarySubtasks.length; i++) {
     const subtask = temporarySubtasks[i];
     subtasksContainer.innerHTML += `
-    
-      <li onclick="editSubtask(${i})" id="editable-subtask${i}" >${subtask}</li>
+    <div class="edit-subtask">
+      <li onclick="editSubtask(${i})" id="editable-subtask${i}"  >${subtask}</li>
 
       <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
         <input id="editSubtaskInput${i}" value="${subtask}" class="add-task-form-input">    
@@ -198,6 +198,7 @@ function renderSubtasks(){
           <img src="img/subtask check icon.png" alt="Check" onclick="changeSubtask(${i})" />
         </div>
       </div>
+    </div>
     `
   }
 }

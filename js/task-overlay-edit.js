@@ -81,7 +81,7 @@ function renderEditSubtasks(index){
           const subtask = tasks[index]['subtasks'][i];
           subtasksContainer.innerHTML += `
           
-            <li onclick="editSubtask(${i})" id="editable-subtask${i}" >${subtask}</li>
+            <li onclick="editSubtask(${i})" id="editable-subtask${i}" class="edit-subtask" >${subtask}</li>
       
             <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
               <input id="editSubtaskInput${i}" value="${subtask}" class="add-task-form-input">    
