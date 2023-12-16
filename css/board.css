@@ -891,6 +891,26 @@ align-items: flex-end;
   gap: 5px;
 }
 
+.edit-task-active-subtask-icon-box {
+  position: absolute;
+  right: 16px;
+  display: flex;
+  gap: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.edit-task-active-subtask-icon-box img:hover{
+  cursor: pointer;
+  background-color: #D1D1D1;
+}
+
+.edit-task-subtask-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .d-none{
   display: none !important;
 }

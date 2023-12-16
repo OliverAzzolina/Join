@@ -1,5 +1,7 @@
 let temporaryAssignedTo = [];
 let newTaskPrio;
+let temporarySubtasks = [];
+let temporarySubtasksDone = [];
 
 //LOAD CONTACTS START
 function loadContactsForAddOverlay(){
@@ -31,9 +33,10 @@ function addNewTask(){
     prio: newTaskPrio,
     category: document.getElementById('add-new-task-category').value,
     status: 'open',
-    subtasks: [],
-    subTasksDone:[],
+    subtasks: temporarySubtasks,
+    subTasksDone: temporarySubtasksDone,
     };
+    createSubtasksDoneArray();
     saveNewAddedTask(newTask);
 }
 
@@ -45,6 +48,7 @@ function saveNewAddedTask(newTask){
     newTaskPrio = '';
     showAddedToBoardMessage();
     hideAddedToBoardMessage();
+    setItem('tasks', JSON.stringify(tasks))
 }
 
 
@@ -152,3 +156,82 @@ function setNewTaskPrio(newPrio, buttonColor){
     });
   }
 ////SET PRIORITY END
+
+
+//ADD SUBTASK START
+function activateCheckCancelButtons(){
+  document.getElementById('add-task-active-subtask-icon-box').classList.remove('d-none');
+  document.getElementById('add-task-create-subtask-icon-box').classList.add('d-none');
+}
+
+
+function clearSubtaskInput(){
+  document.getElementById('add-task-subtask-input').value = '';
+  document.getElementById('add-task-active-subtask-icon-box').classList.add('d-none');
+  document.getElementById('add-task-create-subtask-icon-box').classList.remove('d-none');
+}
+
+
+function addSubtask(){
+  let subtask = document.getElementById('add-task-subtask-input').value;
+  temporarySubtasks.push(subtask);
+  console.log(temporarySubtasks);
+  renderSubtasks();
+  clearSubtaskInput();
+}
+
+
+function renderSubtasks(){
+  let subtasksContainer = document.getElementById('add-task-subtasks-container');
+  subtasksContainer.innerHTML = '';
+  for (let i = 0; i < temporarySubtasks.length; i++) {
+    const subtask = temporarySubtasks[i];
+    subtasksContainer.innerHTML += `
+    
+      <li onclick="editSubtask(${i})" id="editable-subtask${i}" >${subtask}</li>
+
+      <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
+        <input id="editSubtaskInput${i}" value="${subtask}" class="add-task-form-input">    
+        <div class="edit-task-active-subtask-icon-box">                
+          <img src="img/subtask delete icon.png" alt="Delete" onclick="deleteSubtask(${i})" />
+          <img src="img/subtask divider icon.png" alt="Divider" />
+          <img src="img/subtask check icon.png" alt="Check" onclick="changeSubtask(${i})" />
+        </div>
+      </div>
+    `
+  }
+}
+
+
+function editSubtask(i){
+  document.getElementById(`editable-subtask${i}`).style.display = "none";
+  document.getElementById(`editSubtaskContainer${i}`).style.display ="flex";
+}
+
+
+function deleteSubtask(i){
+  temporarySubtasks.splice(i, 1)
+  renderSubtasks();
+  clearSubtaskInput();
+}
+
+
+function changeSubtask(i){
+  temporarySubtasks[i] = document.getElementById(`editSubtaskInput${i}`).value;
+  renderSubtasks();
+  clearSubtaskInput();
+}
+
+
+function createSubtasksDoneArray(){
+  for (let i = 0; i < temporarySubtasks.length; i++) {
+    const subtask = temporarySubtasks[i];
+    let subtaskDoneJson = {
+      subname: subtask, 
+      checked: false
+    }
+    temporarySubtasksDone.push(subtaskDoneJson);
+    console.log(subtaskDoneJson)
+  }
+}
+//ADD SUBTASK END

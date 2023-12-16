@@ -214,9 +214,20 @@ function generateEditOverlay(i, title, description, duedate){
             </div>
             
             <div id="add-task-sub-container">
-              <span class="add-task-form-title">Subtasks</span>
-              <input class="add-task-form-input" type="text" placeholder="Add new subtask">
+            <span class="add-task-form-title">Subtasks</span>
+            <div class="add-task-subtask-input-container">
+              <input id="add-task-subtask-input" class="add-task-form-input" type="text" placeholder="Add new subtask" onclick="activateCheckCancelButtons()"/>
+              <div id="add-task-active-subtask-icon-box" class="d-none">
+                <img src="img/subtask cancel icon.png" alt="Cancel" onclick="clearSubtaskInput()" />
+                <img src="img/subtask divider icon.png" alt="Divider" />
+                <img src="img/subtask check icon.png" alt="Check" onclick="addSubtaskEditOverlay(${i})" />
+              </div>
+              <div id="add-task-create-subtask-icon-box">
+                <img id="add-task-create-subtask-icon" src="img/subtask add icon.png" alt="" />
+              </div>
             </div>
+            <ul id="add-task-subtasks-container"></ul>
+          </div>
          
         </div>
         <div id="edit-task-overlay-footer">
