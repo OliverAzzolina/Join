@@ -74,11 +74,14 @@ body {
     margin-bottom: 10px;
     border-radius: 12px;
     border: 1px solid #ccc;
+    height: 28px;
 }
 
 .button-group {
     display: flex;
     justify-content: center;
+    
+
 }
 
 .button-group button {
@@ -87,6 +90,8 @@ body {
     background-color: #2A3647;
     color: white;
     padding-top: 12px;
+    height: 55px;
+    width: 126px;
 }
 
 .footer {
@@ -134,3 +139,96 @@ body {
     color:#29ABE2;
 }
 
+@media screen and (max-width: 960px) {
+
+    .content h2 {
+        text-align: center;
+        font-size: 47px;
+        font-weight: 700;
+        margin-bottom: 17px;
+        width: 207px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 364px;
+        height: 55px;
+    }
+    .content h2 {
+        text-align: center;
+        font-size: 47px;
+        font-weight: 700;
+        margin-bottom: 17px;
+        width: 336px;
+        padding-left: 19px;
+    }
+    .content {
+        width: 396px;
+        height: 595px;
+        padding-left: 14px;
+        padding-top: -121px;
+    }
+    .arrow {
+        width: 21.33px;
+        height: 20.74px;
+        position: absolute;
+        padding-top: 55px;
+        margin-left: 45px;
+    }
+    .form-group input[type="text"], .form-group input[type="email"], .form-group input[type="password"] {
+        width: 346px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 12px;
+        border: 1px solid #ccc;
+        height: 28px;
+    }
+    .underline {
+        height: 3px;
+        width: 88px;
+        background-color: #29ABE2;
+        margin: 0 auto;
+        margin-top: 5px;
+        margin-bottom: 25px;
+        margin-left: 146px;
+    }
+    .logo {
+        position: absolute;
+        width: 64px;
+        height: 78.03px;
+        top: 37px;
+        left: 38px;
+        gap: 10px;
+    }
+    .checkbox-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding-left: 67px;
+        width: 231px;
+    }
+    .button-group button {
+        padding: 10px 20px;
+        border-radius: 12px;
+        background-color: #2A3647;
+        color: white;
+        padding-top: 12px;
+        width: 180px;
+        height: 51px;
+        margin-left: 100px;
+    }
+
+    .footer p {
+        margin: 0;
+        color: #A8A8A8;
+        font-size: 16px;
+        font-weight: 400;
+        width: 121px;
+    }
+   
+
+}
