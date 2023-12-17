@@ -46,6 +46,7 @@ function saveTask(i){
     setItem('tasks', JSON.stringify(tasks));
     loadTasksfromStorage();
     closeEditOverlay();
+    openTaskDetails(i);
 }
 
 
@@ -80,18 +81,27 @@ function renderEditSubtasks(index){
         for (let i = 0; i < tasks[index]['subtasks'].length; i++) {
           const subtask = tasks[index]['subtasks'][i];
           subtasksContainer.innerHTML += `
-          <div class="edit-subtask">
-            <li onclick="editSubtask(${i})" id="editable-subtask${i}">${subtask}</li>
-      
-            <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
-              <input id="editSubtaskInput${i}" value="${subtask}" class="add-task-form-input">    
-              <div class="edit-task-active-subtask-icon-box">                
+        <div class="edit-subtask">
+        
+            <div onclick="editSubtask(${i})" class="subtask-list-item" id="editable-subtask${i}" onMouseOver="showIcons(${i})" onMouseOut="hideIcons(${i})">
+                <span>• ${subtask}</span>            
+                <div id="edit-task-active-subtask-icon-box${i}" class="edit-task-active-subtask-icon-box" style="opacity:0;" >                
                 <img src="img/subtask delete icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
-                <img src="img/subtask divider icon.png" alt="Divider" />
+                <div class="sub-divider"></div>
                 <img src="img/subtask check icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
-              </div>
             </div>
+       
+
+        </div>
+            <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
+              <input id="editSubtaskInput${i}" value="${subtask}" class="edit-subtask-input">    
+                <div class="edit-task-active-subtask-icon-box">                
+                    <img src="img/subtask delete icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
+                    <div class="sub-divider"></div>
+                    <img src="img/subtask check icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
+                </div>
             </div>
+        </div>
           `
         }
 }
@@ -141,5 +151,14 @@ function createSubtasksDoneArrayEditOverlay(index){
       }
       tasks[index]['subTasksDone'].push(subtaskDoneJson);
     }
+}
+
+
+function showIcons(i){
+ document.getElementById(`edit-task-active-subtask-icon-box${i}`).style.opacity = 1;
+}
+
+function hideIcons(i){
+    document.getElementById(`edit-task-active-subtask-icon-box${i}`).style.opacity = 0;
 }
 //SUBTASKS START

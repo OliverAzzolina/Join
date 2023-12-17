@@ -1,5 +1,5 @@
 let temporaryAssignedTo = [];
-let newTaskPrio;
+let newTaskPrio = 'medium';
 let temporarySubtasks = [];
 let temporarySubtasksDone = [];
 
@@ -21,6 +21,7 @@ function loadContactsForAddOverlay(){
 function openAddTaskCard(){
     document.getElementById('add-task-overlay').style.display = 'flex';
     loadContactsForAddOverlay();
+    getDate();
 }
 
 
@@ -236,3 +237,4 @@ function createSubtasksDoneArray(){
   }
 }
 //ADD SUBTASK END
+

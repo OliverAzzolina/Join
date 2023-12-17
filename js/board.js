@@ -245,16 +245,18 @@ function moveTo(status){
 
 //Slide IN OUT
 function slideOutOverlay(i){
-  var $slider = document.getElementById(`todo-card-detail${i}`);
-  var $toggle = document.getElementById(`slide-out-toggle${i}`);
-  
-  $toggle.addEventListener('click', function() {
-      var isOpen = $slider.classList.contains('slide-in');
-  
-      $slider.setAttribute('class', isOpen ? 'slide-out' +' '+ 'detail-todo-card' +' '+ 'slider'  : 'slide-in');
-     setTimeout(()=>{closeDetailCard()},170); 
-  });
+
+    var $slider = document.getElementById(`todo-card-detail${i}`);
+    var $toggle = document.getElementById(`slide-out-toggle${i}`);
+    
+    $toggle.addEventListener('click', function() {
+        var isOpen = $slider.classList.contains('slide-in');
+    
+        $slider.setAttribute('class', isOpen ? 'slide-out' +' '+ 'detail-todo-card' +' '+ 'slider'  : 'slide-in');
+       setTimeout(()=>{closeDetailCard()},170); 
+    });
 }
+
 
 
 function pushAssignedTo(index, initials, randomColor, name){

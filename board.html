@@ -87,10 +87,10 @@
           
           <div id="add-task-overlay-header">
             <h1 id="add-task-headline">Add Task</h1>
-            <button onclick="closeAddTaskCard()" class="close-button"><img  src="/assets/img/icons/close.png" alt=""></button>
+            <button type="button" id="close-add-task-button" onclick="closeAddTaskCard()" class="close-button"><img  src="/assets/img/icons/close.png" alt=""></button>
           </div>
 
-          <form id="add-task-form" onsubmit="addNewTask()"> <!-- TODO: HTML 5 Form Validation? -->
+          <form id="add-task-form" onsubmit="addNewTask(); return false"> <!-- TODO: HTML 5 Form Validation? -->
             <div id="input-container-tasks">
 
               <div id="add-task-overlay-left">
@@ -104,7 +104,7 @@
 
                 <div id="add-task-description-container">
                   <span id="add-task-description-headline" class="add-task-form-title">Description</span>
-                  <textarea id="add-task-description-input" class="add-task-form-input" required  rows="5" cols="40"></textarea>
+                  <textarea id="add-task-description-input" class="add-task-form-input" rows="5" cols="40"></textarea>
                 </div>
 
                 <div id="add-task-assigned-to-container">
@@ -138,9 +138,9 @@
                       <span id="urgent-text-add" class="add-task-form-btn-text">Urgent</span>
                       <img id="urgent-img-add" src="assets/img/icons/urgent.png" alt="" />
                     </button>
-                    <button  type="button" id="medium" onclick="setNewTaskPrio('medium', '#FFA800'); doNotClose(event)" class="add-task-form-btn">
-                      <span id="medium-text-add" class="add-task-form-btn-text">Medium</span>
-                      <img id="medium-img-add" src="assets/img/icons/medium.png" alt="" />
+                    <button  type="button" id="medium" style="background-color: #FFA800" onclick="setNewTaskPrio('medium', '#FFA800'); doNotClose(event)" class="add-task-form-btn">
+                      <span id="medium-text-add" class="add-task-form-btn-text" style="color: white">Medium</span>
+                      <img id="medium-img-add" src="assets/img/icons/medium_white.png" alt="" />
                     </button>
                     <button  type="button" id="low" onclick="setNewTaskPrio('low', '#7AE229'); doNotClose(event)" class="add-task-form-btn">
                       <span id="low-text-add" class="add-task-form-btn-text">Low</span>
@@ -177,7 +177,7 @@
                 </div>
               </div>
             </div>
-          </form>
+          
 
           <div id="add-task-overlay-footer">
             <div id="add-task-requirement-footer">
@@ -185,12 +185,12 @@
               <span>This field is required</span>
             </div>
             <div class="add-task-buttons">
-              <button type="button" onclick="closeAddTaskCard()" class="cancel-button"><span>Cancel</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
-              <button type="submit" onclick="addNewTask()" class="create-button"><span>Create Task</span><img src="assets/img/icons/check.png" alt=""></button>
+              <button type="button" onclick="closeAddTaskCard()" id="cancel-button" class="cancel-button"><span>Cancel</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
+              <button type="submit" class="create-button"><span>Create Task</span><img src="assets/img/icons/check.png" alt=""></button>
             </div>
-  
+          
           </div>
-
+        </form>
         </div>
     </div>
 
