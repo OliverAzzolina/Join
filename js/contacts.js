@@ -45,7 +45,8 @@ function renderContactList(){
   for (let i = 0; i < contactList.length; i++) {
     const letter = contactList[i]['letter'];
     contactListComplete.innerHTML += `
-    <div>${letter}</div>
+    <div class="category-letter"><span>${letter}</span></div>
+    <div class="contacts-splitter"></div>
     <div id="contacts${i}" class="contacts-list"></div>
     `;
     renderContact(i);
@@ -70,10 +71,10 @@ function renderContact(i){
 //RENDER CONTACT HTML
 function generateContact(i, j, initials, name, email, randomColor){
   return `
-  <div id="contact${i},${j}" class="contact" onclick="openContactInfo(${i},${j})">
+  <div id="contact${i},${j}" class="contact contact-hover" onclick="openContactInfo(${i},${j})">
       <div class="name-logo" style= "background-color: ${randomColor}"><span>${initials}</span></div>
       <div class="contact-name">
-      <span>${name}</span>
+      <span id="contact${i},${j}-name">${name}</span>
       <a href="mailto:${email}">${email}</a>
       </div>    
   </div>
@@ -130,6 +131,17 @@ function sortContacts(){
 //OPEN CONTACT INFO
 function openContactInfo(i, j){
   let contactDetail = document.getElementById('contact-detail');
+  if(document.getElementById(`contact${i},${j}`).style.backgroundColor !== "rgb(42, 54, 71)"){
+    renderContactList();
+    loadContactData(i, j, contactDetail)
+    changeContactBackgroundColor(i, j)
+  }else{
+    contactDetail.innerHTML = '';
+    renderContactList();
+  }
+}
+
+function loadContactData(i, j, contactDetail){
   contactDetail.innerHTML = '';
   const initials = contactList[i]['contacts'][j]['name'].split(" ").map((n)=>n[0]).join("");
   const name = contactList[i]['contacts'][j]['name'];
@@ -137,6 +149,15 @@ function openContactInfo(i, j){
   const phone = contactList[i]['contacts'][j]['phone'];
   const randomColor = contactList[i]['contacts'][j]['randomColor'];
   contactDetail.innerHTML = renderContactInfo(i, j, initials, name, email, phone, randomColor);
+}
+
+
+//CHANGES BG COLOR OF OPEN CONTACT
+function changeContactBackgroundColor(i, j){
+  let contact = document.getElementById(`contact${i},${j}`);
+  contact.style.backgroundColor = "#2A3647";
+  contact.classList.remove('contact-hover');
+  document.getElementById(`contact${i},${j}-name`).style.color ="#FFFFFF";
 }
 
 
@@ -200,15 +221,16 @@ function EditContact(i, j){
 
 
 //SAVE CONTACT
-function saveContact(i, j){
+async function saveContact(i, j){
   id = contactList[i]['contacts'][j]['id'];
   contacts[id]['name'] = document.getElementById('editName').value;
   contacts[id]['email'] = document.getElementById('editEmail').value;
   contacts[id]['phone'] = document.getElementById('editPhone').value;
   contacts.push();
-  setItem('contacts', JSON.stringify(contacts));
+  await setItem('contacts', JSON.stringify(contacts));
+  init();
   document.getElementById('overlay').style.display = "none";
-  loadContactsFromStorage(); 
+  
   openContactInfo(i, j);
 }
 
@@ -258,6 +280,10 @@ function generateOverlay(){
       </div>
   </div>
   <div class="add-contact-card-right">
+    <div class="close-button" onclick="closeAddContact()">
+      <button><img src="assets/img/icons/close.png" alt=""></button>
+    </div>
+    <div class="add-contact-container">
     <img src="assets/img/icons/Frame 79.png" alt="">
     <form onsubmit="addNewContact(); return false">
       <div class="actions-container">
@@ -272,6 +298,7 @@ function generateOverlay(){
         </div>
       </div>
       </form>
+      </div>
   </div>`;
 }
 
@@ -279,31 +306,38 @@ function generateOverlay(){
 function generateEditOverlay(i, j, initials, name, email, phone, randomColor){
   return `
   <div class="add-contact-card" onclick="doNotClose(event)">
-  <div class="add-contact-card-left">
-  <img src="/assets/img/icons/Capa 2.png" alt="">
-      <div class="titles">
-        <span class="title">Edit contact</span>
-        <span class="subtitle">Tasks are better with a Team!</span>
-        <div class="blue-line-horizontal"></div>
-      </div>
-  </div>
-  <div class="add-contact-card-right">
-  <div id="name-logo-bg${i}" class="name-logo name-logo-detail" style= "background-color: ${randomColor}">
-  <span>${initials}</span>
-  </div>
-    <form onsubmit="saveContact(${i},${j}); return false">
-      <div class="actions-container">
-        <div class="add-contact-inputs" >
-          <input id="editName" type="text" placeholder="Name" class="input-icon-name" value="${name}" required>
-          <input id="editEmail" type="email" placeholder="Email" class="input-icon-mail" value="${email}" required>
-          <input id="editPhone" type="text" placeholder="Phone" class="input-icon-phone" value="${phone}" required>
+    <div class="add-contact-card-left">
+      <img src="/assets/img/icons/Capa 2.png" alt="">
+        <div class="titles">
+          <span class="title">Edit contact</span>
+          <span class="subtitle">Tasks are better with a Team!</span>
+          <div class="blue-line-horizontal"></div>
         </div>
-        <div class="add-contact-buttons">
-          <button type="button" onclick="deleteContact(${i},${j})" class="cancel-button"><span>Delete</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
-          <button type="submit" class="create-button"><span>Save</span><img src="assets/img/icons/check.png" alt=""></button>
-        </div>
+    </div>
+    
+    <div class="add-contact-card-right">
+      <div class="close-button" onclick="closeAddContact()">
+        <button><img src="assets/img/icons/close.png" alt=""></button>
       </div>
-      </form
+
+      <div class="add-contact-container">
+        <div id="name-logo-bg${i}" class="name-logo name-logo-detail" style= "background-color: ${randomColor}">
+          <span>${initials}</span>
+        </div>
+        <form onsubmit="saveContact(${i},${j}); return false">
+          <div class="actions-container">
+            <div class="add-contact-inputs" >
+              <input id="editName" type="text" placeholder="Name" class="edit-input input-icon-name" value="${name}" required>
+              <input id="editEmail" type="email" placeholder="Email" class="edit-input input-icon-mail" value="${email}" required>
+              <input id="editPhone" type="text" placeholder="Phone" class="edit-input input-icon-phone" value="${phone}" required>
+            </div>
+            <div class="add-contact-buttons">
+              <button type="button" onclick="deleteContact(${i},${j})" class="cancel-button"><span>Delete</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
+              <button type="submit" class="create-button"><span>Save</span><img src="assets/img/icons/check.png" alt=""></button>
+            </div>
+          </div>
+        </form
+      </div>
   </div>`;
 }
 
