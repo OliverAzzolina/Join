@@ -1021,7 +1021,9 @@ border-radius: 50%;
 }
 
 .drag-here-container{
+  top: 0;
   display: flex;
+  position: sticky;
   align-items: center;
   justify-content: center;
   height: 48px;

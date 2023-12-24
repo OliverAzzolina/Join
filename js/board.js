@@ -227,8 +227,10 @@ function updateDoneSubs(i, checkedTrue){
 //drag&drop
 function startDragging(i){
  currentDraggedElement = i;
+ console.log(currentDraggedElement)
  showDragHereContainer();
 }
+
 
 function showDragHereContainer(){
   let dragContainer = document.getElementsByClassName('drag-here-container');

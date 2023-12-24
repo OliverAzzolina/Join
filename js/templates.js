@@ -113,7 +113,7 @@ function navbarHTML() {
 //BOARD TEMPLATES
 function generateTask(i){
     return `
-    <div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})" onclick="openTaskDetails(${i})">
+    <div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})"  onclick="openTaskDetails(${i})">
       <span id="category${i}" class="category">${tasks[i]["category"]}</span>
       <div class="title-description">
         <span class="todo-title">${tasks[i]["title"]}</span>
