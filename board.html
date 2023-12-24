@@ -59,23 +59,27 @@
             
             <div class="board-section">
                 <div class="todos-section">
+                  <div ondrop="moveTo('open')" ondragover="allowDrop(event)" class="drag-here-container" style="display: none;"><span>drag here to change status</span></div>
                   <div id="open-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>
-                    <div id="open" class="todos-container" ondrop="moveTo('open')" ondragover="allowDrop(event)"></div>
+                  <div id="open" class="todos-container" ondragend="hideDragHereContainer()"></div>
                 </div>
 
                 <div class="todos-section">
-                    <div id="in-progress-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>
-                    <div id="in-progress" class="todos-container" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)"></div>
+                  <div ondrop="moveTo('in-progress')" ondragover="allowDrop(event)" class="drag-here-container" style="display: none;"><span>drag here to change status</span></div>
+                  <div id="in-progress-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>
+                  <div id="in-progress" class="todos-container" ondragend="hideDragHereContainer()"></div>
                 </div>
 
                 <div class="todos-section">
+                  <div ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)" class="drag-here-container" style="display: none;"><span>drag here to change status</span></div>
                   <div id="await-feedback-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>
-                    <div id="await-feedback" class="todos-container" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)"></div>
+                  <div id="await-feedback" class="todos-container" ondragend="hideDragHereContainer()"></div>
                 </div>
             
                 <div class="todos-section">
+                  <div ondrop="moveTo('done')" ondragover="allowDrop(event)" class="drag-here-container" style="display: none;"><span>drag here to change status</span></div>
                   <div id="done-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>
-                    <div id="done" class="todos-container" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div></div>
+                  <div id="done" class="todos-container" ondragend="hideDragHereContainer()"></div></div>
                 </div>
             </div>
   

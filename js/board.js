@@ -227,6 +227,24 @@ function updateDoneSubs(i, checkedTrue){
 //drag&drop
 function startDragging(i){
  currentDraggedElement = i;
+ showDragHereContainer();
+}
+
+function showDragHereContainer(){
+  let dragContainer = document.getElementsByClassName('drag-here-container');
+  for (let i = 0; i < dragContainer.length; i++) {
+      const element = dragContainer[i];
+      element.style.display = 'flex';
+    }
+}
+
+
+function hideDragHereContainer(){
+  let dragContainer = document.getElementsByClassName('drag-here-container');
+  for (let i = 0; i < dragContainer.length; i++) {
+      const element = dragContainer[i];
+      element.style.display = 'none'
+    }
 }
 
 
@@ -236,8 +254,10 @@ function allowDrop(ev){
 
 
 function moveTo(status){
- tasks[currentDraggedElement]['status'] = status;
- setItem('tasks', JSON.stringify(tasks));
+  hideDragHereContainer();
+  console.log(status);
+  tasks[currentDraggedElement]['status'] = status;
+  setItem('tasks', JSON.stringify(tasks));
   refreshTasks();
   renderTasks();
 }
