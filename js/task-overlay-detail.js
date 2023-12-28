@@ -26,7 +26,7 @@ function checkOverlayCategory(i){
 function setPrioDetailImg(i){
     let prioDetailImg = document.getElementById(`prioDetailImg${i}`);
     let prio = tasks[i]['prio'];
-    prioDetailImg.src = `/assets/img/icons/${prio}.png`;
+    prioDetailImg.src = `/assets/img/prio_${prio}_icon.png`;
 }
 
 function renderAssignedToDetail(index){
@@ -71,19 +71,19 @@ function checkIfSubChecked(j, i){
 
 function setChecked(j, i, subTasksDone){
     subTasksDone.checked = true;
-    document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button_checked_bl.png';
+    document.getElementById(`detailSub${j}`).src = 'assets/img/check_checked_black.png';
 }
   
 function setUnChecked(j, i, subTasksDone){
     subTasksDone.checked = false;
-    document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button.png';
+    document.getElementById(`detailSub${j}`).src = 'assets/img/check_icon.png';
 }
 
 function checkIfSubsDone(i){
     for (let j = 0; j < tasks[i]['subTasksDone'].length; j++) {
       const checkedSub = tasks[i]['subTasksDone'][j].checked;
       if(checkedSub == true){
-        document.getElementById(`detailSub${j}`).src = '/assets/img/icons/check_button_checked_bl.png'
+        document.getElementById(`detailSub${j}`).src = 'assets/img/check_checked_black.png'
       }
     }
 }

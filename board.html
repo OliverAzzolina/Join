@@ -12,7 +12,6 @@
     <script src="js/arrays.js"></script>
     <script src="js/storage.js"></script>
     <script src="/js/contacts.js"></script>
-    <script src="js/templates.js"></script>
     <script src="js/task-overlay-detail.js"></script>
     <script src="js/task-overlay-edit.js"></script>
     <script src="js/task-overlay-add.js"></script>
@@ -39,15 +38,15 @@
                     <div class="todos-section-top">
                         <div class="todos-header">
                             <p>To Do</p>
-                            <button onclick="openAddTaskCard()" onmouseover="hover(`add-task-board-button1`)" onmouseout="unhover('add-task-board-button1')"><img id="add-task-board-button1" src="assets/img/icons/plus_button.png" alt=""></button>
+                            <button onclick="openAddTaskCard()" onmouseover="hover(`add-task-board-button1`)" onmouseout="unhover('add-task-board-button1')"><img id="add-task-board-button1" src="assets/img/plus_icon.png" alt=""></button>
                         </div>
                         <div class="todos-header">
                             <p>In progress</p>
-                            <button onclick="openAddTaskCard()" onmouseover="hover('add-task-board-button2')" onmouseout="unhover('add-task-board-button2')"><img id="add-task-board-button2" src="assets/img/icons/plus_button.png" alt=""></button>
+                            <button onclick="openAddTaskCard()" onmouseover="hover('add-task-board-button2')" onmouseout="unhover('add-task-board-button2')"><img id="add-task-board-button2" src="assets/img/plus_icon.png" alt=""></button>
                         </div>
                         <div class="todos-header">
                             <p>Await feedback</p>
-                            <button onclick="openAddTaskCard()" onmouseover="hover('add-task-board-button3')" onmouseout="unhover('add-task-board-button3')"><img id="add-task-board-button3" src="assets/img/icons/plus_button.png" alt=""></button>
+                            <button onclick="openAddTaskCard()" onmouseover="hover('add-task-board-button3')" onmouseout="unhover('add-task-board-button3')"><img id="add-task-board-button3" src="assets/img/plus_icon.png" alt=""></button>
                         </div>
                         <div class="todos-header">
                             <p>Done</p>
@@ -82,12 +81,12 @@
     <div id="overlay" style="display: none" onclick="closeDetailCard(i)"></div>
     
     <div id="add-task-overlay" style="display: none" onclick="closeAddTaskCard()">
-      <div id="added-task-message" style="display: none"><span>Task added to Board</span><img src="/img/Board_sidebar.svg" alt=""></div>
+      <div id="added-task-message" style="display: none"><span>Task added to Board</span><img src="assets/img/sidebar_board_icon.svg" alt=""></div>
         <div id="add-task-container" onclick="doNotClose(event)">
           
           <div id="add-task-overlay-header">
             <h1 id="add-task-headline">Add Task</h1>
-            <button type="button" id="close-add-task-button" onclick="closeAddTaskCard()" class="close-button"><img  src="/assets/img/icons/close.png" alt=""></button>
+            <button type="button" id="close-add-task-button" onclick="closeAddTaskCard()" class="close-button"><img  src="assets/img/close_icon.png" alt=""></button>
           </div>
 
           <form id="add-task-form" onsubmit="addNewTask(); return false"> <!-- TODO: HTML 5 Form Validation? -->
@@ -111,7 +110,7 @@
                   <span class="add-task-form-title">Assigned to</span>
                   <div id="contacts-dropdown" onclick="showDropdownContactsAddOverlay()">
                     <span>Select contacts to assign</span>
-                    <img src="assets/img/icons/arrow_drop_down.png" alt="">
+                    <img src="assets/img/arrow_drop_down.png" alt="">
                   </div>
                   <ul style="display: none;" id="add-assigned-editors" class="assigned-editors"></ul>
                   <div id="show-assigned-editors-container" onclick="clearAssignedToAddOverlay()"></div>
@@ -136,15 +135,15 @@
                   <div id="add-task-form-btn-container">
                     <button type="button" id="urgent" onclick="setNewTaskPrio('urgent', '#FF3D00'); doNotClose(event)" class="add-task-form-btn">
                       <span id="urgent-text-add" class="add-task-form-btn-text">Urgent</span>
-                      <img id="urgent-img-add" src="assets/img/icons/urgent.png" alt="" />
+                      <img id="urgent-img-add" src="assets/img/prio_urgent_icon.png" alt="" />
                     </button>
                     <button  type="button" id="medium" style="background-color: #FFA800" onclick="setNewTaskPrio('medium', '#FFA800'); doNotClose(event)" class="add-task-form-btn">
                       <span id="medium-text-add" class="add-task-form-btn-text" style="color: white">Medium</span>
-                      <img id="medium-img-add" src="assets/img/icons/medium_white.png" alt="" />
+                      <img id="medium-img-add" src="assets/img/prio_medium_icon.png" alt="" />
                     </button>
                     <button  type="button" id="low" onclick="setNewTaskPrio('low', '#7AE229'); doNotClose(event)" class="add-task-form-btn">
                       <span id="low-text-add" class="add-task-form-btn-text">Low</span>
-                      <img id="low-img-add" src="assets/img/icons/low.png" alt="" />
+                      <img id="low-img-add" src="assets/img/prio_low_icon.png" alt="" />
                     </button>
                   </div>
                 </div>
@@ -165,12 +164,12 @@
                   <div class="add-task-subtask-input-container">
                     <input id="add-task-subtask-input" class="add-task-form-input" type="text" placeholder="Add new subtask" onclick="activateCheckCancelButtons()"/>
                     <div id="add-task-active-subtask-icon-box" class="d-none">
-                      <img src="img/subtask cancel icon.png" alt="Cancel" onclick="clearSubtaskInput()" />
-                      <img src="img/subtask divider icon.png" alt="Divider" />
-                      <img src="img/subtask check icon.png" alt="Check" onclick="addSubtask()" />
+                      <img src="assets/img/subtask_cancel_icon.png" alt="Cancel" onclick="clearSubtaskInput()" />
+                      <img src="assets/img/subtask_divider.png" alt="Divider" />
+                      <img src="assets/img/subtask_check_ icon.png" alt="Check" onclick="addSubtask()" />
                     </div>
                     <div id="add-task-create-subtask-icon-box">
-                      <img id="add-task-create-subtask-icon" src="img/subtask add icon.png" alt="" />
+                      <img id="add-task-create-subtask-icon" src="assets/img/subtask_add_icon.png" alt="" />
                     </div>
                   </div>
                   <ul id="add-task-subtasks-container"></ul>
@@ -185,8 +184,8 @@
               <span>This field is required</span>
             </div>
             <div class="add-task-buttons">
-              <button type="button" onclick="closeAddTaskCard()" id="cancel-button" class="cancel-button"><span>Cancel</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
-              <button type="submit" class="create-button"><span>Create Task</span><img src="assets/img/icons/check.png" alt=""></button>
+              <button type="button" onclick="closeAddTaskCard()" id="cancel-button" class="cancel-button"><span>Cancel</span><img src="assets/img/cancel_icon.png" alt=""></button>
+              <button type="submit" class="create-button"><span>Create Task</span><img src="assets/img/check_icon.png" alt=""></button>
             </div>
           
           </div>

@@ -378,7 +378,7 @@ function setUnAssigned(i) {
   let assignedContact = document.getElementById(`assigned-contact${i}`);
   let checkImg = document.getElementById(`checked${i}`);
   assignedContact.style = "color: black";
-  checkImg.src = "/assets/img/icons/check_button.png";
+  checkImg.src = "assets/img/check_icon.png";
 }
 
 
@@ -415,7 +415,7 @@ function loadContacts() {
           <div class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
           <span> ${name}</span>
         </div>
-          <img id="checked${i}" src="/assets/img/icons/check_button.png" alt="">
+          <img id="checked${i}" src="assets/img/check_icon.png" alt="">
       </li>
      </label>
   `;

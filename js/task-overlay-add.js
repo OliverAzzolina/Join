@@ -145,7 +145,7 @@ function setNewTaskPrio(newPrio, buttonColor){
     resetPrioColors();
     document.getElementById(newPrio).style.backgroundColor = buttonColor;
     document.getElementById(`${newPrio}-text-add`).style.color = "#FFFFFF";
-    document.getElementById(`${newPrio}-img-add`).src = `/assets/img/icons/${newPrio}_white.png`;
+    document.getElementById(`${newPrio}-img-add`).src = `/assets/img/prio_${newPrio}_white_icon.png`;
   }
   
 
@@ -153,7 +153,7 @@ function setNewTaskPrio(newPrio, buttonColor){
     ['urgent', 'medium', 'low'].forEach(priority => {
       document.getElementById(priority).style.backgroundColor = "";
       document.getElementById(`${priority}-text-add`).style.color = "";
-      document.getElementById(`${priority}-img-add`).src = `/assets/img/icons/${priority}.png`;
+      document.getElementById(`${priority}-img-add`).src = `/assets/img/prio_${priority}_icon.png`;
     });
   }
 ////SET PRIORITY END

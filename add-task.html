@@ -14,7 +14,6 @@
     <script src="js/board.js"></script>
     <script src="js/add-task.js"></script>
     <script src="js/utils.js"></script>
-    <!-- <script src="js/test.js"></script> -->
     <script src="js/templates.js"></script>
   </head>
 
@@ -25,27 +24,9 @@
     <!-- Sidebar -->
     <div id="sidebar-container"></div>
 
-    <div id="mobile-menu-container">
-
-
-      <a href="summary.html">
-          <img class="mobile-icons" src="img/mobile-summary.png" alt="Summary">
-          <p class="mobile-text">Summary</p>
-      </a>
-      <a href="board.html">
-          <img class="mobile-icons" src="img/mobile-board.png" alt="Board">
-          <p class="mobile-text">Board</p>
-      </a>
-      <a href="add-task.html">
-          <img class="mobile-icons" src="img/mobile-addtask.png" alt="Add Task">
-          <p class="mobile-text">Add Task</p>
-      </a>
-      <a href="contacts.html">
-          <img class="mobile-icons" src="img/mobile-contacts.png" alt="Contact">
-          <p class="mobile-text">Contact</p>
-      </a>
-  </div>
-  <img src="img/logo-mobile.png" alt="Mobile Logo" id="mobile-logo">
+    <!-- Mobile Menu -->
+    <div id="mobile-menu-container"></div>
+  <img src="assets/img/logo_mobile.png" alt="Mobile Logo" id="mobile-logo">
 
 
     <!-- Main -->
@@ -72,7 +53,7 @@
               <span class="add-task-form-title">Assigned to</span>
               <div id="contacts-dropdown" onclick="showDropdownContacts()">
                 <span>Select contacts to assign</span>
-                <img src="assets/img/icons/arrow_drop_down.png" alt="" />
+                <img src="assets/img/arrow_drop_down.png" alt="" />
               </div>
               <ul style="display: none" id="assigned-editors" class="assigned-editors"></ul>
               <div id="show-assigned-editors-container" onclick="clearAssignedTo()"></div>
@@ -92,15 +73,15 @@
               <div id="add-task-form-btn-container">
                 <button class="add-task-form-btn" type="button" task-priority="urgent">
                   <span class="add-task-form-btn-text">Urgent</span>
-                  <img src="assets/img/icons/Prio alta.png" alt="" />
+                  <img src="assets/img/prio_urgent_icon.png" alt="" />
                 </button>
                 <button class="add-task-form-btn" type="button" task-priority="medium">
                   <span class="add-task-form-btn-text">Medium</span>
-                  <img src="assets/img/icons/Prio media.png" alt="" />
+                  <img src="assets/img/prio_medium_icon.png" alt="" />
                 </button>
                 <button class="add-task-form-btn" type="button" task-priority="low">
                   <span class="add-task-form-btn-text">Low</span>
-                  <img src="assets/img/icons/Prio baja.png" alt="" />
+                  <img src="assets/img/prio_low_icon.png" alt="" />
                 </button>
               </div>
             </div>
@@ -119,12 +100,12 @@
               <div class="add-task-subtask-input-container">
                 <input id="add-task-subtask-input" class="add-task-form-input" type="text" placeholder="Add new subtask" />
                 <div id="add-task-active-subtask-icon-box" class="d-none">
-                  <img src="img/subtask cancel icon.png" alt="Cancel" onclick="clearSubtaskInput()" />
-                  <img src="img/subtask divider icon.png" alt="Divider" />
-                  <img src="img/subtask check icon.png" alt="Check" onclick="addSubtask()" />
+                  <img src="assets/img/cancel_icon.png" alt="Cancel" onclick="clearSubtaskInput()" />
+                  <img src="assets/img/subtask_divider.png" alt="Divider" />
+                  <img src="assets/img/check_icon.png" alt="Check" onclick="addSubtask()" />
                 </div>
                 <div id="add-task-create-subtask-icon-box" onclick="setFocusSubtaskInput()">
-                  <img id="add-task-create-subtask-icon" src="img/subtask add icon.png" alt="" />
+                  <img id="add-task-create-subtask-icon" src="assets/img/plus_icon.png" alt="" />
                 </div>
               </div>
               <div id="add-task-subtasks-container"></div>
@@ -139,8 +120,8 @@
           <span>This field is required</span>
         </div>
         <div class="add-task-buttons">
-          <button onclick="closeAddTaskCard()" class="cancel-button"><span>Cancel</span><img src="assets/img/icons/iconoir_cancel.png" alt="" /></button>
-          <button onclick="addTask(event)" class="create-button"><span>Create Task</span><img src="assets/img/icons/check.png" alt="" /></button>
+          <button onclick="closeAddTaskCard()" class="cancel-button"><span>Cancel</span><img src="assets/img/cancel_icon.png" alt="" /></button>
+          <button onclick="addTask(event)" class="create-button"><span>Create Task</span><img src="assets/img/check_icon.png" alt="" /></button>
         </div>
       </div>
     </div>

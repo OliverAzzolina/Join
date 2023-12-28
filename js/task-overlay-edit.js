@@ -86,9 +86,9 @@ function renderEditSubtasks(index){
             <div onclick="editSubtask(${i})" class="subtask-list-item" id="editable-subtask${i}" onMouseOver="showIcons(${i})" onMouseOut="hideIcons(${i})">
                 <span>• ${subtask}</span>            
                 <div id="edit-task-active-subtask-icon-box${i}" class="edit-task-active-subtask-icon-box" style="opacity:0;" >                
-                <img src="img/subtask delete icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
+                <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
                 <div class="sub-divider"></div>
-                <img src="img/subtask check icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
+                <img src="assets/img/subtask_check_ icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
             </div>
        
 
@@ -96,9 +96,9 @@ function renderEditSubtasks(index){
             <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
               <input id="editSubtaskInput${i}" value="${subtask}" class="edit-subtask-input">    
                 <div class="edit-task-active-subtask-icon-box">                
-                    <img src="img/subtask delete icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
+                    <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
                     <div class="sub-divider"></div>
-                    <img src="img/subtask check icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
+                    <img src="assets/img/subtask_check_ icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
                 </div>
             </div>
         </div>

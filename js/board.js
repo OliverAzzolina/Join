@@ -108,13 +108,13 @@ function checkIfAssigned(i){
 
 function setAssigned(i){
   document.getElementById(`assigned-contact${i}`).style = "background-color: #2A3647; color: white";
-  document.getElementById(`checked${i}`).src ="/assets/img/icons/check_button_checked.png";
+  document.getElementById(`checked${i}`).src ="assets/img/check_checked.png";
 }
 
 
 function setUnAssigned(i){
   document.getElementById(`assigned-contact${i}`).style = "color: black";;
-  document.getElementById(`checked${i}`).src ="/assets/img/icons/check_button.png";;
+  document.getElementById(`checked${i}`).src ="/assets/img/icons/assets/img/check_unchecked.png";;
 }
 
 
@@ -194,7 +194,7 @@ function refreshTasks(){
 function setPrioImg(i){
   let prioImg = document.getElementById(`prioImg${i}`);
   let prio = tasks[i]['prio'];
-  prioImg.src =`/assets/img/icons/${prio}.png`;
+  prioImg.src =`/assets/img/prio_${prio}_icon.png`;
 }
 
 
@@ -307,12 +307,12 @@ function filterTasks() {
 function hover(id){
   let button = document.getElementById(id);
   if(id == 'edit-img'){
-    button.setAttribute('src', '/assets/img/icons/edit_hover.png');
+    button.setAttribute('src', 'assets/img/edit_hover_icon.png');
   }else
   if(id == 'delete-img'){
-    button.setAttribute('src', '/assets/img/icons/delete_hover.png');
+    button.setAttribute('src', 'assets/img/delete_hover_icon.png');
   }else{
-    document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button_hover.png');
+    document.getElementById(id).setAttribute('src', 'assets/img/plus_hover_icon.png');
   }
 }
 
@@ -320,12 +320,12 @@ function hover(id){
 function unhover(id){
   let button = document.getElementById(id);
   if(id == 'edit-img'){
-    button.setAttribute('src', '/assets/img/icons/edit.png');
+    button.setAttribute('src', 'assets/img/edit_icon.png');
   }else
   if(id == 'delete-img'){
-    button.setAttribute('src', '/assets/img/icons/delete.png');
+    button.setAttribute('src', 'assets/img/delete_icon.png');
   }else{
-    document.getElementById(id).setAttribute('src', '/assets/img/icons/plus_button.png');
+    document.getElementById(id).setAttribute('src', 'assets/img/plus_icon.png');
   }
 }
 

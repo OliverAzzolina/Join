@@ -281,10 +281,10 @@ function generateOverlay(){
   </div>
   <div class="add-contact-card-right">
     <div class="close-button" onclick="closeAddContact()">
-      <button><img src="assets/img/icons/close.png" alt=""></button>
+      <button><img src="assets/img/close_icon.png" alt=""></button>
     </div>
     <div class="add-contact-container">
-    <img src="assets/img/icons/Frame 79.png" alt="">
+    <img src="assets/img/profile_icon.png" alt="">
     <form onsubmit="addNewContact(); return false">
       <div class="actions-container">
         <div class="add-contact-inputs" >
@@ -293,8 +293,8 @@ function generateOverlay(){
           <input id="phone" type="text" placeholder="Phone" class="input-icon-phone" required>
         </div>
         <div class="add-contact-buttons">
-          <button type="button" onclick="closeAddContact()" class="cancel-button"><span>Cancel</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
-          <button type="submit" class="create-button"><span>Create contact</span><img src="assets/img/icons/check.png" alt=""></button>
+          <button type="button" onclick="closeAddContact()" class="cancel-button"><span>Cancel</span><img src="assets/img/cancel_icon.png" alt=""></button>
+          <button type="submit" class="create-button"><span>Create contact</span><img src="assets/img/check_icon.png" alt=""></button>
         </div>
       </div>
       </form>
@@ -307,7 +307,7 @@ function generateEditOverlay(i, j, initials, name, email, phone, randomColor){
   return `
   <div class="add-contact-card" onclick="doNotClose(event)">
     <div class="add-contact-card-left">
-      <img src="/assets/img/icons/Capa 2.png" alt="">
+      <img src="assets/img/logo_small.png" alt="">
         <div class="titles">
           <span class="title">Edit contact</span>
           <span class="subtitle">Tasks are better with a Team!</span>
@@ -317,7 +317,7 @@ function generateEditOverlay(i, j, initials, name, email, phone, randomColor){
     
     <div class="add-contact-card-right">
       <div class="close-button" onclick="closeAddContact()">
-        <button><img src="assets/img/icons/close.png" alt=""></button>
+        <button><img src="assets/img/close_icon.png" alt=""></button>
       </div>
 
       <div class="add-contact-container">
@@ -332,8 +332,8 @@ function generateEditOverlay(i, j, initials, name, email, phone, randomColor){
               <input id="editPhone" type="text" placeholder="Phone" class="edit-input input-icon-phone" value="${phone}" required>
             </div>
             <div class="add-contact-buttons">
-              <button type="button" onclick="deleteContact(${i},${j})" class="cancel-button"><span>Delete</span><img src="assets/img/icons/iconoir_cancel.png" alt=""></button>
-              <button type="submit" class="create-button"><span>Save</span><img src="assets/img/icons/check.png" alt=""></button>
+              <button type="button" onclick="deleteContact(${i},${j})" class="cancel-button"><span>Delete</span><img src="assets/img/cancel_icon.png" alt=""></button>
+              <button type="submit" class="create-button"><span>Save</span><img src="assets/img/check_icon.png" alt=""></button>
             </div>
           </div>
         </form
@@ -344,18 +344,18 @@ function generateEditOverlay(i, j, initials, name, email, phone, randomColor){
 
 function hover(img){
   if(img == 'a'){
-     document.getElementById('edit-img').setAttribute('src', '/assets/img/icons/edit_hover.png');
+     document.getElementById('edit-img').setAttribute('src', 'assets/img/edit_hover_icon.png');
   }else{
-    document.getElementById('delete-img').setAttribute('src', '/assets/img/icons/delete_hover.png');
+    document.getElementById('delete-img').setAttribute('src', 'assets/img/delete_hover_icon.png');
   }
 }
   
 
 function unhover(img){
     if(img == 'a'){
-        document.getElementById('edit-img').setAttribute('src', '/assets/img/icons/edit.png');
+        document.getElementById('edit-img').setAttribute('src', 'assets/img/edit_icon.png');
       }else{
-        document.getElementById('delete-img').setAttribute('src', '/assets/img/icons/delete.png');
+        document.getElementById('delete-img').setAttribute('src', 'assets/img/delete_icon.png');
       }
 }
 
