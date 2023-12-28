@@ -63,6 +63,18 @@ h1 {
   align-items: center;
 }
 
+.add-task-subtask-input:active {
+  cursor: text;
+}
+
+#add-task-active-subtask-icon-box:first-child {
+  cursor: pointer;
+}
+
+#add-task-active-subtask-icon-box:last-child {
+  cursor: pointer;
+}
+
 #add-task-active-subtask-icon-box {
   position: absolute;
   right: 16px;

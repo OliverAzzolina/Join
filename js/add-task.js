@@ -210,9 +210,9 @@ function createPElement(text) {
 function updateIconsToEditing(subtaskElement) {
   var iconsContainer = subtaskElement.querySelector('.add-task-subtask-icons');
   iconsContainer.innerHTML = `
-    <img src="img/subtask delete icon.png" class="delete-icon" onclick="attemptRemoveSubtask('${subtaskElement.id}', true)">
-    <img src="img/subtask divider icon.png">
-    <img src="img/subtask check icon.png" class="check-icon" onclick="finishEditing('${subtaskElement.id}')">
+    <img src="assets/img/subtask_delete_icon.png" class="delete-icon" onclick="attemptRemoveSubtask('${subtaskElement.id}', true)">
+    <img src="assets/img/subtask_divider.png">
+    <img src="assets/img/subtask_check_ icon.png" class="check-icon" onclick="finishEditing('${subtaskElement.id}')">
   `;
 }
 
@@ -232,9 +232,9 @@ function attemptRemoveSubtask(subtaskId, isEditing) {
 function updateIconsToNormal(subtaskElement) {
   var iconsContainer = subtaskElement.querySelector('.add-task-subtask-icons');
   iconsContainer.innerHTML = `
-    <img src="img/subtask edit icon.png" class="edit-icon" onclick="editSubtask('${subtaskElement.id}')">
-    <img src="img/subtask divider icon.png">
-    <img src="img/subtask delete icon.png" class="delete-icon" onclick="removeSubtask('${subtaskElement.id}')">
+    <img src="assets/img/subtask_edit_icon.png" class="edit-icon" onclick="editSubtask('${subtaskElement.id}')">
+    <img src="assets/img/subtask_divider.png">
+    <img src="assets/img/subtask_delete_icon.png" class="delete-icon" onclick="removeSubtask('${subtaskElement.id}')">
   `;
 }
 
@@ -378,7 +378,7 @@ function setUnAssigned(i) {
   let assignedContact = document.getElementById(`assigned-contact${i}`);
   let checkImg = document.getElementById(`checked${i}`);
   assignedContact.style = "color: black";
-  checkImg.src = "assets/img/check_icon.png";
+  checkImg.src = "assets/img/check_icon_white.png";
 }
 
 
@@ -415,7 +415,7 @@ function loadContacts() {
           <div class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
           <span> ${name}</span>
         </div>
-          <img id="checked${i}" src="assets/img/check_icon.png" alt="">
+          <img id="checked${i}" src="assets/img/check_icon_white.png" alt="">
       </li>
      </label>
   `;

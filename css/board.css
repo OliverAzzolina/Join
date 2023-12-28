@@ -891,8 +891,7 @@ align-items: flex-end;
   height: 12px;
   width: 16px;
   background-position: center 4px;
-  background-image: url("assets/img/scrollbar_up.png");
-  
+  background-image: url("../assets/img/scrollbar_up.png");
 }
 
 /* Down */
@@ -900,7 +899,7 @@ align-items: flex-end;
   height: 12px;
   width: 16px;
   background-position: center 2px;
-  background-image: url("./assets/img/scrollbar_down.png");
+  background-image: url("../assets/img/scrollbar_down.png");
 }
 
 .ok-button{

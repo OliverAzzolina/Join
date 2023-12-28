@@ -58,9 +58,9 @@ function subtaskHTML(subtask, index) {
         <div class="add-task-subtask" id="add-task-subtask${index}">
             <p class="editable">• ${subtask}</p>
             <div class="add-task-subtask-icons">
-                <img src="img/subtask_edit_icon.png" class="edit-icon" onclick="editSubtask(${index})">
-                <img src="img/subtask_divider_icon.png">
-                <img src="img/subtask_delete_icon.png" class="delete-icon" onclick="removeSubtask(${index})">
+                <img src="assets/img/subtask_edit_icon.png" class="edit-icon" onclick="editSubtask(${index})">
+                <img src="assets/img/subtask_divider.png">
+                <img src="assets/img/subtask_delete_icon.png" class="delete-icon" onclick="removeSubtask(${index})">
             </div>
         </div>
     `;
@@ -221,7 +221,7 @@ function generateEditOverlay(i, title, description, duedate) {
               <div id="add-task-active-subtask-icon-box" class="d-none">
                 <img src="assets/img/cancel_icon.png" alt="Cancel" onclick="clearSubtaskInput()" />
                 <img src="assets/img/subtask_divider.png" alt="Divider" />
-                <img src="assets/img/check_icon.png" alt="Check" onclick="addSubtaskEditOverlay(${i})" />
+                <img src="assets/img/check_icon_white.png" alt="Check" onclick="addSubtaskEditOverlay(${i})" />
               </div>
               <div id="add-task-create-subtask-icon-box">
                 <img id="add-task-create-subtask-icon" src="assets/img/plus_icon.png" alt="" />
@@ -233,7 +233,7 @@ function generateEditOverlay(i, title, description, duedate) {
         </div>
         <div id="edit-task-overlay-footer">
         <div class="edit-task-buttons">
-          <button type="submit" class="ok-button"><span>Ok</span><img src="assets/img/check_icon.png" alt=""></button>
+          <button type="submit" class="ok-button"><span>Ok</span><img src="assets/img/check_icon_white.png" alt=""></button>
         </div>
       </div>
       </form>
@@ -252,7 +252,7 @@ function generateDetailSubtasks(i, j, subtask) {
   return `
         <li id="subtaskIndex${j}" class="detailSub" onclick="checkIfSubChecked(${j}, ${i})">
             <div>
-                <img id="detailSub${j}" src="assets/img/check_icon.png">
+                <img id="detailSub${j}" src="assets/img/check_icon_white.png">
                 <span>${subtask}</span>
             </div>
         </li>
@@ -268,7 +268,7 @@ function renderContacts(i, randomColor, name, initials) {
          <div class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
          <span> ${name}</span>
        </div>
-         <img id="checked${i}" src="assets/img/check_icon.png" alt="">
+         <img id="checked${i}" src="assets/img/check_icon_white.png" alt="">
      </li>
     </label>
  `;

@@ -294,7 +294,7 @@ function generateOverlay(){
         </div>
         <div class="add-contact-buttons">
           <button type="button" onclick="closeAddContact()" class="cancel-button"><span>Cancel</span><img src="assets/img/cancel_icon.png" alt=""></button>
-          <button type="submit" class="create-button"><span>Create contact</span><img src="assets/img/check_icon.png" alt=""></button>
+          <button type="submit" class="create-button"><span>Create contact</span><img src="assets/img/check_icon_white.png" alt=""></button>
         </div>
       </div>
       </form>
@@ -333,7 +333,7 @@ function generateEditOverlay(i, j, initials, name, email, phone, randomColor){
             </div>
             <div class="add-contact-buttons">
               <button type="button" onclick="deleteContact(${i},${j})" class="cancel-button"><span>Delete</span><img src="assets/img/cancel_icon.png" alt=""></button>
-              <button type="submit" class="create-button"><span>Save</span><img src="assets/img/check_icon.png" alt=""></button>
+              <button type="submit" class="create-button"><span>Save</span><img src="assets/img/check_icon_white.png" alt=""></button>
             </div>
           </div>
         </form
