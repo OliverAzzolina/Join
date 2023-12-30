@@ -114,7 +114,7 @@ function setAssigned(i){
 
 function setUnAssigned(i){
   document.getElementById(`assigned-contact${i}`).style = "color: black";;
-  document.getElementById(`checked${i}`).src ="/assets/img/icons/assets/img/check_unchecked.png";;
+  document.getElementById(`checked${i}`).src ="assets/img/check_unchecked.png";
 }
 
 

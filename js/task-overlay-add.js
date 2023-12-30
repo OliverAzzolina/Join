@@ -21,7 +21,6 @@ function loadContactsForAddOverlay(){
 function openAddTaskCard(){
     document.getElementById('add-task-overlay').style.display = 'flex';
     loadContactsForAddOverlay();
-    getDate();
 }
 
 
@@ -194,9 +193,9 @@ function renderSubtasks(){
       <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
         <input id="editSubtaskInput${i}" value="${subtask}" class="add-task-form-input">    
         <div class="edit-task-active-subtask-icon-box">                
-          <img src="img/subtask delete icon.png" alt="Delete" onclick="deleteSubtask(${i})" />
-          <img src="img/subtask divider icon.png" alt="Divider" />
-          <img src="img/subtask check icon.png" alt="Check" onclick="changeSubtask(${i})" />
+          <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtask(${i})" />
+          <img src="assets/img/subtask_divider.png" alt="Divider" />
+          <img src="assets/img/subtask_edit_icon.png" alt="Check" onclick="changeSubtask(${i})" />
         </div>
       </div>
     </div>

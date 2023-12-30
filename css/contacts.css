@@ -359,19 +359,19 @@ main {
 }
 
 .input-icon-name {
-  background: url("/assets/img/icons/person.png") no-repeat right;
+  background: url("/assets/img/person_icon.png") no-repeat right;
   background-size: 24px 24px;
   background-position-x: 420px;
 }
 
 .input-icon-mail {
-  background: url("/assets/img/icons/mail.png") no-repeat right;
+  background: url("/assets/img/mail_icon.png") no-repeat right;
   background-size: 24px 24px;
   background-position-x: 420px;
 }
 
 .input-icon-phone {
-  background: url("/assets/img/icons/call.png") no-repeat right;
+  background: url("/assets/img/call_icon.png") no-repeat right;
   background-size: 24px 24px;
   background-position-x: 420px;
 }

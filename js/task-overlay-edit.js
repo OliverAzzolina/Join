@@ -9,8 +9,8 @@ function loadTaskData(i){
     let title = tasks[i]['title'];
     let description = tasks[i]['description'];
     let duedate = tasks[i]['duedate'];
-    document.getElementById('overlay').innerHTML = generateEditOverlay(i, title, description, duedate);
-    showPrio(i);
+    document.getElementById('overlay').innerHTML = generateEditTaskOverlay(i, title, description, duedate);
+    showEditPrio(i);
     renderAssignedToEdit(i);
     renderEditSubtasks(i);
 }
@@ -23,7 +23,7 @@ function clearAssignedTo(index){
 
 
 function renderAssignedToEdit(index){
-    let showAssignedEditors = document.getElementById('show-assigned-editors-edit-container');
+    let showAssignedEditors = document.getElementById(`show-assigned-editors-edit-container`);
   
     for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
         const checkedEditor = tasks[index]['assignedto'][i]['initials'];
@@ -57,11 +57,30 @@ function closeEditOverlay(){
 
 
 //PRIO START
+function showEditPrio(i){
+    let prio = tasks[i]['prio'];
+    if(prio == 'urgent'){
+       document.getElementById(prio).style.backgroundColor = "#FF3D00";
+       document.getElementById(`${prio}-text`).style.color = "#FFFFFF";
+       document.getElementById(`${prio}-img-edit`).src = `/assets/img/prio_${prio}_white_icon.png`;
+       }else if(prio == 'medium'){
+       document.getElementById(prio).style.backgroundColor = "#FFA800";
+       document.getElementById(`${prio}-text`).style.color = "#FFFFFF";
+       document.getElementById(`${prio}-img-edit`).src = `/assets/img/prio_${prio}_white_icon.png`;
+       }else if(prio == 'low'){
+       document.getElementById(prio).style.backgroundColor = "#7AE229";
+       document.getElementById(`${prio}-text`).style.color = "#FFFFFF";
+       document.getElementById(`${prio}-img-edit`).src = `/assets/img/prio_${prio}_white_icon.png`;
+       assets/img/prio_low_white_icon.png
+     }
+   }
+
 function setPrio(i, newPrio, buttonColor){
     resetColors();
     tasks[i]['prio'] = newPrio;
     document.getElementById(newPrio).style.backgroundColor = buttonColor;
     document.getElementById(`${newPrio}-text`).style.color = "#FFFFFF";
+    document.getElementById(`${newPrio}-img-edit`).src = `/assets/img/prio_${newPrio}_white_icon.png`;
 }
   
 
@@ -69,6 +88,7 @@ function resetColors() {
     ['urgent', 'medium', 'low'].forEach(priority => {
         document.getElementById(priority).style.backgroundColor = "";
         document.getElementById(`${priority}-text`).style.color = "";
+        document.getElementById(`${priority}-img-edit`).src = `/assets/img/prio_${priority}_icon.png`;
     });
 }
 //PRIO END
@@ -86,9 +106,9 @@ function renderEditSubtasks(index){
             <div onclick="editSubtask(${i})" class="subtask-list-item" id="editable-subtask${i}" onMouseOver="showIcons(${i})" onMouseOut="hideIcons(${i})">
                 <span>• ${subtask}</span>            
                 <div id="edit-task-active-subtask-icon-box${i}" class="edit-task-active-subtask-icon-box" style="opacity:0;" >                
-                <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
+                <img src="assets/img/subtask_edit_icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
                 <div class="sub-divider"></div>
-                <img src="assets/img/subtask_check_ icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
+                <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
             </div>
        
 
@@ -98,7 +118,7 @@ function renderEditSubtasks(index){
                 <div class="edit-task-active-subtask-icon-box">                
                     <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
                     <div class="sub-divider"></div>
-                    <img src="assets/img/subtask_check_ icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
+                    <img src="assets/img/subtask_check_icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
                 </div>
             </div>
         </div>

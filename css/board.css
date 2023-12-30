@@ -661,7 +661,7 @@ cursor: pointer;
   box-sizing: border-box;
 }
 
-#assigned-editors {
+.assigned-editors {
   list-style-type: none; /* Remove bullets */
   padding: 0; /* Remove padding */
   margin: 0; /* Remove margins */
@@ -669,7 +669,7 @@ cursor: pointer;
   height: 200px;
 }
 
-#assigned-editors li {
+.assigned-editors li {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -679,7 +679,7 @@ cursor: pointer;
   color: black;
 }
 
-#assigned-editors li:hover {
+.assigned-editors li:hover {
   cursor: pointer;
   background-color: #e7e7e7;
   border-radius: 10px;

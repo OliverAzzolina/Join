@@ -82,7 +82,7 @@
                 </div>
             </div>
   
-    <div id="overlay" style="display: none" onclick="closeDetailCard(i)"></div>
+    <div id="overlay" style="display: none" onclick="closeDetailCard()"></div>
     
     <div id="add-task-overlay" style="display: none" onclick="closeAddTaskCard()">
       <div id="added-task-message" style="display: none"><span>Task added to Board</span><img src="assets/img/sidebar_board_icon.svg" alt=""></div>
@@ -143,7 +143,7 @@
                     </button>
                     <button  type="button" id="medium" style="background-color: #FFA800" onclick="setNewTaskPrio('medium', '#FFA800'); doNotClose(event)" class="add-task-form-btn">
                       <span id="medium-text-add" class="add-task-form-btn-text" style="color: white">Medium</span>
-                      <img id="medium-img-add" src="assets/img/prio_medium_icon.png" alt="" />
+                      <img id="medium-img-add" src="assets/img/prio_medium_white_icon.png" alt="" />
                     </button>
                     <button  type="button" id="low" onclick="setNewTaskPrio('low', '#7AE229'); doNotClose(event)" class="add-task-form-btn">
                       <span id="low-text-add" class="add-task-form-btn-text">Low</span>
@@ -170,7 +170,7 @@
                     <div id="add-task-active-subtask-icon-box" class="d-none">
                       <img src="assets/img/subtask_cancel_icon.png" alt="Cancel" onclick="clearSubtaskInput()" />
                       <img src="assets/img/subtask_divider.png" alt="Divider" />
-                      <img src="assets/img/subtask_check_ icon.png" alt="Check" onclick="addSubtask()" />
+                      <img src="assets/img/subtask_check_icon.png" alt="Check" onclick="addSubtask()" />
                     </div>
                     <div id="add-task-create-subtask-icon-box">
                       <img id="add-task-create-subtask-icon" src="assets/img/subtask_add_icon.png" alt="" />

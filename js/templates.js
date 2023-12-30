@@ -143,7 +143,7 @@ function generateOverlay(i) {
       <span class="detail-title">${tasks[i]["title"]}</span><br>
       <span class="f-s20-w400">${tasks[i]["description"]}</span><br>
       <span class="f-s20-w400">Due date:  ${tasks[i]["duedate"]}</span><br>
-      <span class=" prio-img f-s20-w400">Priority:  ${tasks[i]["prio"].charAt(0).toUpperCase() + tasks[i]["prio"].slice(1)}<img class="prio-detail-img" id="prioDetailImg${i}" src=""></span><br>
+      <span class=" prio-img f-s20-w400">Priority:  ${tasks[i]["prio"].charAt(0).toUpperCase() + tasks[i]["prio"].slice(1)}<img class="prio-detail-img" id="prioDetailImg${i}"></span><br>
       <span class="f-s20-w400">Assigned to:<br><div id="detailAssignedTo"></div></span><br>
       <span class="f-s20-w400">Subtasks<ul id="checklistSubDetail"></ul></span>
       <div class="overlay-buttons">
@@ -155,7 +155,7 @@ function generateOverlay(i) {
       `;
 }
 
-function generateEditOverlay(i, title, description, duedate) {
+function generateEditTaskOverlay(i, title, description, duedate) {
   return `
     <div id="edit-task-overlay"  onclick="closeDetailCard()">
     <div class= "detail-todo-card" onclick="doNotClose(event)">
@@ -191,15 +191,15 @@ function generateEditOverlay(i, title, description, duedate) {
             <div id="add-task-form-btn-container" onclick="doNotClose(event)">
               <button type="button" id="urgent" onclick="setPrio(${i}, 'urgent', '#FF3D00'); doNotClose(event)" class="add-task-form-btn">
                 <span id="urgent-text" class="add-task-form-btn-text">Urgent</span>
-                <img src="assets/img/prio_urgent_icon.png" alt="" />
+                <img id="urgent-img-edit" src="assets/img/prio_urgent_icon.png" alt="" />
                 </button>
               <button  type="button" id="medium" onclick="setPrio(${i}, 'medium', '#FFA800'); doNotClose(event)" class="add-task-form-btn">
                 <span id="medium-text" class="add-task-form-btn-text">Medium</span>
-                <img src="assets/img/prio_medium_icon.png" alt="" />
+                <img id="medium-img-edit" src="assets/img/prio_medium_icon.png" alt="" />
                 </button>
               <button  type="button" id="low" onclick="setPrio(${i}, 'low', '#7AE229'); doNotClose(event)" class="add-task-form-btn">
                 <span id="low-text" class="add-task-form-btn-text">Low</span>
-                <img src="assets/img/prio_low_icon.png" alt="" />
+                <img id="low-img-edit" src="assets/img/prio_low_icon.png" alt="" />
                 </button>
             </div>
           </div>
@@ -221,10 +221,10 @@ function generateEditOverlay(i, title, description, duedate) {
               <div id="add-task-active-subtask-icon-box" class="d-none">
                 <img src="assets/img/cancel_icon.png" alt="Cancel" onclick="clearSubtaskInput()" />
                 <img src="assets/img/subtask_divider.png" alt="Divider" />
-                <img src="assets/img/check_icon_white.png" alt="Check" onclick="addSubtaskEditOverlay(${i})" />
+                <img src="assets/img/subtask_check_icon.png" alt="Check" onclick="addSubtaskEditOverlay(${i})" />
               </div>
               <div id="add-task-create-subtask-icon-box">
-                <img id="add-task-create-subtask-icon" src="assets/img/plus_icon.png" alt="" />
+                <img id="add-task-create-subtask-icon" src="assets/img/subtask_add_icon.png" alt="" />
               </div>
             </div>
             <div id="edit-task-subtasks-container"></div>
@@ -252,7 +252,7 @@ function generateDetailSubtasks(i, j, subtask) {
   return `
         <li id="subtaskIndex${j}" class="detailSub" onclick="checkIfSubChecked(${j}, ${i})">
             <div>
-                <img id="detailSub${j}" src="assets/img/check_icon_white.png">
+                <img id="detailSub${j}" src="assets/img/check_unchecked.png">
                 <span>${subtask}</span>
             </div>
         </li>
@@ -268,7 +268,7 @@ function renderContacts(i, randomColor, name, initials) {
          <div class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
          <span> ${name}</span>
        </div>
-         <img id="checked${i}" src="assets/img/check_icon_white.png" alt="">
+         <img id="checked${i}" src="assets/img/check_unchecked.png" alt="">
      </li>
     </label>
  `;

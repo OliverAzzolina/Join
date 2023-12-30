@@ -164,7 +164,7 @@ function changeContactBackgroundColor(i, j){
 //OPEN ADD NEW CONTACT OVERLAY
 function openAddNewContact(){
   document.getElementById('overlay').style.display = "flex"; 
-  document.getElementById('overlay').innerHTML = generateOverlay();   
+  document.getElementById('overlay').innerHTML = generateAddNewOverlay();   
 }
 
 
@@ -248,8 +248,8 @@ function renderContactInfo(i, j, initials, name, email, phone, randomColor){
                 <span>${name}</span>
             </div>
             <div class="edit-contact">
-                <button onclick="EditContact(${i},${j})" onmouseover="hover('a')" onmouseout="unhover('a')"><img id="edit-img" src="/assets/img/icons/edit.png" alt=""><span>Edit</span></button>
-                <button onclick="deleteContact(${i},${j})" onmouseover="hover('b')" onmouseout="unhover('b')"><img id="delete-img" src="/assets/img/icons/delete.png" alt=""><span>Delete</span></button>
+                <button onclick="EditContact(${i},${j})" onmouseover="hover('a')" onmouseout="unhover('a')"><img id="edit-img" src="assets/img/edit_icon.png" alt=""><span>Edit</span></button>
+                <button onclick="deleteContact(${i},${j})" onmouseover="hover('b')" onmouseout="unhover('b')"><img id="delete-img" src="assets/img/delete_icon.png" alt=""><span>Delete</span></button>
             </div>
         </div>
     </div>        
@@ -267,12 +267,12 @@ function renderContactInfo(i, j, initials, name, email, phone, randomColor){
 }
 
 //ADD NEW CONTACT OVERLAY
-function generateOverlay(){
+function generateAddNewOverlay(){
   return `
   <div class="add-contact-card" onclick="doNotClose(event)">
 
   <div class="add-contact-card-left">
-      <img src="/assets/img/icons/Capa 2.png" alt="">
+      <img src="/assets/img/logo_desktop.png" alt="">
       <div class="titles">
         <span class="title">Add contact</span>
         <span class="subtitle">Tasks are better with a Team!</span>

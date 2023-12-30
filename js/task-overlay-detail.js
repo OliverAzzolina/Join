@@ -26,6 +26,7 @@ function checkOverlayCategory(i){
 function setPrioDetailImg(i){
     let prioDetailImg = document.getElementById(`prioDetailImg${i}`);
     let prio = tasks[i]['prio'];
+    console.log(`assets/img/prio_${prio}_icon.png`)
     prioDetailImg.src = `/assets/img/prio_${prio}_icon.png`;
 }
 
