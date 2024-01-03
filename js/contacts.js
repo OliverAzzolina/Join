@@ -163,6 +163,16 @@ function changeContactBackgroundColor(i, j){
 
 //OPEN ADD NEW CONTACT OVERLAY
 function openAddNewContact(){
+  // Überprüfe die Fensterbreite
+  const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+  // Überprüfe, ob die Fensterbreite kleiner oder gleich 1050px ist
+  if (windowWidth <= 1050) {
+    // Verstecke den Button, indem du seine Anzeige auf "none" setzt
+    document.querySelector('.add-contact-button').style.display = 'none';
+  }
+
+  // Öffne das Overlay
   document.getElementById('overlay').style.display = "flex"; 
   document.getElementById('overlay').innerHTML = generateAddNewOverlay();   
 }
@@ -170,7 +180,17 @@ function openAddNewContact(){
 
 // CLOSE ADD NEW CONTACT OVERLAY
 function closeAddContact(){
-    document.getElementById('overlay').style.display = "none";
+  // Stelle sicher, dass das Overlay geschlossen wird
+  document.getElementById('overlay').style.display = "none";
+
+  // Überprüfe die Fensterbreite
+  const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+  // Überprüfe, ob die Fensterbreite kleiner oder gleich 1050px ist
+  if (windowWidth <= 1050) {
+    // Zeige den Button wieder an, indem du seine Anzeige auf "block" setzt
+    document.querySelector('.add-contact-button').style.display = 'block';
+  }
 }
 
 
@@ -272,7 +292,7 @@ function generateAddNewOverlay(){
   <div class="add-contact-card" onclick="doNotClose(event)">
 
   <div class="add-contact-card-left">
-      <img src="/assets/img/logo_desktop.png" alt="">
+      <img class="mobile-none" src="/assets/img/logo_desktop.png" alt="">
       <div class="titles">
         <span class="title">Add contact</span>
         <span class="subtitle">Tasks are better with a Team!</span>
@@ -284,7 +304,7 @@ function generateAddNewOverlay(){
       <button><img src="assets/img/close_icon.png" alt=""></button>
     </div>
     <div class="add-contact-container">
-    <img src="assets/img/profile_icon.png" alt="">
+    <img class="profile-icon" src="assets/img/profile_icon.png" alt="">
     <form onsubmit="addNewContact(); return false">
       <div class="actions-container">
         <div class="add-contact-inputs" >
