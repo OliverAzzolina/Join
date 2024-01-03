@@ -598,8 +598,8 @@ textarea:hover,
       background-color: #2a3647;
       color: white;
       border: none;
-      margin-right: -136px;
-      margin-left: 34px;
+      margin-right: -76px;
+      margin-left: 55px;
     }
     .add-task-form-suffix {
       color: #ff8190;
@@ -612,8 +612,10 @@ textarea:hover,
     #add-task-requirement-footer {
       display: flex;
       flex-direction: row;
-      margin-left: -124px;
-    }
+      /* margin-left: -124px; */
+      width: 396px;
+      margin-left: 13px;
+  }
     #mobile-logo {
       display: block;
       width: 32px;
@@ -624,6 +626,38 @@ textarea:hover,
       gap: 10;
     }
 
-}
+    #add-task-overlay-footer, .add-task-form-suffix {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    #add-task-overlay-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #F6F7F8;
+      height: 43px;
+    }
+    
+    .add-task-form-suffix {
+      color: #ff8190;
+      font-family: Inter;
+      font-size: 20px;
+      font-weight: 400;
+      margin-left: 66px;
+      margin-right: -75px;
+      margin-top: 15px;
+    }
 
+    .add-task-buttons {
+      gap: 24px;
+      margin-left: 165px;
+      position: absolute;
+  }
+
+  }
 }
