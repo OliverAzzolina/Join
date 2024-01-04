@@ -10,7 +10,7 @@ body {
   flex-direction: column;
   justify-content: center;
   background-color: #f6f7f8;
-  margin-top: 96px;
+  margin-top: 483px;
   margin-left: 232px;
   width: 1208px;
 }
@@ -20,8 +20,8 @@ body {
   justify-content: flex-end;
   flex-direction: column;
   width: 1208px;
-  
   box-sizing: border-box;
+  margin-top: -397px;
 }
 
 #board-header-top {
@@ -1037,4 +1037,141 @@ border-radius: 50%;
   line-height: 19.2px;
   font-weight: 400;
   color: #A8A8A8;
+}
+
+#mobile-menu-container {
+  display: none;
+}
+
+@media screen and (max-width: 1050px) {
+  #board-header {
+    display: flex;
+    justify-content: center; /* Änderung: In der Mitte ausrichten */
+    flex-direction: column;
+    width: 100%; /* Änderung: Vollständige Breite nutzen */
+    box-sizing: border-box;
+    margin-top: -15px;
+  }
+
+
+  .board-section {
+    display: flex;
+    gap: 26px;
+    height: 688px;
+    width: 100%; /* Änderung: Vollständige Breite nutzen */
+    overflow: auto;
+    padding: 0px 64px 0px 64px;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #board {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f6f7f8;
+    margin-top: 100px;
+    margin-left: -36px;
+    width: 100%;
+}
+
+  #board-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Änderung: Vollständige Breite nutzen */
+    padding-left: 64px;
+    flex-direction: column;
+  }
+
+  #board-header-right button {
+    width: 160px;
+    height: 48px;
+    background-color: #2a3647;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    font-size: 21px;
+    font-weight: 700;
+    margin-top: -81px;
+    position: absolute;
+    margin-left: 357px;
+  }
+
+
+  #board-header h1 {
+    font-size: 47px;
+    font-weight: 700;
+    margin-top: 50px;
+    margin-left: -315px;
+  }
+
+  #board-header div input {
+    width: 396px;
+    height: 32px;
+    box-sizing: border-box;
+    padding: 8px 16px 8px 16px;
+    background: url(/assets/img/search_icon.png) no-repeat right;
+    background-position-x: 270px;
+    border-radius: 10px;
+    border: 1px solid #a8a8a8;
+    background-color: white;
+    font-size: 20px;
+    font-weight: 400;
+    margin-right: -55px;
+  }
+
+  #board-header-right {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    margin-right: 107px;
+  }
+
+  .todos-container {
+    display: flex;
+    flex-direction: column;
+    width: 252px; /* Änderung: Prozentuale Breite nutzen */
+    height: 400px;
+    gap: 16px;
+  }
+
+  .todos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 396px;
+    /* padding-right: 18px; */
+  }
+
+  .todos-section {
+    display: flex;
+    flex-direction: column;
+    width: 246px;
+    gap: 26px;
+    margin-left: -190px;
+  }
+
+  body {
+    font-family: "Inter";
+    margin: 0;
+    width: 100%; /* Änderung: Vollständige Breite nutzen */
+    background-color: #f6f7f8;
+    overflow: hidden;
+  }
+  .input {
+    width: 396px;
+  }
+
+  #board-header-right button.mobile-button {
+    font-size: 0; /* Text ausblenden, aber Platz beibehalten */
+    width: 40px;
+    height: 40px;
+  }
+
+  #board-header-right button.mobile-button::after {
+    content: "+"; /* Pluszeichen mit ::after hinzufügen */
+    font-size: 21px; /* Originalgröße des Pluszeichens */
+
+  }
 }

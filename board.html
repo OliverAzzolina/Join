@@ -24,58 +24,82 @@
     <!-- Sidebar -->
     <div id="sidebar-container"></div>
 
+      <!-- Mobile Menu -->
+      <div id="mobile-menu-container">
+
+        <a href="summary.html">
+            <img class="mobile-icons" src="assets/img/mobile-summary.png" alt="Summary">
+            <p class="mobile-text">Summary</p>
+        </a>
+        <a href="board.html">
+            <img class="mobile-icons" src="assets/img/mobile-board.png" alt="Board">
+            <p class="mobile-text">Board</p>
+        </a>
+        <a href="add-task.html">
+            <img class="mobile-icons" src="assets/img/mobile-addtask.png" alt="Add Task">
+            <p class="mobile-text">Add Task</p>
+        </a>
+        <a href="contacts.html">
+            <img class="mobile-icons" src="assets/img/mobile-contacts.png" alt="Contact">
+            <p class="mobile-text">Contact</p>
+        </a>
+    </div>
+    <img src="assets/img/logo_mobile.png" alt="Mobile Logo" id="mobile-logo">
+
+
    <!-- Main -->
         <div id="board">
             <div id="board-header">
                 <div id="board-header-top">
                         <h1>Board</h1>
                     <div id="board-header-right">              
-                        <input id="search" onkeyup="filterTasks()" type="text" placeholder="Find Task">
-                        <button onclick="openAddTaskCard()">Add task +</button>
+                        <input class="input" id="search" onkeyup="filterTasks()" type="text" placeholder="Find Task">
+                        <button class="mobile-button" onclick="openAddTaskCard()">Add task +</button>
                     </div>
                 </div>
                 <div id="board-header-bottom">
                     <div class="todos-section-top">
-                        <div class="todos-header">
-                            <p>To Do</p>
-                            <button onclick="openAddTaskCard()" onmouseover="hover(`add-task-board-button1`)" onmouseout="unhover('add-task-board-button1')"><img id="add-task-board-button1" src="assets/img/plus_icon.png" alt=""></button>
-                        </div>
-                        <div class="todos-header">
-                            <p>In progress</p>
-                            <button onclick="openAddTaskCard()" onmouseover="hover('add-task-board-button2')" onmouseout="unhover('add-task-board-button2')"><img id="add-task-board-button2" src="assets/img/plus_icon.png" alt=""></button>
-                        </div>
-                        <div class="todos-header">
-                            <p>Await feedback</p>
-                            <button onclick="openAddTaskCard()" onmouseover="hover('add-task-board-button3')" onmouseout="unhover('add-task-board-button3')"><img id="add-task-board-button3" src="assets/img/plus_icon.png" alt=""></button>
-                        </div>
-                        <div class="todos-header">
-                            <p>Done</p>
-                  
-                        </div>
+                        
                     </div>
                 </div>
             </div>
             
             <div class="board-section" id="board-section">
                 <div class="todos-section">
+                  <div class="todos-header">
+                    <p>To Do</p>
+                    <button onclick="openAddTaskCard()" onmouseover="hover(`add-task-board-button1`)" onmouseout="unhover('add-task-board-button1')"><img id="add-task-board-button1" src="assets/img/plus_icon.png" alt=""></button>
+                  </div>
                   <div ondrop="moveTo('open')" ondragover="allowDrop(event)" class="drag-here-container" style="display: none;"><span>drag here to change status</span></div>
                   <div id="open-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>
                   <div id="open" class="todos-container" ondragend="hideDragHereContainer()"></div>
                 </div>
 
                 <div class="todos-section">
+                  <div class="todos-header">
+                    <p>In progress</p>
+                    <button onclick="openAddTaskCard()" onmouseover="hover('add-task-board-button2')" onmouseout="unhover('add-task-board-button2')"><img id="add-task-board-button2" src="assets/img/plus_icon.png" alt=""></button>
+                  </div>
                   <div ondrop="moveTo('in-progress')" ondragover="allowDrop(event)" class="drag-here-container" style="display: none;"><span>drag here to change status</span></div>
                   <div id="in-progress-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>
                   <div id="in-progress" class="todos-container" ondragend="hideDragHereContainer()"></div>
                 </div>
 
                 <div class="todos-section">
+                  <div class="todos-header">
+                    <p>Await feedback</p>
+                    <button onclick="openAddTaskCard()" onmouseover="hover('add-task-board-button3')" onmouseout="unhover('add-task-board-button3')"><img id="add-task-board-button3" src="assets/img/plus_icon.png" alt=""></button>
+                </div>
                   <div ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)" class="drag-here-container" style="display: none;"><span>drag here to change status</span></div>
                   <div id="await-feedback-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>
                   <div id="await-feedback" class="todos-container" ondragend="hideDragHereContainer()"></div>
                 </div>
             
                 <div class="todos-section">
+                  <div class="todos-header">
+                    <p>Done</p>
+          
+                  </div>
                   <div ondrop="moveTo('done')" ondragover="allowDrop(event)" class="drag-here-container" style="display: none;"><span>drag here to change status</span></div>
                   <div id="done-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>
                   <div id="done" class="todos-container" ondragend="hideDragHereContainer()"></div></div>
