@@ -12,8 +12,21 @@ body {
     position: absolute;
     width: 100.03px;
     height: 121.97px;
-    top: 80px;
-    left: 77px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: moveLogo 3s ease-in-out forwards;
+}
+
+@keyframes moveLogo {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    100% {
+        top: 80px; /* Ändern Sie diese Zahl nach Bedarf */
+        left: 77px; /* Ändern Sie diese Zahl nach Bedarf */
+    }
 }
 
 .top-bar {
@@ -150,7 +163,173 @@ body {
 }
 
 .guest-login {
-    background-color: rgb(148, 31, 31);
+    background-color: white;
     color: black;
-    border: 1px solid #ccc; 
+    border: 1px solid black;
+    transition: background-color 0.3s, color 0.3s; /* Fügt eine sanfte Übergangsanimation hinzu */
+}
+
+.guest-login:hover {
+    background-color: black;
+    color: white;
+}
+
+@media screen and (max-width: 670px) {
+
+    .logo {
+        position: absolute;
+        width: 64px;
+        height: 79.03px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: moveLogo 3s ease-in-out forwards;
+    }
+
+    .content {
+        width: 396px;
+        height: 515px;
+        background-color: #FFFFFF;
+        box-sizing: border-box;
+        border-radius: 30px;
+        padding-left: 116px;
+        padding-right: 116px;
+        padding-top: 8px;
+        font-family: 'Inter', sans-serif;
+        margin-top: -25px;
+    }
+
+    .top-bar {
+        position: absolute;
+        top: 639px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        padding-top: 95px;
+        margin-right: -14px;
+        margin-left: auto;
+    }
+
+    .content h2 {
+        text-align: center;
+        font-size: 47px;
+        font-weight: 700;
+        margin-top: 44px;
+        margin-bottom: 19px;
+    }
+
+    .input-with-icon {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 364px;
+        margin-left: -98px;
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 355px;
+        height: 20px;
+        margin-top: -10px;
+        margin-left: -30px;
+    }
+
+    .form-group input[type="email"], .form-group input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        padding-left: 25px;
+        margin-bottom: 10px;
+        border-radius: 12px;
+        border: 1px solid #ccc;
+    }
+
+    label {
+        margin-left: -75px;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        border-radius: 12px;
+        align-items: center;
+        flex-direction: column;
+    }
+    .button-group button {
+        padding: 10px 20px;
+        border-radius: 12px;
+        background-color: #2A3647;
+        color: white;
+        padding-top: 12px;
+        margin-top: 24px; 
+        width: 180px;
+        height: 51px;
+        z-index: 9999999;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 45px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .footer p {
+        margin: 0;
+        white-space: nowrap; /* Hier wird der Zeilenumbruch unterdrückt */
+        color: #A8A8A8;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .top-bar button {
+        padding: 5px 10px;
+        border-radius: 8px;
+        background-color: #2A3647;
+        color: white;
+        width: 104px;
+        height: 49px;
+    }
+    .top-bar span {
+        margin-right: 10px;
+        font-family: 'Inter', sans-serif;
+        font-size: 20px;
+        white-space: nowrap;
+    }
+
+    .top-bar button {
+        padding: 5px 10px;
+        border-radius: 8px;
+        background-color: #2A3647;
+        color: white;
+        width: 104px;
+        min-width: 104px; /* Mindestbreite auf 104px festlegen */
+        height: 49px;
+        white-space: nowrap; /* Hier wird der Zeilenumbruch unterdrückt */
+    }
+
+    body {
+        width: 100vw;
+        height: 926px;
+        margin: 0;
+        background-color: #F6F7F8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    .checkbox-group {
+        margin-bottom: 33px;
+    }
+
+   
+
+
+    
+
 }
