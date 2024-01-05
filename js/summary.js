@@ -20,3 +20,21 @@ function resetImageDoneRight(element) {
     element.querySelector('.icon').src = "assets/img/done_black_icon.png";
 }
 
+function getGreeting() {
+    let today = new Date();
+    let hour = today.getHours();
+
+    let greetingText = document.getElementById('greetingText');
+
+    if (hour >= 5 && hour < 12) {
+        greetingText.textContent = 'Guten Morgen';
+    } else if (hour >= 12 && hour < 17) {
+        greetingText.textContent = 'Guten Tag';
+    } else {
+        greetingText.textContent = 'Guten Abend';
+    }
+}
+
+
+getGreeting();
+
