@@ -61,12 +61,17 @@ function sortContacts(){
 function loadContacts(){
   let contactList = document.getElementById('assigned-editors');
   for (let i = 0; i < contacts.length; i++) {
-      let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
+      //let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
+      let initials = getInitials(contacts[i]['firstName'], contacts[i]['lastName'])
       let randomColor = '#' + contacts[i]['randomColor'];
       let name = contacts[i]['name'];
       contactList.innerHTML += renderContacts(i, randomColor, name, initials);
   }
     sortContacts();
+}
+
+function getInitials(firstName, lastName) {
+  return firstName.slice[0] + lastName.slice[1];
 }
 
 
