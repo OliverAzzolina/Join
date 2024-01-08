@@ -1,22 +1,31 @@
+function init() {
+    generateHeader();
+    generateSidebar();
+}
+
+function generateHeader() {
+    var header = document.getElementById('header-container');
+    header.innerHTML = headerHTML();
+  }
+  
+  function generateSidebar() {
+    var sidebar = document.getElementById('sidebar-container');
+    sidebar.innerHTML = sidebarHTML();
+  }
+
 function changeImage(element) {
-    console.log("changeImage aufgerufen");
-    element.querySelector('.icon').src = "assets/img/prio_urgent_icon.png";
+    element.querySelector('.icon').src = "assets/img/todo_white_icon.png";
 }
 
 function resetImage(element) {
-    console.log("resetImage aufgerufen");
-    element.querySelector('.icon').src = "assets/img/to_do_icon.png";
+    element.querySelector('.icon').src = "assets/img/todo_black_icon.png";
 }
 
-
-
 function changeImageDoneRight(element) {
-    console.log("changeImageDoneRight aufgerufen");
-    element.querySelector('.icon').src = "assets/img/done_black_icon.png"; 
+    element.querySelector('.icon').src = "assets/img/done_white_icon.png"; 
 }
 
 function resetImageDoneRight(element) {
-    console.log("resetImageDoneRight aufgerufen");
     element.querySelector('.icon').src = "assets/img/done_black_icon.png";
 }
 
