@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //HTML GENERATION
 function generateHeader() {
-  var header = document.getElementById('header-container');
+  let header = document.getElementById('header-container');
   header.innerHTML = headerHTML();
 }
 
 function generateSidebar() {
-  var sidebar = document.getElementById('sidebar-container');
+  let sidebar = document.getElementById('sidebar-container');
   sidebar.innerHTML = sidebarHTML();
 }
 
@@ -65,7 +65,7 @@ function subtaskInputEventListener() {
 }
 
 function subtaskInputKeypressEventListener() {
-  var input = document.getElementById("add-task-subtask-input");
+  let input = document.getElementById("add-task-subtask-input");
 
   input.addEventListener('keypress', function (event) {
     if (event.key === 'Enter' && input.value.length > 0) {
