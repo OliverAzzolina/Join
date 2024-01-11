@@ -1,3 +1,87 @@
+// INDEX HTML TEMPLATES
+
+function loginHTML() {
+  return /*html*/`
+  <div id="register-container" class="fade-in">
+    <p>Not a Join User?</p>
+    <button id="sign-up-btn" type="button" onclick="generateRegister()">Sign Up</button>
+  </div>
+  <img src="assets/img/logo_desktop.png" alt="Logo" id="logo">
+  <div id="login-container" class="fade-in">
+    <h2>Log in</h2>
+    <div id="login-underline"></div>
+    <form id="login-form">
+      <div id="email-form-container" class="form-group">
+        <div id="email-input-container" class="input-with-icon">
+          <img id="email-icon" class="input-icon" src="assets/img/mail_icon.png" alt="Email Icon">
+          <input id="email-input" type="email" placeholder="Email">
+        </div>
+      </div>
+      <div id="password-form-container" class="form-group">
+        <div id="password-input-container" class="input-with-icon">
+            <img id="password-icon" src="assets/img/lock_icon.png" alt="Password Icon" class="input-icon">
+            <input id="password-input" type="password" placeholder="Password">
+        </div>
+      </div>
+      <div id="remember-checkbox-container">
+        <input type="checkbox">
+        <p>Remember me</p>
+      </div>
+      <div class="button-group">
+        <button id="submit-btn" type="submit">Log in</button>
+        <button id="guest-login-btn" type="button" class="guest-login">Guest Log in</button>
+      </div>
+    </form>
+  </div>
+<div class="footer fade-in">
+<p>Privacy Policy</p>
+<p>Legal Notice</p>
+</div>`;
+}
+
+function registerHTML() {
+  return /*html*/`
+  <div class="top-bar">
+        <span>Already a User?</span>
+        <button type="button" id="loginButton">Log In</button>
+    </div>
+    <img src="assets/img/logo_desktop.png" alt="Logo" class="logo">
+    <div class="content">
+        <img src="assets/img/arrow.png" alt="arrow" class="arrow">
+        
+        <h2>Sign Up</h2>
+        <div class="underline"></div>
+
+        <form onsubmit="addUser(); return false;">
+            <div class="form-group">
+                <input type="text" id="name"  placeholder="Name">
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Confirm Password">
+            </div>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="privacy">
+                    I accept the <span class="privacy-policy">Privacy Policy</span>
+                </label>
+            </div>
+            <div class="button-group">
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <p>Privacy Policy</p>
+        <p>Legal Notice</p>
+    </div>`;
+}
+
 // HEADER AND SIDEBAR HTML TEMPLATES
 
 function headerHTML() {
