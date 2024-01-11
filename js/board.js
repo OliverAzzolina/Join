@@ -174,8 +174,10 @@ function checkOpen(id){
 let board = document.getElementById(`${id}`);
     if(board.innerHTML == ''){
       document.getElementById(`${id}-empty`).style.display = "flex";
+      document.getElementById(`${id}`).style.display = "none";
      }else{
       document.getElementById(`${id}-empty`).style.display = "none";
+      document.getElementById(`${id}`).style.display = "flex";
      }
 }
 

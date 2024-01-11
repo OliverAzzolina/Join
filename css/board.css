@@ -1,25 +1,25 @@
 body {
   font-family: "Inter";
   margin: 0;
-  width: 1440px;
+
   background-color: #f6f7f8;
 }
 
 #board {
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background-color: #f6f7f8;
   margin-top: 483px;
   margin-left: 232px;
-  width: 1208px;
 }
 
 #board-header {
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
-  width: 1208px;
+  width: 100%;
   box-sizing: border-box;
   margin-top: -397px;
 }
@@ -28,16 +28,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1056px;
-  padding-left: 64px;
-}
-
-#board-header-bottom {
-  display: flex;
-  flex-direction: row;
-  width: 1208px;
-  padding-left: 64px;
-  gap: 26px;
+  padding: 0 64px 0 64px;
 }
 
 #board-header-right {
@@ -86,10 +77,10 @@ body {
   display: flex;
   gap: 26px;
   height: 688px;
-  width: 1208px;
   overflow: auto;
-  padding: 0px 64px 0px 64px;
-  
+  padding: 0px 64px 32px 64px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .board-section p {
@@ -100,15 +91,8 @@ body {
 .todos-section {
   display: flex;
   flex-direction: column;
-  width: 246px;
+  min-width: 20%;
   gap: 26px;
-}
-
-.todos-section-top {
-  display: flex;
-  width: 1208px;
-  gap: 26px;
-  flex-direction: row;
 }
 
 .todos-header {
@@ -1043,135 +1027,62 @@ border-radius: 50%;
   display: none;
 }
 
-@media screen and (max-width: 1050px) {
-  #board-header {
-    display: flex;
-    justify-content: center; /* Änderung: In der Mitte ausrichten */
+@media screen and (max-width: 1200px) {
+  #board-header-top{
     flex-direction: column;
-    width: 100%; /* Änderung: Vollständige Breite nutzen */
-    box-sizing: border-box;
-    margin-top: -15px;
+    align-items: flex-start;
+    margin-bottom: 32px;
   }
 
-
-  .board-section {
-    display: flex;
-    gap: 26px;
-    height: 688px;
-    width: 100%; /* Änderung: Vollständige Breite nutzen */
-    overflow: auto;
-    padding: 0px 64px 0px 64px;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  #board {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #f6f7f8;
-    margin-top: 100px;
-    margin-left: -36px;
+  .todos-container{
     width: 100%;
+    height:auto;
+  }
+
+  #board-section{
+    align-items: unset;
+  }
 }
 
-  #board-header-top {
-    display: flex;
+@media screen and (max-width: 1160px) {
+  #board-section{
+    justify-content: space-evenly;
+  }
+
+  #board{
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  #board{
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 667.5px) {
+  .todos-section{
+    width: 100%;
+  }
+
+  .todos-header{
+    width: 100%;
+  }
+
+  .todo-card{
+    width: 100%;
+  }
+
+  #board-header-right{
+    flex-direction: column;
+    width: 100%;
     align-items: center;
-    justify-content: center;
-    width: 100%; /* Änderung: Vollständige Breite nutzen */
-    padding-left: 64px;
-    flex-direction: column;
   }
 
-  #board-header-right button {
-    width: 160px;
-    height: 48px;
-    background-color: #2a3647;
-    border: none;
-    color: white;
-    border-radius: 10px;
-    font-size: 21px;
-    font-weight: 700;
-    margin-top: -81px;
-    position: absolute;
-    margin-left: 357px;
-  }
-
-
-  #board-header h1 {
-    font-size: 47px;
-    font-weight: 700;
-    margin-top: 50px;
-    margin-left: -315px;
-  }
-
-  #board-header div input {
-    width: 396px;
-    height: 32px;
-    box-sizing: border-box;
-    padding: 8px 16px 8px 16px;
-    background: url(/assets/img/search_icon.png) no-repeat right;
-    background-position-x: 270px;
-    border-radius: 10px;
-    border: 1px solid #a8a8a8;
-    background-color: white;
-    font-size: 20px;
-    font-weight: 400;
-    margin-right: -55px;
-  }
-
-  #board-header-right {
-    display: flex;
-    flex-direction: row;
-    gap: 32px;
-    margin-right: 107px;
-  }
-
-  .todos-container {
-    display: flex;
-    flex-direction: column;
-    width: 252px; /* Änderung: Prozentuale Breite nutzen */
-    height: 400px;
-    gap: 16px;
-  }
-
-  .todos-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 396px;
-    /* padding-right: 18px; */
-  }
-
-  .todos-section {
-    display: flex;
-    flex-direction: column;
-    width: 246px;
-    gap: 26px;
-    margin-left: -190px;
-  }
-
-  body {
-    font-family: "Inter";
-    margin: 0;
-    width: 100%; /* Änderung: Vollständige Breite nutzen */
-    background-color: #f6f7f8;
-    overflow: hidden;
-  }
-  .input {
-    width: 396px;
-  }
-
-  #board-header-right button.mobile-button {
-    font-size: 0; /* Text ausblenden, aber Platz beibehalten */
-    width: 40px;
-    height: 40px;
-  }
-
-  #board-header-right button.mobile-button::after {
-    content: "+"; /* Pluszeichen mit ::after hinzufügen */
-    font-size: 21px; /* Originalgröße des Pluszeichens */
-
-  }
+  #board-header div input{
+    width: 100%;
+    background-position: 95%;
+  }   
+  
 }
