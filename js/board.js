@@ -25,9 +25,11 @@ function generateSidebar() {
 async function loadTasksfromStorage(){
   try{
     tasks = JSON.parse(await getItem('tasks'));
+    console.log('tasks loaded from storage', tasks)
   }catch(e){
     console.warn('loading error:', e)
   }
+  
   renderTasks();
 }
 
@@ -76,6 +78,7 @@ function getInitials(firstName, lastName) {
 
 
 function renderTasks() {
+  refreshTasks();
   for (let i = 0; i < tasks.length; i++) {
     let status = tasks[i]["status"];
     if (status == status) {
