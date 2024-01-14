@@ -6,10 +6,14 @@ function loginHTML() {
     <p>Not a Join User?</p>
     <button id="sign-up-btn" type="button" onclick="generateRegister()">Sign Up</button>
   </div>
-  <img src="assets/img/logo_desktop.png" alt="Logo" id="logo">
+
+  <img src="assets/img/logo_desktop.png" alt="Logo" id="logo" class="logo-animation">
+  
   <div id="login-container" class="fade-in">
+
     <h2>Log in</h2>
-    <div id="login-underline"></div>
+    <div class="form-underline"></div>
+
     <form id="login-form">
       <div id="email-form-container" class="form-group">
         <div id="email-input-container" class="input-with-icon">
@@ -41,16 +45,17 @@ function loginHTML() {
 
 function registerHTML() {
   return /*html*/`
-  <div class="top-bar">
-        <span>Already a User?</span>
-        <button type="button" id="loginButton">Log In</button>
-    </div>
-    <img src="assets/img/logo_desktop.png" alt="Logo" class="logo">
-    <div class="content">
-        <img src="assets/img/arrow.png" alt="arrow" class="arrow">
+
+
+
+    <img src="assets/img/logo_desktop.png" alt="Logo" id="logo">
+
+    <div id="signup-container">
+
+        <img src="assets/img/arrow.png" alt="arrow" id="arrow" onclick="switchToLogin()">
         
         <h2>Sign Up</h2>
-        <div class="underline"></div>
+        <div class="form-underline"></div>
 
         <form onsubmit="addUser(); return false;">
             <div class="form-group">
@@ -81,6 +86,8 @@ function registerHTML() {
         <p>Legal Notice</p>
     </div>`;
 }
+
+
 
 // HEADER AND SIDEBAR HTML TEMPLATES
 
