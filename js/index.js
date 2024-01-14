@@ -2,6 +2,9 @@ function init() {
     generateLogin()
 }
 
+function switchToLogin() {
+    generateLogin()
+}
 
 //HTML GENERATION
 function generateLogin() {
