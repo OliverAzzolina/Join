@@ -4,7 +4,7 @@ function loginHTML() {
   return /*html*/`
   <div id="register-container" class="fade-in">
     <p>Not a Join User?</p>
-    <button id="sign-up-btn" type="button" onclick="generateRegister()">Sign Up</button>
+    <button id="sign-up-btn" type="button" onclick="changeToRegister()">Sign Up</button>
   </div>
 
   <img src="assets/img/logo_desktop.png" alt="Logo" id="logo" class="logo-animation">

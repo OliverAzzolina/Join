@@ -14,7 +14,7 @@ function addUser() {
 
 function showRegistrationSuccessMessage() {
     alert("Sie haben sich erfolgreich registriert!");
-    window.location.href = 'login.html';  // Weiterleitung zur signup.html
+    window.location.href = 'login.html';
 }
 
 function setupLoginButtonListener() {
