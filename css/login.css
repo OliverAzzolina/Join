@@ -21,7 +21,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: moveLogoAnimation 0.8s ease-in-out forwards;
+    animation: moveLogoAnimation 0.5s ease-in-out forwards;
 }
 
 @keyframes moveLogoAnimation {
@@ -41,7 +41,7 @@ body {
 
 .fade-in {
     opacity: 0;
-    animation: fadeInAnimation 1s ease-in-out forwards;
+    animation: fadeInAnimation 0.5s ease-in-out forwards;
 }
 
 
@@ -51,6 +51,20 @@ body {
     }
     100% {
         opacity: 1;
+    }
+}
+
+.fade-out {
+    opacity: 1;
+    animation: fadeOutAnimation 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeOutAnimation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
 
@@ -229,6 +243,7 @@ body {
 /* SIGNUP CSS */
 
 #signup-container {
+    opacity: 0;
     width: 598px;
     height: 630px; 
     background-color: #FFFFFF;
