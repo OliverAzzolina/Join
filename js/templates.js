@@ -2,14 +2,14 @@
 
 function loginHTML() {
   return /*html*/`
-  <div id="register-container" class="fade-in">
+  <div id="register-container" class="init-fade-in">
     <p>Not a Join User?</p>
     <button id="sign-up-btn" type="button" onclick="changeToRegister()">Sign Up</button>
   </div>
 
   <img src="assets/img/logo_desktop.png" alt="Logo" id="logo" class="logo-animation">
   
-  <div id="login-container" class="fade-in">
+  <div id="login-container" class="init-fade-in">
 
     <h2>Log in</h2>
     <div class="form-underline"></div>
@@ -45,41 +45,35 @@ function loginHTML() {
 
 function registerHTML() {
   return /*html*/`
-
-
-
     <img src="assets/img/logo_desktop.png" alt="Logo" id="logo">
 
     <div id="signup-container">
-
-        <img src="assets/img/arrow.png" alt="arrow" id="arrow" onclick="switchToLogin()">
-        
-        <h2>Sign Up</h2>
-        <div class="form-underline"></div>
-
-        <form onsubmit="addUser(); return false;">
-            <div class="form-group">
-                <input type="text" id="name"  placeholder="Name">
-            </div>
-            <div class="form-group">
-                <input type="email" id="email" placeholder="Email" required>
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" placeholder="Password" required>
-            </div>
-            <div class="form-group">
-                <input type="password" placeholder="Confirm Password">
-            </div>
-            <div class="checkbox-group">
-                <label>
-                    <input type="checkbox" name="privacy">
-                    I accept the <span class="privacy-policy">Privacy Policy</span>
-                </label>
-            </div>
-            <div class="button-group">
-                <button type="submit">Sign Up</button>
-            </div>
-        </form>
+      <img src="assets/img/arrow.png" alt="arrow" id="arrow" onclick="switchToLogin()">
+      <h2>Sign Up</h2>
+      <div class="form-underline"></div>
+      <form onsubmit="addUser(); return false;">
+        <div class="form-group">
+          <input type="text" id="name"  placeholder="Name">
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Confirm Password">
+        </div>
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" name="privacy">
+              I accept the <span class="privacy-policy">Privacy Policy</span>
+            </label>
+        </div>
+        <div class="button-group">
+            <button type="submit">Sign Up</button>
+        </div>
+      </form>
     </div>
     <div class="footer">
         <p>Privacy Policy</p>
