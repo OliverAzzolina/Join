@@ -51,29 +51,29 @@ function registerHTML() {
       <img src="assets/img/arrow.png" alt="arrow" id="arrow" onclick="switchToLogin()">
       <h2>Sign Up</h2>
       <div class="form-underline"></div>
-      <form onsubmit="addUser(); return false;">
+      <form id="registrationForm">
         <div class="form-group">
-          <input type="text" id="name"  placeholder="Name">
+            <input type="text" id="name" placeholder="Name" required>
         </div>
         <div class="form-group">
-          <input type="email" id="email" placeholder="Email" required>
+            <input type="email" id="email" placeholder="Email" required>
         </div>
         <div class="form-group">
-          <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="password" placeholder="Password" required>
         </div>
         <div class="form-group">
-          <input type="password" placeholder="Confirm Password">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
         </div>
         <div class="checkbox-group">
-          <label>
-            <input type="checkbox" name="privacy">
-              I accept the <span class="privacy-policy">Privacy Policy</span>
+            <label>
+                <input type="checkbox" name="privacy">
+                I accept the <span class="privacy-policy">Privacy Policy</span>
             </label>
         </div>
         <div class="button-group">
             <button type="submit">Sign Up</button>
         </div>
-      </form>
+      </form>    
     </div>
     <div class="footer">
         <p>Privacy Policy</p>
