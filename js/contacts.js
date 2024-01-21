@@ -211,12 +211,6 @@ async function addNewContact(){
 }
 
 
-//GENERATES RANDOM COLOR FOR INITIALS
-function generateRandomColor(){
-  return randomColor = Math.floor(Math.random()*16777215).toString(16);
-}
-
-
 //DELETE CONTACT
 function deleteContact(i, j){
   id = contactList[i]['contacts'][j]['id'];
