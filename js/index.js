@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function () {
+    init();
+  });
+
 function init() {
     generateLogin()
 }
@@ -9,6 +13,7 @@ async function changeToRegister() {
     await new Promise(r => setTimeout(r, 500));
     generateRegister();
     toggleFadeIn('signup-container');
+    loadRegisterListeners();
 }
 
 async function switchToLogin() {
@@ -48,13 +53,148 @@ function toggleFadeIn(target) {
     }
 }
 
+
 //HTML GENERATION
 function generateLogin() {
     let mainContainer = document.getElementById('main-container');
     mainContainer.innerHTML = loginHTML();
-  }
+}
+
 
 function generateRegister() {
     let mainContainer = document.getElementById('main-container');
     mainContainer.innerHTML = registerHTML();
 }
+
+
+function loadRegisterListeners() {
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        if (validateForm()) {
+            registerUser();
+        }
+    });
+}
+
+
+function validateForm(event) {
+    return validateName() && validateEmail() && validatePassword();
+}
+
+
+function validateName() {
+    let name = document.getElementById('name').value.trim();
+    if (!/^[A-Za-z]{3,}\s[A-Za-z]{3,}$/.test(name)) {
+        inputAlert('name', 'Name must consist of two words, each at least 3 characters long.');
+        return false;
+    }
+    removeInputAlert('name');
+    return true;
+}
+
+
+function validateEmail() {
+    let email = document.getElementById('email').value.trim();
+    if (!/\S+@\S+\.\S+/.test(email)) {
+        inputAlert('email', 'Please enter a valid email address.');
+        return false;
+    }
+    removeInputAlert('email');
+    return true;
+}
+
+
+function validatePassword() {
+    let password = document.getElementById('password').value.trim();
+    let confirmPassword = document.getElementById('confirmPassword').value.trim();
+    if (password.length < 6) {
+        inputAlert('password', 'Password must be at least 6 characters long.');
+        return false;
+    }
+    if (password !== confirmPassword) {
+        inputAlert('confirmPassword', 'Passwords do not match.');
+        return false;
+    }
+    removeInputAlert('password');
+    removeInputAlert('confirmPassword');
+    return true;
+}
+
+
+function inputAlert(inputId, message) {
+    let inputElement = document.getElementById(inputId);
+    let errorElement = document.createElement('p');
+    errorElement.classList.add('error-message');
+    errorElement.textContent = message;
+    let existingError = inputElement.nextElementSibling;
+    if (existingError && existingError.classList.contains('error-message')) {
+        inputElement.parentNode.removeChild(existingError);
+    }
+    inputElement.insertAdjacentElement('afterend', errorElement);
+}
+
+
+function removeInputAlert(inputId) {
+    let inputElement = document.getElementById(inputId);
+    let errorElement = inputElement.nextElementSibling;
+    if (errorElement && errorElement.classList.contains('error-message')) {
+        inputElement.parentNode.removeChild(errorElement);
+    }
+}
+
+
+function removeAllAlerts() {
+    let errorElements = document.querySelectorAll('.error-message');
+    errorElements.forEach(element => {
+        element.parentNode.removeChild(element);
+    });
+}
+
+
+function registerUser() {
+    let [firstName, lastName = ''] = document.getElementById('name').value.trim().split(" ");
+    let email = document.getElementById('email').value.trim();
+    let password = document.getElementById('password').value.trim();
+    let confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+    if (password !== confirmPassword) {
+        alert('Passwörter stimmen nicht überein');
+        return;
+    }
+
+    let userData = {
+        firstName,
+        lastName,
+        userColor: generateRandomColor(),
+        email,
+        phone: '', 
+        userId: generateRandomId(), 
+        password,
+        userContacts: preRegisteredContacts,
+        initials: `${firstName[0]}${lastName[0]}`
+    };
+    addUserToDatabase(userData);
+}
+
+
+async function addUserToDatabase(userData) {
+    try {
+        let usersJson = await getItem('users');
+        let users = [];
+
+        if (usersJson) {
+            users = JSON.parse(usersJson);
+        }
+
+        users.push(userData);
+
+        await setItem('users', JSON.stringify(users));
+        console.log('User successfully registered.');
+    } catch (error) {
+        console.error('Error adding user:', error);
+    }
+}
+
+
+
