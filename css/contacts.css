@@ -513,7 +513,7 @@ main {
   }
   .add-contact-card-left {
     border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+    border-bottom-left-radius: 0px;
     background-color: #2a3647;
     width: 396px;
     display: flex;
@@ -523,7 +523,8 @@ main {
     padding: 66px 48px 66px 48px;
     box-sizing: border-box;
     height: 352px;
-  }
+    border-top-right-radius: 30px;
+}
 
   .add-contact-card-right {
     width: 396px;
