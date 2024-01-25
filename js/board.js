@@ -1,7 +1,8 @@
 let currentDraggedElement;
 
 async function init(){
-    loadContactsFromStorage();
+    //loadContactsFromStorage();
+    await loadUserData();
     loadTasksfromStorage();
     generateHeader();
     generateSidebar();
@@ -33,41 +34,18 @@ async function loadTasksfromStorage(){
   renderTasks();
 }
 
-
-//LOAD Contacts from Storage
-async function loadContactsFromStorage(){
-  try{
-      contacts = JSON.parse(await getItem('contacts'));
-  }catch(e){
-    console.warn('loading error:', e)
-  }
-  sortContacts();
-}
-
-
-//SORT Contacts
-function sortContacts(){
-  contacts.sort((a, b) => {
-    if (a.name.toUpperCase() < b.name.toUpperCase()) {
-     return -1;
-    } else if (a.name.toUpperCase() > b.name.toUpperCase()) {
-     return 1;
-    } else {
-     return 0;
-    }
-   });
-}
-
-
 //LOAD Contacts
-function loadContacts(){
+function loadContactList(){
   let contactList = document.getElementById('assigned-editors');
   for (let i = 0; i < contacts.length; i++) {
       //let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
-      let initials = getInitials(contacts[i]['firstName'], contacts[i]['lastName'])
-      let randomColor = '#' + contacts[i]['randomColor'];
-      let name = contacts[i]['name'];
-      contactList.innerHTML += renderContacts(i, randomColor, name, initials);
+      let contact = contacts[i];
+      let initials = getInitials(contact.firstName, contact.lastName)
+      let userColor = contact.userColor;
+      let firstName = contact.firstName;
+      let lastName = contact.lastName;
+      let id = contact.userId;
+      contactList.innerHTML += renderContacts(i, userColor, firstName, lastName, initials);
   }
     sortContacts();
 }
@@ -144,13 +122,14 @@ function addAssignedEditors(index){
     const checkedEditor = contacts[i];
     let checkbox = document.getElementById(`checkbox${i}`).checked;
     if(checkbox == true){
-      let name = checkedEditor['name'];
-      let randomColor = '#' + checkedEditor['randomColor'];
-      let initials = checkedEditor['name'].split(" ").map((n)=>n[0]).join("");
+      let firstName = checkedEditor.firstName;
+      let lastName = checkedEditor.lastName;
+      let userColor = checkedEditor.userColor;
+      let initials = checkedEditor.firstName[0] + checkedEditor.lastName[0];
       showAssignedEditors.innerHTML += `
-      <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
+      <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
       `;
-      pushAssignedTo(index, initials, randomColor, name);
+      pushAssignedTo(index, initials, userColor, firstName, lastName);
     }
   }
 }
@@ -161,10 +140,11 @@ function renderAssignedTo(index){
   assignedTo.innerHTML = '';
 
   for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
-    const checkedEditor = tasks[index]['assignedto'][i]['initials'];
-    let randomColor = tasks[index]['assignedto'][i]['randomColor'];
+    const checkedEditor = tasks[index]['assignedto'][i];
+    let initials = checkedEditor.initials;
+    let userColor = checkedEditor.userColor;
     assignedTo.innerHTML += `
-    <div id="mini-logo${i}" style="background-color: ${randomColor}" class="mini-logo">${checkedEditor}</div>
+    <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
     `;
   }
 }
@@ -237,7 +217,6 @@ function updateDoneSubs(i, checkedTrue){
 //drag&drop
 function startDragging(i){
  currentDraggedElement = i;
- console.log(currentDraggedElement)
  showDragHereContainer();
 }
 
@@ -267,7 +246,6 @@ function allowDrop(ev){
 
 function moveTo(status){
   hideDragHereContainer();
-  console.log(status);
   tasks[currentDraggedElement]['status'] = status;
   setItem('tasks', JSON.stringify(tasks));
   refreshTasks();
@@ -291,11 +269,12 @@ function slideOutOverlay(i){
 
 
 
-function pushAssignedTo(index, initials, randomColor, name){
+function pushAssignedTo(index, initials, userColor, firstName, lastName){
   let assignedToTask = {
-    name: name,
+    firstName: firstName,
+    lastName: lastName,
     initials: initials,
-    randomColor: randomColor,
+    userColor: userColor,
   };
   tasks[index]['assignedto'].push(assignedToTask);
   renderAssignedToCards(index);
@@ -305,9 +284,10 @@ function pushAssignedTo(index, initials, randomColor, name){
 function renderAssignedToCards(index){
   let showAssignedEditors = document.getElementById('show-assigned-editors-container');
   for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
-    const checkedEditor = tasks[index]['assignedto'][i]['initials'];
-    let randomColor = tasks[index]['assignedto'][i]['randomColor'];
-    showAssignedEditors.innerHTML += generateAssignedTo(i, randomColor, checkedEditor);
+    const checkedEditor = tasks[index]['assignedto'][i];
+    let initials = checkedEditor.initials;
+    let userColor = checkedEditor.userColor;
+    showAssignedEditors.innerHTML += generateAssignedTo(i, userColor, initials);
   }
 }
 

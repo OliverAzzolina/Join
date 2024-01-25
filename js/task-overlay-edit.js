@@ -1,7 +1,7 @@
 //EDIT TASK START
 function openEditOverlay(i){
     loadTaskData(i);
-    loadContacts();
+    loadContactList();
 }
 
 
@@ -26,9 +26,10 @@ function renderAssignedToEdit(index){
     let showAssignedEditors = document.getElementById(`show-assigned-editors-edit-container`);
   
     for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
-        const checkedEditor = tasks[index]['assignedto'][i]['initials'];
-        let randomColor = tasks[index]['assignedto'][i]['randomColor'];
-        showAssignedEditors.innerHTML += generateAssignedTo(i, randomColor, checkedEditor);
+        const checkedEditor = tasks[index]['assignedto'][i];
+        let initials = checkedEditor.initials;
+        let userColor = checkedEditor.initials;
+        showAssignedEditors.innerHTML += generateAssignedTo(i, userColor, initials);
     }
 }
 

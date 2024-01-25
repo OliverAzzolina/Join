@@ -7,10 +7,12 @@ let temporarySubtasksDone = [];
 function loadContactsForAddOverlay(){
     let contactList = document.getElementById('add-assigned-editors');
     for (let i = 0; i < contacts.length; i++) {
-        let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
-        let randomColor = '#' + contacts[i]['randomColor'];
-        let name = contacts[i]['name'];
-        contactList.innerHTML += renderContacts(i, randomColor, name, initials);
+      let contact = contacts[i];
+      let initials = getInitials(contact.firstName, contact.lastName)
+      let userColor = contact.userColor;
+      let firstName = contact.firstName;
+      let lastName = contact.lastName;
+        contactList.innerHTML += renderContacts(i, userColor, firstName, lastName, initials);
     }
       sortContacts();
 }
@@ -99,20 +101,23 @@ function checkIfContactCheckboxChecked(checkedEditor, i){
     let checkbox = document.getElementById(`checkbox${i}`).checked;
     let showAssignedEditors = document.getElementById('show-assigned-editors-container');
     if(checkbox == true){
-      let name = checkedEditor['name'];
-      let randomColor = '#' + checkedEditor['randomColor'];
-      let initials = checkedEditor['name'].split(" ").map((n)=>n[0]).join("");
-      showAssignedEditors.innerHTML += `<div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${initials}</div>`;
-      pushAssignedToAddOverlay(initials, randomColor, name);
+      const checkedEditor = contacts[i];
+      let firstName = checkedEditor.firstName;
+      let lastName = checkedEditor.lastName;
+      let userColor = checkedEditor.userColor;
+      let initials = checkedEditor.firstName[0] + checkedEditor.lastName[0];
+      showAssignedEditors.innerHTML += `<div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>`;
+      pushAssignedToAddOverlay(initials, userColor, firstName, lastName);
     }
 }
 
 
-function pushAssignedToAddOverlay(initials, randomColor, name){
+function pushAssignedToAddOverlay(initials, userColor, firstName, lastName){
     let assignedToTask = {
-      name: name,
+      firstName: firstName,
+      lastName: lastName,
       initials: initials,
-      randomColor: randomColor,
+      userColor: userColor,
     };
     temporaryAssignedTo.push(assignedToTask);
 }
@@ -123,10 +128,11 @@ function renderAssignedTo(index){
     assignedTo.innerHTML = '';
   
     for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
-      const checkedEditor = tasks[index]['assignedto'][i]['initials'];
-      let randomColor = tasks[index]['assignedto'][i]['randomColor'];
+      const checkedEditor = contacts[i];
+      let initials = checkedEditor.initials;
+      let userColor = checkedEditor.userColor;
       assignedTo.innerHTML += `
-      <div id="mini-logo${i}" style="background-color: ${randomColor}" class="mini-logo">${checkedEditor}</div>
+      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
       `;
     }
 }

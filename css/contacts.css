@@ -1,31 +1,30 @@
 body{
   font-family: "Inter", sans-serif;
   margin: 0;
+  background-color: rgb(246, 247, 248);
 }
 
 main {
   display: flex;
-  justify-content: center; /* Horizontal zentrieren */
-  align-items: center; /* Vertikal zentrieren */
-  width: 100vw; /* Volle Breite des Viewports */
-  height: 100vh; /* Volle Höhe des Viewports */
-  margin: 96px 0 0 232px; /* Oben margin, um Platz für den Header zu lassen */
+  justify-content: center;
+  margin-left: 232px;
+  margin-top: 40px;
 }
 
 .left {
-  width: 453px;
+  width: 40%;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
-  padding: 32px 24px;
+  height: 100vh;
   box-sizing: border-box;
-  margin-top: -785px;
+  background-color: white;
 }
 
 #contact-list {
-  width: 453px;
+  width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
   padding: 32px 24px 32px 24px;
   box-sizing: border-box;
@@ -34,13 +33,12 @@ main {
 }
 
 .right {
-  width: 755px;
+  width: 60%;
   display: flex;
   flex-direction: column;
   background-color: rgb(246, 247, 248);
   padding-top: 100px;
   padding-left: 42px;
-  margin-top: -1465px;
 }
 
 .add-contact-button {
@@ -65,12 +63,11 @@ main {
 }
 
 .category-letter{
-  width: 100%;
+  width: 80%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
-  width: 352px;
   height: 78px;
   gap: 8px;
   font-size: 20px;
@@ -80,17 +77,16 @@ main {
 }
 
 .contacts-splitter{
-  width: 352px;
+  width: 80%;
   border: 1px solid #D1D1D1;
 }
 
 .contacts-list {
-  width: 453px;
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 15px 24px 15px 24px;
-  
+  padding: 15px 0px 15px 0px;
 }
 
 .contact {
@@ -98,7 +94,7 @@ main {
   align-items: center;
   justify-content: flex-start;
   gap: 35px;
-  width: 352px;
+  width: 80%;
   height: 78px;
   border-radius: 10px;
   cursor: pointer;
@@ -446,6 +442,14 @@ main {
 .blue-line-horizontal {
   width: 90px;
   border: 1px solid #29abe2;
+}
+
+#mobile-menu-container {
+  display: none;
+}
+
+#mobile-logo{
+  display: none;
 }
 
 @media screen and (max-width: 1050px) {
