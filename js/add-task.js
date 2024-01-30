@@ -1,15 +1,23 @@
-selectedPriority = '';
+selectedPriority = 'medium';
 subtaskTempArray = [];
+subtaskDoneTempArray = [];
+contacts = [];
+assignedToTempArray = [];
 
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM loaded');
   generateHeader();
   generateSidebar();
   addEventListener();
-  loadContactsFromStorage();
+  loadUserContacts();
+
   loadTasksfromStorage();
 });
 
+async function loadUserContacts(){
+await loadUserData();
+loadContactList();
+}
 
 //HTML GENERATION
 function generateHeader() {
@@ -228,7 +236,6 @@ function attemptRemoveSubtask(subtaskId, isEditing) {
   removeSubtask(subtaskId); // Aufruf der ursprünglichen Löschfunktion
 }
 
-
 function updateIconsToNormal(subtaskElement) {
   var iconsContainer = subtaskElement.querySelector('.add-task-subtask-icons');
   iconsContainer.innerHTML = `
@@ -238,15 +245,13 @@ function updateIconsToNormal(subtaskElement) {
   `;
 }
 
-
-
 function addTask(event) {
   event.preventDefault();
 
   var taskData = {
     title: document.getElementById('add-task-title-input').value,
     description: document.getElementById('add-task-description-input').value,
-    assignedto: [],
+    assignedto: assignedToTempArray,
     duedate: document.getElementById('add-task-date-input').value,
     prio: selectedPriority,
     category: getCategoryValue(),
@@ -254,10 +259,10 @@ function addTask(event) {
     subTasksDone: getSubTasksDone(),
     status: "in-progress",
   };
+  console.log(taskData)
   tasks.push(taskData);
   saveTask();
 }
-
 
 function getCategoryValue() {
   var categoryDropdown = document.querySelector('.add-task-form-dropdown');
@@ -267,7 +272,6 @@ function getCategoryValue() {
     return null;
   }
 }
-
 
 function getSubTasksDone() {
   returnArray = [];
@@ -280,20 +284,10 @@ function getSubTasksDone() {
   return returnArray;
 };
 
-
 function saveTask() {
   setItem('tasks', JSON.stringify(tasks));
   console.log("Task gespeichert");
 }
-
-
-
-
-
-
-
-
-
 
 
 // ADD TASK FUNCTIONS
@@ -307,45 +301,11 @@ function highlightSelectedButton(selectedButton) {
 }
 
 
-//LOAD Storage
-async function loadContactsFromStorage() {
-  try {
-    contacts = JSON.parse(await getItem('contacts'));
-  } catch (e) {
-    console.warn('loading error:', e)
-  }
-  sortContacts();
-  loadContacts();
-}
-
-//SORT Contacts
-function sortContacts() {
-  contacts.sort((a, b) => {
-    if (a.name.toUpperCase() < b.name.toUpperCase()) {
-      return -1;
-    } else if (a.name.toUpperCase() > b.name.toUpperCase()) {
-      return 1;
-    } else {
-      return 0;
-    }
-  });
-}
-
 function showDropdownContacts() {
   let dropdown = document.getElementById('assigned-editors');
   if (dropdown.style.display == 'none') {
     dropdown.style.display = 'block';
-  } else {
-    dropdown.style.display = 'none';
-  }
-}
-
-
-function showDropdownContacts() {
-  let dropdown = document.getElementById('assigned-editors');
-  if (dropdown.style.display == 'none') {
-    dropdown.style.display = 'block';
-    clearAssignedTo();
+    clearAssignedToAddOverlay();
   } else {
     dropdown.style.display = 'none';
     addAssignedEditors();
@@ -357,28 +317,29 @@ function addAssignedEditors() {
   let showAssignedEditors = document.getElementById('show-assigned-editors-container');
   for (let i = 0; i < contacts.length; i++) {
     const checkedEditor = contacts[i];
-    let randomColor = '#' + checkedEditor['randomColor'];
-    let initials = checkedEditor['name'].split(" ").map((n) => n[0]).join("");
+    let userColor = checkedEditor.userColor;
+    let firstName = checkedEditor.firstName;
+    let lastName = checkedEditor.lastName;
+    let initials = checkedEditor.firstName.charAt(0) + checkedEditor.lastName.charAt(0);
     let checkbox = document.getElementById(`checkbox${i}`).checked;
     if (checkbox == true) {
       showAssignedEditors.innerHTML += `
-      <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
+      <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
       `;
+      pushAssignedToAdd(initials, userColor, firstName, lastName)
     }
   }
 }
 
 
-function clearAssignedTo() {
-  document.getElementById('show-assigned-editors-container').innerHTML = '';
-}
-
-
-function setUnAssigned(i) {
-  let assignedContact = document.getElementById(`assigned-contact${i}`);
-  let checkImg = document.getElementById(`checked${i}`);
-  assignedContact.style = "color: black";
-  checkImg.src = "assets/img/check_icon_white.png";
+function pushAssignedToAdd(initials, userColor, firstName, lastName) {
+  let assignedToTask = {
+    firstName: firstName,
+    lastName: lastName,
+    initials: initials,
+    userColor: userColor,
+  };
+  assignedToTempArray.push(assignedToTask);
 }
 
 
@@ -399,33 +360,134 @@ function checkIfAssigned(i) {
   }
 }
 
-
+function clearAssignedToAddOverlay() {
+  document.getElementById("show-assigned-editors-container").innerHTML = "";
+}
 //LOAD Contacts
-function loadContacts() {
+function loadContactList() {
   let contactList = document.getElementById('assigned-editors');
   for (let i = 0; i < contacts.length; i++) {
-    let initials = contacts[i]['name'].split(" ").map((n) => n[0]).join("");
-    let randomColor = '#' + contacts[i]['randomColor'];
-    let name = contacts[i]['name'];
-    contactList.innerHTML += `
-     <label for="checkbox${i}">
-      <li id="assigned-contact${i}" onclick="checkIfAssigned(${i})">
-      <input style="display: none" type="checkbox" id="checkbox${i}">
-        <div class="drop-name-initials">
-          <div class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
-          <span> ${name}</span>
-        </div>
-          <img id="checked${i}" src="assets/img/check_icon_white.png" alt="">
-      </li>
-     </label>
-  `;
+      //let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
+      let contact = contacts[i];
+      let initials = contact.firstName.charAt(0) + contact.lastName.charAt(0);
+      let userColor = contact.userColor;
+      let firstName = contact.firstName;
+      let lastName = contact.lastName;
+      let id = contact.userId;
+      contactList.innerHTML += renderContacts(i, userColor, firstName, lastName, initials);
   }
-  sortContacts();
+    sortContacts();
 }
 
-function setAssigned(i) {
-  let assignedContact = document.getElementById(`assigned-contact${i}`);
-  let checkImg = document.getElementById(`checked${i}`);
-  assignedContact.style = "background-color: #2A3647; color: white; border-radius: 10px"
-  checkImg.src = "/assets/img/icons/check_button_checked.png";
+
+function setAssigned(i){
+  document.getElementById(`assigned-contact${i}`).style = "background-color: #2A3647; color: white";
+  document.getElementById(`checked${i}`).src ="assets/img/check_checked.png";
 }
+
+
+function setUnAssigned(i){
+  document.getElementById(`assigned-contact${i}`).style = "color: black";;
+  document.getElementById(`checked${i}`).src ="assets/img/check_unchecked.png";
+}
+
+
+//ADD SUBTASK START
+function activateCheckCancelButtons(){
+  document.getElementById('add-task-active-subtask-icon-box').classList.remove('d-none');
+  document.getElementById('add-task-create-subtask-icon-box').classList.add('d-none');
+}
+
+
+function clearSubtaskInput(){
+  document.getElementById('add-task-subtask-input').value = '';
+  document.getElementById('add-task-active-subtask-icon-box').classList.add('d-none');
+  document.getElementById('add-task-create-subtask-icon-box').classList.remove('d-none');
+}
+
+
+function addSubtask(){
+  let subtask = document.getElementById('add-task-subtask-input').value;
+  subtaskTempArray.push(subtask);
+  console.log(subtaskTempArray);
+  renderSubtasks();
+  clearSubtaskInput();
+}
+
+
+function renderSubtasks(){
+  let subtasksContainer = document.getElementById('add-task-subtasks-container');
+  subtasksContainer.innerHTML = '';
+  for (let i = 0; i < subtaskTempArray.length; i++) {
+    const subtask = subtaskTempArray[i];
+    subtasksContainer.innerHTML += `
+    <div class="edit-subtask">
+        
+    <div onclick="editSubtask(${i})" class="subtask-list-item" id="editable-subtask${i}" onMouseOver="showIcons(${i})" onMouseOut="hideIcons(${i})">
+        <span>• ${subtask}</span>            
+        <div id="edit-task-active-subtask-icon-box${i}" class="edit-task-active-subtask-icon-box" style="opacity:0;" >                
+        <img src="assets/img/subtask_edit_icon.png" alt="Check" onclick="editSubtask(${i})" />
+        <div class="sub-divider"></div>
+        <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtask(${i})" />
+    </div>
+
+
+</div>
+    <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
+      <input id="editSubtaskInput${i}" value="${subtask}" class="edit-subtask-input">    
+        <div class="edit-task-active-subtask-icon-box">                
+            <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtask(${i})" />
+            <div class="sub-divider"></div>
+            <img src="assets/img/subtask_check_icon.png" alt="Check" onclick="changeSubtask(${i})" />
+        </div>
+    </div>
+</div>
+  `
+  }
+}
+
+
+function editSubtask(i){
+  if(!subtaskTempArray.length == 0){
+    document.getElementById(`editable-subtask${i}`).style.display = "none";
+    document.getElementById(`editSubtaskContainer${i}`).style.display ="flex";
+  }
+}
+
+
+function deleteSubtask(i){
+  subtaskTempArray.splice(i, 1)
+  renderSubtasks();
+  clearSubtaskInput();
+}
+
+
+function changeSubtask(i){
+  subtaskTempArray[i] = document.getElementById(`editSubtaskInput${i}`).value;
+  renderSubtasks();
+  clearSubtaskInput();
+}
+
+
+function createSubtasksDoneArray(){
+  for (let i = 0; i < subtaskTempArray.length; i++) {
+    const subtask = subtaskTempArray[i];
+    let subtaskDoneJson = {
+      subname: subtask, 
+      checked: false
+    }
+    subtaskDoneTempArray.push(subtaskDoneJson);
+    console.log(subtaskDoneJson)
+  }
+}
+
+
+function showIcons(i){
+  document.getElementById(`edit-task-active-subtask-icon-box${i}`).style.opacity = 1;
+ }
+ 
+
+ function hideIcons(i){
+     document.getElementById(`edit-task-active-subtask-icon-box${i}`).style.opacity = 0;
+ }
+//ADD SUBTASK END

@@ -11,8 +11,9 @@ body {
   flex-direction: column;
   justify-content: center;
   background-color: #f6f7f8;
-  margin-top: 483px;
   margin-left: 232px;
+  position: absolute;
+  top: 483px;
 }
 
 #board-header {
@@ -137,7 +138,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 252px;
-  height: 400px;
+
   gap: 16px;
 }
 
@@ -934,6 +935,12 @@ align-items: flex-end;
   right: 16px;
   display: flex;
   gap: 5px;
+}
+
+#add-task-active-subtask-icon-box img:hover{
+  cursor: pointer;
+  background-color: #D1D1D1;
+  border-radius: 50%;
 }
 
 .edit-task-active-subtask-icon-box {

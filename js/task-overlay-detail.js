@@ -26,7 +26,6 @@ function checkOverlayCategory(i){
 function setPrioDetailImg(i){
     let prioDetailImg = document.getElementById(`prioDetailImg${i}`);
     let prio = tasks[i]['prio'];
-    console.log(`assets/img/prio_${prio}_icon.png`)
     prioDetailImg.src = `/assets/img/prio_${prio}_icon.png`;
 }
 
@@ -34,11 +33,11 @@ function renderAssignedToDetail(index){
     let showAssignedEditors = document.getElementById('detailAssignedTo');
   
     for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
-      const checkedEditor = tasks[index]['assignedto'][i]['initials'];
-      let randomColor = tasks[index]['assignedto'][i]['randomColor'];
-      let name = tasks[index]['assignedto'][i]['name'];
+      const checkedEditor = tasks[index]['assignedto'][i];
+      let initials = checkedEditor.initials;
+      let userColor = checkedEditor.userColor;
         showAssignedEditors.innerHTML += `
-        <div class="detail-name-initials"><div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${checkedEditor}</div><span>${name}</span></div>
+        <div class="detail-name-initials"><div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div><span>${name}</span></div>
         `;
     }
 }
@@ -77,7 +76,7 @@ function setChecked(j, i, subTasksDone){
   
 function setUnChecked(j, i, subTasksDone){
     subTasksDone.checked = false;
-    document.getElementById(`detailSub${j}`).src = 'assets/img/check_icon_white.png';
+    document.getElementById(`detailSub${j}`).src = 'assets/img/check_unchecked.png';
 }
 
 function checkIfSubsDone(i){

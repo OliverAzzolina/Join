@@ -292,9 +292,9 @@ function generateEditTaskOverlay(i, title, description, duedate) {
     `;
 }
 
-function generateAssignedTo(i, randomColor, checkedEditor) {
+function generateAssignedTo(i, userColor, initials) {
   return `
-        <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${checkedEditor}</div>
+        <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
     `;
 }
 
@@ -309,14 +309,14 @@ function generateDetailSubtasks(i, j, subtask) {
     `;
 }
 
-function renderContacts(i, randomColor, name, initials) {
+function renderContacts(i, userColor, firstName, lastName, initials) {
   return `
     <label for="checkbox${i}">
      <li id="assigned-contact${i}" onclick="checkIfAssigned(${i})">
      <input style="display: none" type="checkbox" id="checkbox${i}">
        <div class="drop-name-initials">
-         <div class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
-         <span> ${name}</span>
+         <div class="drop-initials" style="background-color: ${userColor}">${initials}</div>
+         <span> ${firstName} ${lastName}</span>
        </div>
          <img id="checked${i}" src="assets/img/check_unchecked.png" alt="">
      </li>

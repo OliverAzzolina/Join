@@ -6,7 +6,7 @@
     <title>Contacts</title>
     <link rel="stylesheet" href="/css/contacts.css" />
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="css/privacy.css">
+    <link rel="stylesheet" href="css/privacy.css" />
     <script src="js/templates.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/storage.js"></script>
@@ -14,7 +14,6 @@
     <script src="js/contacts.js"></script>
   </head>
   <body onload="init()">
-    
     <!-- Header -->
     <div id="header-container"></div>
 
@@ -22,67 +21,116 @@
     <div id="sidebar-container"></div>
 
     <div id="mobile-menu-container">
-
       <a href="summary.html">
-          <img class="mobile-icons" src="assets/img/mobile-summary.png" alt="Summary">
-          <p class="mobile-text">Summary</p>
+        <img
+          class="mobile-icons"
+          src="assets/img/mobile-summary.png"
+          alt="Summary"
+        />
+        <p class="mobile-text">Summary</p>
       </a>
       <a href="board.html">
-          <img class="mobile-icons" src="assets/img/mobile-board.png" alt="Board">
-          <p class="mobile-text">Board</p>
+        <img
+          class="mobile-icons"
+          src="assets/img/mobile-board.png"
+          alt="Board"
+        />
+        <p class="mobile-text">Board</p>
       </a>
       <a href="add-task.html">
-          <img class="mobile-icons" src="assets/img/mobile-addtask.png" alt="Add Task">
-          <p class="mobile-text">Add Task</p>
+        <img
+          class="mobile-icons"
+          src="assets/img/mobile-addtask.png"
+          alt="Add Task"
+        />
+        <p class="mobile-text">Add Task</p>
       </a>
       <a href="contacts.html">
-          <img class="mobile-icons" src="assets/img/mobile-contacts.png" alt="Contact">
-          <p class="mobile-text">Contact</p>
+        <img
+          class="mobile-icons"
+          src="assets/img/mobile-contacts.png"
+          alt="Contact"
+        />
+        <p class="mobile-text">Contact</p>
       </a>
-  </div>
-  <img src="assets/img/logo_mobile.png" alt="Mobile Logo" id="mobile-logo">
-    
-<div class="pcontent-container">
-        <div class="p-content">
-            <p class="title">Legal Notice</p>
-            <img src="assets/img/arrow.png" alt="Arrow Icon" class="redirect-icon" onclick="redirectToSummary()">
+    </div>
+    <img src="assets/img/logo_mobile.png" alt="Mobile Logo" id="mobile-logo" />
 
-            <h1>Imprint</h1>
-            <p>[Student Names List]<br>
-                [Address of the JOIN operator - e.g. one of the students]<br>
-                [Postcode and city]
-                
-            </p>
-            <h1>Exploring the Board</h1>
-            <p>Email: [Email]</p>
-            <h1>Acceptance of terms</h1>
-            <p>Acceptance of terms
-                By accessing and using Join (Product), you acknowledge and agree to the following terms and conditions, and any policies, guidelines, or amendments thereto that may be presented to you from time to time. We, the listed students, may update or change the terms and conditions from time to time without notice.
-            </p>
-            <h1>Scope and ownership of the product</h1>
-            <p>Scope and ownership of the product
-                Join has been developed as part of a student group project in a web development bootcamp at the Developer Akademie GmbH. It has an educational purpose and is not intended for extensive personal & business usage. As such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality regarding this Product.<br><br>
-                
-                The design of Join is owned by the Developer Akademie GmbH. Unauthorized use, reproduction, modification, distribution, or replication of the design is strictly prohibited.
-            </p>
-            <h1>Proprietary rights</h1>
-            <p>
-                Aside from the design owned by Developer Akademie GmbH, we, the listed students, retain all proprietary rights in Join, including any associated copyrighted material, trademarks, and other proprietary information.
-            </p>
-            <h1>Use of the product</h1>
-            <p>Use of the product
-                Join is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations. Any use of Join for illegal activities, or to harass, harm, threaten, or intimidate another person, is strictly prohibited. You are solely responsible for your interactions with other users of Join.
-            </p>
-            <h1>Disclaimer of warranties and limitation of liability</h1>
-            <p>
-                Join is provided "as is" without warranty of any kind, whether express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event will we, the listed students, or the Developer Akademie, be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of such damages, arising out of or in connection with the use or performance of Join.
-            </p>
+    <div class="pcontent-container">
+      <div class="p-content">
+        <p class="title">Rechtlicher Hinweis</p>
+        <img
+          src="assets/img/arrow.png"
+          alt="Arrow Icon"
+          class="redirect-icon"
+          onclick="redirectToSummary()"
+        />
 
-        </div>
-        
-</div> 
+        <h1>Kontakt</h1>
+        <p>
+          Oliver Mustermann<br />
+          Marcel Arnold<br />
+          Rainer Mustermann<br />
+          9000 München
+        </p>
+        <h1>Erforschung des Boards</h1>
+        <p>Email: info@developeracademie.de</p>
 
-<script src="./js/privacy.js"></script>
+        <h1>Akzeptanz der Bedingungen</h1>
+        <p>
+          Durch den Zugriff auf und die Nutzung von Join (Produkt) erkennen Sie
+          die folgenden Geschäftsbedingungen an und stimmen diesen zu, sowie
+          etwaigen Richtlinien, Leitlinien oder Änderungen, die Ihnen von Zeit
+          zu Zeit präsentiert werden können. Wir, die aufgelisteten Studenten,
+          können die Geschäftsbedingungen von Zeit zu Zeit ohne Vorankündigung
+          aktualisieren oder ändern.
+        </p>
+        <h1>Umfang und Eigentum des Produkts</h1>
+        <p>
+          Join wurde im Rahmen eines Studentengruppenprojekts in einem
+          Webentwicklungsbootcamp an der Developer Akademie GmbH entwickelt. Es
+          hat einen Bildungszweck und ist nicht für umfassende persönliche oder
+          geschäftliche Nutzung vorgesehen. Daher können wir keine durchgehende
+          Verfügbarkeit, Zuverlässigkeit, Genauigkeit oder einen anderen Aspekt
+          der Qualität dieses Produkts garantieren.<br /><br />
 
-</body>
+          Das Design von Join gehört der Developer Akademie GmbH. Die unbefugte
+          Nutzung, Reproduktion, Modifikation, Verbreitung oder Vervielfältigung
+          des Designs ist strengstens untersagt.
+        </p>
+        <h1>Urheberrechte</h1>
+        <p>
+          Neben dem Design, das der Developer Akademie GmbH gehört, behalten
+          wir, die aufgelisteten Studenten, alle Urheberrechte an Join,
+          einschließlich aller zugehörigen urheberrechtlich geschützten
+          Materialien, Marken und anderer proprietärer Informationen
+        </p>
+        <h1>Nutzung des Produkts</h1>
+        <p>
+          Die Nutzung des Produkts Join soll nur zu rechtmäßigen Zwecken
+          erfolgen, in Übereinstimmung mit allen anwendbaren Gesetzen und
+          Vorschriften. Jegliche Nutzung von Join für illegale Aktivitäten oder
+          um eine andere Person zu belästigen, zu schädigen, zu bedrohen oder
+          einzuschüchtern, ist strengstens untersagt. Sie sind allein für Ihre
+          Interaktionen mit anderen Benutzern von Join verantwortlich.
+        </p>
+        <h1>Haftungsausschluss von Garantien und Haftungsbeschränkung</h1>
+        <p>
+          Join wird "wie besehen" ohne jegliche Gewährleistung bereitgestellt,
+          sei es ausdrücklich oder stillschweigend, einschließlich, aber nicht
+          beschränkt auf die stillschweigenden Gewährleistungen der
+          Marktgängigkeit, der Eignung für einen bestimmten Zweck und der
+          Nichtverletzung. In keinem Fall haften wir, die aufgelisteten
+          Studenten, oder die Developer Akademie für direkte, indirekte,
+          zufällige, besondere, exemplarische oder Folgeschäden, einschließlich,
+          aber nicht beschränkt auf Schäden wegen entgangener Gewinne, Goodwill,
+          Nutzung, Daten oder anderer immaterieller Verluste, selbst wenn wir
+          auf die Möglichkeit solcher Schäden hingewiesen wurden, die sich aus
+          oder im Zusammenhang mit der Nutzung oder Leistung von Join ergeben.
+        </p>
+      </div>
+    </div>
+
+    <script src="./js/privacy.js"></script>
+  </body>
 </html>
