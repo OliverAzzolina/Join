@@ -305,6 +305,7 @@ function showDropdownContacts() {
   let dropdown = document.getElementById('assigned-editors');
   if (dropdown.style.display == 'none') {
     dropdown.style.display = 'block';
+    clearAssignedToAddOverlay();
   } else {
     dropdown.style.display = 'none';
     addAssignedEditors();
@@ -359,7 +360,9 @@ function checkIfAssigned(i) {
   }
 }
 
-
+function clearAssignedToAddOverlay() {
+  document.getElementById("show-assigned-editors-container").innerHTML = "";
+}
 //LOAD Contacts
 function loadContactList() {
   let contactList = document.getElementById('assigned-editors');
