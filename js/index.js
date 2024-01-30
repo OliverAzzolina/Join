@@ -54,7 +54,6 @@ function toggleFadeIn(target) {
 }
 
 
-//HTML GENERATION
 function generateLogin() {
     let mainContainer = document.getElementById('main-container');
     mainContainer.innerHTML = loginHTML();
@@ -78,9 +77,10 @@ function loadRegisterListeners() {
 }
 
 
-function validateForm(event) {
-    return validateName() && validateEmail() && validatePassword();
+function validateForm() {
+    return validateName() && validateEmail() && validatePassword() && validatePrivacyCheckbox();
 }
+
 
 
 function validateName() {
@@ -122,6 +122,18 @@ function validatePassword() {
 }
 
 
+function validatePrivacyCheckbox() {
+    let privacyCheckbox = document.getElementById('privacy-checkbox');
+    if (!privacyCheckbox.checked) {
+        checkboxAlert('You must accept the Privacy Policy.');
+        return false;
+    }
+    removeInputAlert('privacy-checkbox');
+    return true;
+}
+
+
+
 function inputAlert(inputId, message) {
     let inputElement = document.getElementById(inputId);
     let errorElement = document.createElement('p');
@@ -135,11 +147,36 @@ function inputAlert(inputId, message) {
 }
 
 
+function checkboxAlert(message) {
+    let checkboxGroup = document.getElementById('register-checkbox-group');
+    let errorElement = document.createElement('p');
+    errorElement.classList.add('error-message');
+    errorElement.textContent = message;
+
+    let existingError = checkboxGroup.querySelector('.error-message');
+    if (existingError) {
+        checkboxGroup.removeChild(existingError);
+    }
+
+    checkboxGroup.appendChild(errorElement);
+}
+
+
+
 function removeInputAlert(inputId) {
     let inputElement = document.getElementById(inputId);
     let errorElement = inputElement.nextElementSibling;
     if (errorElement && errorElement.classList.contains('error-message')) {
         inputElement.parentNode.removeChild(errorElement);
+    }
+}
+
+function removeInputAlert(inputId) {
+    let inputElement = document.getElementById(inputId);
+    let parentElement = inputElement.closest('.form-group') || inputElement.closest('.checkbox-group');
+    let errorElement = parentElement.querySelector('.error-message');
+    if (errorElement) {
+        parentElement.removeChild(errorElement);
     }
 }
 
@@ -198,3 +235,11 @@ async function addUserToDatabase(userData) {
 
 
 
+// DELETE LATER ON!!!
+function fillForm() {
+    document.getElementById('name').value = 'Max Mustermann';
+    document.getElementById('email').value = 'max.mustermann@example.com';
+    document.getElementById('password').value = 'password123';
+    document.getElementById('confirmPassword').value = 'password123';
+    document.getElementById('privacy-checkbox').checked = true;
+}

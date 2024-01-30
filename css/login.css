@@ -249,6 +249,11 @@ body {
     margin-top: 5px;
 }
 
+#checkbox-label {
+    display: flex;
+    gap: 10px;
+}
+
 
 
 

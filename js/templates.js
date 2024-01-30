@@ -64,14 +64,14 @@ function registerHTML() {
         <div class="form-group">
             <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
         </div>
-        <div class="checkbox-group">
-            <label>
-                <input type="checkbox" name="privacy">
-                I accept the <span class="privacy-policy">Privacy Policy</span>
-            </label>
+        <div id="register-checkbox-group" class="checkbox-group">
+          <label id="checkbox-label">
+          <input id="privacy-checkbox" type="checkbox" name="privacy">
+          <span>I accept the <span class="privacy-policy">Privacy Policy</span></span>
+          </label>
         </div>
         <div class="button-group">
-            <button type="submit">Sign Up</button>
+          <button type="submit">Sign Up</button>
         </div>
       </form>    
     </div>
