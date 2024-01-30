@@ -116,21 +116,21 @@
             <div id="add-task-sub-container">
               <span class="add-task-form-title">Subtasks</span>
               <div class="add-task-subtask-input-container">
-                <input id="add-task-subtask-input" class="add-task-form-input" type="text" placeholder="Add new subtask" />
+                <input id="add-task-subtask-input" class="add-task-form-input" type="text" placeholder="Add new subtask" onclick="activateCheckCancelButtons()"/>
                 <div id="add-task-active-subtask-icon-box" class="d-none">
-                  <img src="assets/img/cancel_icon.png" alt="Cancel" onclick="clearSubtaskInput()" />
+                  <img src="assets/img/subtask_cancel_icon.png" alt="Cancel" onclick="clearSubtaskInput()" />
                   <img src="assets/img/subtask_divider.png" alt="Divider" />
-                  <img src="assets/img/check_icon_black.png" alt="Check" onclick="addSubtask()" />
+                  <img src="assets/img/subtask_check_icon.png" alt="Check" onclick="addSubtask()" />
                 </div>
-                <div id="add-task-create-subtask-icon-box" onclick="setFocusSubtaskInput()">
-                  <img id="add-task-create-subtask-icon" src="assets/img/plus_icon.png" alt="" />
+                <div id="add-task-create-subtask-icon-box">
+                  <img id="add-task-create-subtask-icon" src="assets/img/subtask_add_icon.png" onclick="activateCheckCancelButtons()" alt="" />
                 </div>
               </div>
-              <div id="add-task-subtasks-container"></div>
+              <ul id="add-task-subtasks-container"></ul>
             </div>
           </div>
         </div>
-      </form>
+      
 
       <div id="add-task-overlay-footer">
         <div id="add-task-requirement-footer">

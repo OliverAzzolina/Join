@@ -1,6 +1,7 @@
 // let contacts = []; <--- Moved to arrays.js
 let contactList = [];
 let contactLetterGroup = [];
+
 async function init() {
   await loadUserData();
   loadContacts();
@@ -18,19 +19,6 @@ function generateSidebar() {
   let sidebar = document.getElementById("sidebar-container");
   sidebar.innerHTML = sidebarHTML();
 }
-
-
-/* async function loadContactsFromStorage() {
-  try {
-    //contacts = JSON.parse(await getItem('contacts'));
-    contacts = user.userContacts;
-  } catch (e) {
-    console.warn("loading error:", e);
-  }
-  sortContacts();
-  loadContacts();
-  }
- */
 
 //LOAD Contacts
 function loadContacts() {

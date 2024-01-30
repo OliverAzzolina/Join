@@ -76,7 +76,7 @@ function setChecked(j, i, subTasksDone){
   
 function setUnChecked(j, i, subTasksDone){
     subTasksDone.checked = false;
-    document.getElementById(`detailSub${j}`).src = 'assets/img/check_icon_white.png';
+    document.getElementById(`detailSub${j}`).src = 'assets/img/check_unchecked.png';
 }
 
 function checkIfSubsDone(i){

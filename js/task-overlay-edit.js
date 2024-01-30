@@ -138,8 +138,10 @@ function addSubtaskEditOverlay(i){
 
 
 function editSubtask(i){
+    if(!temporarySubtasks.length == 0){
     document.getElementById(`editable-subtask${i}`).style.display = "none";
     document.getElementById(`editSubtaskContainer${i}`).style.display ="flex";
+    }
 }
 
   

@@ -40,7 +40,7 @@ function loadContactList(){
   for (let i = 0; i < contacts.length; i++) {
       //let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
       let contact = contacts[i];
-      let initials = getInitials(contact.firstName, contact.lastName)
+      let initials = contact.firstName.charAt(0) + contact.lastName.charAt(0);
       let userColor = contact.userColor;
       let firstName = contact.firstName;
       let lastName = contact.lastName;
@@ -48,10 +48,6 @@ function loadContactList(){
       contactList.innerHTML += renderContacts(i, userColor, firstName, lastName, initials);
   }
     sortContacts();
-}
-
-function getInitials(firstName, lastName) {
-  return firstName.slice[0] + lastName.slice[1];
 }
 
 
