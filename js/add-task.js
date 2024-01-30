@@ -2,6 +2,7 @@ selectedPriority = 'medium';
 subtaskTempArray = [];
 subtaskDoneTempArray = [];
 contacts = [];
+assignedToTempArray = [];
 
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM loaded');
@@ -235,7 +236,6 @@ function attemptRemoveSubtask(subtaskId, isEditing) {
   removeSubtask(subtaskId); // Aufruf der ursprünglichen Löschfunktion
 }
 
-
 function updateIconsToNormal(subtaskElement) {
   var iconsContainer = subtaskElement.querySelector('.add-task-subtask-icons');
   iconsContainer.innerHTML = `
@@ -245,15 +245,13 @@ function updateIconsToNormal(subtaskElement) {
   `;
 }
 
-
-
 function addTask(event) {
   event.preventDefault();
 
   var taskData = {
     title: document.getElementById('add-task-title-input').value,
     description: document.getElementById('add-task-description-input').value,
-    assignedto: [],
+    assignedto: assignedToTempArray,
     duedate: document.getElementById('add-task-date-input').value,
     prio: selectedPriority,
     category: getCategoryValue(),
@@ -261,10 +259,10 @@ function addTask(event) {
     subTasksDone: getSubTasksDone(),
     status: "in-progress",
   };
+  console.log(taskData)
   tasks.push(taskData);
   saveTask();
 }
-
 
 function getCategoryValue() {
   var categoryDropdown = document.querySelector('.add-task-form-dropdown');
@@ -274,7 +272,6 @@ function getCategoryValue() {
     return null;
   }
 }
-
 
 function getSubTasksDone() {
   returnArray = [];
@@ -287,20 +284,10 @@ function getSubTasksDone() {
   return returnArray;
 };
 
-
 function saveTask() {
   setItem('tasks', JSON.stringify(tasks));
   console.log("Task gespeichert");
 }
-
-
-
-
-
-
-
-
-
 
 
 // ADD TASK FUNCTIONS
@@ -318,10 +305,9 @@ function showDropdownContacts() {
   let dropdown = document.getElementById('assigned-editors');
   if (dropdown.style.display == 'none') {
     dropdown.style.display = 'block';
-    clearAssignedTo();
   } else {
     dropdown.style.display = 'none';
-    //addAssignedEditors();
+    addAssignedEditors();
   }
 }
 
@@ -330,28 +316,29 @@ function addAssignedEditors() {
   let showAssignedEditors = document.getElementById('show-assigned-editors-container');
   for (let i = 0; i < contacts.length; i++) {
     const checkedEditor = contacts[i];
-    let randomColor = '#' + checkedEditor['randomColor'];
-    let initials = checkedEditor['name'].split(" ").map((n) => n[0]).join("");
+    let userColor = checkedEditor.userColor;
+    let firstName = checkedEditor.firstName;
+    let lastName = checkedEditor.lastName;
+    let initials = checkedEditor.firstName.charAt(0) + checkedEditor.lastName.charAt(0);
     let checkbox = document.getElementById(`checkbox${i}`).checked;
     if (checkbox == true) {
       showAssignedEditors.innerHTML += `
-      <div id="editor${i}" class="drop-initials" style="background-color: ${randomColor}">${initials}</div>
+      <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
       `;
+      pushAssignedToAdd(initials, userColor, firstName, lastName)
     }
   }
 }
 
 
-function clearAssignedTo() {
-  document.getElementById('show-assigned-editors-container').innerHTML = '';
-}
-
-
-function setUnAssigned(i) {
-  let assignedContact = document.getElementById(`assigned-contact${i}`);
-  let checkImg = document.getElementById(`checked${i}`);
-  assignedContact.style = "color: black";
-  checkImg.src = "assets/img/check_icon_white.png";
+function pushAssignedToAdd(initials, userColor, firstName, lastName) {
+  let assignedToTask = {
+    firstName: firstName,
+    lastName: lastName,
+    initials: initials,
+    userColor: userColor,
+  };
+  assignedToTempArray.push(assignedToTask);
 }
 
 
@@ -389,12 +376,18 @@ function loadContactList() {
     sortContacts();
 }
 
-function setAssigned(i) {
-  let assignedContact = document.getElementById(`assigned-contact${i}`);
-  let checkImg = document.getElementById(`checked${i}`);
-  assignedContact.style = "background-color: #2A3647; color: white; border-radius: 10px"
-  checkImg.src = "/assets/img/icons/check_button_checked.png";
+
+function setAssigned(i){
+  document.getElementById(`assigned-contact${i}`).style = "background-color: #2A3647; color: white";
+  document.getElementById(`checked${i}`).src ="assets/img/check_checked.png";
 }
+
+
+function setUnAssigned(i){
+  document.getElementById(`assigned-contact${i}`).style = "color: black";;
+  document.getElementById(`checked${i}`).src ="assets/img/check_unchecked.png";
+}
+
 
 //ADD SUBTASK START
 function activateCheckCancelButtons(){
@@ -485,10 +478,12 @@ function createSubtasksDoneArray(){
   }
 }
 
+
 function showIcons(i){
   document.getElementById(`edit-task-active-subtask-icon-box${i}`).style.opacity = 1;
  }
  
+
  function hideIcons(i){
      document.getElementById(`edit-task-active-subtask-icon-box${i}`).style.opacity = 0;
  }

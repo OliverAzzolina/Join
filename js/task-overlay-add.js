@@ -98,9 +98,7 @@ function addAssignedEditorsAddOverlay() {
 
 function checkIfContactCheckboxChecked(checkedEditor, i) {
   let checkbox = document.getElementById(`checkbox${i}`).checked;
-  let showAssignedEditors = document.getElementById(
-    "show-assigned-editors-container"
-  );
+  let showAssignedEditors = document.getElementById( "show-assigned-editors-container");
   if (checkbox == true) {
     const checkedEditor = contacts[i];
     let firstName = checkedEditor.firstName;
