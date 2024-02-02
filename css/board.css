@@ -1,7 +1,6 @@
 body {
   font-family: "Inter";
   margin: 0;
-
   background-color: #f6f7f8;
 }
 
@@ -77,8 +76,7 @@ body {
 .board-section {
   display: flex;
   gap: 26px;
-  height: 688px;
-  overflow: auto;
+
   padding: 0px 64px 32px 64px;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -94,6 +92,7 @@ body {
   flex-direction: column;
   min-width: 20%;
   gap: 26px;
+
 }
 
 .todos-header {
@@ -165,7 +164,6 @@ body {
   width: 100vw;
   height: 100vh;
   top: 0;
-
 }
 
 .detail-todo-card {
@@ -358,6 +356,7 @@ ul li div{
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
 }
 
 .mini-logo {
@@ -436,14 +435,14 @@ ul li div{
   display: flex;
   flex-direction: column;
   gap: 8px;
-  
+  width: 45%;
 }
 
 #add-task-overlay-right{
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 440px;
+  width: 45%;
 }
 
 #add-task-headline {
@@ -466,7 +465,7 @@ ul li div{
 #add-task-title-container {
   display: flex;
   flex-direction: column;
-  width: 440px;
+  width: 100%;
   gap: 8px;
   margin-bottom: 12px;
 }
@@ -482,7 +481,7 @@ ul li div{
 #add-task-description-container{
   display: flex;
   flex-direction: column;
-  width: 440px;
+  width: 100%;
   gap: 8px;
   margin-top: 12px;
   margin-bottom: 12px;
@@ -491,7 +490,7 @@ ul li div{
 #add-task-assigned-to-container{
   display: flex;
   flex-direction: column;
-  width: 440px;
+  width: 100%;
   box-sizing: border-box;
   gap: 8px;
   margin-top: 12px;
@@ -503,6 +502,7 @@ ul li div{
   gap: 8px;
   margin-top: 12px;
   margin-bottom: 12px;
+  width: 100%;
 }
 
 #add-task-category-container{
@@ -531,7 +531,7 @@ ul li div{
 }
 
 .add-task-form-input {
-  width: 440px;
+  width: 100%;
   padding: 12px 21px;
   gap: 10px;
   border-radius: 10px;
@@ -551,7 +551,7 @@ input::placeholder {
 
 .add-task-form-dropdown {
   display: flex;
-  width: 440px;
+  width: 100%;
   padding: 12px 16px;
   justify-content: space-between;
   align-items: center;
@@ -622,7 +622,7 @@ cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 440px;
+  width: 100%;
   height: 88px;
   gap: 16px;
 }
@@ -639,7 +639,7 @@ cursor: pointer;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding: 12px 16px 12px 16px;
-  width: 440px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -779,7 +779,7 @@ cursor: pointer;
 
 #task-splitter{
   width: 0;
-  height: 424px;
+  height: 90%;
   border: solid 1px #D1D1D1;
 }
 
@@ -1034,6 +1034,14 @@ border-radius: 50%;
   display: none;
 }
 
+#header-container{
+  z-index: 995;
+}
+
+#sidebar-container{
+  z-index: 996;
+}
+
 @media screen and (max-width: 1200px) {
   #board-header-top{
     flex-direction: column;
@@ -1049,6 +1057,48 @@ border-radius: 50%;
   #board-section{
     align-items: unset;
   }
+
+  ::-webkit-scrollbar{
+    display: none;
+  }
+  #add-task-overlay-left {
+  width: 100%;
+  align-items: center;
+  }
+  #add-task-title-container{
+    width: 100%;
+  }
+  #add-task-title-input{
+    width: 100%;
+  }
+  #add-task-description-container{
+    width: 100%;
+  }
+  #add-task-description-input{
+    width: 100%;
+  }
+  #add-task-assigned-to-container{
+    width: 100%;
+  }
+  #contacts-dropdown{
+    width: 100%;
+  }
+
+  #add-task-overlay-right{
+    width: 100%;
+  }
+  #add-task-date-container{
+    width: 100%;
+  }
+  #add-task-date-input{
+    width: 100%;
+  }
+  #add-task-form-btn-container{
+    width: 100%;
+  }
+  #add-new-task-category{
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 1160px) {
@@ -1059,16 +1109,55 @@ border-radius: 50%;
   #board{
     width: auto;
   }
+
+  #input-container-tasks{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #task-splitter{
+    display: none;
+  }
+
+  #add-task-container{
+    justify-content: unset;
+    overflow: scroll;
+    width: 90%;
+  }
+
 }
 
 @media screen and (max-width: 1050px) {
   #board{
     margin-left: 0;
     width: 100%;
+    padding-bottom: 400px;
+  }
+
+  #header-container{
+    z-index: 995;
   }
 }
 
 @media screen and (max-width: 667.5px) {
+  #edit-input-container-tasks{
+    width: 100%;
+  }
+.edit-task-form-input{
+  width: 100%;
+}
+
+#edit-task-overlay{
+  width: 90%;
+}
+  .detail-todo-card{
+    width: 90%;
+  }
+
+  #add-task-sub-container{
+    width: 100%;
+  }
+
   .todos-section{
     width: 100%;
   }
@@ -1090,6 +1179,103 @@ border-radius: 50%;
   #board-header div input{
     width: 100%;
     background-position: 95%;
-  }   
+  }
+
+  .todos-container{
+    flex-direction: row;
+    overflow-x: scroll;
+  }
+
+  main{
+    height: 100%;
+    margin-top: 96px;
+
+  }
   
+  #header-container{
+    z-index: 995;
+  }
+
+.board-section{
+  height: auto;
+}
+  .todo-card{
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+
+  #add-task-prio-container{
+    height: 100%;
+  }
+  #add-task-form-btn-container{
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .add-task-form-btn{
+    width: 100%;
+  }
+
+  #add-task-headline{
+    font-size: 32px;
+  }
+
+  #add-task-overlay-footer{
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  .add-task-buttons{
+    flex-direction: column;
+    width: 80%;
+  }
+
+  .cancel-button{
+    width: 100%;
+    justify-content:center;
+    gap: 16px;
+  }
+
+  .create-button{
+    width: 100%;
+    justify-content:center;
+    gap: 16px;
+  }
+
+  #add-task-requirement-footer{
+    margin-bottom: 16px;
+  }
+
+  #add-task-prio-container{
+    width: 100%;
+  }
+}
+
+.change-task-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.change-task-status-button{
+  width: 160px;
+    height: 32px;
+    background-color: #2a3647;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.change-task-status-button:hover{
+  cursor: pointer;
+  background-color: #29abe2;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
 }

@@ -197,11 +197,14 @@ function generateOverlay(i) {
       <span class="f-s20-w400">Assigned to:<br><div id="detailAssignedTo"></div></span><br>
       <span class="f-s20-w400">Subtasks<ul id="checklistSubDetail"></ul></span>
       <div class="overlay-buttons">
+        <button onclick="openChangeTaskPopup(${i})" onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="assets/img/delete_icon.png">Change</button>
+        <div class="overlay-buttons-splitter"></div>
         <button onclick="deleteTask(${i})" onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="assets/img/delete_icon.png">Delete</button>
         <div class="overlay-buttons-splitter"></div>
         <button onclick="openEditOverlay(${i})" onmouseover="hover('edit-img')" onmouseout="unhover('edit-img')"><img id="edit-img" src="assets/img/edit_icon.png">Edit</button>
       </div>
-      </div>
+      <div id="change-task-buttons" class="change-task-buttons"></div>
+  </div>
       `;
 }
 
