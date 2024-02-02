@@ -13,8 +13,8 @@ body {
     position: absolute;
     width: 100px;
     height: 122px;
-    top: 80px;
-    left: 77px;
+    top: 19px;
+    left: 27px;
 }
 
 .logo-animation {
@@ -38,6 +38,14 @@ body {
         left: 77px;
     }
 }
+
+/* 
+    top: 19px;
+    left: 27px;
+    
+    top: 80px;
+    left: 77px;
+*/
 
 .init-fade-in {
     opacity: 0;
