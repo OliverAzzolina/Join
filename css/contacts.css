@@ -8,16 +8,16 @@ main {
   display: flex;
   justify-content: center;
   margin-left: 232px;
-  margin-top: 40px;
+  height: 100vh;
 }
 
 .left {
   width: 40%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: column;
-  height: 100vh;
+  padding-top: 110px;
   box-sizing: border-box;
   background-color: white;
 }
@@ -26,7 +26,7 @@ main {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 32px 24px 32px 24px;
+  padding: 0px 24px 0px 24px;
   box-sizing: border-box;
   overflow-y: auto; /* oder overflow: scroll; */
   max-height: 800px; /* Setze hier die gewünschte maximale Höhe ein */
@@ -37,14 +37,14 @@ main {
   display: flex;
   flex-direction: column;
   background-color: rgb(246, 247, 248);
-  padding-top: 100px;
+  padding-top: 150px;
   padding-left: 42px;
 }
 
 .add-contact-button {
   background-color: rgb(42, 54, 71);
   color: white;
-  width: 352px;
+  width: 90%;
   height: 56px;
   border-radius: 10px;
   border: none;
@@ -68,16 +68,15 @@ main {
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
-  height: 78px;
+  height: 48px;
   gap: 8px;
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
-  padding: 17px 36px 17px 36px;
 }
 
 .contacts-splitter{
-  width: 80%;
+  width: 100%;
   border: 1px solid #D1D1D1;
 }
 
@@ -94,18 +93,20 @@ main {
   align-items: center;
   justify-content: flex-start;
   gap: 35px;
-  width: 80%;
+  width: 100%;
   height: 78px;
   border-radius: 10px;
   cursor: pointer;
   box-sizing: border-box;
-  padding: 15px 24px 15px 24px;
 }
 
 .contact a {
   text-decoration: none;
   color: #007cee;
   font-size: 16px;
+  overflow: hidden; 
+  overflow-wrap: break-word;
+  max-width: 290px;
 }
 
 .contact-hover:hover {
@@ -118,6 +119,7 @@ main {
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
+  overflow: hidden;
 }
 
 .name-logo {
@@ -468,22 +470,22 @@ main {
 
   main {
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-    height: 100vh;
+    margin: 0;
     margin-top: 96px;
-    margin-left: 12px;
+    margin-bottom: 80px;
+    align-items: unset;
   }
 
   .left {
-    width: 453px;
+    width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
     padding: 32px 24px 32px 24px;
     box-sizing: border-box;
-    margin-top: 100px;
+    justify-content: unset;
+
   }
 
   .add-contact-button {
@@ -668,4 +670,38 @@ main {
     z-index: 999999;
   }
   
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  padding: 14px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #A8A8A8;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 496px) {
+  .contact a{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .contact {
+    gap: 16px;
+  }
+
+  .contact-name {
+    font-size: 16px;
+  }
 }
