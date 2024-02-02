@@ -16,5 +16,6 @@ function clearDataBase() {
 
 
 function generateRandomColor(){
-    return randomColor = Math.floor(Math.random()*16777215).toString(16);
+    let randomColor = Math.floor(Math.random()*16777215).toString(16);
+    return "#" + randomColor
   }
