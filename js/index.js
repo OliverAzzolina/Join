@@ -86,7 +86,7 @@ function validateForm() {
 function validateName() {
     let name = document.getElementById('name').value.trim();
     if (!/^[A-Za-z]{3,}\s[A-Za-z]{3,}$/.test(name)) {
-        inputAlert('name', 'Name must consist of two words, each at least 3 characters long.');
+        inputAlert('name', 'Two words (Firstname Lastname), minimum 3 letters each.');
         return false;
     }
     removeInputAlert('name');
