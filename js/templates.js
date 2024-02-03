@@ -51,7 +51,7 @@ function registerHTML() {
       <img src="assets/img/arrow.png" alt="arrow" id="arrow" onclick="switchToLogin()">
       <h2>Sign Up</h2>
       <div class="form-underline"></div>
-      <form id="registrationForm">
+      <form id="registration-Form">
         <div class="form-group">
             <input type="text" id="name" placeholder="Name" required>
         </div>
