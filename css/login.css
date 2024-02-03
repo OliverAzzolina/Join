@@ -169,7 +169,7 @@ body {
 .form-group input {
     width: 100%;
     padding: 10px;
-    padding-left: 40px; 
+    padding-left: 15px;
     margin-bottom: 10px;
     border-radius: 12px;
     border: 1px solid #ccc; 
@@ -204,6 +204,14 @@ body {
     margin-top: 45px;
 }
 
+.button-group button:hover {
+    background-color: #29ABE2;
+    border: 2px solid #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+
 
 .footer {
     position: absolute;
@@ -234,6 +242,7 @@ body {
     background-color: #29ABE2;
     border: 2px solid #29ABE2;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
 }
 
 #guest-login-btn {
@@ -249,12 +258,15 @@ body {
     color: #29ABE2;
     border: 2px solid #29ABE2;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
 }
 
 .error-message {
     color: red;
     font-size: 0.8em;
-    margin-top: 5px;
+    margin-top: 0px;
+    margin-left: 11px;
+    margin-block-end: 0;
 }
 
 #checkbox-label {
@@ -300,6 +312,7 @@ body {
     position: absolute;
     padding-top: 77px;
     margin-left: -35px;
+    cursor: pointer;
 }
 
 
@@ -396,6 +409,7 @@ body {
         align-items: center;
         flex-direction: column;
     }
+
     .button-group button {
         padding: 10px 20px;
         border-radius: 12px;
@@ -406,6 +420,7 @@ body {
         width: 180px;
         height: 51px;
         z-index: 9999999;
+        cursor: pointer;
     }
 
     .footer {
