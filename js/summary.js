@@ -3,6 +3,44 @@ function init() {
     generateSidebar();
 }
 
+async function getUserData() {
+    let userId = localStorage.getItem("userId");
+    let usersJson = await getItem('users');
+    let users = JSON.parse(usersJson);
+    return users.find(user => user.userId === userId);
+}
+
+async function getTaskData() {
+    let tasksJson = await getItem('tasks');
+    console.log(JSON.parse(tasksJson));
+    return JSON.parse(tasksJson);
+}
+
+async function generateSummary() {
+    let tasks = await getTaskData()
+    let user = await getUserData()
+    let toDoCounter = getElementById('to-do-counter');
+    let doneCounter = getElementById('done-counter');
+    let urgentCounter = getElementById('urgent-counter');
+    let urgentDeadline = getElementById('urgent-deadline');
+    let tibCounter = getElementById('tib-counter');
+    let tipCounter = getElementById('tip-counter');
+    let userGreetingName = getElementById('user-greeting-name');
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 function generateHeader() {
     var header = document.getElementById('header-container');
     header.innerHTML = headerHTML();
