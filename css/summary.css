@@ -5,7 +5,7 @@ body {
 }
 
 
-.main-content {
+#main-container {
     width: 560px;
     height: auto; 
     color: rgb(66, 66, 213);
