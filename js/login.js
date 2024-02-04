@@ -12,7 +12,7 @@ async function loginUser() {
     if (user) {
         console.log('User found:', user.email);
         localStorage.setItem("userId", user.userId);
-        loadSummary();
+        window.location.href = 'summary.html';
     } else {
         console.error('User not found.');
     }
@@ -24,9 +24,6 @@ async function findUser(email, password) {
         return users.find(user => user.email === email && user.password === password);
 }
 
-function loadSummary() {
-    window.location.href = 'summary.html';
-}
 
 
 //const urlParams = new URLSearchParams(window.location.search);
