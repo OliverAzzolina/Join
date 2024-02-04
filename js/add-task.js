@@ -317,6 +317,7 @@ function addAssignedEditors() {
   let showAssignedEditors = document.getElementById('show-assigned-editors-container');
   for (let i = 0; i < contacts.length; i++) {
     const checkedEditor = contacts[i];
+    let userId = checkedEditor.userId;
     let userColor = checkedEditor.userColor;
     let firstName = checkedEditor.firstName;
     let lastName = checkedEditor.lastName;
@@ -326,14 +327,15 @@ function addAssignedEditors() {
       showAssignedEditors.innerHTML += `
       <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
       `;
-      pushAssignedToAdd(initials, userColor, firstName, lastName)
+      pushAssignedToAdd(userId, initials, userColor, firstName, lastName)
     }
   }
 }
 
 
-function pushAssignedToAdd(initials, userColor, firstName, lastName) {
+function pushAssignedToAdd(userId, initials, userColor, firstName, lastName) {
   let assignedToTask = {
+    userId: userId,
     firstName: firstName,
     lastName: lastName,
     initials: initials,
