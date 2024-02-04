@@ -3,10 +3,12 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 function init() {
-    generateLogin()
+    generateLogin();
+    loadLoginListeners();
 }
 
-async function changeToRegister() {
+
+async function switchToRegister() {
     removeInitFadeIn();
     toggleFadeIn('login-container');
     toggleFadeOut('login-container');
@@ -23,6 +25,7 @@ async function switchToLogin() {
     generateLogin();
     removeLogoTransition();
     toggleFadeIn('login-container');
+    loadLoginListeners();
 }
 
 function removeLogoTransition() {
@@ -232,39 +235,6 @@ async function addUserToDatabase(userData) {
         console.error('Error adding user:', error);
     }
 }
-
-
-function loadLoginListeners() {
-    document.getElementById('login-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        loginUser();
-    });
-}
-
-
-function loginUser() {
-    let email = document.getElementById('email-input').value.trim();
-    let password = document.getElementById('password-input').value.trim();
-    let user = findUser(email, password);
-    if (user) {
-        console.log('User found:', user);
-    } else {
-        alert('User not found.');
-    }
-}
-
-
-async function findUser(email, password) {
-    try {
-        let usersJson = await getItem('users');
-        let users = JSON.parse(usersJson);
-        return users.find(user => user.email === email && user.password === password);
-    } catch (error) {
-        console.error('Error finding user:', error);
-    }
-}
-
-
 
 
 
