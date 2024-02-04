@@ -105,17 +105,19 @@ function checkIfContactCheckboxChecked(checkedEditor, i) {
     let lastName = checkedEditor.lastName;
     let userColor = checkedEditor.userColor;
     let initials = checkedEditor.firstName[0] + checkedEditor.lastName[0];
+    let userId = checkedEditor.userId;
     showAssignedEditors.innerHTML += `<div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>`;
-    pushAssignedToAddOverlay(initials, userColor, firstName, lastName);
+    pushAssignedToAddOverlay(initials, userColor, firstName, lastName, userId);
   }
 }
 
-function pushAssignedToAddOverlay(initials, userColor, firstName, lastName) {
+function pushAssignedToAddOverlay(initials, userColor, firstName, lastName, userId) {
   let assignedToTask = {
     firstName: firstName,
     lastName: lastName,
     initials: initials,
     userColor: userColor,
+    userId: userId,
   };
   temporaryAssignedTo.push(assignedToTask);
 }

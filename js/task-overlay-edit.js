@@ -20,15 +20,12 @@ function loadTaskData(i) {
 }
 
 function clearAssignedTo(index) {
-  document.getElementById("show-assigned-editors-edit-container").innerHTML =
-    "";
+  document.getElementById("show-assigned-editors-edit-container").innerHTML ="";
   tasks[index]["assignedto"].splice(0, tasks[index]["assignedto"].length);
 }
 
 function renderAssignedToEdit(index) {
-  let showAssignedEditors = document.getElementById(
-    `show-assigned-editors-edit-container`
-  );
+  let showAssignedEditors = document.getElementById(`show-assigned-editors-edit-container`);
 
   for (let i = 0; i < tasks[index]["assignedto"].length; i++) {
     const checkedEditor = tasks[index]["assignedto"][i];
@@ -39,11 +36,9 @@ function renderAssignedToEdit(index) {
 }
 
 function saveTask(i) {
-  refreshTasks();
+
   tasks[i]["title"] = document.getElementById("edit-task-title-input").value;
-  tasks[i]["description"] = document.getElementById(
-    "edit-task-description-input"
-  ).value;
+  tasks[i]["description"] = document.getElementById("edit-task-description-input").value;
   tasks[i]["duedate"] = document.getElementById("edit-task-form-input").value;
   tasks[i]["prio"];
   tasks[i]["assignedTo"];
@@ -53,6 +48,7 @@ function saveTask(i) {
   setItem("tasks", JSON.stringify(tasks));
   loadTasksfromStorage();
   closeEditOverlay();
+  refreshTasks();
   openTaskDetails(i);
 }
 

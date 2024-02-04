@@ -321,23 +321,25 @@ function addAssignedEditors() {
     let firstName = checkedEditor.firstName;
     let lastName = checkedEditor.lastName;
     let initials = checkedEditor.firstName.charAt(0) + checkedEditor.lastName.charAt(0);
+    let userId = checkedEditor.userId;
     let checkbox = document.getElementById(`checkbox${i}`).checked;
     if (checkbox == true) {
       showAssignedEditors.innerHTML += `
       <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
       `;
-      pushAssignedToAdd(initials, userColor, firstName, lastName)
+      pushAssignedToAdd(initials, userColor, firstName, lastName, userId)
     }
   }
 }
 
 
-function pushAssignedToAdd(initials, userColor, firstName, lastName) {
+function pushAssignedToAdd(initials, userColor, firstName, lastName, userId) {
   let assignedToTask = {
     firstName: firstName,
     lastName: lastName,
     initials: initials,
     userColor: userColor,
+    userId : userId
   };
   assignedToTempArray.push(assignedToTask);
 }

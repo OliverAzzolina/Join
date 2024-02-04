@@ -44,7 +44,7 @@ function loadContactList(){
       let userColor = contact.userColor;
       let firstName = contact.firstName;
       let lastName = contact.lastName;
-      let id = contact.userId;
+      let userId = contact.userId;
       contactList.innerHTML += renderContacts(i, userColor, firstName, lastName, initials);
   }
     sortContacts();
@@ -122,10 +122,11 @@ function addAssignedEditors(index){
       let lastName = checkedEditor.lastName;
       let userColor = checkedEditor.userColor;
       let initials = checkedEditor.firstName[0] + checkedEditor.lastName[0];
+      let userId = checkedEditor.userId;
       showAssignedEditors.innerHTML += `
       <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
       `;
-      pushAssignedTo(index, initials, userColor, firstName, lastName);
+      pushAssignedTo(index, initials, userColor, firstName, lastName, userId);
     }
   }
 }
@@ -265,12 +266,13 @@ function slideOutOverlay(i){
 
 
 
-function pushAssignedTo(index, initials, userColor, firstName, lastName){
+function pushAssignedTo(index, initials, userColor, firstName, lastName, userId){
   let assignedToTask = {
     firstName: firstName,
     lastName: lastName,
     initials: initials,
     userColor: userColor,
+    userId: userId
   };
   tasks[index]['assignedto'].push(assignedToTask);
   renderAssignedToCards(index);
