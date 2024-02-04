@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/font.css">
     <script src="/js/templates.js"></script>
     <script src="/js/utils.js"></script>
+    <script src="js/summary.js"></script>
+    <script src="js/storage.js"></script>
 
 
 
@@ -54,15 +56,15 @@
                     <div class="todo-left" onmouseover="changeImage(this)" onmouseout="resetImage(this)">
                         <img src="assets/img/todo_black_icon.png" alt="Icon" class="icon">
                         <div class="text-container">
-                            <span class="number">1</span>
+                            <span id="to-do-counter" class="number">1</span>
                             <span class="label">To-do</span>
                         </div>
                     </div>
                     <div class="done-right" onmouseover="changeImageDoneRight(this)" onmouseout="resetImageDoneRight(this)">
                         <img src="assets/img/done_black_icon.png" alt="Icon" class="icon">
                         <div class="text-container">
-                            <span class="number">1</span>
-                            <span class="label">To-do</span>
+                            <span id="done-counter" class="number">1</span>
+                            <span class="label">Done</span>
                         </div>
                     </div>
                 </div>
@@ -70,7 +72,7 @@
                     <div class="todo2-left">
                         <img src="assets/img/prio_urgent_icon_big.png" alt="Icon" class="icon" onmouseover="changeImage(this)" onmouseout="resetImage(this)">
                         <div class="text-container">
-                            <span class="number">1</span>
+                            <span id="urgent-counter" class="number">1</span>
                             <span class="label">Urgent</span>
                         </div>
                         <div>
@@ -78,28 +80,28 @@
                         </div>   
                     </div>
                     <div class="todo-right">
-                        <span class="date"><b>Oktober 16, 2022</b></span>
+                        <span class="date"><b id="urgent-deadline">Oktober 16, 2022</b></span>
                         <span class="label">Upcomming Deadline</span>
                     </div>
                 </div>
                 <div class="todo1">
                     <div class="to-do">
-                        <span class="number">5</span>
+                        <span id="tib-counter" class="number">5</span>
                         <span class="label">Task in<br> Board</span>
                     </div>
                     <div class="to-do2">
-                        <span class="number">2</span>
+                        <span id="tip-counter" class="number">2</span>
                         <span class="label">Tasks in<br> Prozess</span>
                     </div>    
                     <div class="to-do3">
-                        <span class="number">2</span>
+                        <span id="awaiting-feedback-counter" class="number">2</span>
                         <span class="label">Awaiting Feedback</span>
                     </div>
                 </div>
             </div>
             <div class="greeting-script">
                 <p id="greetingText"></p><br>
-                <p class="name">Sofia Müller</p>
+                <p id="user-greeting-name" class="name">Sofia Müller</p>
             </div>
         </div>
     </div>
