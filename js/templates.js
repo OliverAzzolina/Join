@@ -81,6 +81,67 @@ function registerHTML() {
     </div>`;
 }
 
+function summaryHTML(toDoCounter, doneCounter, urgentCounter, urgentDeadline, tibCounter, tipCounter, awaitingFeedbackCounter, greetingDaytime, userGreetingName) {
+  return /*html*/`
+            <div class="content-container">
+                <div class="summary-content">
+                    <p class="left-text">Join 360</p>
+                    <p class="middle-text">|</p>
+                    <p class="right-text">Key Metrics at a Glance</p>
+                </div> 
+                <div class="todo1">
+                    <div class="todo-left" onmouseover="changeImage(this)" onmouseout="resetImage(this)">
+                        <img src="assets/img/todo_black_icon.png" alt="Icon" class="icon">
+                        <div class="text-container">
+                            <span id="to-do-counter" class="number">${toDoCounter}</span>
+                            <span class="label">To-do</span>
+                        </div>
+                    </div>
+                    <div class="done-right" onmouseover="changeImageDoneRight(this)" onmouseout="resetImageDoneRight(this)">
+                        <img src="assets/img/done_black_icon.png" alt="Icon" class="icon">
+                        <div class="text-container">
+                            <span id="done-counter" class="number">${doneCounter}</span>
+                            <span class="label">Done</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="todo2">
+                    <div class="todo2-left">
+                        <img src="assets/img/prio_urgent_icon_big.png" alt="Icon" class="icon" onmouseover="changeImage(this)" onmouseout="resetImage(this)">
+                        <div class="text-container">
+                            <span id="urgent-counter" class="number">${urgentCounter}</span>
+                            <span class="label">Urgent</span>
+                        </div>
+                        <div>
+                            <p class="middle-text2">|</p>
+                        </div>   
+                    </div>
+                    <div class="todo-right">
+                        <span class="date"><b id="urgent-deadline">${urgentDeadline}</b></span>
+                        <span class="label">Upcomming Deadline</span>
+                    </div>
+                </div>
+                <div class="todo1">
+                    <div class="to-do">
+                        <span id="tib-counter" class="number">${tibCounter}</span>
+                        <span class="label">Task in<br> Board</span>
+                    </div>
+                    <div class="to-do2">
+                        <span id="tip-counter" class="number">${tipCounter}</span>
+                        <span class="label">Tasks in<br> Prozess</span>
+                    </div>    
+                    <div class="to-do3">
+                        <span id="awaiting-feedback-counter" class="number">${awaitingFeedbackCounter}</span>
+                        <span class="label">Awaiting Feedback</span>
+                    </div>
+                </div>
+            </div>
+            <div class="greeting-script">
+                <p id="greetingText"></p>${greetingDaytime}<br>
+                <p id="user-greeting-name" class="name">${userGreetingName}</p>
+            </div>
+        </div>`;
+}
 
 
 // HEADER AND SIDEBAR HTML TEMPLATES
