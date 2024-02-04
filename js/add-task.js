@@ -335,6 +335,7 @@ function addAssignedEditors() {
 
 function pushAssignedToAdd(initials, userColor, firstName, lastName, userId) {
   let assignedToTask = {
+    userId: userId,
     firstName: firstName,
     lastName: lastName,
     initials: initials,

@@ -89,7 +89,22 @@ let preRegisteredContacts = [
     }
 ];
 
-
+async function loadUserData() {
+    users = JSON.parse(await getItem("users"));
+    user = {
+      firstName: users[2].firstName,
+      lastName: users[2].lastName,
+      userColor: users[2].userColor,
+      email: users[2].email,
+      phone: users[2].phone,
+      userId: users[2].userId,
+      password: users[2].password,
+      userContacts: users[2].userContacts,
+      initials: users[2].initials,
+    };
+    contacts = user.userContacts;
+    sortContacts();
+  }
 
 let contacts = [];
 let tasks = [];
