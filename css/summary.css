@@ -4,13 +4,17 @@ body {
     background-color: #f6f7f8;
 }
 
+a {
+    text-decoration: none;
+    color: #29ABE2;
 
+}
 #main-container {
     width: 560px;
-    height: auto; 
+    height: auto;
     color: rgb(66, 66, 213);
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: absolute;
