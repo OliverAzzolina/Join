@@ -12,9 +12,19 @@ async function init() {
 async function getUserData() {
   let userId = localStorage.getItem("userId");
   userId = Number(userId);
+ 
+  if (localStorage.getItem("userId")) {
+    let userId = localStorage.getItem("userId");
+    userId = Number(userId);
+  } else {
+    window.location.href = "index.html";
+  }
+
   let usersJson = await getItem("users");
   let users = JSON.parse(usersJson);
-  return users.find(user => user.userId === userId);
+
+  const validUser = users.find(user => user.userId === userId);
+  return validUser || null;
 }
 
 async function getTaskData() {
@@ -120,7 +130,6 @@ async function awaitingFeedbackCounter() {
     let allTasksInProgressStatus = tasks.filter(task => task.status === "await-feedback");
     let count = allTasksInProgressStatus.length;
     return count;
-    return awaitingFeedbackCounter;
 }
 
 
@@ -139,50 +148,31 @@ function greetingDaytime() {
     return greetingText;
 }
 
-
-
 async function userGreetingName() {
-    user = await getUserData();
-    let userGreetingName = user.firstName + user.lastName;    
-    return userGreetingName;
+  let user = await getUserData();
+  if (user.firstName && !user.lastName) {
+      return user.firstName;
+  } else if (user.firstName && user.lastName) {
+      return `${user.firstName} ${user.lastName}`;
+  }
+}
+
+
+async function XXX() {
+  let users = await getUserData();
+  const userWithFullName = users.find(user => user.firstName && user.lastName);
+  if (userWithFullName) {
+      return `${userWithFullName.firstName} ${userWithFullName.lastName}`;
+  }
+  const fallbackUser = users.find(user => user.email);
+  if (fallbackUser) {
+      return fallbackUser.email;
+  }
+  return "User not found";
 }
 
 
 
-
-
-
-
-
-
-//async function XXX() {
-//  let tasks = await getTaskData();
-//  let user = await getUserData();
-//
-//  generateToDoCounter(tasks, user);
-//
-//  //let toDoCounter = getElementById('to-do-counter');
-//  //let doneCounter = getElementById('done-counter');
-//  //let urgentCounter = getElementById('urgent-counter');
-//  //let urgentDeadline = getElementById('urgent-deadline');
-//  //let tibCounter = getElementById('tib-counter');
-//  //let tipCounter = getElementById('tip-counter');
-//  //let userGreetingName = getElementById('user-greeting-name');
-//}
-//
-//async function generateToDoCounter(tasks, user) {
-//  let userId = localStorage.getItem("userId");
-//  let toDoCounter = document.getElementById("to-do-counter");
-//  let tasksWithUserId = tasks.filter((task) => {
-//    return task.assignedTo && task.assignedTo.some((user) => user && user.userId === userId);
-//  });
-//    toDoCounter.innerHTML = tasksWithUserId.length;
-//}
-//
-//
-//
-//
-//
 function changeImage(element) {
   element.querySelector(".icon").src = "assets/img/todo_white_icon.png";
 }
@@ -198,20 +188,3 @@ function changeImageDoneRight(element) {
 function resetImageDoneRight(element) {
   element.querySelector(".icon").src = "assets/img/done_black_icon.png";
 }
-//
-//function getGreeting() {
-//  let today = new Date();
-//  let hour = today.getHours();
-//
-//  let greetingText = document.getElementById("greetingText");
-//
-//  if (hour >= 5 && hour < 12) {
-//    greetingText.textContent = "Guten Morgen";
-//  } else if (hour >= 12 && hour < 17) {
-//    greetingText.textContent = "Guten Tag";
-//  } else {
-//    greetingText.textContent = "Guten Abend";
-//  }
-//}
-
-//getGreeting();

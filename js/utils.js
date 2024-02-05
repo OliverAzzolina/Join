@@ -29,3 +29,7 @@ function generateSidebar() {
     let sidebar = document.getElementById("sidebar-container");
     sidebar.innerHTML = sidebarHTML();
 }
+  function logout() {
+    localStorage.clear();
+    window.location.href = 'index.html';
+  }
