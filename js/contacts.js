@@ -113,7 +113,6 @@ function groupNames() {
       });
     }
   }
-  console.log(contactList);
 }
 
 //SORT CONTACTS

@@ -219,7 +219,6 @@ function registerUser() {
     
 }
 
-
 function addUserToUserContacts(userData){
     let userContactCard = {
     firstName: userData.firstName,
@@ -242,8 +241,6 @@ async function addUserToDatabase(userData) {
             users = JSON.parse(usersJson);
         }
         addUserToUserContacts(userData);
-        users.push(userData);
-
         await setItem('users', JSON.stringify(users));
         console.log('User successfully registered.');
     } catch (error) {
