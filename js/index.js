@@ -214,9 +214,24 @@ function registerUser() {
         userContacts: preRegisteredContacts,
         initials: `${firstName[0]}${lastName[0]}`
     };
+    
     addUserToDatabase(userData);
+    
 }
 
+
+function addUserToUserContacts(userData){
+    let userContactCard = {
+    firstName: userData.firstName,
+    lastName: userData.lastName+'(Me)',
+    initials: userData.initials,
+    email: userData.email,
+    phone: userData.phone,
+    userColor: userData.userColor,
+    userId: userData.userId,
+    }
+    userData.userContacts.push(userContactCard);
+}
 
 async function addUserToDatabase(userData) {
     try {
@@ -226,7 +241,7 @@ async function addUserToDatabase(userData) {
         if (usersJson) {
             users = JSON.parse(usersJson);
         }
-
+        addUserToUserContacts(userData);
         users.push(userData);
 
         await setItem('users', JSON.stringify(users));
@@ -234,6 +249,7 @@ async function addUserToDatabase(userData) {
     } catch (error) {
         console.error('Error adding user:', error);
     }
+    
 }
 
 

@@ -3,21 +3,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function init() {
-  generateHeader();
+  await loadUserData();
+  generateHeader(userInitials);
   generateSidebar();
   generateSummary();
 }
-
-function generateHeader() {
-  let header = document.getElementById("header-container");
-  header.innerHTML = headerHTML();
-}
-
-function generateSidebar() {
-  let sidebar = document.getElementById("sidebar-container");
-  sidebar.innerHTML = sidebarHTML();
-}
-
 
 async function getUserData() {
   let userId = localStorage.getItem("userId");
@@ -26,9 +16,6 @@ async function getUserData() {
   let users = JSON.parse(usersJson);
   return users.find(user => user.userId === userId);
 }
-
-
-  
 
 async function getTaskData() {
   let tasksJson = await getItem("tasks");

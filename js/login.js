@@ -22,7 +22,9 @@ async function findUser(email, password) {
         let usersJson = await getItem('users');
         let users = JSON.parse(usersJson);
         return users.find(user => user.email === email && user.password === password);
+        
 }
+
 
 
 

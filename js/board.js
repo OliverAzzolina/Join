@@ -3,24 +3,11 @@ let currentDraggedElement;
 async function init(){
     //loadContactsFromStorage();
     await loadUserData();
+    sortContacts();
     loadTasksfromStorage();
-    generateHeader();
+    generateHeader(userInitials);
     generateSidebar();
 }
-
-
-//HTML GENERATION
-function generateHeader() {
-  var header = document.getElementById('header-container');
-  header.innerHTML = headerHTML();
-}
-
-
-function generateSidebar() {
-  var sidebar = document.getElementById('sidebar-container');
-  sidebar.innerHTML = sidebarHTML();
-}
-
 
 //LOAD Tasks from Storage
 async function loadTasksfromStorage(){

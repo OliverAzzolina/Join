@@ -6,30 +6,18 @@ assignedToTempArray = [];
 
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM loaded');
-  generateHeader();
   generateSidebar();
   addEventListener();
   loadUserContacts();
-
   loadTasksfromStorage();
 });
 
 async function loadUserContacts(){
 await loadUserData();
+sortContacts();
 loadContactList();
+generateHeader(userInitials);
 }
-
-//HTML GENERATION
-function generateHeader() {
-  let header = document.getElementById('header-container');
-  header.innerHTML = headerHTML();
-}
-
-function generateSidebar() {
-  let sidebar = document.getElementById('sidebar-container');
-  sidebar.innerHTML = sidebarHTML();
-}
-
 
 //LOAD Tasks from Storage
 async function loadTasksfromStorage(){

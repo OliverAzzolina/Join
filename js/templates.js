@@ -146,16 +146,16 @@ function summaryHTML(toDoCounter, doneCounter, urgentCounter, urgentDeadline, ti
 
 // HEADER AND SIDEBAR HTML TEMPLATES
 
-function headerHTML() {
+function headerHTML(userInitials) {
   return /*html*/`
     <div><p id="header-headline">Kanban Project Management Tool</p></div>
         <div id="header-icons">
-            <span>
+            
                 <img id="help-icon"src="assets/img/header_help_icon.png" alt="help">
-            </span>
-            <span>
-                <img id="login-icon"src="assets/img/header_login_icon.png" alt="" onclick="toggleDropdown()">
-            </span>
+           
+                <button id="login-icon" onclick="toggleDropdown()">${userInitials}</button>
+                
+            
             <div id="dropdownMenu">
             <a href="legal-notice.html">Legal Notice</a>
             <a href="private.html">Private</a>

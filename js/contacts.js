@@ -4,20 +4,11 @@ let contactLetterGroup = [];
 
 async function init() {
   await loadUserData();
+  sortContacts();
   loadContacts();
   //loadContactsFromStorage();
-  generateHeader();
+  generateHeader(userInitials);
   generateSidebar();
-}
-
-function generateHeader() {
-  let header = document.getElementById("header-container");
-  header.innerHTML = headerHTML();
-}
-
-function generateSidebar() {
-  let sidebar = document.getElementById("sidebar-container");
-  sidebar.innerHTML = sidebarHTML();
 }
 
 //LOAD Contacts
@@ -51,7 +42,7 @@ function renderContact(i) {
     const initials = contact.firstName[0] + contact.lastName[0];
     const firstName = contact.firstName;
     const lastName = contact.lastName;
-    const mail = contact.mail;
+    const email = contact.email;
     const userColor = contact.userColor;
     newContactList.innerHTML += generateContact(
       i,
@@ -59,20 +50,20 @@ function renderContact(i) {
       initials,
       firstName,
       lastName,
-      mail,
+      email,
       userColor
     );
   }
 }
 
 //RENDER CONTACT HTML
-function generateContact(i, j, initials, firstName, lastName, mail, userColor) {
+function generateContact(i, j, initials, firstName, lastName, email, userColor) {
   return `
   <div id="contact${i},${j}" class="contact contact-hover" onclick="openContactInfo(${i},${j})">
       <div class="name-logo" style= "background-color: ${userColor}"><span>${initials}</span></div>
       <div class="contact-name">
       <span id="contact${i},${j}-name">${firstName} ${lastName}</span>
-      <a href="mailto:${mail}">${mail}</a>
+      <a href="#">${email}</a>
       </div>    
   </div>
   `;
@@ -85,7 +76,7 @@ function groupNames() {
     const initials = contacts[i].initials;
     const firstName = contacts[i].firstName;
     const lastName = contacts[i].lastName;
-    const mail = contacts[i].mail;
+    const email = contacts[i].email;
     const phone = contacts[i].phone;
     const userColor = contacts[i].userColor;
     const id = contacts[i].userId;
@@ -94,7 +85,7 @@ function groupNames() {
       initials: initials,
       firstName: firstName,
       lastName: lastName,
-      mail: mail,
+      email: email,
       phone: phone,
       userColor: userColor,
     };
@@ -114,7 +105,7 @@ function groupNames() {
             initials: initials,
             firstName: firstName,
             lastName: lastName,
-            mail: mail,
+            email: email,
             phone: phone,
             userColor: userColor,
           },
@@ -160,7 +151,7 @@ function loadContactData(i, j, contactDetail) {
   const initials = contact.firstName[0] + contact.lastName[0];
   const firstName = contacts[i].firstName;
   const lastName = contacts[i].lastName;
-  const mail = contacts[i].mail;
+  const email = contacts[i].email;
   const phone = contacts[i].phone;
   const userColor = contacts[i].userColor;
   const id = contacts[i].userId;
@@ -170,7 +161,7 @@ function loadContactData(i, j, contactDetail) {
     initials,
     firstName,
     lastName,
-    mail,
+    email,
     phone,
     userColor
   );
@@ -254,7 +245,7 @@ function EditContact(i, j) {
   const initials = contact.firstName[0] + contact.lastName[0];
   const firstName = contacts[i].firstName;
   const lastName = contacts[i].lastName;
-  const mail = contacts[i].mail;
+  const email = contacts[i].mail;
   const phone = contacts[i].phone;
   const userColor = contacts[i].userColor;
   const id = contacts[i].userId;
@@ -264,7 +255,7 @@ function EditContact(i, j) {
     initials,
     firstName,
     lastName,
-    mail,
+    email,
     phone,
     userColor
   );
@@ -291,7 +282,7 @@ function renderContactInfo(
   initials,
   firstName,
   lastName,
-  mail,
+  email,
   phone,
   userColor
 ) {
@@ -314,7 +305,7 @@ function renderContactInfo(
         <p id="ci-head">Contact Information</p>
         <div class="email">
           <p>Email</p>
-          <a href="mailto:${mail}">${mail}</a>
+          <a href="mailto:${email}">${email}</a>
         </div>
         <div class="phone">
           <p>Phone</p>
@@ -366,7 +357,7 @@ function generateEditOverlay(
   initials,
   firstName,
   lastName,
-  mail,
+  email,
   phone,
   userColor
 ) {
@@ -394,7 +385,7 @@ function generateEditOverlay(
           <div class="actions-container">
             <div class="add-contact-inputs" >
               <input id="editName" type="text" placeholder="Name" class="edit-input input-icon-name" value="${firstName} ${lastName}" required>
-              <input id="editEmail" type="email" placeholder="Email" class="edit-input input-icon-mail" value="${mail}" required>
+              <input id="editEmail" type="email" placeholder="Email" class="edit-input input-icon-mail" value="${email}" required>
               <input id="editPhone" type="text" placeholder="Phone" class="edit-input input-icon-phone" value="${phone}" required>
             </div>
             <div class="add-contact-buttons">
