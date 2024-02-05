@@ -32,8 +32,6 @@ async function getUserData() {
 
 async function getTaskData() {
   let tasksJson = await getItem("tasks");
-  console.log(JSON.parse(tasksJson));
-  console.log(tasksJson);
   return JSON.parse(tasksJson);
 }
 
