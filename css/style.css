@@ -222,11 +222,10 @@
         display: block;
         width: 32px;
         height: 39.02px;
-        position: absolute;
+        position: fixed; /* Ändern Sie 'absolute' zu 'fixed' */
         top: 20px;
-        left: 23px;
-        gap: 10;
-        z-index: 1000;
+        left: 10px; /* Anpassung basierend auf Ihrer ursprünglichen Angabe */
+        z-index: 1000; /* Stellt sicher, dass das Logo über anderen Elementen liegt */
     }
 
     
