@@ -223,9 +223,10 @@
         width: 32px;
         height: 39.02px;
         position: absolute;
-        top: 19px;
-        left: 10px;
+        top: 20px;
+        left: 23px;
         gap: 10;
+        z-index: 1000;
     }
 
     
