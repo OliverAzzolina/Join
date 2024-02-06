@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacts</title>
+    <title>legal notice</title>
     <link rel="stylesheet" href="/css/contacts.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="css/privacy.css" />
@@ -11,14 +11,43 @@
     <script src="js/utils.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/arrays.js"></script>
-    <script src="js/contacts.js"></script>
+    <link rel="stylesheet" href="./css/header.css">
   </head>
-  <body onload="init()">
+  <body>
     <!-- Header -->
     <div id="header-container"></div>
 
-    <!-- Sidebar -->
-    <div id="sidebar-container"></div>
+    <div class="sidebar">
+      <div>
+          <img class="logo" src="assets/img/logo_white.svg" alt="">
+      </div>
+      <div class="menu-section">
+          <ul>
+              <li>
+                  <img class="icon" src="assets/img/mobile-summary.png" alt="Summary Icon">
+                  <a href="summary.html">Summary</a>
+              </li>
+              <li>
+                  <img class="icon" src="assets/img/mobile-addtask.png" alt="Add Task Icon">
+                  <a href="about.html">Ad Task</a>
+              </li>
+              <li>
+                  <img class="icon" src="assets/img/mobile-board.png" alt="Board Icon">
+                  <a href="board.html">Board</a>
+              </li>
+              <li>
+                  <img class="icon" src="assets/img/mobile-contacts.png" alt="Contacts Icon">
+                  <a href="join.html">Contacts</a>
+              </li>
+          </ul>
+      </div>
+      <li class="footer-section">
+          <a class="footertext" href="./privacy.html">Privacy Policy</a>
+          <a class="footertext" href="./legal-notice.html">Legal Notice</a>
+      </li>
+      
+
+  </div>
 
     <div id="mobile-menu-container">
       <a href="summary.html">
@@ -55,16 +84,15 @@
       </a>
     </div>
     <img src="assets/img/logo_mobile.png" alt="Mobile Logo" id="mobile-logo" />
-
+    <img
+      src="assets/img/arrow.png"
+      alt="Arrow Icon"
+      class="redirect-icon"
+      onclick="redirectToSummary()"
+    />
     <div class="pcontent-container">
       <div class="p-content">
-        <p class="title">Rechtlicher Hinweis</p>
-        <img
-          src="assets/img/arrow.png"
-          alt="Arrow Icon"
-          class="redirect-icon"
-          onclick="redirectToSummary()"
-        />
+        <p class="title">Impresum</p>
 
         <h1>Kontakt</h1>
         <p>

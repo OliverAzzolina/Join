@@ -144,3 +144,13 @@ body {
 .dropdown-menu a:hover {
     background-color: #ddd;
 }
+
+@media screen and (max-width: 1050px) {
+    .sidebar {
+        display: none;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}
