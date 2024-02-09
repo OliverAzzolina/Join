@@ -25,49 +25,54 @@ async function findUser(email, password) {
         
 }
 
+async function guestLogin() {
+    let usersJson = await getItem('users');
+    try {
+        let users = JSON.parse(usersJson);
+        let user = users.find(user => user.userId === 123456);
+        if (user) {
+            localStorage.setItem('userId', user.userId);
+            window.location.href = 'summary.html';
+        } else {
+            await setGuestUser();
+            init();
+        }
+    } catch (error) {
+        console.error('Error parsing users JSON', error);
+    }
+}
 
 
+async function setGuestUser() {
+    let usersJson = await getItem('users');
+    let users = JSON.parse(usersJson);
+    let guestUser = {
+        email: 'GuestUser@test.com',
+        phone: '0171-1234567',
+        userColor: '#ff0000',
+        userId: 123456,
+        firstName: 'Guest',
+        lastName: 'User',
+        initials: 'GU',
+        password: "guest",
+        userContacts: rescueUserArray
+        }
+        users.push(guestUser);
+        await setItem('users', JSON.stringify(users));
+        console.log('Guest user added. Please try again.');
+};
 
-//const urlParams = new URLSearchParams(window.location.search);
-//const msg = urlParams.get('msg');
-//if (msg) {
-//    msgBox.innerHTML = msg;
-//} else {
-//    msgBox.style.display = 'none';
-//}
-//
-//
-//
-//function setupButtonListeners() {
-//    let guestLoginButton = document.getElementById('guestLoginButton');
-//    if (guestLoginButton) {
-//        guestLoginButton.addEventListener('click', function() {
-//            window.location.href = 'summary.html';
-//        });
-//    }
-//
-//    let signUpButton = document.getElementById('signUpButton');
-//    if (signUpButton) {
-//        signUpButton.addEventListener('click', function() {
-//            window.location.href = 'register.html';
-//        });
-//    }
-//}
-//
-//document.addEventListener('DOMContentLoaded', setupButtonListeners);
-//
-//
-//function login() { 
-//    let email = document.getElementById('email').value;
-//    let password = document.getElementById('password').value;
-//    let user = users.find(u => u.email === email && u.password === password);
-//
-//    if (user) {
-//        console.log('user gefunden');
-//        window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt';
-//    } else {
-//        console.log('Login fehlgeschlagen');
-//        alert('Login fehlgeschlagen: Ungültige E-Mail-Adresse oder Passwort.');
-//
-//    }
-//}
+
+async function showUsersOnRemoteStorage() {
+    try {
+        let usersJson = await getItem('users');
+        if (usersJson) {;
+            console.log(usersJson);
+            console.log(JSON.parse(usersJson));
+        } else {
+            console.log("Keine Nutzerdaten gefunden.");
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen oder Parsen der Nutzerdaten:", error);
+    }
+}
