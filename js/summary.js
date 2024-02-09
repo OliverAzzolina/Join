@@ -9,23 +9,26 @@ async function init() {
   generateSummary();
 }
 
+
 async function getUserData() {
-  let userId = localStorage.getItem("userId");
-  userId = Number(userId);
- 
-  if (localStorage.getItem("userId")) {
-    let userId = localStorage.getItem("userId");
-    userId = Number(userId);
-  } else {
+  let userId = Number(localStorage.getItem("userId"));
+
+  if (!userId) {
+    console.log("No user ID found. Redirecting to login page.");
     window.location.href = "index.html";
+    return null;
   }
 
   let usersJson = await getItem("users");
   let users = JSON.parse(usersJson);
 
   const validUser = users.find(user => user.userId === userId);
+
   return validUser || null;
 }
+
+
+
 
 async function getTaskData() {
   let tasksJson = await getItem("tasks");
@@ -150,6 +153,10 @@ function greetingDaytime() {
 
 async function userGreetingName() {
   let user = await getUserData();
+  if (!user) {
+    console.log("User not found.");
+    return "User not found";
+  }
   if (user.firstName && !user.lastName) {
       return user.firstName;
   } else if (user.firstName && user.lastName) {
@@ -158,18 +165,6 @@ async function userGreetingName() {
 }
 
 
-async function XXX() {
-  let users = await getUserData();
-  const userWithFullName = users.find(user => user.firstName && user.lastName);
-  if (userWithFullName) {
-      return `${userWithFullName.firstName} ${userWithFullName.lastName}`;
-  }
-  const fallbackUser = users.find(user => user.email);
-  if (fallbackUser) {
-      return fallbackUser.email;
-  }
-  return "User not found";
-}
 
 
 
