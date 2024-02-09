@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function init() {
     generateLogin();
     loadLoginListeners();
+    checkRemoteStorage();
 }
 
 
@@ -248,6 +249,59 @@ async function addUserToDatabase(userData) {
     }
     
 }
+
+
+async function checkRemoteStorage() {
+    await checkRemoteStorageUsers();
+    await checkRemoteStorageTasks();
+}
+
+
+async function checkRemoteStorageUsers() {
+    try {
+        let usersJson = await getItem('users');
+        if (usersJson && usersJson !== "undefined") {
+            let users = JSON.parse(usersJson);
+            if (!users || users.length < 1) {
+                throw new Error("Users array is empty.");
+            }
+        } else {
+            throw new Error("Users array did not exist. Creating new array. Please reload the page.");
+        }
+    } catch (error) {
+        console.log(error.message);
+        let users = JSON.stringify(rescueUserArray);
+        await setItem('users', users);
+    }
+}
+
+
+async function checkRemoteStorageTasks() {
+    try {
+        let tasksJson = await getItem('tasks');
+        if (tasksJson && tasksJson !== "undefined") {
+            let tasks = JSON.parse(tasksJson);
+            if (!tasks || tasks.length < 1) {
+                throw new Error("Tasks array is empty.");
+            }
+        } else {
+            throw new Error("Tasks array did not exist. Creating new array. Please reload the page.");
+        }
+    } catch (error) {
+        console.log(error.message);
+        let tasks = JSON.stringify(rescueTaskArray);
+        await setItem('tasks', tasks);
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 
