@@ -33,7 +33,7 @@ function loginHTML() {
       </div>
       <div class="button-group">
         <button id="submit-btn" type="submit">Log in</button>
-        <button id="guest-login-btn" type="button" class="guest-login">Guest Log in</button>
+        <button id="guest-login-btn" type="button" class="guest-login" onclick="guestLogin()">Guest Log in</button>
       </div>
     </form>
   </div>
