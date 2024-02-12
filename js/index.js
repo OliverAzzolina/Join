@@ -294,7 +294,6 @@ function registerUser() {
     
 }
 
-
 async function addUserToDatabase(userData) {
         const usersJson = await getItem('users');
         let users = JSON.parse(usersJson);
@@ -317,19 +316,6 @@ function addUserToUserContacts(userData){
     }
     userData.userContacts.push(userContactCard);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
