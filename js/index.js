@@ -298,7 +298,6 @@ async function addUserToDatabase(userData) {
         const usersJson = await getItem('users');
         let users = JSON.parse(usersJson);
 
-        console.log("Checking if user already exists.")
         if (!checkIfUserAlreadyExists(users, userData.email)) {
             addUserToUserContacts(userData);
             users.push(userData);
