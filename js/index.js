@@ -298,11 +298,28 @@ async function addUserToDatabase(userData) {
         const usersJson = await getItem('users');
         let users = JSON.parse(usersJson);
 
-        addUserToUserContacts(userData);
-        users.push(userData);
-        await setItem('users', JSON.stringify(users));
-        console.log('User successfully registered.');
+        console.log("Checking if user already exists.")
+        if (!checkIfUserAlreadyExists(users, userData.email)) {
+            addUserToUserContacts(userData);
+            users.push(userData);
+            await setItem('users', JSON.stringify(users));
+            console.log('User successfully registered.');
+        }
+
+        
 }
+
+function checkIfUserAlreadyExists(users, email) {
+    for (let user of users) {
+        if (user.email === email.trim()) {
+            inputAlert('email', 'This email is already registered. Please log in.');
+            return true;
+        }
+    }
+    removeInputAlert('email');
+    return false;
+}
+
 
 function addUserToUserContacts(userData){
     let userContactCard = {
