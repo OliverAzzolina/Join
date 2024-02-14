@@ -8,7 +8,85 @@ function init() {
     checkRemoteStorage();
 }
 
+function generateLogin() {
+    let mainContainer = document.getElementById('main-container');
+    mainContainer.innerHTML = loginHTML();
+}
 
+function loadLoginListeners() {
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        loginUser();
+    });
+}
+
+async function loginUser() {
+    let email = document.getElementById('email-input').value.trim();
+    let password = document.getElementById('password-input').value.trim();
+    let user = await findUser(email, password);
+    if (user) {
+        console.log('User found:', user.email);
+        localStorage.setItem("userId", user.userId);
+        window.location.href = 'summary.html';
+    } else {
+        console.error('User not found.');
+    }
+}
+
+
+async function findUser(email, password) {
+    let usersJson = await getItem('users');
+    let users = JSON.parse(usersJson);
+    return users.find(user => user.email === email && user.password === password);
+    
+}
+
+
+// CHECK REMOTE STORAGE
+
+async function checkRemoteStorage() {
+    await checkRemoteStorageUsers();
+    await checkRemoteStorageTasks();
+}
+
+async function checkRemoteStorageUsers() {
+    try {
+        let usersJson = await getItem('users');
+        if (usersJson && usersJson !== "undefined") {
+            let users = JSON.parse(usersJson);
+            if (!users || users.length < 1) {
+                throw new Error("Users array is empty.");
+            }
+        } else {
+            throw new Error("Users array did not exist. Creating new array. Please reload the page.");
+        }
+    } catch (error) {
+        console.log(error.message);
+        let users = JSON.stringify(rescueUserArray);
+        await setItem('users', users);
+    }
+}
+
+async function checkRemoteStorageTasks() {
+    try {
+        let tasksJson = await getItem('tasks');
+        if (tasksJson && tasksJson !== "undefined") {
+            let tasks = JSON.parse(tasksJson);
+            if (!tasks || tasks.length < 1) {
+                throw new Error("Tasks array is empty.");
+            }
+        } else {
+            throw new Error("Tasks array did not exist. Creating new array. Please reload the page.");
+        }
+    } catch (error) {
+        console.log(error.message);
+        let tasks = JSON.stringify(rescueTaskArray);
+        await setItem('tasks', tasks);
+    }
+}
+
+
+// TEMPLATE SWITCH
 async function switchToRegister() {
     removeInitFadeIn();
     toggleFadeIn('login-container');
@@ -29,10 +107,12 @@ async function switchToLogin() {
     loadLoginListeners();
 }
 
+
 function removeLogoTransition() {
     logo = document.getElementById('logo');
     logo.classList.remove('logo-animation');
 }
+
 
 function removeInitFadeIn() {
     container = document.getElementById('login-container');
@@ -58,12 +138,6 @@ function toggleFadeIn(target) {
 }
 
 
-function generateLogin() {
-    let mainContainer = document.getElementById('main-container');
-    mainContainer.innerHTML = loginHTML();
-}
-
-
 function generateRegister() {
     let mainContainer = document.getElementById('main-container');
     mainContainer.innerHTML = registerHTML();
@@ -80,6 +154,9 @@ function loadRegisterListeners() {
     });
 }
 
+
+
+// REGISTER FORM VALIDATION
 
 function validateForm() {
     return validateName() && validateEmail() && validatePassword() && validatePrivacyCheckbox();
@@ -137,7 +214,7 @@ function validatePrivacyCheckbox() {
 }
 
 
-
+// VALIDATION ALERTS
 function inputAlert(inputId, message) {
     let inputElement = document.getElementById(inputId);
     let errorElement = document.createElement('p');
@@ -149,7 +226,6 @@ function inputAlert(inputId, message) {
     }
     inputElement.insertAdjacentElement('afterend', errorElement);
 }
-
 
 function checkboxAlert(message) {
     let checkboxGroup = document.getElementById('register-checkbox-group');
@@ -164,8 +240,6 @@ function checkboxAlert(message) {
 
     checkboxGroup.appendChild(errorElement);
 }
-
-
 
 function removeInputAlert(inputId) {
     let inputElement = document.getElementById(inputId);
@@ -184,7 +258,6 @@ function removeInputAlert(inputId) {
     }
 }
 
-
 function removeAllAlerts() {
     let errorElements = document.querySelectorAll('.error-message');
     errorElements.forEach(element => {
@@ -193,6 +266,7 @@ function removeAllAlerts() {
 }
 
 
+// REGISTER LOGIC
 function registerUser() {
     let [firstName, lastName = ''] = document.getElementById('name').value.trim().split(" ");
     let email = document.getElementById('email').value.trim();
@@ -200,25 +274,51 @@ function registerUser() {
     let confirmPassword = document.getElementById('confirmPassword').value.trim();
 
     if (password !== confirmPassword) {
-        alert('Passwörter stimmen nicht überein');
+        alert('Passwords do not match.');
         return;
     }
 
     let userData = {
-        firstName,
-        lastName,
+        email: email,
+        firstName: firstName,
+        initials: `${firstName[0]}${lastName[0]}`,
+        lastName: lastName,
+        password: password,
+        phone: null,
         userColor: generateRandomColor(),
-        email,
-        phone: '', 
-        userId: generateRandomId(), 
-        password,
-        userContacts: preRegisteredContacts,
-        initials: `${firstName[0]}${lastName[0]}`
+        userContacts: rescueUserArray,
+        userId: generateRandomId(),
+
     };
-    
     addUserToDatabase(userData);
     
 }
+
+async function addUserToDatabase(userData) {
+        const usersJson = await getItem('users');
+        let users = JSON.parse(usersJson);
+
+        if (!checkIfUserAlreadyExists(users, userData.email)) {
+            addUserToUserContacts(userData);
+            users.push(userData);
+            await setItem('users', JSON.stringify(users));
+            console.log('User successfully registered.');
+        }
+
+        
+}
+
+function checkIfUserAlreadyExists(users, email) {
+    for (let user of users) {
+        if (user.email === email.trim()) {
+            inputAlert('email', 'This email is already registered. Please log in.');
+            return true;
+        }
+    }
+    removeInputAlert('email');
+    return false;
+}
+
 
 function addUserToUserContacts(userData){
     let userContactCard = {
@@ -232,77 +332,6 @@ function addUserToUserContacts(userData){
     }
     userData.userContacts.push(userContactCard);
 }
-
-async function addUserToDatabase(userData) {
-    try {
-        let usersJson = await getItem('users');
-        let users = [];
-
-        if (usersJson) {
-            users = JSON.parse(usersJson);
-        }
-        addUserToUserContacts(userData);
-        await setItem('users', JSON.stringify(users));
-        console.log('User successfully registered.');
-    } catch (error) {
-        console.error('Error adding user:', error);
-    }
-    
-}
-
-
-async function checkRemoteStorage() {
-    await checkRemoteStorageUsers();
-    await checkRemoteStorageTasks();
-}
-
-
-async function checkRemoteStorageUsers() {
-    try {
-        let usersJson = await getItem('users');
-        if (usersJson && usersJson !== "undefined") {
-            let users = JSON.parse(usersJson);
-            if (!users || users.length < 1) {
-                throw new Error("Users array is empty.");
-            }
-        } else {
-            throw new Error("Users array did not exist. Creating new array. Please reload the page.");
-        }
-    } catch (error) {
-        console.log(error.message);
-        let users = JSON.stringify(rescueUserArray);
-        await setItem('users', users);
-    }
-}
-
-
-async function checkRemoteStorageTasks() {
-    try {
-        let tasksJson = await getItem('tasks');
-        if (tasksJson && tasksJson !== "undefined") {
-            let tasks = JSON.parse(tasksJson);
-            if (!tasks || tasks.length < 1) {
-                throw new Error("Tasks array is empty.");
-            }
-        } else {
-            throw new Error("Tasks array did not exist. Creating new array. Please reload the page.");
-        }
-    } catch (error) {
-        console.log(error.message);
-        let tasks = JSON.stringify(rescueTaskArray);
-        await setItem('tasks', tasks);
-    }
-}
-
-
-
-
-
-
-
-
-
-
 
 
 
