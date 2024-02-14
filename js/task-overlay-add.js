@@ -34,7 +34,7 @@ function addNewTask() {
   let newTask = {
     title: document.getElementById("add-task-title-input").value,
     description: document.getElementById("add-task-description-input").value,
-    assignedto: temporaryAssignedTo,
+    assignedto: checkedArray,
     duedate: document.getElementById("add-task-date-input").value,
     prio: newTaskPrio,
     category: document.getElementById("add-new-task-category").value,
@@ -82,6 +82,7 @@ function showDropdownContactsAddOverlay() {
   let dropdown = document.getElementById("add-assigned-editors");
   if (dropdown.style.display == "none") {
     dropdown.style.display = "block";
+    checkedArray = [];
     clearAssignedToAddOverlay();
   } else {
     dropdown.style.display = "none";
@@ -99,42 +100,45 @@ function addAssignedEditorsAddOverlay() {
 function checkIfContactCheckboxChecked(checkedEditor, i) {
   let checkbox = document.getElementById(`checkbox${i}`).checked;
   let showAssignedEditors = document.getElementById( "show-assigned-editors-container");
+  let tooMuchEditors = document.getElementById('tooMuchEditors');
+  let userColor = checkedEditor.userColor;
+  let initials = checkedEditor.firstName.charAt(0) + checkedEditor.lastName.charAt(0);
+
   if (checkbox == true) {
-    const checkedEditor = contacts[i];
-    let firstName = checkedEditor.firstName;
-    let lastName = checkedEditor.lastName;
-    let userColor = checkedEditor.userColor;
-    let initials = checkedEditor.firstName[0] + checkedEditor.lastName[0];
-    let userId = checkedEditor.userId;
-    showAssignedEditors.innerHTML += `<div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>`;
-    pushAssignedToAddOverlay(initials, userColor, firstName, lastName, userId);
-  }
+    checkedArray.push(checkedEditor);
+    if(checkedArray.length > 3){
+      tooMuchEditors.style.display = 'flex';
+      tooMuchEditors.innerHTML = `+${checkedArray.length - 3}`;
+    }else {
+      showAssignedEditors.innerHTML += `<div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>`;
+    }
+}
 }
 
-function pushAssignedToAddOverlay(initials, userColor, firstName, lastName, userId) {
-  let assignedToTask = {
-    firstName: firstName,
-    lastName: lastName,
-    initials: initials,
-    userColor: userColor,
-    userId: userId,
-  };
-  temporaryAssignedTo.push(assignedToTask);
-}
+//function pushAssignedToAddOverlay(initials, userColor, firstName, lastName, userId) {
+//  let assignedToTask = {
+//    firstName: firstName,
+//    lastName: lastName,
+//    initials: initials,
+//    userColor: userColor,
+//    userId: userId,
+//  };
+//  temporaryAssignedTo.push(assignedToTask);
+//}
 
-function renderAssignedTo(index) {
-  let assignedTo = document.getElementById(`todo-assigned-to${index}`);
-  assignedTo.innerHTML = "";
-
-  for (let i = 0; i < tasks[index]["assignedto"].length; i++) {
-    const checkedEditor = contacts[i];
-    let initials = checkedEditor.initials;
-    let userColor = checkedEditor.userColor;
-    assignedTo.innerHTML += `
-      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
-      `;
-  }
-}
+//function renderAssignedTo(index) {
+//  let assignedTo = document.getElementById(`todo-assigned-to${index}`);
+//  assignedTo.innerHTML = "";
+//
+//  for (let i = 0; i < tasks[index]["assignedto"].length; i++) {
+//    const checkedEditor = contacts[i];
+//    let initials = checkedEditor.initials;
+//    let userColor = checkedEditor.userColor;
+//    assignedTo.innerHTML += `
+//      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
+//      `;
+//  }
+//}
 
 function clearAssignedToAddOverlay() {
   document.getElementById("show-assigned-editors-container").innerHTML = "";

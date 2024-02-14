@@ -29,19 +29,59 @@ function setPrioDetailImg(i){
     prioDetailImg.src = `/assets/img/prio_${prio}_icon.png`;
 }
 
-function renderAssignedToDetail(index){
-    let showAssignedEditors = document.getElementById('detailAssignedTo');
+//function renderAssignedToDetail(index){
+//    let showAssignedEditors = document.getElementById('detailAssignedTo');
+//  
+//    for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
+//      const checkedEditor = tasks[index]['assignedto'][i];
+//      let initials = checkedEditor.initials;
+//      let userColor = checkedEditor.userColor;
+//        showAssignedEditors.innerHTML += `
+//        <div class="detail-name-initials"><div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div><span>${name}</span></div>
+//        `;
+//    }
+//}
   
+function renderAssignedToDetail(index){
+  let assignedTo = document.getElementById('detailAssignedTo');
+  assignedTo.innerHTML = '';
+    if(tasks[index]['assignedto'].length > 3){
+      checkIfToMuchEditorsDetail(assignedTo, index);
+    
+    }else {
+      notToMuchEditorsDetail(assignedTo, index);
+    }
+  }
+
+
+  function checkIfToMuchEditorsDetail(assignedTo, index){
+    for (let i = 0; i < 3; i++) {
+      const checkedEditor = tasks[index]['assignedto'][i];
+      let initials = checkedEditor.initials;
+      let userColor = checkedEditor.userColor;
+      let tooMuchEditors = document.getElementById(`toMuchEditors${index}`);
+      tooMuchEditors.style.display = 'flex';
+      tooMuchEditors.innerHTML = `+${tasks[index]['assignedto'].length - 3}`;
+    
+      assignedTo.innerHTML += `
+      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
+      `;
+    }
+  }
+
+
+  function notToMuchEditorsDetail(assignedTo, index){
     for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
       const checkedEditor = tasks[index]['assignedto'][i];
       let initials = checkedEditor.initials;
       let userColor = checkedEditor.userColor;
-        showAssignedEditors.innerHTML += `
-        <div class="detail-name-initials"><div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div><span>${name}</span></div>
-        `;
+      assignedTo.innerHTML += `
+      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
+      `;
     }
-}
-  
+  }
+
+
 
 function renderDetailSubtasks(i){
     let detailSub = document.getElementById(`checklistSubDetail`);

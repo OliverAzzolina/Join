@@ -119,19 +119,69 @@ function addAssignedEditors(index){
 }
 
 
+//function addAssignedEditors() {
+//  let showAssignedEditors = document.getElementById('show-assigned-editors-container');
+//  let tooMuchEditors = document.getElementById('tooMuchEditors');
+//
+//  for (let i = 0; i < contacts.length; i++) {
+//    const checkedEditor = contacts[i];
+//    let userColor = checkedEditor.userColor;
+//    let initials = checkedEditor.firstName.charAt(0) + checkedEditor.lastName.charAt(0);
+//    let checkbox = document.getElementById(`checkbox${i}`).checked;
+//    if (checkbox == true) {
+//      checkedArray.push(checkedEditor);
+//      if(checkedArray.length > 3){
+//        tooMuchEditors.style.display = 'flex';
+//        tooMuchEditors.innerHTML = `+${checkedArray.length - 3}`;
+//
+//      }else {
+//        showAssignedEditors.innerHTML += `
+//        <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
+//        `;
+//      }
+//    }
+//  }
+//}
+
+
 function renderAssignedTo(index){
   let assignedTo = document.getElementById(`todo-assigned-to${index}`);
   assignedTo.innerHTML = '';
-
-  for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
-    const checkedEditor = tasks[index]['assignedto'][i];
-    let initials = checkedEditor.initials;
-    let userColor = checkedEditor.userColor;
-    assignedTo.innerHTML += `
-    <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
-    `;
+    if(tasks[index]['assignedto'].length > 3){
+      checkIfToMuchEditors(assignedTo, index);
+    
+    }else {
+      notToMuchEditors(assignedTo, index);
+    }
   }
-}
+
+
+  function checkIfToMuchEditors(assignedTo, index){
+    for (let i = 0; i < 3; i++) {
+      const checkedEditor = tasks[index]['assignedto'][i];
+      let initials = checkedEditor.initials;
+      let userColor = checkedEditor.userColor;
+      let tooMuchEditors = document.getElementById(`tooMuchEditors${index}`);
+      tooMuchEditors.style.display = 'flex';
+      tooMuchEditors.innerHTML = `+${tasks[index]['assignedto'].length - 3}`;
+    
+      assignedTo.innerHTML += `
+      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
+      `;
+    }
+  }
+
+
+  function notToMuchEditors(assignedTo, index){
+    for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
+      const checkedEditor = tasks[index]['assignedto'][i];
+      let initials = checkedEditor.initials;
+      let userColor = checkedEditor.userColor;
+      assignedTo.innerHTML += `
+      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
+      `;
+    }
+  }
 
 
 function checkOpen(id){

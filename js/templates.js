@@ -237,7 +237,10 @@ function generateTask(i){
         <span><span id="subsDoneOfAll${i}"></span> / ${tasks[i]["subtasks"].length} Subtasks</span>
       </div>
       <div class="assigned-prio">
-        <div class="todo-assigned-to" id="todo-assigned-to${i}"></div>
+        <div class="d-flex">
+          <div class="todo-assigned-to" id="todo-assigned-to${i}"></div>
+          <div style="display: none;" id="tooMuchEditors${i}" class="mini-logo-dummy"></div>
+        </div>
         <img id="prioImg${i}" src="" alt="">
       </div>
     </div>
@@ -255,7 +258,8 @@ function generateOverlay(i) {
       <span class="f-s20-w400">${tasks[i]["description"]}</span><br>
       <span class="f-s20-w400">Due date:  ${tasks[i]["duedate"]}</span><br>
       <span class=" prio-img f-s20-w400">Priority:  ${tasks[i]["prio"].charAt(0).toUpperCase() + tasks[i]["prio"].slice(1)}<img class="prio-detail-img" id="prioDetailImg${i}"></span><br>
-      <span class="f-s20-w400">Assigned to:<br><div id="detailAssignedTo"></div></span><br>
+      <span class="f-s20-w400">Assigned to:</span>
+      <div class="d-flex"><div id="detailAssignedTo"></div><div style="display: none;" id="toMuchEditors${i}" class="mini-logo-dummy"></div></div>
       <span class="f-s20-w400">Subtasks<ul id="checklistSubDetail"></ul></span>
       <div class="overlay-buttons">
         <button onclick="openChangeTaskPopup(${i})" onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="assets/img/delete_icon.png">Change</button>

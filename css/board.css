@@ -373,6 +373,27 @@ ul li div{
   line-height: 14.4px;
 }
 
+.mini-logo-dummy {
+  height: 32px;
+  width: 32px;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  margin-left: 4px;
+}
+
+.d-flex{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
 .sub-progress-container{
   display: flex;
   flex-direction: row;
@@ -676,9 +697,8 @@ cursor: pointer;
 
 #detailAssignedTo{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 4px;
-  margin-top: 4px;
 }
 
 .detail-name-initials {

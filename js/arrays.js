@@ -47,6 +47,7 @@ let rescueTaskArray = [
 let contacts = [];
 let tasks = [];
 let userInitials = '';
+let checkedArray = [];
 
 
 async function loadUserData() {
