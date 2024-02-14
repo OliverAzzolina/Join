@@ -58,18 +58,19 @@ async function loadUserData() {
     }
 }
 
-async function loadUserData() {
-    let userId = localStorage.getItem('userId');
-    user = await findUserData(userId);
-    if(user){
-        userInitials = user.initials;
-        contacts = user.userContacts;
-    }
-  }
-    
 async function findUserData(userId){
     let users = JSON.parse(await getItem("users"));
     return users.find(user => user.userId === parseInt(userId));
 }
-  
+
+async function saveUserData(users){
+    let userId = user.userId;
+    await findUserData(userId);
+        if (user){
+                const pos = users.findIndex(user => user.userId === userId);
+                users[pos].userContacts = user.userContacts;
+                users.push();
+                await setItem('users', JSON.stringify(users));
+    }
+}
 

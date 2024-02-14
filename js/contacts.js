@@ -44,15 +44,7 @@ function renderContact(i) {
     const lastName = contact.lastName;
     const email = contact.email;
     const userColor = contact.userColor;
-    newContactList.innerHTML += generateContact(
-      i,
-      j,
-      initials,
-      firstName,
-      lastName,
-      email,
-      userColor
-    );
+    newContactList.innerHTML += generateContact(i,j,initials,firstName,lastName,email,userColor);
   }
 }
 
@@ -100,8 +92,7 @@ function groupNames() {
       contactList.push({
         letter: letter,
         contacts: [
-          {
-            id: id,
+          { id: id,
             initials: initials,
             firstName: firstName,
             lastName: lastName,
@@ -154,137 +145,74 @@ function loadContactData(i, j, contactDetail) {
   const phone = contacts[i].phone;
   const userColor = contacts[i].userColor;
   const id = contacts[i].userId;
-  contactDetail.innerHTML = renderContactInfo(
-    i,
-    j,
-    initials,
-    firstName,
-    lastName,
-    email,
-    phone,
-    userColor
-  );
+  contactDetail.innerHTML = renderContactInfo(i,j,initials,firstName,lastName,email,phone,userColor);
 }
 
-//CHANGES BG COLOR OF OPEN CONTACT
-function changeContactBackgroundColor(i, j) {
-  let contact = document.getElementById(`contact${i},${j}`);
-  contact.style.backgroundColor = "#2A3647";
-  contact.classList.remove("contact-hover");
-  document.getElementById(`contact${i},${j}-name`).style.color = "#FFFFFF";
-}
-
-//OPEN ADD NEW CONTACT OVERLAY
-function openAddNewContact() {
-  // Überprüfe die Fensterbreite
-  const windowWidth =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-
-  // Überprüfe, ob die Fensterbreite kleiner oder gleich 1050px ist
-  if (windowWidth <= 1050) {
-    // Verstecke den Button, indem du seine Anzeige auf "none" setzt
-    document.querySelector(".add-contact-button").style.display = "none";
-  }
-
-  // Öffne das Overlay
-  document.getElementById("overlay").style.display = "flex";
-  document.getElementById("overlay").innerHTML = generateAddNewOverlay();
-}
-
-// CLOSE ADD NEW CONTACT OVERLAY
-function closeAddContact() {
-  // Stelle sicher, dass das Overlay geschlossen wird
-  document.getElementById("overlay").style.display = "none";
-
-  // Überprüfe die Fensterbreite
-  const windowWidth =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-
-  // Überprüfe, ob die Fensterbreite kleiner oder gleich 1050px ist
-  if (windowWidth <= 1050) {
-    // Zeige den Button wieder an, indem du seine Anzeige auf "block" setzt
-    document.querySelector(".add-contact-button").style.display = "block";
-  }
-}
 
 //ADD NEW CONTACT
 async function addNewContact() {
-  generateRandomColor();
-  contacts.push({
-    name: contactname.value,
+  let users = JSON.parse(await getItem("users"));
+  let fullName = contactname.value.split(' ');
+  let firstName = fullName[0];
+  let lastName = fullName[fullName.length -1];
+  let userColor = generateRandomColor();
+  let userId = generateRandomId();
+  user.userContacts.push({
+    firstName: firstName,
+    lastName: lastName,
+    initials: firstName[0] + lastName[0],
     email: email.value,
     phone: phone.value,
-    randomColor: randomColor,
-  });
-
-  await setItem("contacts", JSON.stringify(contacts));
+    userColor: userColor,
+    password: null,
+    userId: userId,
+    userContacts: null
+  })
+  await saveUserData(users);
   document.getElementById("overlay").style.display = "none";
-  loadContactsFromStorage();
-  sortContacts();
+  await loadUserData();
 }
 
 //DELETE CONTACT
-function deleteContact(i, j) {
+async function deleteContact(i, j) {
   id = contactList[i]["contacts"][j]["id"];
   contacts.splice(id, 1);
   document.getElementById("contact-detail").innerHTML = "";
   document.getElementById("overlay").style.display = "none";
-  setItem("contacts", JSON.stringify(contacts));
-  loadContactsFromStorage();
+  await saveUserData();
+  await loadUserData();
 }
 
 //EDIT CONTACT
 function EditContact(i, j) {
   document.getElementById("overlay").style.display = "flex";
+  let fullName = contacts[i].firstName+' '+contacts[i].lastName;
   const contact = contactList[i]["contacts"][j];
   const initials = contact.firstName[0] + contact.lastName[0];
-  const firstName = contacts[i].firstName;
-  const lastName = contacts[i].lastName;
-  const email = contacts[i].mail;
+  const email = contacts[i].email;
   const phone = contacts[i].phone;
   const userColor = contacts[i].userColor;
   const id = contacts[i].userId;
-  document.getElementById("overlay").innerHTML = generateEditOverlay(
-    i,
-    j,
-    initials,
-    firstName,
-    lastName,
-    email,
-    phone,
-    userColor
-  );
+  document.getElementById("overlay").innerHTML = generateEditOverlay(i,j,initials,fullName,email,phone,userColor);
 }
 
 //SAVE CONTACT
 async function saveContact(i, j) {
-  id = contactList[i]["contacts"][j]["id"];
-  contacts[id]["name"] = document.getElementById("editName").value;
-  contacts[id]["email"] = document.getElementById("editEmail").value;
-  contacts[id]["phone"] = document.getElementById("editPhone").value;
-  contacts.push();
-  await setItem("contacts", JSON.stringify(contacts));
-  init();
+  updatingContact = contactList[i]["contacts"][j];
+  let fullName = document.getElementById("editName").value.split(' ');
+  updatingContact.firstName = fullName[0];
+  updatingContact.lastName = fullName[fullName.length-1];
+  updatingContact.email = document.getElementById("editEmail").value;
+  updatingContact.phone = document.getElementById("editPhone").value;
+  saveUserData();
+  //await setItem("contacts", JSON.stringify(contacts));
+  //init();
   document.getElementById("overlay").style.display = "none";
-
   openContactInfo(i, j);
 }
 
 //CONTACT INFO HTML
-function renderContactInfo(
-  i,
-  j,
-  initials,
-  firstName,
-  lastName,
-  email,
-  phone,
-  userColor
-) {
+function renderContactInfo(i,j,initials,firstName,lastName,email,phone,userColor) {
   return `
     <div class="name-section">
         <div class="name-logo name-logo-detail" style= "background-color: ${userColor}">
@@ -350,16 +278,7 @@ function generateAddNewOverlay() {
 }
 
 //EDIT CONTACT OVERLAY
-function generateEditOverlay(
-  i,
-  j,
-  initials,
-  firstName,
-  lastName,
-  email,
-  phone,
-  userColor
-) {
+function generateEditOverlay(i,j,initials,fullName,email,phone,userColor) {
   return `
   <div class="add-contact-card" onclick="doNotClose(event)">
     <div class="add-contact-card-left">
@@ -383,7 +302,7 @@ function generateEditOverlay(
         <form onsubmit="saveContact(${i},${j}); return false">
           <div class="actions-container">
             <div class="add-contact-inputs" >
-              <input id="editName" type="text" placeholder="Name" class="edit-input input-icon-name" value="${firstName} ${lastName}" required>
+              <input id="editName" type="text" placeholder="Name" class="edit-input input-icon-name" value="${fullName}" required>
               <input id="editEmail" type="email" placeholder="Email" class="edit-input input-icon-mail" value="${email}" required>
               <input id="editPhone" type="text" placeholder="Phone" class="edit-input input-icon-phone" value="${phone}" required>
             </div>
@@ -423,4 +342,49 @@ function unhover(img) {
 
 function doNotClose(event) {
   event.stopPropagation();
+}
+
+//CHANGES BG COLOR OF OPEN CONTACT
+function changeContactBackgroundColor(i, j) {
+  let contact = document.getElementById(`contact${i},${j}`);
+  contact.style.backgroundColor = "#2A3647";
+  contact.classList.remove("contact-hover");
+  document.getElementById(`contact${i},${j}-name`).style.color = "#FFFFFF";
+}
+
+//OPEN ADD NEW CONTACT OVERLAY
+function openAddNewContact() {
+  // Überprüfe die Fensterbreite
+  const windowWidth =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+
+  // Überprüfe, ob die Fensterbreite kleiner oder gleich 1050px ist
+  if (windowWidth <= 1050) {
+    // Verstecke den Button, indem du seine Anzeige auf "none" setzt
+    document.querySelector(".add-contact-button").style.display = "none";
+  }
+
+  // Öffne das Overlay
+  document.getElementById("overlay").style.display = "flex";
+  document.getElementById("overlay").innerHTML = generateAddNewOverlay();
+}
+
+// CLOSE ADD NEW CONTACT OVERLAY
+function closeAddContact() {
+  // Stelle sicher, dass das Overlay geschlossen wird
+  document.getElementById("overlay").style.display = "none";
+
+  // Überprüfe die Fensterbreite
+  const windowWidth =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+
+  // Überprüfe, ob die Fensterbreite kleiner oder gleich 1050px ist
+  if (windowWidth <= 1050) {
+    // Zeige den Button wieder an, indem du seine Anzeige auf "block" setzt
+    document.querySelector(".add-contact-button").style.display = "block";
+  }
 }
