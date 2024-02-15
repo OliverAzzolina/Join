@@ -315,7 +315,6 @@ function addAssignedEditors() {
       if(checkedArray.length > 3){
         tooMuchEditors.style.display = 'flex';
         tooMuchEditors.innerHTML = `+${checkedArray.length - 3}`;
-
       }else {
         showAssignedEditors.innerHTML += `
         <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
@@ -391,10 +390,12 @@ function clearSubtaskInput(){
 
 function addSubtask(){
   let subtask = document.getElementById('add-task-subtask-input').value;
-  subtaskTempArray.push(subtask);
-  console.log(subtaskTempArray);
-  renderSubtasks();
-  clearSubtaskInput();
+  if(subtask !== ''){
+    subtaskTempArray.push(subtask);
+    console.log(subtaskTempArray);
+    renderSubtasks();
+    clearSubtaskInput();
+  }
 }
 
 
@@ -446,9 +447,12 @@ function deleteSubtask(i){
 
 
 function changeSubtask(i){
+  let subtask = document.getElementById(`editSubtaskInput${i}`).value;
+  if(subtask !== ''){
   subtaskTempArray[i] = document.getElementById(`editSubtaskInput${i}`).value;
   renderSubtasks();
   clearSubtaskInput();
+  }
 }
 
 

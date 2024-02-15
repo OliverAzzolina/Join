@@ -247,7 +247,7 @@ function generateTask(i){
     `;
 }
 
-function generateOverlay(i) {
+function generateDetailOverlay(i) {
   return/*html*/`
   <div id="todo-card-detail${i}" class="detail-todo-card slider slide-in" onclick="doNotClose(event)">
     <div class="detail-card-top">  
@@ -262,7 +262,7 @@ function generateOverlay(i) {
       <div class="d-flex"><div id="detailAssignedTo"></div><div style="display: none;" id="toMuchEditors${i}" class="mini-logo-dummy"></div></div>
       <span class="f-s20-w400">Subtasks<ul id="checklistSubDetail"></ul></span>
       <div class="overlay-buttons">
-        <button onclick="openChangeTaskPopup(${i})" onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="assets/img/delete_icon.png">Change</button>
+        <button onclick="openChangeTaskPopup(${i})" onmouseover="hover('change-img')" onmouseout="unhover('change-img')"><img id="change-img" src="assets/img/change_unhovered.png">Change</button>
         <div class="overlay-buttons-splitter"></div>
         <button onclick="deleteTask(${i})" onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="assets/img/delete_icon.png">Delete</button>
         <div class="overlay-buttons-splitter"></div>
@@ -329,7 +329,12 @@ function generateEditTaskOverlay(i, title, description, duedate) {
                 <img src="assets/img/arrow_drop_down.png" alt="">
               </div>
               <ul style="display: none;" id="assigned-editors" class="assigned-editors"></ul>
-              <div id="show-assigned-editors-edit-container" onclick="clearAssignedTo(${i})"></div>
+
+              <div style="display: flex; flex-direction: row;">              
+              <div id="show-assigned-editors-edit-container"></div>
+              <div style="display: none;" id="tooMuchEditorsEdit${i}" class="mini-logo-dummy"></div>
+            </div>
+
             </div>
             
             <div id="add-task-sub-container">

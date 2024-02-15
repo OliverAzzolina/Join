@@ -355,6 +355,9 @@ function hover(id){
   let button = document.getElementById(id);
   if(id == 'edit-img'){
     button.setAttribute('src', 'assets/img/edit_hover_icon.png');
+  }else 
+  if(id == 'change-img'){
+    button.setAttribute('src', 'assets/img/change_hover.png');
   }else
   if(id == 'delete-img'){
     button.setAttribute('src', 'assets/img/delete_hover_icon.png');
@@ -368,6 +371,9 @@ function unhover(id){
   let button = document.getElementById(id);
   if(id == 'edit-img'){
     button.setAttribute('src', 'assets/img/edit_icon.png');
+  }else  
+  if(id == 'change-img'){
+    button.setAttribute('src', 'assets/img/change_unhovered.png');
   }else
   if(id == 'delete-img'){
     button.setAttribute('src', 'assets/img/delete_icon.png');

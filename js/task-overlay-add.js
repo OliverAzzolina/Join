@@ -189,10 +189,12 @@ function clearSubtaskInput() {
 
 function addSubtask() {
   let subtask = document.getElementById("add-task-subtask-input").value;
-  temporarySubtasks.push(subtask);
-  console.log(temporarySubtasks);
-  renderSubtasks();
-  clearSubtaskInput();
+  if(subtask !== ''){
+    temporarySubtasks.push(subtask);
+    console.log(temporarySubtasks);
+    renderSubtasks();
+    clearSubtaskInput();
+  }
 }
 
 function renderSubtasks() {
@@ -242,9 +244,12 @@ function deleteSubtask(i) {
 }
 
 function changeSubtask(i) {
-  temporarySubtasks[i] = document.getElementById(`editSubtaskInput${i}`).value;
-  renderSubtasks();
-  clearSubtaskInput();
+  let subtask = document.getElementById(`editSubtaskInput${i}`).value;
+  if(subtask !== ''){
+    temporarySubtasks[i] = document.getElementById(`editSubtaskInput${i}`).value;
+    renderSubtasks();
+    clearSubtaskInput();
+  }
 }
 
 function createSubtasksDoneArray() {
