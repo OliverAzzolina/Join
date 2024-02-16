@@ -21,26 +21,24 @@
     <div id="sidebar-container"></div>
 
     <div id="mobile-menu-container">
-
       <a href="summary.html">
-          <img class="mobile-icons" src="assets/img/mobile-summary.png" alt="Summary">
-          <p class="mobile-text">Summary</p>
+        <img class="mobile-icons" src="assets/img/mobile-summary.png" alt="Summary">
+        <p class="mobile-text">Summary</p>
       </a>
       <a href="board.html">
-          <img class="mobile-icons" src="assets/img/mobile-board.png" alt="Board">
-          <p class="mobile-text">Board</p>
+        <img class="mobile-icons" src="assets/img/mobile-board.png" alt="Board">
+        <p class="mobile-text">Board</p>
       </a>
       <a href="add-task.html">
-          <img class="mobile-icons" src="assets/img/mobile-addtask.png" alt="Add Task">
-          <p class="mobile-text">Add Task</p>
+        <img class="mobile-icons" src="assets/img/mobile-addtask.png" alt="Add Task">
+        <p class="mobile-text">Add Task</p>
       </a>
       <a href="contacts.html">
-          <img class="mobile-icons" src="assets/img/mobile-contacts.png" alt="Contact">
-          <p class="mobile-text">Contact</p>
+        <img class="mobile-icons" src="assets/img/mobile-contacts.png" alt="Contact">
+        <p class="mobile-text">Contact</p>
       </a>
-  </div>
-  <img src="assets/img/logo_mobile.png" alt="Mobile Logo" id="mobile-logo">
-
+    </div>
+    <img src="assets/img/logo_mobile.png" alt="Mobile Logo" id="mobile-logo">
 
     <!-- Main -->
     <main>
@@ -49,9 +47,30 @@
           <span>Add new contact</span>
           <img src="assets/img/person_add_icon.png" alt="" />
         </button>
-        <div id="contact-list" >
+        <div id="contact-list">
           <div id="contact-list-container" class="contacts-list"></div>
         </div>
+      </div>
+      <!-- Kontaktinformationen Popup mit Überschrift -->
+      <div id="contact-info-popup" class="contact-popup" style="display:none;">
+        <div class="contact-popup-content">
+          <span class="close-btn" onclick="closePopup()">&times;</span>
+          <!-- Eingefügte Überschrift -->
+          <div class="detail-headline">
+            <section> <div class="detail-headline2">
+              <h1><b class="mobile-view">Contacts</b></h1>
+              <div class="blue-line-vertical-mobile"></div>
+              <h5>Better with a team</h5>
+
+            </div>
+          </section>
+          </div>
+          <div class id="popup-contact-detail"></div>
+        </div>
+       
+          
+        <img src="assets/img/mobile-menu-icon.png" id="roundButton" onclick="EditContact()" alt="Edit" style="cursor: pointer;">
+       
       </div>
 
       <div class="right">

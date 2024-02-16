@@ -135,6 +135,9 @@ function openContactInfo(i, j) {
   }
 }
 
+
+
+
 function loadContactData(i, j, contactDetail) {
   contactDetail.innerHTML = "";
   const contact = contactList[i]["contacts"][j];
@@ -314,6 +317,25 @@ function generateEditOverlay(i,j,initials,fullName,email,phone,userColor) {
         </form
       </div>
   </div>`;
+}
+
+function openContactInfo(i, j) {
+  if (window.innerWidth <= 1049) {
+    // Kontaktinformationen laden für kleinere Bildschirme im Popup
+    const contactDetail = document.getElementById("popup-contact-detail");
+    loadContactData(i, j, contactDetail); // Annahme, dass diese Funktion die Kontaktinformationen lädt
+
+    // Popup anzeigen
+    document.getElementById("contact-info-popup").style.display = "block";
+  } else {
+    // Für größere Bildschirme die Kontaktinformationen im Detailbereich laden
+    const contactDetail = document.getElementById("contact-detail");
+    loadContactData(i, j, contactDetail); // Lädt die Kontaktinformationen in den Detailbereich
+  }
+}
+
+function closePopup() {
+  document.getElementById("contact-info-popup").style.display = "none";
 }
 
 function hover(img) {
