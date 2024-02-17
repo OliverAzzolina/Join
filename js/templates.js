@@ -228,7 +228,7 @@ function generateTask(i){
       <span id="category${i}" class="category">${tasks[i]["category"]}</span>
       <div class="title-description">
         <span class="todo-title">${tasks[i]["title"]}</span>
-        <span class="todo-description">${tasks[i]["description"]}</span>
+        <span class="todo-description">${tasks[i]["description"].substring(0, 20)}...</span>
       </div>
       <div class="sub-progress-container">
         <div class="subtasks-progress-bar-container">

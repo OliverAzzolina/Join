@@ -11,12 +11,14 @@ async function init() {
   generateSidebar();
 }
 
+
 //LOAD Contacts
 function loadContacts() {
   contactList = [];
   groupNames();
   renderContactList();
 }
+
 
 //RENDER CONTACT LIST
 function renderContactList() {
@@ -33,6 +35,7 @@ function renderContactList() {
   }
 }
 
+
 //RENDER CONTACT JS
 function renderContact(i) {
   let newContactList = document.getElementById(`contacts${i}`);
@@ -48,6 +51,7 @@ function renderContact(i) {
   }
 }
 
+
 //RENDER CONTACT HTML
 function generateContact(i, j, initials, firstName, lastName, email, userColor) {
   return `
@@ -60,6 +64,7 @@ function generateContact(i, j, initials, firstName, lastName, email, userColor) 
   </div>
   `;
 }
+
 
 //GROUPING CONTACTS TO THEIR CATEGORY LETTERS
 function groupNames() {
@@ -106,6 +111,7 @@ function groupNames() {
   }
 }
 
+
 //SORT CONTACTS
 function sortContacts() {
   contacts.sort((a, b) => {
@@ -119,13 +125,12 @@ function sortContacts() {
   });
 }
 
+
 //OPEN CONTACT INFO
 function openContactInfo(i, j) {
   let contactDetail = document.getElementById("contact-detail");
   if (
-    document.getElementById(`contact${i},${j}`).style.backgroundColor !==
-    "rgb(42, 54, 71)"
-  ) {
+    document.getElementById(`contact${i},${j}`).style.backgroundColor !=="rgb(42, 54, 71)") {
     renderContactList();
     loadContactData(i, j, contactDetail);
     changeContactBackgroundColor(i, j);
@@ -136,18 +141,16 @@ function openContactInfo(i, j) {
 }
 
 
-
-
 function loadContactData(i, j, contactDetail) {
   contactDetail.innerHTML = "";
   const contact = contactList[i]["contacts"][j];
-  const initials = contact.firstName[0] + contact.lastName[0];
-  const firstName = contacts[i].firstName;
-  const lastName = contacts[i].lastName;
-  const email = contacts[i].email;
-  const phone = contacts[i].phone;
-  const userColor = contacts[i].userColor;
-  const id = contacts[i].userId;
+  const initials = contact.initials;
+  const firstName = contact.firstName;
+  const lastName = contact.lastName;
+  const email = contact.email;
+  const phone = contact.phone;
+  const userColor = contact.userColor;
+  const id = contact.userId;
   contactDetail.innerHTML = renderContactInfo(i,j,initials,firstName,lastName,email,phone,userColor);
 }
 
@@ -176,6 +179,7 @@ async function addNewContact() {
   await loadUserData();
 }
 
+
 //DELETE CONTACT
 async function deleteContact(i, j) {
   id = contactList[i]["contacts"][j]["id"];
@@ -186,18 +190,20 @@ async function deleteContact(i, j) {
   await loadUserData();
 }
 
+
 //EDIT CONTACT
 function EditContact(i, j) {
   document.getElementById("overlay").style.display = "flex";
-  let fullName = contacts[i].firstName+' '+contacts[i].lastName;
   const contact = contactList[i]["contacts"][j];
-  const initials = contact.firstName[0] + contact.lastName[0];
-  const email = contacts[i].email;
-  const phone = contacts[i].phone;
-  const userColor = contacts[i].userColor;
-  const id = contacts[i].userId;
+  let fullName = contact.firstName+' '+contact.lastName;
+  const initials = contact.initials;
+  const email = contact.email;
+  const phone = contact.phone;
+  const userColor = contact.userColor;
+  const id = contact.userId;
   document.getElementById("overlay").innerHTML = generateEditOverlay(i,j,initials,fullName,email,phone,userColor);
 }
+
 
 //SAVE CONTACT
 async function saveContact(i, j) {
@@ -208,11 +214,12 @@ async function saveContact(i, j) {
   updatingContact.email = document.getElementById("editEmail").value;
   updatingContact.phone = document.getElementById("editPhone").value;
   saveUserData();
-  //await setItem("contacts", JSON.stringify(contacts));
-  //init();
+  await setItem("contacts", JSON.stringify(contacts));
+  init();
   document.getElementById("overlay").style.display = "none";
   openContactInfo(i, j);
 }
+
 
 //CONTACT INFO HTML
 function renderContactInfo(i,j,initials,firstName,lastName,email,phone,userColor) {
@@ -244,6 +251,7 @@ function renderContactInfo(i,j,initials,firstName,lastName,email,phone,userColor
     </div>
     <img src="assets/img/mobile-menu-icon.png" id="roundButton" onclick="EditContact(${i},${j})" alt="Edit" style="cursor: pointer;">`;
 }
+
 
 //ADD NEW CONTACT OVERLAY
 function generateAddNewOverlay() {
@@ -280,6 +288,7 @@ function generateAddNewOverlay() {
       </div>
   </div>`;
 }
+
 
 //EDIT CONTACT OVERLAY
 function generateEditOverlay(i,j,initials,fullName,email,phone,userColor) {
@@ -320,6 +329,7 @@ function generateEditOverlay(i,j,initials,fullName,email,phone,userColor) {
   </div>`;
 }
 
+
 function openContactInfo(i, j) {
   if (window.innerWidth <= 1049) {
     // Kontaktinformationen laden für kleinere Bildschirme im Popup
@@ -335,9 +345,11 @@ function openContactInfo(i, j) {
   }
 }
 
+
 function closePopup() {
   document.getElementById("contact-info-popup").style.display = "none";
 }
+
 
 function hover(img) {
   if (img == "a") {
@@ -351,6 +363,7 @@ function hover(img) {
   }
 }
 
+
 function unhover(img) {
   if (img == "a") {
     document
@@ -363,9 +376,11 @@ function unhover(img) {
   }
 }
 
+
 function doNotClose(event) {
   event.stopPropagation();
 }
+
 
 //CHANGES BG COLOR OF OPEN CONTACT
 function changeContactBackgroundColor(i, j) {
@@ -374,6 +389,7 @@ function changeContactBackgroundColor(i, j) {
   contact.classList.remove("contact-hover");
   document.getElementById(`contact${i},${j}-name`).style.color = "#FFFFFF";
 }
+
 
 //OPEN ADD NEW CONTACT OVERLAY
 function openAddNewContact() {
@@ -393,6 +409,7 @@ function openAddNewContact() {
   document.getElementById("overlay").style.display = "flex";
   document.getElementById("overlay").innerHTML = generateAddNewOverlay();
 }
+
 
 // CLOSE ADD NEW CONTACT OVERLAY
 function closeAddContact() {
