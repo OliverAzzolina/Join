@@ -25,11 +25,11 @@ async function loginUser() {
     let password = document.getElementById('password-input').value.trim();
     let user = await findUser(email, password);
     if (user) {
-        console.log('User found:', user.email);
+        removeInputAlert('email-input');
         localStorage.setItem("userId", user.userId);
         window.location.href = 'summary.html';
     } else {
-        console.error('User not found.');
+        inputAlert('email-input', 'Unknown user or wrong password. Please try again.');
     }
 }
 
@@ -291,7 +291,7 @@ function registerUser() {
 
     };
     addUserToDatabase(userData);
-    
+    switchToLogin();
 }
 
 async function addUserToDatabase(userData) {
