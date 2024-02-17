@@ -15,6 +15,7 @@ body {
     height: 122px;
     top: 19px;
     left: 27px;
+    cursor: pointer;
 }
 
 .logo-animation {
@@ -223,12 +224,13 @@ body {
     gap: 20px; 
 }
 
-.footer p {
+.footer a {
     margin: 0;
     color:#A8A8A8; 
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 400;
+    text-decoration: none;
 }
 
 #submit-btn {
@@ -337,6 +339,7 @@ body {
         left: 50%;
         transform: translate(-50%, -50%);
         animation: moveLogo 3s ease-in-out forwards;
+        cursor: pointer;
     }
 
     #login-container {
