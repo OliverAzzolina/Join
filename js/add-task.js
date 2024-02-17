@@ -4,6 +4,7 @@ subtaskDoneTempArray = [];
 contacts = [];
 assignedToTempArray = [];
 
+
 document.addEventListener('DOMContentLoaded', async function () {
   console.log('DOM loaded');
   await userIsAllowed();
@@ -14,11 +15,13 @@ document.addEventListener('DOMContentLoaded', async function () {
   loadTasksfromStorage();
 });
 
+
 async function loadUserContacts(){
   await loadUserData();
   sortContacts();
   loadContactList();
 }
+
 
 //LOAD Tasks from Storage
 async function loadTasksfromStorage(){
@@ -33,9 +36,8 @@ async function loadTasksfromStorage(){
 //EVENT LISTENERS
 function addEventListener() {
   btnEventListener();
-  subtaskInputEventListener();
-  subtaskInputKeypressEventListener();
 }
+
 
 function btnEventListener() {
   document.querySelectorAll('.add-task-form-btn').forEach(function (button) {
@@ -46,193 +48,6 @@ function btnEventListener() {
   });
 }
 
-function subtaskInputEventListener() {
-  input = document.getElementById("add-task-subtask-input");
-  icons = document.getElementById("add-task-create-subtask-icon-box");
-  activeIcons = document.getElementById("add-task-active-subtask-icon-box");
-  input.addEventListener('input', function () {
-    if (input.value.length > 0) {
-      icons.classList.add("d-none");
-      activeIcons.classList.remove("d-none");
-    } else {
-      icons.classList.remove("d-none");
-      activeIcons.classList.add("d-none");
-    }
-  })
-}
-
-function subtaskInputKeypressEventListener() {
-  let input = document.getElementById("add-task-subtask-input");
-
-  input.addEventListener('keypress', function (event) {
-    if (event.key === 'Enter' && input.value.length > 0) {
-      event.preventDefault();
-      addSubtask();
-    }
-  });
-}
-
-
-function updateSubtaskListeners() {
-  var subtaskElements = document.querySelectorAll('.add-task-subtask');
-
-  subtaskElements.forEach(function (subtaskElement) {
-    var icons = subtaskElement.querySelector('.add-task-subtask-icons');
-
-    subtaskElement.addEventListener('mouseover', function () {
-      icons.style.opacity = 1;
-    });
-
-    subtaskElement.addEventListener('mouseout', function () {
-      icons.style.opacity = 0;
-    });
-  });
-}
-
-
-
-// SUBTASKS FUNCTIONS
-
-function setFocusSubtaskInput() {
-  input = document.getElementById("add-task-subtask-input");
-  input.focus();
-}
-
-
-function clearSubtaskInput() {
-  input = document.getElementById("add-task-subtask-input");
-  icons = document.getElementById("add-task-create-subtask-icon-box");
-  activeIcons = document.getElementById("add-task-active-subtask-icon-box");
-
-  input.value = '';
-  icons.classList.remove("d-none");
-  activeIcons.classList.add("d-none");
-  setFocusSubtaskInput();
-}
-
-
-function addSubtask() {
-  var input = document.getElementById("add-task-subtask-input");
-  var subtaskContainer = document.getElementById("add-task-subtasks-container");
-  subtaskTempArray.push(input.value);
-  clearSubtaskInput();
-  subtaskContainer.innerHTML = '';
-  subtaskTempArray.forEach((subtask, index) => {
-    subtaskContainer.innerHTML += subtaskHTML(subtask, index);
-  });
-  setupEditableP(subtaskContainer);
-  updateSubtaskListeners();
-}
-
-function removeSubtask(index) {
-  var subtaskContainer = document.getElementById("add-task-subtasks-container");
-  subtaskTempArray.splice(index, 1)
-  subtaskContainer.innerHTML = '';
-  subtaskTempArray.forEach((subtask, index) => {
-    subtaskContainer.innerHTML += subtaskHTML(subtask, index);
-  });
-  setupEditableP(subtaskContainer);
-}
-
-function generateSubtaskElement(subtask, index) {
-  let subtaskContainer = document.getElementById("add-task-subtasks-container");
-  subtaskContainer.innerHTML = "";
-  subtaskContainer.innerHTML += subtaskHTML(subtask, index)
-}
-
-
-
-// EDIT SUBTASKS !!!WIP!!!
-function editSubtask(subtaskId) {
-  var subtaskElement = document.getElementById(subtaskId);
-  if (subtaskElement) {
-    var editableP = subtaskElement.querySelector('.editable');
-    if (editableP) {
-      convertPToInput(subtaskElement);
-    }
-  }
-}
-
-
-function setupEditableP(container) {
-  container.addEventListener('dblclick', function (event) {
-    var subtaskElement = event.target.closest('.add-task-subtask');
-    if (subtaskElement && subtaskElement.querySelector('.editable')) {
-      convertPToInput(subtaskElement);
-    }
-  });
-}
-
-function convertPToInput(subtaskElement) {
-  var editableP = subtaskElement.querySelector('.editable');
-  var inputField = createInputField(editableP.innerText);
-  setupInputFieldEvents(inputField, subtaskElement);
-  editableP.parentNode.replaceChild(inputField, editableP);
-  inputField.focus();
-  updateIconsToEditing(subtaskElement);
-}
-
-function createInputField(text) {
-  var inputField = document.createElement("input");
-  inputField.type = "text";
-  inputField.value = text.replace('• ', '');
-  inputField.className = "editable-input";
-  return inputField;
-}
-
-function setupInputFieldEvents(inputField, subtaskElement) {
-  inputField.addEventListener("blur", function () {
-    convertInputToP(inputField, subtaskElement);
-  });
-  inputField.addEventListener("keypress", function (event) {
-    if (event.key === 'Enter') {
-      inputField.blur();
-    }
-  });
-}
-
-function convertInputToP(inputElement, subtaskElement) {
-  var newP = createPElement(inputElement.value);
-  inputElement.parentNode.replaceChild(newP, inputElement);
-  updateIconsToNormal(subtaskElement);
-}
-
-function createPElement(text) {
-  var newP = document.createElement("p");
-  newP.innerText = '• ' + text;
-  newP.classList.add("editable");
-  return newP;
-}
-
-function updateIconsToEditing(subtaskElement) {
-  var iconsContainer = subtaskElement.querySelector('.add-task-subtask-icons');
-  iconsContainer.innerHTML = `
-    <img src="assets/img/subtask_delete_icon.png" class="delete-icon" onclick="attemptRemoveSubtask('${subtaskElement.id}', true)">
-    <img src="assets/img/subtask_divider.png">
-    <img src="assets/img/subtask_check_ icon.png" class="check-icon" onclick="finishEditing('${subtaskElement.id}')">
-  `;
-}
-
-function attemptRemoveSubtask(subtaskId, isEditing) {
-  if (isEditing) {
-    // Beende den Edit-Mode, bevor der Subtask gelöscht wird
-    var subtaskElement = document.getElementById(subtaskId);
-    if (subtaskElement.querySelector('.editable-input')) {
-      var inputElement = subtaskElement.querySelector('.editable-input');
-      convertInputToP(inputElement, subtaskElement);
-    }
-  }
-  removeSubtask(subtaskId); // Aufruf der ursprünglichen Löschfunktion
-}
-
-function updateIconsToNormal(subtaskElement) {
-  var iconsContainer = subtaskElement.querySelector('.add-task-subtask-icons');
-  iconsContainer.innerHTML = `
-    <img src="assets/img/subtask_edit_icon.png" class="edit-icon" onclick="editSubtask('${subtaskElement.id}')">
-    <img src="assets/img/subtask_divider.png">
-    <img src="assets/img/subtask_delete_icon.png" class="delete-icon" onclick="removeSubtask('${subtaskElement.id}')">
-  `;
-}
 
 function addTask(event) {
   event.preventDefault();
@@ -253,6 +68,7 @@ function addTask(event) {
   saveTask();
 }
 
+
 function getCategoryValue() {
   var categoryDropdown = document.querySelector('.add-task-form-dropdown');
   if (categoryDropdown && categoryDropdown.selectedIndex >= 0) {
@@ -261,6 +77,7 @@ function getCategoryValue() {
     return null;
   }
 }
+
 
 function getSubTasksDone() {
   returnArray = [];
@@ -272,6 +89,7 @@ function getSubTasksDone() {
   });
   return returnArray;
 };
+
 
 function saveTask() {
   setItem('tasks', JSON.stringify(tasks));
@@ -343,9 +161,12 @@ function checkIfAssigned(i) {
   }
 }
 
+
 function clearAssignedToAddOverlay() {
   document.getElementById("show-assigned-editors-container").innerHTML = "";
 }
+
+
 //LOAD Contacts
 function loadContactList() {
   let contactList = document.getElementById('assigned-editors');

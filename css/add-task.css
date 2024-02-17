@@ -221,8 +221,9 @@ h1 {
 
 #add-task-container form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
+  gap: 16px;
 }
 
 #add-task-title-container,
@@ -418,7 +419,7 @@ textarea:hover,
 #input-container-tasks {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  
 }
 
 #task-splitter {
