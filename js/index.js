@@ -295,15 +295,13 @@ async function registerUser() {
 }
 
 async function addUserToDatabase(userData) {
-        const usersJson = await getItem('users');
-        let users = JSON.parse(usersJson);
-
-        if (!checkIfUserAlreadyExists(users, userData.email)) {
-            addUserToUserContacts(userData);
-            users.push(userData);
-            await setItem('users', JSON.stringify(users));
-            console.log('User successfully registered.');
-        }
+    let users = await getUserArray()
+    if (!checkIfUserAlreadyExists(users, userData.email)) {
+        addUserToUserContacts(userData);
+        users.push(userData);
+        await setItem('users', JSON.stringify(users));
+        console.log('User successfully registered.');
+    }
 
         
 }

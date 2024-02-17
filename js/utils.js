@@ -13,8 +13,7 @@ async function generateRandomId() {
 }
 
 async function checkIfUserIdAlreadyExists(newUserId) {
-    const usersJson = await getItem('users');
-    let users = JSON.parse(usersJson);
+    let users = await getUserArray()
     let user = users.find(user => user.userId === newUserId);
     if (user) {
         return true;

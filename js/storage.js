@@ -27,7 +27,13 @@ async function getItem(key) {
     });
 }
 
-async function getRemoteArray(key) {
+async function getUserArray() {
+    const responseJson = await getItem('users');
+    const response = JSON.parse(responseJson);
+    return response;
+}
+
+async function logoutRemoteArray(key) {
     const responseJson = await getItem(key);
     const response = JSON.parse(responseJson);
     console.log(response)
