@@ -32,3 +32,11 @@ async function getRemoteArray(key) {
     const response = JSON.parse(responseJson);
     console.log(response)
 }
+
+
+async function resetUserArray() {
+    let users = rescueUserArray;
+    await setItem('users', JSON.stringify(users));
+    console.log('User array reset.');
+    getRemoteArray('users');
+}
