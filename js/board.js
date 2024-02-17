@@ -2,11 +2,12 @@ let currentDraggedElement;
 
 async function init(){
     //loadContactsFromStorage();
+    await userIsAllowed();
+    await generateHeader(userInitials);
+    await generateSidebar();
     await loadUserData();
     sortContacts();
     loadTasksfromStorage();
-    generateHeader(userInitials);
-    generateSidebar();
 }
 
 //LOAD Tasks from Storage

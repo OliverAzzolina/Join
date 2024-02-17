@@ -34,16 +34,49 @@ function generateRandomColor(){
     return "#" + randomColor
   }
 
-function generateHeader(userInitials) {
+async function generateHeader(userInitials) {
     let header = document.getElementById("header-container");
-    header.innerHTML = headerHTML(userInitials);
+    if (await userIsLoggedIn()) {
+        header.innerHTML = headerHTML(userInitials);
+    } else {
+        header.innerHTML = headerLoggedOutHTML();
+    }
 }
 
-function generateSidebar() {
+
+async function generateSidebar() {
     let sidebar = document.getElementById("sidebar-container");
-    sidebar.innerHTML = sidebarHTML();
+    if (await userIsLoggedIn()){
+        sidebar.innerHTML = sidebarHTML();
+    } else {
+        sidebar.innerHTML = sidebarLoggedOutHTML();
+    }
 }
-  function logout() {
+
+async function userIsLoggedIn() {
+    if (await localStorage.getItem('userId') === null) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+async function userIsAllowed() {
+    if (!await userIsLoggedIn()) {
+        window.location.href = 'index.html';
+    }
+}
+
+function logout() {
     localStorage.clear();
     window.location.href = 'index.html';
   }
+
+
+async function goHome() {
+    if (await userIsLoggedIn()) {
+        window.location.href = 'summary.html';
+    } else {
+        window.location.href = 'index.html';
+    }
+}

@@ -4,19 +4,20 @@ subtaskDoneTempArray = [];
 contacts = [];
 assignedToTempArray = [];
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
   console.log('DOM loaded');
-  generateSidebar();
+  await userIsAllowed();
+  await generateHeader(userInitials);  
+  await generateSidebar();
   addEventListener();
   loadUserContacts();
   loadTasksfromStorage();
 });
 
 async function loadUserContacts(){
-await loadUserData();
-sortContacts();
-loadContactList();
-generateHeader(userInitials);
+  await loadUserData();
+  sortContacts();
+  loadContactList();
 }
 
 //LOAD Tasks from Storage

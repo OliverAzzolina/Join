@@ -3,12 +3,12 @@ let contactList = [];
 let contactLetterGroup = [];
 
 async function init() {
+  await generateHeader(userInitials);
+  await generateSidebar();  
   await loadUserData();
   sortContacts();
   loadContacts();
   //loadContactsFromStorage();
-  generateHeader(userInitials);
-  generateSidebar();
 }
 
 //LOAD Contacts

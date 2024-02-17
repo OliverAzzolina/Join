@@ -3,10 +3,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function init() {
+  await userIsAllowed();
+  await generateSidebar();
+  await generateSummary();
   await loadUserData();
   generateHeader(userInitials);
-  generateSidebar();
-  generateSummary();
 }
 
 
