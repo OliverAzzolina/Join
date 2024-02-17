@@ -241,7 +241,8 @@ function renderContactInfo(i,j,initials,firstName,lastName,email,phone,userColor
           <p>Phone</p>
           <a href="tel:${phone}">${phone}</a>
         </div>
-    </div>`;
+    </div>
+    <img src="assets/img/mobile-menu-icon.png" id="roundButton" onclick="EditContact(${i},${j})" alt="Edit" style="cursor: pointer;">`;
 }
 
 //ADD NEW CONTACT OVERLAY
