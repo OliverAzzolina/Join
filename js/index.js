@@ -25,11 +25,11 @@ async function loginUser() {
     let password = document.getElementById('password-input').value.trim();
     let user = await findUser(email, password);
     if (user) {
-        console.log('User found:', user.email);
+        removeInputAlert('email-input');
         localStorage.setItem("userId", user.userId);
         window.location.href = 'summary.html';
     } else {
-        console.error('User not found.');
+        inputAlert('email-input', 'Unknown user or wrong password. Please try again.');
     }
 }
 
@@ -267,7 +267,7 @@ function removeAllAlerts() {
 
 
 // REGISTER LOGIC
-function registerUser() {
+async function registerUser() {
     let [firstName, lastName = ''] = document.getElementById('name').value.trim().split(" ");
     let email = document.getElementById('email').value.trim();
     let password = document.getElementById('password').value.trim();
@@ -287,23 +287,21 @@ function registerUser() {
         phone: null,
         userColor: generateRandomColor(),
         userContacts: rescueUserArray,
-        userId: generateRandomId(),
+        userId: await generateRandomId(),
 
     };
     addUserToDatabase(userData);
-    
+    switchToLogin();
 }
 
 async function addUserToDatabase(userData) {
-        const usersJson = await getItem('users');
-        let users = JSON.parse(usersJson);
-
-        if (!checkIfUserAlreadyExists(users, userData.email)) {
-            addUserToUserContacts(userData);
-            users.push(userData);
-            await setItem('users', JSON.stringify(users));
-            console.log('User successfully registered.');
-        }
+    let users = await getUserArray()
+    if (!checkIfUserAlreadyExists(users, userData.email)) {
+        addUserToUserContacts(userData);
+        users.push(userData);
+        await setItem('users', JSON.stringify(users));
+        console.log('User successfully registered.');
+    }
 
         
 }
