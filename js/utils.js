@@ -5,7 +5,23 @@ function toggleDropdown() {
 
 
 function generateRandomId() {
-    return Math.floor(100000 + Math.random() * 900000);
+    newUserId = Math.floor(100000 + Math.random() * 900000)
+    if (!checkIfUserIdAlreadyExists(newUserId)) {
+        return newUserId;
+    } else {
+        generateRandomId();
+    }
+}
+
+async function checkIfUserIdAlreadyExists(userId) {
+    const usersJson = await getItem('users');
+    let users = JSON.parse(usersJson);
+    let user = users.find(user => user.userId === userId);
+    if (user) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
