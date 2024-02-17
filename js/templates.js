@@ -18,13 +18,13 @@ function loginHTML() {
       <div id="email-form-container" class="form-group">
         <div id="email-input-container" class="input-with-icon">
           <img id="email-icon" class="input-icon" src="assets/img/mail_icon.png" alt="Email Icon">
-          <input id="email-input" type="email" placeholder="Email">
+          <input id="email-input" type="email" placeholder="Email" autocomplete="username">
         </div>
       </div>
       <div id="password-form-container" class="form-group">
         <div id="password-input-container" class="input-with-icon">
             <img id="password-icon" src="assets/img/lock_icon.png" alt="Password Icon" class="input-icon">
-            <input id="password-input" type="password" placeholder="Password">
+            <input id="password-input" type="password" placeholder="Password" autocomplete="current-password">
         </div>
       </div>
       <div id="remember-checkbox-container">
@@ -38,14 +38,14 @@ function loginHTML() {
     </form>
   </div>
 <div class="footer fade-in">
-<p>Privacy Policy</p>
-<p>Legal Notice</p>
+<a href="privacy.html">Privacy Policy</a>
+<a href="legal-notice.html">Legal Notice</a>
 </div>`;
 }
 
 function registerHTML() {
   return /*html*/`
-    <img src="assets/img/logo_desktop.png" alt="Logo" id="logo">
+    <img src="assets/img/logo_desktop.png" alt="Logo" id="logo" onclick="goHome()">
 
     <div id="signup-container">
       <img src="assets/img/arrow.png" alt="arrow" id="arrow" onclick="switchToLogin()">
@@ -53,16 +53,16 @@ function registerHTML() {
       <div class="form-underline"></div>
       <form id="registration-Form">
         <div class="form-group">
-            <input type="text" id="name" placeholder="Name" required>
+            <input type="text" id="name" placeholder="Name" autocomplete="off" required>
         </div>
         <div class="form-group">
-            <input type="email" id="email" placeholder="Email" required>
+            <input type="email" id="email" placeholder="Email" autocomplete="email" required>
         </div>
         <div class="form-group">
-            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="password" placeholder="Password" autocomplete="new-password" required>
         </div>
         <div class="form-group">
-            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" autocomplete="new-password" required>
         </div>
         <div id="register-checkbox-group" class="checkbox-group">
           <label id="checkbox-label">
@@ -76,71 +76,71 @@ function registerHTML() {
       </form>    
     </div>
     <div class="footer">
-        <p>Privacy Policy</p>
-        <p>Legal Notice</p>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="legal-notice.html">Legal Notice</a>
     </div>`;
 }
 
 function summaryHTML(toDoCounter, doneCounter, urgentCounter, urgentDeadline, tibCounter, tipCounter, awaitingFeedbackCounter, greetingDaytime, userGreetingName) {
   return /*html*/`
-            <div class="content-container">
-                <div class="summary-content">
-                    <p class="left-text">Join 360</p>
-                    <p class="middle-text">|</p>
-                    <p class="right-text">Key Metrics at a Glance</p>
-                </div> 
-                <div class="todo1">
-                    <a href="board.html" class="todo-left" onmouseover="changeImage(this)" onmouseout="resetImage(this)">
-                        <img src="assets/img/todo_black_icon.png" alt="Icon" class="icon">
-                        <div class="text-container">
-                            <span id="to-do-counter" class="number">${toDoCounter}</span>
-                            <span class="label">To-do</span>
-                        </div>
-                    </a>
-                    <a href="board.html" class="done-right" onmouseover="changeImageDoneRight(this)" onmouseout="resetImageDoneRight(this)">
-                        <img src="assets/img/done_black_icon.png" alt="Icon" class="icon">
-                        <div class="text-container">
-                            <span id="done-counter" class="number">${doneCounter}</span>
-                            <span class="label">Done</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="todo2">
-                    <a href="board.html" class="todo2-left">
-                        <img src="assets/img/prio_urgent_icon_big.png" alt="Icon" class="icon" onmouseover="changeImage(this)" onmouseout="resetImage(this)">
-                        <div class="text-container">
-                            <span id="urgent-counter" class="number">${urgentCounter}</span>
-                            <span class="label">Urgent</span>
-                        </div>
-                        <div>
-                            <p class="middle-text2">|</p>
-                        </div>   
-                    </a>
-                    <div class="todo-right">
-                        <span class="date"><b id="urgent-deadline">${urgentDeadline}</b></span>
-                        <span class="label">Upcomming Deadline</span>
-                    </div>
-                </div>
-                <div class="todo1">
-                    <a href="board.html" class="to-do">
-                        <span id="tib-counter" class="number">${tibCounter}</span>
-                        <span class="label">Task in<br> Board</span>
-                    </a>
-                    <a href="board.html" class="to-do2">
-                        <span id="tip-counter" class="number">${tipCounter}</span>
-                        <span class="label">Tasks in<br> Prozess</span>
-                    </a>    
-                    <a href="board.html" class="to-do3">
-                        <span id="awaiting-feedback-counter" class="number">${awaitingFeedbackCounter}</span>
-                        <span class="label">Awaiting Feedback</span>
-                    </a>
-                </div>
-            </div>
-            <div class="greeting-script">
-                <p id="greetingText"></p>${greetingDaytime}<br>
-                <p id="user-greeting-name" class="name">${userGreetingName}</p>
-            </div>
-        </div>`;
+  <div class="content-container">
+    <div class="summary-content">
+      <p class="left-text">Join 360</p>
+      <p class="middle-text">|</p>
+      <p class="right-text">Key Metrics at a Glance</p>
+    </div> 
+    <div class="todo1">
+      <a href="board.html" class="todo-left" onmouseover="changeImage(this)" onmouseout="resetImage(this)">
+        <img src="assets/img/todo_black_icon.png" alt="Icon" class="icon">
+        <div class="text-container">
+          <span id="to-do-counter" class="number">${toDoCounter}</span>
+          <span class="label">To-do</span>
+        </div>
+      </a>
+      <a href="board.html" class="done-right" onmouseover="changeImageDoneRight(this)" onmouseout="resetImageDoneRight(this)">
+        <img src="assets/img/done_black_icon.png" alt="Icon" class="icon">
+        <div class="text-container">
+          <span id="done-counter" class="number">${doneCounter}</span>
+          <span class="label">Done</span>
+        </div>
+      </a>
+    </div>
+    <div class="todo2">
+      <a href="board.html" class="todo2-left">
+        <img src="assets/img/prio_urgent_icon_big.png" alt="Icon" class="icon" onmouseover="changeImage(this)" onmouseout="resetImage(this)">
+        <div class="text-container">
+          <span id="urgent-counter" class="number">${urgentCounter}</span>
+          <span class="label">Urgent</span>
+        </div>
+        <div>
+          <p class="middle-text2">|</p>
+        </div>   
+      </a>
+      <div class="todo-right">
+        <span class="date"><b id="urgent-deadline">${urgentDeadline}</b></span>
+        <span class="label">Upcomming Deadline</span>
+      </div>
+    </div>
+    <div class="todo1">
+      <a href="board.html" class="to-do">
+        <span id="tib-counter" class="number">${tibCounter}</span>
+        <span class="label">Task in<br> Board</span>
+      </a>
+      <a href="board.html" class="to-do2">
+        <span id="tip-counter" class="number">${tipCounter}</span>
+        <span class="label">Tasks in<br> Prozess</span>
+      </a>    
+      <a href="board.html" class="to-do3">
+        <span id="awaiting-feedback-counter" class="number">${awaitingFeedbackCounter}</span>
+        <span class="label">Awaiting Feedback</span>
+      </a>
+    </div>
+  </div>
+  <div class="greeting-script">
+    <p id="greetingText"></p>${greetingDaytime}<br>
+    <p id="user-greeting-name" class="name">${userGreetingName}</p>
+  </div>
+</div>`;
 }
 
 
@@ -164,10 +164,16 @@ function headerHTML(userInitials) {
         </div>`;
 }
 
+
+function headerLoggedOutHTML() {
+  return /*html*/`
+    <div><p id="header-headline">Kanban Project Management Tool</p></div>`;
+}
+
 function sidebarHTML() {
   return/*html*/`
         <div>
-            <img id="sidebar-logo" src="assets/img/logo_white.svg" alt="">
+            <img id="sidebar-logo" src="assets/img/logo_white.svg" alt="Logo" onclick="goHome()">
         </div>
         <div id="menu-section">
             <ul>
@@ -188,6 +194,18 @@ function sidebarHTML() {
                     <a href="./contacts.html">Contacts</a>
                 </li>
             </ul>
+        </div>
+        <li id="sidebar-footer">
+            <a href="./privacy.html">Privacy Policy</a>
+            <a href="./legal-notice.html">Legal Notice</a>
+        </li>`;
+}
+
+
+function sidebarLoggedOutHTML() {
+  return/*html*/`
+        <div>
+            <img id="sidebar-logo" src="assets/img/logo_white.svg" alt="Logo" onclick="goHome()">
         </div>
         <li id="sidebar-footer">
             <a href="./privacy.html">Privacy Policy</a>
