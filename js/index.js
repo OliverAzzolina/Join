@@ -267,7 +267,7 @@ function removeAllAlerts() {
 
 
 // REGISTER LOGIC
-function registerUser() {
+async function registerUser() {
     let [firstName, lastName = ''] = document.getElementById('name').value.trim().split(" ");
     let email = document.getElementById('email').value.trim();
     let password = document.getElementById('password').value.trim();
@@ -287,7 +287,7 @@ function registerUser() {
         phone: null,
         userColor: generateRandomColor(),
         userContacts: rescueUserArray,
-        userId: generateRandomId(),
+        userId: await generateRandomId(),
 
     };
     addUserToDatabase(userData);
