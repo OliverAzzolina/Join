@@ -54,7 +54,7 @@ function renderAssignedToEdit(index){
   }
 
 
-  function notToMuchEditorsDetail(assignedTo, index){
+  function notToMuchEditorsEdit(assignedTo, index){
     for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
       const checkedEditor = tasks[index]['assignedto'][i];
       let initials = checkedEditor.initials;
@@ -83,21 +83,23 @@ function saveTask(i) {
   tasks[i]["description"] = document.getElementById("edit-task-description-input").value;
   tasks[i]["duedate"] = document.getElementById("edit-task-form-input").value;
   tasks[i]["prio"];
-  tasks[i]["assignedTo"];
+  tasks[i].assignedto;
   tasks[i]["subtasks"];
   createSubtasksDoneArrayEditOverlay(i);
   tasks.push();
   setItem("tasks", JSON.stringify(tasks));
   loadTasksfromStorage();
   closeEditOverlay();
-  refreshTasks();
+  init();
   openTaskDetails(i);
 }
+
 
 function closeEditOverlay() {
   document.getElementById("overlay").style.display = "none";
 }
 //EDIT TASK END
+
 
 //PRIO START
 function showEditPrio(i) {
