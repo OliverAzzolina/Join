@@ -151,7 +151,8 @@ function headerHTML(userInitials) {
     <div><p id="header-headline">Kanban Project Management Tool</p></div>
         <div id="header-icons">
             
-                <img id="help-icon"src="assets/img/header_help_icon.png" alt="help">
+               
+                <a href="help.html"><img id="help-icon" src="assets/img/header_help_icon.png" alt="help"></a>
            
                 <button id="login-icon" onclick="toggleDropdown()">${userInitials}</button>
                 
