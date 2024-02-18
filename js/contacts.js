@@ -295,7 +295,7 @@ function generateEditOverlay(i,j,initials,fullName,email,phone,userColor) {
   return `
   <div class="add-contact-card" onclick="doNotClose(event)">
     <div class="add-contact-card-left">
-      <img src="assets/img/logo_small.png" alt="">
+      <img class="mobile-logo-small" src="assets/img/logo_small.png" alt="">
         <div class="titles">
           <span class="title">Edit contact</span>
           <span class="subtitle">Tasks are better with a Team!</span>

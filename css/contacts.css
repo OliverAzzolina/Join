@@ -24,6 +24,8 @@ main {
 
 
 
+
+
 #contact-list {
   width: 100%;
   display: flex;
@@ -286,6 +288,7 @@ main {
   justify-content: space-between;
   flex-direction: row;
   width: 159px;
+  display: none;
 }
 
 .edit-contact button {
@@ -718,6 +721,20 @@ main {
     color: white;
     z-index: 999999;
   }
+
+  .mobile-logo-small {
+    margin-bottom: 120px;
+    margin-left: 80px;
+    margin-right: 80px;
+    padding-top: 0px;
+  }
+
+  .detail-headline h1 {
+    font-size: 61px;
+    font-weight: 700;
+    /* margin: 0; */
+    margin-top: 65px;
+  }
   
 }
 
@@ -743,6 +760,12 @@ main {
   .contact a{
     display: none;
   }
+  .mobile-logo-small {
+    margin-bottom: 120px;
+    margin-left: 123px;
+    margin-right: 80px;
+    padding-top: 0px;
+  }
 }
 
 @media screen and (max-width: 330px) {
@@ -755,9 +778,16 @@ main {
   }
 }
 
-@media screen and (min-width: 1049px) {
+@media screen and (min-width: 1050px) {
   .contact-popup {
     display: none !important; /* Erzwingt das Verstecken des Popups auf größeren Bildschirmen */
+  }
+
+  .mobile-logo-small {
+    margin-bottom: 120px;
+    margin-left: 80px;
+    margin-right: 80px;
+    padding-top: 0px;
   }
 
   .name-section {
@@ -767,6 +797,13 @@ main {
     height: 120px;
     margin-top: 80px;
     
+  }
+
+  .mobile-logo-small {
+    margin-bottom: 120px;
+    margin-left: 80px;
+    margin-right: 80px;
+    padding-top: 0px;
   }
  
 
@@ -858,5 +895,99 @@ h5 {
   .logo-mobile-edit {
     display: none;
    }
+
+
+
+  @media screen and (max-width: 396px) {
+    .add-contact-card-left {
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 0px;
+      background-color: #2a3647;
+      width: 310px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+      padding: 66px 48px 66px 48px;
+      box-sizing: border-box;
+      height: 352px;
+      border-top-right-radius: 30px;
+    }
+
+    .close-button button {
+      border: unset;
+      background-color: white;
+      border-radius: 56px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -743px;
+      position: absolute;
+      padding-left: -36px;
+      color: white;
+      z-index: 999999;
+      margin-right: 50px;
+      margin-bottom: -10px;
+  }
+
+    .add-contact-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0px;
+      width: 310px;
+      height: 760px;
+    }
+
+    .input-icon-name {
+      background: url(/assets/img/person_icon.png) no-repeat right;
+      background-size: 24px 24px;
+      background-position-x: 270px;
+    }
+
+    .input-icon-mail {
+      background: url(/assets/img/mail_icon.png) no-repeat right;
+      background-size: 24px 24px;
+      background-position-x: 270px;
+    }
+
+    .input-icon-phone {
+      background: url(/assets/img/call_icon.png) no-repeat right;
+      background-size: 24px 24px;
+      background-position-x: 270px;
+    }
+
+    .add-contact-inputs input {
+      width: 255px;
+      border: 1px solid #d1d1d1;
+      border-radius: 10px;
+      padding: 13px 21px 13px 21px;
+      color: #d1d1d1;
+      margin-left: 1px;
+    }
+    .subtitle {
+      font-size: 15px;
+      font-weight: 400;
+      color: white;
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: 700;
+      color: white;
+      margin-top: -92px;
+    }
+
+    .mobile-logo-small {
+      margin-bottom: 120px;
+      margin-left: 80px;
+      margin-right: 80px;
+      padding-top: 0px;
+    }
+
+
+  }
 
 
