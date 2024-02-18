@@ -35,6 +35,39 @@ body {
     box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
 }
 
+/* Link-Standardfarbe und Hintergrund */
+#mobile-menu-container a {
+    color: #fbfbfb; /* Standardlinkfarbe, behalten Sie dies bei oder passen Sie es nach Bedarf an */
+    text-decoration: none; /* Entfernt die Unterstreichung von Links */
+    background-color: transparent; /* Standard Hintergrundfarbe */
+    display: inline-block; /* Ermöglicht die Anwendung von Padding und korrekter Hintergrundfarbe */
+    width: 100%; /* Stellt sicher, dass der gesamte Linkbereich klickbar ist */
+    padding: 10px 0; /* Fügt etwas Platz um den Text hininzu */
+    box-sizing: border-box; /* Stellt sicher, dass Padding im definierten width enthalten ist */
+    display: flex; /* Macht den Link zu einem Flex-Container */
+  align-items: center; /* Zentriert die Inhalte vertikal */
+  justify-content: flex-start; /* Ausrichtung der Inhalte am Anfang */
+  padding: 10px 0;
+}
+
+/* Link-Hover- und Aktivzustand */
+#mobile-menu-container a:hover, #mobile-menu-container a:active {
+    background-color: 
+    #091931; /* Dunkelblau für den Hover- und Aktivzustand */
+    color: #fff; /* Optional: Ändert die Textfarbe beim Hovern/Aktivieren in Weiß */
+}
+
+/* Optional: Ändern der Bild- und Textfarbe beim Hovern bleibt gleich, nur der Hintergrund ändert sich */
+#mobile-menu-container a:hover .mobile-icons,
+#mobile-menu-container a:active .mobile-icons {
+    filter: none; /* Keine Änderung am Bild beim Hovern/Aktivieren */
+}
+
+#mobile-menu-container a:hover .mobile-text,
+#mobile-menu-container a:active .mobile-text {
+    color: #fff; /* Optional: Beibehalten der weißen Textfarbe beim Hovern/Aktivieren */
+}
+
 .content {
     margin-left: 200px;
     padding: 20px;
