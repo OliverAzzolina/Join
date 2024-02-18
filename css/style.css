@@ -2,8 +2,7 @@
 #header-container {
     width: 100%;
     height: 80px;
-    background-color:white;
-    color: white;
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,7 +30,7 @@
     padding-right: 15px;
 }
 
-#header-icons{
+#header-icons {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,19 +52,19 @@
     background-color: white;
 }
 
-#login-icon:hover{
-    filter: drop-shadow( 0px 0px 10px rgba(0, 0, 0, 0.18));
+#login-icon:hover {
+    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.18));
 }
 
 #dropdownMenu {
     display: none;
     position: absolute;
     right: 5px;
-    top: 100%; 
+    top: 80px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     border-radius: 20px;
-    background-color:#2A3647;
+    background-color: #2A3647;
     padding: 10px;
 }
 
@@ -74,19 +73,17 @@
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-    z-index: 1000;
 }
 
 #dropdownMenu a:hover {
     background-color: #ddd;
 }
 
-
 /* Sidebar Container */
 #sidebar-container {
     width: 232px;
     height: 100vh;
-    background-color:#2A3647;
+    background-color: #2A3647;
     position: fixed;
     top: 0;
     left: 0;
@@ -98,7 +95,6 @@
     font-family: 'Inter', sans-serif;
 }
 
-
 /* Sidebar Logo */
 #sidebar-logo {
     width: 100px;
@@ -106,37 +102,49 @@
     cursor: pointer;
 }
 
+/* Verbessertes Styling für Sidebar-Links */
+#sidebar-container ul {
+    padding: 0;
+    width: 100%;
+}
+
+#sidebar-container ul li {
+    list-style-type: none;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 30px;
+}
+
+#sidebar-container ul li a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    padding-left: 47px; /* Abstand für Icon und Text */
+}
+
+/* Hover-Effekt für das gesamte Listenelement */
+#sidebar-container ul li:hover {
+    background-color: #091931;
+    border-radius: 5px;
+    width: 190px;
+}
 
 /* Sidebar Links */
 #menu-section {
     display: flex;
     align-items: center;
     gap: 16px;
-    width: 200px;
-    height: 46px;
+    width: 100%;
 }
 
 #menu-section img {
     margin-right: 10px;
-    padding-top: 8px;
 }
-
-#sidebar-container ul li {
-    list-style-type: none;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    padding-top: 25px;
-}
-
-#sidebar-container ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    text-align: left;
-    margin-top: 5px;
-}
-
 
 /* Sidebar Footer */
 #sidebar-footer {
@@ -144,11 +152,10 @@
     align-items: center;
     flex-direction: column;
     gap: 16px;
-    width: 200px;
-    height: 46px;
+    width: 100%;
     text-decoration: none;
     color: white;
-    padding-bottom: 80px;
+    padding: 0 20px 80px 20px; /* Anpassung für Padding */
 }
 
 #sidebar-footer a {
@@ -156,16 +163,18 @@
     text-decoration: none;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
-
 }
 
+/* Media Queries für responsive Anpassungen */
 @media screen and (max-width: 1050px) {
-    /* Sidebar-Container ausblenden */
+    #header-headline, #help-icon {
+        display: none;
+    }
+
     #sidebar-container {
         display: none;
     }
 
-    /* Mobiles Menü-Container */
     #mobile-menu-container {
         display: flex;
         justify-content: space-around;
@@ -180,7 +189,6 @@
         z-index: 100;
     }
 
-    /* Stil für die mobilen Menü-Links */
     #mobile-menu-container a {
         display: flex;
         flex-direction: column;
@@ -189,46 +197,24 @@
         text-decoration: none;
     }
 
-    /* Stil für die Icons */
-    .menu-icon {
+    .menu-icon, .mobile-icons {
         width: 20px;
         height: 20px;
-        padding-bottom: 12px;
-    }
-    .mobile-icons {
-        width: 24px;
-        height: 24px;
         margin-bottom: 5px;
     }
 
     .mobile-text {
         font-size: 14px;
         margin-top: 0;
-        
-    }
-
-    .greeting-script p {
-        display: none;
-    }
-
-    #header-headline {
-        display: none;
-    }
-
-    #help-icon {
-        display: none;
     }
 
     #mobile-logo {
         display: block;
         width: 32px;
         height: 39.02px;
-        position: fixed; /* Ändern Sie 'absolute' zu 'fixed' */
+        position: fixed;
         top: 20px;
-        left: 10px; /* Anpassung basierend auf Ihrer ursprünglichen Angabe */
-        z-index: 1000; /* Stellt sicher, dass das Logo über anderen Elementen liegt */
+        left: 10px;
+        z-index: 1000;
     }
-
-    
-    
 }
