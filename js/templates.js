@@ -71,7 +71,7 @@ function registerHTML() {
           </label>
         </div>
         <div class="button-group">
-          <button type="submit">Sign Up</button>
+          <button id="register-button" type="submit" disabled>Sign Up</button>
         </div>
       </form>    
     </div>

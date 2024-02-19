@@ -8,6 +8,7 @@ function init() {
     checkRemoteStorage();
 }
 
+
 function generateLogin() {
     let mainContainer = document.getElementById('main-container');
     mainContainer.innerHTML = loginHTML();
@@ -152,8 +153,59 @@ function loadRegisterListeners() {
             registerUser();
         }
     });
+
+    document.getElementById('registration-Form').addEventListener('input', function(event) {
+        checkForm();
+    });
+    
 }
 
+function checkForm() {
+    if (checkName() && checkEmail() && checkPasswords() && checkPrivacyCheckbox()) {
+        document.getElementById('register-button').disabled = false;
+        console.log('form is valid');      
+    } else {
+        document.getElementById('register-button').disabled = true;
+        console.log('form is invalid');
+    }
+}
+
+function checkName() {
+    let name = document.getElementById('name');
+    if (name.value !== "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function checkEmail() {
+    let email = document.getElementById('email');
+    if (email.value !== "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function checkPasswords() {
+    let password = document.getElementById('password');
+    let confirmPassword = document.getElementById('confirmPassword');
+    if (password.value !== "" && confirmPassword.value !== "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function checkPrivacyCheckbox() {
+    let privacyCheckbox = document.getElementById('privacy-checkbox');
+    if (privacyCheckbox.checked) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 // REGISTER FORM VALIDATION
