@@ -15,26 +15,14 @@ async function getUserData() {
   let userId = Number(localStorage.getItem("userId"));
 
   if (!userId) {
-    console.log("No user ID found. Redirecting to login page.");
     window.location.href = "index.html";
     return null;
   }
-
-  let usersJson = await getItem("users");
-  let users = JSON.parse(usersJson);
-
-  const validUser = users.find(user => user.userId === userId);
-
-  return validUser || null;
+  let users = await getUserArray()
+  const userWithSameId = users.find(user => user.userId === userId);
+  return userWithSameId;
 }
 
-
-
-
-async function getTaskData() {
-  let tasksJson = await getItem("tasks");
-  return JSON.parse(tasksJson);
-}
 
 async function generateSummary() {
     let main = document.getElementById("main-container");
@@ -43,26 +31,28 @@ async function generateSummary() {
 
 
 async function toDoCounter() {
-    let tasks = await getTaskData();
-    let userId = localStorage.getItem("userId");
-    
-    let tasksInOpenStatus = tasks.filter((task) => {
-        return (
-            task.assignedTo && task.assignedTo.some((user) => user && user.userId === userId) &&
-            task.status === "open" && task.status === "in-progress"
-        );
-    });
-    
-    let count = tasksInOpenStatus.length;
-    return count;
+  let tasks = await getTaskArray();
+  let userId = parseInt(localStorage.getItem("userId"), 10);
+  
+  let tasksInOpenStatus = tasks.filter((task) => {
+    return (
+        task.assignedTo && task.assignedTo.some((user) => user && user.userId === userId) &&
+        (task.status === "open" || task.status === "in-progress")
+    );
+  });
+
+  let count = tasksInOpenStatus.length;
+  return count;
 }
 
 
 
 
+
+
 async function doneCounter() {
-    let tasks = await getTaskData();
-    let userId = localStorage.getItem("userId");
+    let tasks = await getTaskArray();
+    let userId = parseInt(localStorage.getItem("userId"), 10);
 
     let tasksInProgressStatus = tasks.filter((task) => {
         return (
@@ -77,7 +67,7 @@ async function doneCounter() {
 
 
 async function urgentCounter() {
-    let tasks = await getTaskData();
+    let tasks = await getTaskArray();
     let userId = localStorage.getItem("userId");
 
     let tasksInUrgentStatus = tasks.filter((task) => {
@@ -93,16 +83,16 @@ async function urgentCounter() {
 
 
 async function urgentDeadline() {
-    let tasks = await getTaskData();
+    let tasks = await getTaskArray();
     let urgentTasks = tasks.filter(task => task.prio === "urgent");
 
     let nearestUrgentTask = urgentTasks.reduce((prev, current) => {
-        return (new Date(prev.duedate) < new Date(current.duedate)) ? prev : current;
+        return (new Date(prev.dueDate) < new Date(current.dueDate)) ? prev : current;
     }, urgentTasks[0]);
 
-    let duedateFormatted = formatDate(nearestUrgentTask.duedate);
+    let dueDateFormatted = formatDate(nearestUrgentTask.dueDate);
 
-    return duedateFormatted;
+    return dueDateFormatted;
 }
 
 function formatDate(dateString) {
@@ -114,14 +104,14 @@ function formatDate(dateString) {
 
 
 async function tibCounter() {
-    let tasks = await getTaskData();
+    let tasks = await getTaskArray();
     let count = tasks.length;
     return count;
 }
 
 
 async function tipCounter() {
-    let tasks = await getTaskData();
+    let tasks = await getTaskArray();
     let allTasksInProgressStatus = tasks.filter(task => task.status === "in-progress");
     let count = allTasksInProgressStatus.length;
     return count;
@@ -130,7 +120,7 @@ async function tipCounter() {
 
 
 async function awaitingFeedbackCounter() {
-    let tasks = await getTaskData();
+    let tasks = await getTaskArray();
     let allTasksInProgressStatus = tasks.filter(task => task.status === "await-feedback");
     let count = allTasksInProgressStatus.length;
     return count;
