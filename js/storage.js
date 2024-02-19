@@ -29,9 +29,13 @@ async function getItem(key) {
 
 async function getUserArray() {
     const responseJson = await getItem('users');
-    const response = JSON.parse(responseJson);
-    return response;
+    return JSON.parse(responseJson);
 }
+
+async function getTaskArray() {
+    let responseJson = await getItem("tasks");
+    return JSON.parse(responseJson);
+  }
 
 async function logoutRemoteArray(key) {
     const responseJson = await getItem(key);
@@ -44,5 +48,12 @@ async function resetUserArray() {
     let users = rescueUserArray;
     await setItem('users', JSON.stringify(users));
     console.log('User array reset.');
-    getRemoteArray('users');
+    logoutRemoteArray('users');
+}
+
+async function resetTaskArray() {
+    let tasks = rescueTaskArray;
+    await setItem('tasks', JSON.stringify(tasks));
+    console.log('Task array reset.');
+    logoutRemoteArray('tasks');
 }
