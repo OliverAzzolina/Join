@@ -148,7 +148,7 @@ function addAssignedEditors(index){
 function renderAssignedTo(index){
   let assignedTo = document.getElementById(`todo-assigned-to${index}`);
   assignedTo.innerHTML = '';
-    if(tasks[index]['assignedto'].length > 3){
+    if(tasks[index]['assignedTo'].length > 3){
       checkIfToMuchEditors(assignedTo, index);
     
     }else {
@@ -159,12 +159,12 @@ function renderAssignedTo(index){
 
   function checkIfToMuchEditors(assignedTo, index){
     for (let i = 0; i < 3; i++) {
-      const checkedEditor = tasks[index]['assignedto'][i];
+      const checkedEditor = tasks[index]['assignedTo'][i];
       let initials = checkedEditor.initials;
       let userColor = checkedEditor.userColor;
       let tooMuchEditors = document.getElementById(`tooMuchEditors${index}`);
       tooMuchEditors.style.display = 'flex';
-      tooMuchEditors.innerHTML = `+${tasks[index]['assignedto'].length - 3}`;
+      tooMuchEditors.innerHTML = `+${tasks[index]['assignedTo'].length - 3}`;
     
       assignedTo.innerHTML += `
       <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
@@ -174,8 +174,8 @@ function renderAssignedTo(index){
 
 
   function notToMuchEditors(assignedTo, index){
-    for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
-      const checkedEditor = tasks[index]['assignedto'][i];
+    for (let i = 0; i < tasks[index]['assignedTo'].length; i++) {
+      const checkedEditor = tasks[index]['assignedTo'][i];
       let initials = checkedEditor.initials;
       let userColor = checkedEditor.userColor;
       assignedTo.innerHTML += `
@@ -312,15 +312,15 @@ function pushAssignedTo(index, initials, userColor, firstName, lastName, userId)
     userColor: userColor,
     userId: userId
   };
-  tasks[index]['assignedto'].push(assignedToTask);
+  tasks[index]['assignedTo'].push(assignedToTask);
   renderAssignedToCards(index);
 }
 
 
 function renderAssignedToCards(index){
   let showAssignedEditors = document.getElementById('show-assigned-editors-container');
-  for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
-    const checkedEditor = tasks[index]['assignedto'][i];
+  for (let i = 0; i < tasks[index]['assignedTo'].length; i++) {
+    const checkedEditor = tasks[index]['assignedTo'][i];
     let initials = checkedEditor.initials;
     let userColor = checkedEditor.userColor;
     showAssignedEditors.innerHTML += generateAssignedTo(i, userColor, initials);

@@ -275,7 +275,7 @@ function generateDetailOverlay(i) {
     </div>
       <span class="detail-title">${tasks[i]["title"]}</span><br>
       <span class="f-s20-w400">${tasks[i]["description"]}</span><br>
-      <span class="f-s20-w400">Due date:  ${tasks[i]["duedate"]}</span><br>
+      <span class="f-s20-w400">Due date:  ${tasks[i]["dueDate"]}</span><br>
       <span class=" prio-img f-s20-w400">Priority:  ${tasks[i]["prio"].charAt(0).toUpperCase() + tasks[i]["prio"].slice(1)}<img class="prio-detail-img" id="prioDetailImg${i}"></span><br>
       <span class="f-s20-w400">Assigned to:</span>
       <div class="d-flex"><div id="detailAssignedTo"></div><div style="display: none;" id="toMuchEditors${i}" class="mini-logo-dummy"></div></div>
@@ -292,7 +292,7 @@ function generateDetailOverlay(i) {
       `;
 }
 
-function generateEditTaskOverlay(i, title, description, duedate) {
+function generateEditTaskOverlay(i, title, description, dueDate) {
   return `
     <div id="edit-task-overlay"  onclick="closeDetailCard()">
     <div class= "detail-todo-card" onclick="doNotClose(event)">
@@ -320,7 +320,7 @@ function generateEditTaskOverlay(i, title, description, duedate) {
               <div>
                 <span id="add-task-date-headline" class="add-task-form-title">Due date</span>
               </div>
-                <input id="edit-task-form-input" class="edit-task-form-input" required type="date" value=${duedate}>
+                <input id="edit-task-form-input" class="edit-task-form-input" required type="date" value=${dueDate}>
             </div>
   
             <div id="add-task-prio-container" onclick="doNotClose(event)">
