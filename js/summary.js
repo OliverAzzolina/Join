@@ -30,15 +30,22 @@ async function generateSummary() {
 }
 
 
+
+
 async function toDoCounter() {
   let tasks = await getTaskArray();
   let userId = parseInt(localStorage.getItem("userId"), 10);
   
   let tasksInOpenStatus = tasks.filter((task) => {
     return (
-        task.assignedTo && task.assignedTo.some((user) => user && user.userId === userId) &&
+        task.assignedto && task.assignedto.some((user) => user.userId && parseInt(user.userId, 10) === userId) &&
         (task.status === "open" || task.status === "in-progress")
+        //TODO: Change back to assignedTo as soon as typo gets out of task array
     );
+  });
+
+  tasksInOpenStatus.forEach(task => {
+    console.log(task);
   });
 
   let count = tasksInOpenStatus.length;
