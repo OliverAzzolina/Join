@@ -38,7 +38,7 @@ async function toDoCounter() {
   
   let tasksInOpenStatus = tasks.filter((task) => {
     return (
-        task.assignedto && task.assignedto.some((user) => user.userId && parseInt(user.userId, 10) === userId) &&
+        task.assignedTo && task.assignedTo.some((user) => user.userId && parseInt(user.userId, 10) === userId) &&
         (task.status === "open" || task.status === "in-progress")
         //TODO: Change back to assignedTo as soon as typo gets out of task array
     );
@@ -75,7 +75,7 @@ async function doneCounter() {
 
 async function urgentCounter() {
     let tasks = await getTaskArray();
-    let userId = localStorage.getItem("userId");
+    let userId = parseInt(localStorage.getItem("userId"), 10);
 
     let tasksInUrgentStatus = tasks.filter((task) => {
         return (
