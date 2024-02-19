@@ -34,8 +34,8 @@ function addNewTask() {
   let newTask = {
     title: document.getElementById("add-task-title-input").value,
     description: document.getElementById("add-task-description-input").value,
-    assignedto: checkedArray,
-    duedate: document.getElementById("add-task-date-input").value,
+    assignedTo: checkedArray,
+    dueDate: document.getElementById("add-task-date-input").value,
     prio: newTaskPrio,
     category: document.getElementById("add-new-task-category").value,
     status: "open",
@@ -130,7 +130,7 @@ function checkIfContactCheckboxChecked(checkedEditor, i) {
 //  let assignedTo = document.getElementById(`todo-assigned-to${index}`);
 //  assignedTo.innerHTML = "";
 //
-//  for (let i = 0; i < tasks[index]["assignedto"].length; i++) {
+//  for (let i = 0; i < tasks[index]["assignedTo"].length; i++) {
 //    const checkedEditor = contacts[i];
 //    let initials = checkedEditor.initials;
 //    let userColor = checkedEditor.userColor;

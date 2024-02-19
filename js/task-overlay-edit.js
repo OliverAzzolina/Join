@@ -7,12 +7,12 @@ function openEditOverlay(i) {
 function loadTaskData(i) {
   let title = tasks[i]["title"];
   let description = tasks[i]["description"];
-  let duedate = tasks[i]["duedate"];
+  let dueDate = tasks[i]["dueDate"];
   document.getElementById("overlay").innerHTML = generateEditTaskOverlay(
     i,
     title,
     description,
-    duedate
+    dueDate
   );
   showEditPrio(i);
   renderAssignedToEdit(i);
@@ -22,14 +22,14 @@ function loadTaskData(i) {
 
 function clearAssignedTo(index) {
   document.getElementById("show-assigned-editors-edit-container").innerHTML ="";
-  tasks[index]["assignedto"].splice(0, tasks[index]["assignedto"].length);
+  tasks[index]["assignedTo"].splice(0, tasks[index]["assignedTo"].length);
 }
 
 
 function renderAssignedToEdit(index){
   let assignedTo = document.getElementById(`show-assigned-editors-edit-container`);
   assignedTo.innerHTML = '';
-    if(tasks[index]['assignedto'].length > 3){
+    if(tasks[index]['assignedTo'].length > 3){
       checkIfToMuchEditorsEdit(assignedTo, index);
     
     }else {
@@ -40,12 +40,12 @@ function renderAssignedToEdit(index){
 
   function checkIfToMuchEditorsEdit(assignedTo, index){
     for (let i = 0; i < 3; i++) {
-      const checkedEditor = tasks[index]['assignedto'][i];
+      const checkedEditor = tasks[index]['assignedTo'][i];
       let initials = checkedEditor.initials;
       let userColor = checkedEditor.userColor;
       let tooMuchEditors = document.getElementById(`tooMuchEditorsEdit${index}`);
       tooMuchEditors.style.display = 'flex';
-      tooMuchEditors.innerHTML = `+${tasks[index]['assignedto'].length - 3}`;
+      tooMuchEditors.innerHTML = `+${tasks[index]['assignedTo'].length - 3}`;
     
       assignedTo.innerHTML += `
       <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
@@ -55,8 +55,8 @@ function renderAssignedToEdit(index){
 
 
   function notToMuchEditorsEdit(assignedTo, index){
-    for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
-      const checkedEditor = tasks[index]['assignedto'][i];
+    for (let i = 0; i < tasks[index]['assignedTo'].length; i++) {
+      const checkedEditor = tasks[index]['assignedTo'][i];
       let initials = checkedEditor.initials;
       let userColor = checkedEditor.userColor;
       assignedTo.innerHTML += `
@@ -69,8 +69,8 @@ function renderAssignedToEdit(index){
 //function renderAssignedToEdit(index) {
 //  let showAssignedEditors = document.getElementById(`show-assigned-editors-edit-container`);
 //
-//  for (let i = 0; i < tasks[index]["assignedto"].length; i++) {
-//    const checkedEditor = tasks[index]["assignedto"][i];
+//  for (let i = 0; i < tasks[index]["assignedTo"].length; i++) {
+//    const checkedEditor = tasks[index]["assignedTo"][i];
 //    let initials = checkedEditor.initials;
 //    let userColor = checkedEditor.initials;
 //    showAssignedEditors.innerHTML += generateAssignedTo(i, userColor, initials);
@@ -81,9 +81,9 @@ function saveTask(i) {
 
   tasks[i]["title"] = document.getElementById("edit-task-title-input").value;
   tasks[i]["description"] = document.getElementById("edit-task-description-input").value;
-  tasks[i]["duedate"] = document.getElementById("edit-task-form-input").value;
+  tasks[i]["dueDate"] = document.getElementById("edit-task-form-input").value;
   tasks[i]["prio"];
-  tasks[i].assignedto;
+  tasks[i].assignedTo;
   tasks[i]["subtasks"];
   createSubtasksDoneArrayEditOverlay(i);
   tasks.push();

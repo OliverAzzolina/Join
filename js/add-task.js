@@ -55,8 +55,8 @@ function addTask(event) {
   var taskData = {
     title: document.getElementById('add-task-title-input').value,
     description: document.getElementById('add-task-description-input').value,
-    assignedto: checkedArray,
-    duedate: document.getElementById('add-task-date-input').value,
+    assignedTo: checkedArray,
+    dueDate: document.getElementById('add-task-date-input').value,
     prio: selectedPriority,
     category: getCategoryValue(),
     subtasks: subtaskTempArray,

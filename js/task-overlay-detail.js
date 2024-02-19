@@ -32,7 +32,7 @@ function setPrioDetailImg(i){
 function renderAssignedToDetail(index){
   let assignedTo = document.getElementById('detailAssignedTo');
   assignedTo.innerHTML = '';
-    if(tasks[index]['assignedto'].length > 3){
+    if(tasks[index]['assignedTo'].length > 3){
       checkIfToMuchEditorsDetail(assignedTo, index);
     
     }else {
@@ -42,12 +42,12 @@ function renderAssignedToDetail(index){
 
 function checkIfToMuchEditorsDetail(assignedTo, index){
   for (let i = 0; i < 3; i++) {
-    const checkedEditor = tasks[index]['assignedto'][i];
+    const checkedEditor = tasks[index]['assignedTo'][i];
     let initials = checkedEditor.initials;
     let userColor = checkedEditor.userColor;
     let tooMuchEditors = document.getElementById(`toMuchEditors${index}`);
     tooMuchEditors.style.display = 'flex';
-    tooMuchEditors.innerHTML = `+${tasks[index]['assignedto'].length - 3}`;
+    tooMuchEditors.innerHTML = `+${tasks[index]['assignedTo'].length - 3}`;
   
     assignedTo.innerHTML += `
     <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
@@ -56,8 +56,8 @@ function checkIfToMuchEditorsDetail(assignedTo, index){
 }
 
 function notToMuchEditorsDetail(assignedTo, index){
-  for (let i = 0; i < tasks[index]['assignedto'].length; i++) {
-    const checkedEditor = tasks[index]['assignedto'][i];
+  for (let i = 0; i < tasks[index]['assignedTo'].length; i++) {
+    const checkedEditor = tasks[index]['assignedTo'][i];
     let initials = checkedEditor.initials;
     let userColor = checkedEditor.userColor;
     assignedTo.innerHTML += `
