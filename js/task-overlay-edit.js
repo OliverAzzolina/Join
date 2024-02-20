@@ -66,17 +66,6 @@ function renderAssignedToEdit(index){
   }
 
 
-//function renderAssignedToEdit(index) {
-//  let showAssignedEditors = document.getElementById(`show-assigned-editors-edit-container`);
-//
-//  for (let i = 0; i < tasks[index]["assignedTo"].length; i++) {
-//    const checkedEditor = tasks[index]["assignedTo"][i];
-//    let initials = checkedEditor.initials;
-//    let userColor = checkedEditor.initials;
-//    showAssignedEditors.innerHTML += generateAssignedTo(i, userColor, initials);
-//  }
-//}
-
 function saveTask(i) {
 
   tasks[i]["title"] = document.getElementById("edit-task-title-input").value;

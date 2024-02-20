@@ -161,8 +161,8 @@ async function addNewContact() {
   let fullName = contactname.value.split(' ');
   let firstName = fullName[0];
   let lastName = fullName[fullName.length -1];
-  let userColor = generateRandomColor();
-  let userId = generateRandomId();
+  let userColor = await generateRandomColor();
+  let newUserId = await generateRandomId();
   user.userContacts.push({
     firstName: firstName,
     lastName: lastName,
@@ -171,23 +171,34 @@ async function addNewContact() {
     phone: phone.value,
     userColor: userColor,
     password: null,
-    userId: userId,
+    userId: newUserId,
     userContacts: null
   })
   await saveUserData(users);
   document.getElementById("overlay").style.display = "none";
-  await loadUserData();
+  init();
 }
 
 
 //DELETE CONTACT
 async function deleteContact(i, j) {
-  id = contactList[i]["contacts"][j]["id"];
-  contacts.splice(id, 1);
+  let users = JSON.parse(await getItem("users"));
+  let contactForDelete = contactList[i]["contacts"][j].id;
+  findContactForDelete(contactForDelete);
   document.getElementById("contact-detail").innerHTML = "";
   document.getElementById("overlay").style.display = "none";
-  await saveUserData();
-  await loadUserData();
+  await saveUserData(users);
+  init();
+}
+
+
+function findContactForDelete(contactForDelete){
+    for (let x = 0; x < user.userContacts.length; x++) {
+      const contact = user.userContacts[x];
+      if(contact.userId == contactForDelete){
+        user.userContacts.splice(x, 1);
+      }
+    }
 }
 
 
@@ -205,16 +216,28 @@ function EditContact(i, j) {
 }
 
 
+function findUpdatingContact(updatingContact){
+  for (let x = 0; x < user.userContacts.length; x++) {
+    const contact = user.userContacts[x];
+    if(contact.userId == updatingContact.id){
+      let fullName = document.getElementById("editName").value.split(' ');
+      updatingContact.firstName = fullName[0];
+      updatingContact.lastName = fullName[fullName.length-1];
+      updatingContact.email = document.getElementById("editEmail").value;
+      updatingContact.phone = document.getElementById("editPhone").value;
+      user.userContacts.splice(x, 1);
+      user.userContacts.push(updatingContact);
+    }
+  }
+}
+
+
 //SAVE CONTACT
 async function saveContact(i, j) {
-  updatingContact = contactList[i]["contacts"][j];
-  let fullName = document.getElementById("editName").value.split(' ');
-  updatingContact.firstName = fullName[0];
-  updatingContact.lastName = fullName[fullName.length-1];
-  updatingContact.email = document.getElementById("editEmail").value;
-  updatingContact.phone = document.getElementById("editPhone").value;
-  saveUserData();
-  await setItem("contacts", JSON.stringify(contacts));
+  let users = JSON.parse(await getItem("users"));
+  let updatingContact = contactList[i]["contacts"][j];
+  findUpdatingContact(updatingContact);
+  await saveUserData(users);
   init();
   document.getElementById("overlay").style.display = "none";
   openContactInfo(i, j);

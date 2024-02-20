@@ -109,10 +109,14 @@ function highlightSelectedButton(selectedButton) {
 
 function showDropdownContacts() {
   let dropdown = document.getElementById('assigned-editors');
+  let tooMuchEditors = document.getElementById(`tooMuchEditors`);
   if (dropdown.style.display == 'none') {
     dropdown.style.display = 'block';
     checkedArray = [];
     clearAssignedToAddOverlay();
+    if(tooMuchEditors.style.display !== 'none'){
+      tooMuchEditors.style.display = 'none';
+    }
   } else {
     dropdown.style.display = 'none';
     addAssignedEditors();

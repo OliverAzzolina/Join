@@ -39,7 +39,27 @@ function loadContactList(){
 }
 
 
-function renderTasks() {
+async function checkIfEditorsExist(){
+  for (let i = 0; i < tasks.length; i++) {
+    const task = tasks[i];
+    for (let j = 0; j < task.assignedTo.length; j++) {
+      const editor = task.assignedTo[j].userId;
+      let contact = await findEditorInContacts(editor);
+      if(!contact){
+        tasks[i].assignedTo.splice(j, 1);
+      }
+    }
+  }
+}
+
+
+async function findEditorInContacts(editor){ 
+    return contacts.find(contact => contact.userId === parseInt(editor));
+}
+
+
+async function renderTasks() {
+  await checkIfEditorsExist();
   refreshTasks();
   for (let i = 0; i < tasks.length; i++) {
     let status = tasks[i]["status"];
@@ -93,6 +113,7 @@ function showDropdownContacts(index){
   if(dropdown.style.display == 'none'){
     dropdown.style.display = 'block';
     clearAssignedTo(index);
+    document.getElementById(`tooMuchEditorsEdit${index}`).style.display = 'none';
   }else{
     dropdown.style.display = 'none';
     addAssignedEditors(index);

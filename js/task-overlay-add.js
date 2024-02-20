@@ -81,6 +81,10 @@ function closeAddTaskCard() {
 function showDropdownContactsAddOverlay() {
   let dropdown = document.getElementById("add-assigned-editors");
   if (dropdown.style.display == "none") {
+    let tooMuchEditors = document.getElementById('tooMuchEditors');
+    if(tooMuchEditors.style.display !== 'none'){
+      tooMuchEditors.style.display = 'none';
+    }
     dropdown.style.display = "block";
     checkedArray = [];
     clearAssignedToAddOverlay();
