@@ -40,7 +40,6 @@ async function toDoCounter() {
     return (
         task.assignedTo && task.assignedTo.some((user) => user.userId && parseInt(user.userId, 10) === userId) &&
         (task.status === "open" || task.status === "in-progress")
-        //TODO: Change back to assignedTo as soon as typo gets out of task array
     );
   });
 
