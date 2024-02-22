@@ -337,7 +337,7 @@ async function registerUser() {
         lastName: lastName,
         password: password,
         phone: null,
-        userColor: generateRandomColor(),
+        userColor: await generateRandomColor(),
         userContacts: rescueUserArray,
         userId: await generateRandomId(),
 

@@ -268,13 +268,34 @@ function updateDoneSubs(i, checkedTrue){
   }else{
     document.getElementById(`subsDoneOfAll${i}`).innerHTML =`${checkedTrue}`;
   }
+  let subTasksDone = tasks[i]['subTasksDone'];
+  let subInfo = document.getElementById(`subtasks-info${i}`);
+  subInfo.innerHTML = ``;
+  subInfo.innerHTML = `${checkedTrue} von ${subTasksDone.length} Subtasks erledigt.`;
+
+}
+
+
+function showSubInfo(i){
+  let subInfo = document.getElementById(`subtasks-info${i}`);
+  subInfo.style.display = 'block';
+}
+
+function hideSubInfo(i){
+  let subInfo = document.getElementById(`subtasks-info${i}`);
+  subInfo.style.display = 'none';
 }
 
 
 //drag&drop
 function startDragging(i){
  currentDraggedElement = i;
+ document.getElementById(`todo-card${i}`).classList.add('todo-card-dragging');
  showDragHereContainer();
+}
+
+function stopDragging(i){
+  document.getElementById(`todo-card${i}`).classList.remove('todo-card-dragging');
 }
 
 

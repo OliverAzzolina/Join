@@ -242,19 +242,20 @@ function subtaskHTML(subtask, index) {
 //BOARD TEMPLATES
 function generateTask(i){
     return `
-    <div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})"  onclick="openTaskDetails(${i})">
+    <div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})" ondragend="stopDragging(${i})" onclick="openTaskDetails(${i})">
 
       <span id="category${i}" class="category">${tasks[i]["category"]}</span>
       <div class="title-description">
         <span class="todo-title">${tasks[i]["title"]}</span>
         <span class="todo-description">${tasks[i]["description"].substring(0, 20)}...</span>
       </div>
-      <div class="sub-progress-container">
+      <div class="sub-progress-container" onmouseover="showSubInfo(${i})" onmouseout="hideSubInfo(${i})">
         <div class="subtasks-progress-bar-container">
           <div class="subtasks-progress-bar" id="subtasks-progress${i}"></div>
         </div>
         <span><span id="subsDoneOfAll${i}"></span> / ${tasks[i]["subtasks"].length} Subtasks</span>
       </div>
+      <div class="subtask-info" id="subtasks-info${i}"></div>
       <div class="assigned-prio">
         <div class="d-flex">
           <div class="todo-assigned-to" id="todo-assigned-to${i}"></div>

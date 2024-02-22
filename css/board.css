@@ -151,6 +151,10 @@ body {
   gap: 24px;
 }
 
+.todo-card-dragging {
+  rotate: 5deg;
+}
+
 .todo-card:hover {
   cursor: pointer;
 }
@@ -357,6 +361,11 @@ ul li div{
   flex-direction: column;
   gap: 8px;
   width: 100%;
+}
+
+.subtask-info{
+  display: none;
+  width: 100%; 
 }
 
 .mini-logo {

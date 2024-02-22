@@ -111,7 +111,6 @@ function showEditPrio(i) {
     document.getElementById(
       `${prio}-img-edit`
     ).src = `/assets/img/prio_${prio}_white_icon.png`;
-    assets / img / prio_low_white_icon.png;
   }
 }
 
