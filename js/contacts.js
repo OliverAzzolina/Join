@@ -3,9 +3,9 @@ let contactList = [];
 let contactLetterGroup = [];
 
 async function init() {
+  await loadUserData();
   await generateHeader(userInitials);
   await generateSidebar();  
-  await loadUserData();
   sortContacts();
   loadContacts();
   //loadContactsFromStorage();

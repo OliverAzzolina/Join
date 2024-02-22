@@ -8,6 +8,7 @@ assignedToTempArray = [];
 document.addEventListener('DOMContentLoaded', async function () {
   console.log('DOM loaded');
   await userIsAllowed();
+  await loadUserData();
   await generateHeader(userInitials);  
   await generateSidebar();
   addEventListener();
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
 async function loadUserContacts(){
-  await loadUserData();
+  
   sortContacts();
   loadContactList();
 }

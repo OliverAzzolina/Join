@@ -3,9 +3,10 @@ let currentDraggedElement;
 async function init(){
     //loadContactsFromStorage();
     await userIsAllowed();
+    await loadUserData();
     await generateHeader(userInitials);
     await generateSidebar();
-    await loadUserData();
+    
     sortContacts();
     loadTasksfromStorage();
 }
