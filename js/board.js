@@ -453,3 +453,21 @@ function renderFilteredTasks(i){
 function doNotClose(event){
   event.stopPropagation();
 }
+
+//EVENT LISTENERS
+window.addEventListener('keydown',function(e) {
+  if (e.keyIdentifier=='U+000A' || e.keyIdentifier=='Enter' || e.keyCode==13) {
+      if (e.target.nodeName=='INPUT' && e.target.type=='text') {
+          e.preventDefault();
+
+          return false;
+      }
+  }
+}, true);
+
+
+function checkForEnter(e){
+  if(e.keyCode == 13 || e.which == 13){
+    addSubtask();
+  }
+}

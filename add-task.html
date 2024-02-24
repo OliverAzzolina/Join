@@ -123,8 +123,8 @@
             <div id="add-task-sub-container">
               <span class="add-task-form-title">Subtasks</span>
               <div class="add-task-subtask-input-container">
-                <input id="add-task-subtask-input" class="add-task-form-input" type="text" placeholder="Add new subtask" onclick="activateCheckCancelButtons()"/>
-                <div id="add-task-active-subtask-icon-box" class="d-none">
+                <input id="add-task-subtask-input" class="add-task-form-input" type="text" placeholder="Add new subtask" onkeydown="checkForEnter(event)" onclick="activateCheckCancelButtons()"/>
+                <div id="add-task-active-subtask-icon-box" class="d-none" >
                   <img src="assets/img/subtask_cancel_icon.png" alt="Cancel" onclick="clearSubtaskInput()" />
                   <img src="assets/img/subtask_divider.png" alt="Divider" />
                   <img src="assets/img/subtask_check_icon.png" alt="Check" onclick="addSubtask()" />

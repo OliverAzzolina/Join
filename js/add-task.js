@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   await loadUserData();
   await generateHeader(userInitials);  
   await generateSidebar();
-  addEventListener();
+  //addEventListener();
   loadUserContacts();
   loadTasksfromStorage();
 });
@@ -35,20 +35,22 @@ async function loadTasksfromStorage(){
 
 
 //EVENT LISTENERS
-function addEventListener() {
-  btnEventListener();
+window.addEventListener('keydown',function(e) {
+  if (e.keyIdentifier=='U+000A' || e.keyIdentifier=='Enter' || e.keyCode==13) {
+      if (e.target.nodeName=='INPUT' && e.target.type=='text') {
+          e.preventDefault();
+
+          return false;
+      }
+  }
+}, true);
+
+
+function checkForEnter(e){
+  if(e.keyCode == 13 || e.which == 13){
+    addSubtask();
+  }
 }
-
-
-function btnEventListener() {
-  document.querySelectorAll('.add-task-form-btn').forEach(function (button) {
-    button.addEventListener('click', function () {
-      selectedPriority = this.getAttribute('task-priority');
-      highlightSelectedButton(this); //TODO: highlightSelectedButton()
-    });
-  });
-}
-
 
 function addTask(event) {
   event.preventDefault();
@@ -99,13 +101,13 @@ function saveTask() {
 
 
 // ADD TASK FUNCTIONS
-function highlightSelectedButton(selectedButton) {
-  var buttons = document.querySelectorAll('.add-task-form-btn');
-  buttons.forEach(function (button) {
-    button.classList.remove('selected');
-  });
-  selectedButton.classList.add('selected');
-}
+//function highlightSelectedButton(selectedButton) {
+//  var buttons = document.querySelectorAll('.add-task-form-btn');
+//  buttons.forEach(function (button) {
+//    button.classList.remove('selected');
+//  });
+//  selectedButton.classList.add('selected');
+//}
 
 
 function showDropdownContacts() {
