@@ -27,7 +27,7 @@ let rescueUserArray = [
     {"email":"massimo.schönland@t-online.de","phone":"0169-5627881","userColor":"#89dc1f","firstName":"Massimo","lastName":"Schönland","initials":"MS","userId":106347,"password":null,"userContacts":null},
     {"email":"dominic.römer@freenet.de","phone":"0171-9458330","userColor":"#4495a8","firstName":"Dominic","lastName":"Römer","initials":"DR","userId":206994,"password":null,"userContacts":null},
     {"email":"laura.schulz@developerakademie.com","phone":"0154-3298716","userColor":"#8000ff","firstName":"Laura","lastName":"Schulz","initials":"LS","userId":654122,"password":null,"userContacts":null},
-    {"email":"GuestUser@test.com","phone":"0171-1234567","userColor":"#ff0000","firstName":"Guest","lastName":"User","initials":"GU","userId":123456,"password":"guest","userContacts":preRegisteredContacts}
+    
   ];
 
   

@@ -31,6 +31,7 @@ async function setGuestUser() {
         userContacts: rescueUserArray
         }
         users.push(guestUser);
+        addUserToUserContacts(guestUser);
         await setItem('users', JSON.stringify(users));
         console.log('Guest user added. Please try again.');
 };
