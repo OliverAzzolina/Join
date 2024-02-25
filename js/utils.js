@@ -88,7 +88,7 @@ async function goHome() {
 function showMessageOverlay(message){
     let messageOverlay = document.getElementById("message");
     messageOverlay.style.display = "flex";
-    messageOverlay.innerHTML = `${message} <img src="assets/img/sidebar_board_icon.svg" alt="">`;
+    messageOverlay.innerHTML = `<span>${message}</span><img src="assets/img/sidebar_board_icon.svg" alt="">`;
     setTimeout(() => {
         messageOverlay.style.display = "none";
       }, "2000");
