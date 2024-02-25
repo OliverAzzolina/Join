@@ -11,14 +11,12 @@ document.addEventListener('DOMContentLoaded', async function () {
   await loadUserData();
   await generateHeader(userInitials);  
   await generateSidebar();
-  //addEventListener();
   loadUserContacts();
   loadTasksfromStorage();
 });
 
 
 async function loadUserContacts(){
-  
   sortContacts();
   loadContactList();
 }
@@ -52,10 +50,10 @@ function checkForEnter(e){
   }
 }
 
+
 function addTask(event) {
   event.preventDefault();
-
-  var taskData = {
+  let taskData = {
     title: document.getElementById('add-task-title-input').value,
     description: document.getElementById('add-task-description-input').value,
     assignedTo: checkedArray,
@@ -64,7 +62,7 @@ function addTask(event) {
     category: getCategoryValue(),
     subtasks: subtaskTempArray,
     subTasksDone: getSubTasksDone(),
-    status: "in-progress",
+    status: "open",
   };
   console.log(taskData)
   tasks.push(taskData);
@@ -97,17 +95,8 @@ function getSubTasksDone() {
 function saveTask() {
   setItem('tasks', JSON.stringify(tasks));
   console.log("Task gespeichert");
+  showMessageOverlay('Task added to Board');
 }
-
-
-// ADD TASK FUNCTIONS
-//function highlightSelectedButton(selectedButton) {
-//  var buttons = document.querySelectorAll('.add-task-form-btn');
-//  buttons.forEach(function (button) {
-//    button.classList.remove('selected');
-//  });
-//  selectedButton.classList.add('selected');
-//}
 
 
 function showDropdownContacts() {
@@ -178,7 +167,6 @@ function clearAssignedToAddOverlay() {
 function loadContactList() {
   let contactList = document.getElementById('assigned-editors');
   for (let i = 0; i < contacts.length; i++) {
-      //let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
       let contact = contacts[i];
       let initials = contact.firstName.charAt(0) + contact.lastName.charAt(0);
       let userColor = contact.userColor;
@@ -233,29 +221,7 @@ function renderSubtasks(){
   subtasksContainer.innerHTML = '';
   for (let i = 0; i < subtaskTempArray.length; i++) {
     const subtask = subtaskTempArray[i];
-    subtasksContainer.innerHTML += `
-    <div class="edit-subtask">
-        
-    <div onclick="editSubtask(${i})" class="subtask-list-item" id="editable-subtask${i}" onMouseOver="showIcons(${i})" onMouseOut="hideIcons(${i})">
-        <span>• ${subtask}</span>            
-        <div id="edit-task-active-subtask-icon-box${i}" class="edit-task-active-subtask-icon-box" style="opacity:0;" >                
-        <img src="assets/img/subtask_edit_icon.png" alt="Check" onclick="editSubtask(${i})" />
-        <div class="sub-divider"></div>
-        <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtask(${i})" />
-    </div>
-
-
-</div>
-    <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
-      <input id="editSubtaskInput${i}" value="${subtask}" class="edit-subtask-input">    
-        <div class="edit-task-active-subtask-icon-box">                
-            <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtask(${i})" />
-            <div class="sub-divider"></div>
-            <img src="assets/img/subtask_check_icon.png" alt="Check" onclick="changeSubtask(${i})" />
-        </div>
-    </div>
-</div>
-  `
+    subtasksContainer.innerHTML += subtaskHTML(subtask, i)
   }
 }
 

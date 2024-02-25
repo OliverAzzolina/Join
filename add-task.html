@@ -45,16 +45,17 @@
           <p class="mobile-text">Contact</p>
       </a>
   </div>
-  <img src="assets/img/logo_mobile.png" alt="Mobile Logo" id="mobile-logo">
+
 
     
-
+ 
     <!-- Main -->
     <div id="add-task-container" onclick="doNotClose(event)">
+
       <div id="add-task-overlay-header">
         <h1 id="add-task-headline">Add Task</h1>
       </div>
-
+      <div class="message-overlay"><div class="added-task-message" id="message" style="display: none"></div></div>
       <form id="add-task-form" onsubmit="addTask(event)">
         <!-- TODO: HTML 5 Form Validation? -->
         <div id="input-container-tasks">
@@ -66,7 +67,7 @@
 
             <div id="add-task-description-container">
               <span id="add-task-description-headline" class="add-task-form-title">Description</span>
-              <textarea id="add-task-description-input" class="add-task-form-input" required rows="5" cols="40"></textarea>
+              <textarea id="add-task-description-input" class="add-task-form-input" rows="5" cols="40"></textarea>
             </div>
 
             <div id="add-task-assigned-to-container">
@@ -83,9 +84,10 @@
             </div>
 
             </div>
-          </div>
+       
 
           <div id="task-splitter"></div>
+      
 
           <div id="add-task-overlay-right">
             <div id="add-task-date-container">
@@ -137,19 +139,20 @@
             </div>
           </div>
         </div>
+          <div id="add-task-overlay-footer">
+            <div id="add-task-requirement-footer">
+              <span class="add-task-form-suffix">*</span>
+              <span>This field is required</span>
+            </div>
+            <div class="add-task-buttons">
+              <button onclick="" class="cancel-button"><span>Cancel</span><img src="assets/img/cancel_icon.png" alt="" /></button>
+              <button type="submit"  class="create-button"><span>Create Task</span><img src="assets/img/check_icon_white.png" alt="" /></button>
+            </div>
+        
+        </form>
+
       
 
-      <div id="add-task-overlay-footer">
-        <div id="add-task-requirement-footer">
-          <span class="add-task-form-suffix">*</span>
-          <span>This field is required</span>
-        </div>
-        <div class="add-task-buttons">
-          <button onclick="" class="cancel-button"><span>Cancel</span><img src="assets/img/cancel_icon.png" alt="" /></button>
-          <button type="submit"  class="create-button"><span>Create Task</span><img src="assets/img/check_icon_white.png" alt="" /></button>
-        </div>
-      </div>
-    </form>
     </div>
   </body>
 </html>

@@ -51,23 +51,15 @@ function saveNewAddedTask(newTask) {
   console.log(newTask, tasks);
   temporaryAssignedTo = [];
   newTaskPrio = "";
-  showAddedToBoardMessage();
-  hideAddedToBoardMessage();
+  showMessageOverlay('Task added to Board');
+  setTimeout(() => {
+  closeAddTaskCard();
+  refreshTasks();
+  renderTasks();
+}, "2000");
   setItem("tasks", JSON.stringify(tasks));
 }
 
-function showAddedToBoardMessage() {
-  document.getElementById("added-task-message").style.display = "flex";
-}
-
-function hideAddedToBoardMessage() {
-  setTimeout(() => {
-    document.getElementById("added-task-message").style.display = "none";
-    closeAddTaskCard();
-    refreshTasks();
-    renderTasks();
-  }, "2000");
-}
 
 function closeAddTaskCard() {
   temporarySubtasks = [];

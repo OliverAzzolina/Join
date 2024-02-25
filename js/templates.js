@@ -148,7 +148,9 @@ function summaryHTML(toDoCounter, doneCounter, urgentCounter, urgentDeadline, ti
 
 function headerHTML(userInitials) {
   return /*html*/`
-    <div><p id="header-headline">Kanban Project Management Tool</p></div>
+    <div>
+    <p id="header-headline">Kanban Project Management Tool</p></div>
+    <img src="assets/img/logo_mobile.png" alt="Mobile Logo" id="mobile-logo">
         <div id="header-icons">
             
                
@@ -218,22 +220,31 @@ function sidebarLoggedOutHTML() {
 
 // ADD TASK HTML TEMPLATES
 
-function subtaskHTML(subtask, index) {
-  return /*html*/`
-        <div class="add-task-subtask" id="add-task-subtask${index}">
-            <p class="editable">• ${subtask}</p>
-            <div class="add-task-subtask-icons">
-                <img src="assets/img/subtask_edit_icon.png" class="edit-icon" onclick="editSubtask(${index})">
-                <img src="assets/img/subtask_divider.png">
-                <img src="assets/img/subtask_delete_icon.png" class="delete-icon" onclick="removeSubtask(${index})">
-            </div>
-        </div>
-    `;
+function subtaskHTML(subtask, i) {
+  return `
+  <div class="edit-subtask">
+      
+  <div onclick="editSubtask(${i})" class="subtask-list-item" id="editable-subtask${i}" onMouseOver="showIcons(${i})" onMouseOut="hideIcons(${i})">
+      <span>• ${subtask}</span>            
+      <div id="edit-task-active-subtask-icon-box${i}" class="edit-task-active-subtask-icon-box" style="opacity:0;" >                
+      <img src="assets/img/subtask_edit_icon.png" alt="Check" onclick="editSubtask(${i})" />
+      <div class="sub-divider"></div>
+      <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtask(${i})" />
+  </div>
+
+
+</div>
+  <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
+    <input id="editSubtaskInput${i}" value="${subtask}" class="edit-subtask-input">    
+      <div class="edit-task-active-subtask-icon-box">                
+          <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtask(${i})" />
+          <div class="sub-divider"></div>
+          <img src="assets/img/subtask_check_icon.png" alt="Check" onclick="changeSubtask(${i})" />
+      </div>
+  </div>
+</div>
+`;
 }
-
-
-
-// BOARD HTML TEMPLATES
 
 
 // CONTACTS HTML TEMPLATES

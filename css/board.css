@@ -816,6 +816,7 @@ cursor: pointer;
 
 #input-container-tasks{
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   width: 100%;
 
@@ -1034,7 +1035,7 @@ border-radius: 50%;
   flex-direction: row;
 }
 
-#added-task-message{
+.added-task-message-board{
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -1049,7 +1050,7 @@ border-radius: 50%;
   line-height: 24px;
 }
 
-#added-task-message img{
+.added-task-message-board img{
   height: 30px;
   width: 30px;
 }

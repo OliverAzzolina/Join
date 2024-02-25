@@ -352,8 +352,6 @@ async function addUserToDatabase(userData) {
         await setItem('users', JSON.stringify(users));
         console.log('User successfully registered.');
     }
-
-        
 }
 
 function checkIfUserAlreadyExists(users, email) {
