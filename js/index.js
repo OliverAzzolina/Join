@@ -162,11 +162,9 @@ function loadRegisterListeners() {
 
 function checkForm() {
     if (checkName() && checkEmail() && checkPasswords() && checkPrivacyCheckbox()) {
-        document.getElementById('register-button').disabled = false;
-        console.log('form is valid');      
+        document.getElementById('register-button').disabled = false;    
     } else {
         document.getElementById('register-button').disabled = true;
-        console.log('form is invalid');
     }
 }
 
@@ -293,18 +291,18 @@ function checkboxAlert(message) {
     checkboxGroup.appendChild(errorElement);
 }
 
-function removeInputAlert(inputId) {
-    let inputElement = document.getElementById(inputId);
-    let errorElement = inputElement.nextElementSibling;
-    if (errorElement && errorElement.classList.contains('error-message')) {
-        inputElement.parentNode.removeChild(errorElement);
-    }
-}
+//function removeInputAlert(inputId) {
+//    let inputElement = document.getElementById(inputId);
+//    let errorElement = inputElement.nextElementSibling;
+//    if (errorElement && errorElement.classList.contains('error-message')) {
+//        inputElement.parentNode.removeChild(errorElement);
+//    }
+//}
 
 function removeInputAlert(inputId) {
     let inputElement = document.getElementById(inputId);
-    let parentElement = inputElement.closest('.form-group') || inputElement.closest('.checkbox-group');
-    let errorElement = parentElement.querySelector('.error-message');
+    let parentElement = inputElement.parentNode
+    let errorElement = parentElement.querySelector('.error-message')
     if (errorElement) {
         parentElement.removeChild(errorElement);
     }
