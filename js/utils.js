@@ -29,10 +29,13 @@ function clearDataBase() {
 }
 
 
-async function generateRandomColor(){
+async function generateRandomColor() {
     let randomColor = Math.floor(Math.random()*16777215).toString(16);
-    return "#" + randomColor
-  }
+    while (randomColor.length < 6) {
+        randomColor = "0" + randomColor;
+    }
+    return "#" + randomColor;
+}
 
 async function generateHeader(userInitials) {
     let header = document.getElementById("header-container");
