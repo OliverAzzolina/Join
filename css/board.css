@@ -76,11 +76,20 @@ body {
 .board-section {
   display: flex;
   gap: 26px;
-
   padding: 0px 64px 32px 64px;
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+#search-section{
+  width: 100%;
+  padding: 0 64px 0 64px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
 
 .board-section p {
   font-size: 20px;
@@ -149,6 +158,7 @@ body {
   border-radius: 8px;
   box-shadow: 0px 0px 5px 0px lightgray;
   gap: 24px;
+  width: 236px;
 }
 
 .todo-card-dragging {

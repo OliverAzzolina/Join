@@ -1,12 +1,10 @@
 let currentDraggedElement;
 
 async function init(){
-    //loadContactsFromStorage();
     await userIsAllowed();
     await loadUserData();
     await generateHeader(userInitials);
     await generateSidebar();
-    
     sortContacts();
     loadTasksfromStorage();
 }
@@ -19,7 +17,6 @@ async function loadTasksfromStorage(){
   }catch(e){
     console.warn('loading error:', e)
   }
-  
   renderTasks();
 }
 
@@ -370,12 +367,44 @@ function showPrio(i){
 //SEARCH
 function filterTasks() {
   let search = document.getElementById("search").value.toLowerCase();
+  let searchSection = document.getElementById(`search-section`);
+  let boardSection = document.getElementById('board-section');
+  searchSection.innerHTML = '';
   refreshTasks();
   if (search == "") {
+    boardSection.style.display = 'flex';
+    searchSection.innerHTML = '';
     renderTasks();
   }else{
     FilteredTasks(search);
   }
+}
+
+
+function FilteredTasks(search){ 
+  refreshTasks();
+  for (let i = 0; i < tasks.length; i++) {
+    let title = tasks[i]['title'].toLowerCase();
+    let description = tasks[i]['description'].toLowerCase();
+    let boardSection = document.getElementById('board-section');
+    if (title.toLowerCase().includes(search)||description.toLowerCase().includes(search)) {
+      boardSection.style.display = 'none';
+      renderFilteredTasks(i);
+    }else{
+      boardSection.style.display = 'none';
+      document.getElementById(`search-section`).innerHTML = '<div>No tasks found</div>';
+    }
+  }
+}
+
+
+function renderFilteredTasks(i){
+  document.getElementById(`search-section`).innerHTML += generateTask(i);
+  setPrioImg(i);
+  updateDoneSubs(i);
+  generateSubtasks(i);
+  checkCategory(i);
+  renderAssignedTo(i);
 }
 
 
@@ -407,29 +436,6 @@ function unhover(id){
     button.setAttribute('src', 'assets/img/delete_icon.png');
   }else{
     document.getElementById(id).setAttribute('src', 'assets/img/plus_icon.png');
-  }
-}
-
-
-function FilteredTasks(search){ 
-  refreshTasks();
-  for (let i = 0; i < tasks.length; i++) {
-    let title = tasks[i]['title'].toLowerCase();
-    let description = tasks[i]['description'].toLowerCase();
-    if (title.toLowerCase().includes(search)||description.toLowerCase().includes(search)) {
-      renderFilteredTasks(i);
-    }else{
-      //?checkIfEmpty();
-    }
-  }
-}
-
-
-function renderFilteredTasks(i){
-  let status = tasks[i]["status"];
-  if (status == status) {
-    document.getElementById(`${status}`).innerHTML += generateTask(i);
-    checkCategory(i);
   }
 }
 
