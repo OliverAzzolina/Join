@@ -111,16 +111,25 @@ function setUnAssigned(i){
 
 function showDropdownContacts(index){
   let dropdown = document.getElementById('assigned-editors');
+  let backgroundOverlay = document.getElementById('background-overlay');
   if(dropdown.style.display == 'none'){
     dropdown.style.display = 'block';
+    backgroundOverlay.style.display = 'block';
     clearAssignedTo(index);
     document.getElementById(`tooMuchEditorsEdit${index}`).style.display = 'none';
   }else{
-    dropdown.style.display = 'none';
-    addAssignedEditors(index);
+    hideDropdownContacts(index);
   } 
 }
 
+
+function hideDropdownContacts(index){
+  let dropdown = document.getElementById('assigned-editors');
+  let backgroundOverlay = document.getElementById('background-overlay');
+  dropdown.style.display = "none";
+  backgroundOverlay.style.display = 'none';
+  addAssignedEditors(index);
+}
 
 function addAssignedEditors(index){
   let showAssignedEditors = document.getElementById('show-assigned-editors-edit-container');
@@ -140,31 +149,6 @@ function addAssignedEditors(index){
     }
   }
 }
-
-
-//function addAssignedEditors() {
-//  let showAssignedEditors = document.getElementById('show-assigned-editors-container');
-//  let tooMuchEditors = document.getElementById('tooMuchEditors');
-//
-//  for (let i = 0; i < contacts.length; i++) {
-//    const checkedEditor = contacts[i];
-//    let userColor = checkedEditor.userColor;
-//    let initials = checkedEditor.firstName.charAt(0) + checkedEditor.lastName.charAt(0);
-//    let checkbox = document.getElementById(`checkbox${i}`).checked;
-//    if (checkbox == true) {
-//      checkedArray.push(checkedEditor);
-//      if(checkedArray.length > 3){
-//        tooMuchEditors.style.display = 'flex';
-//        tooMuchEditors.innerHTML = `+${checkedArray.length - 3}`;
-//
-//      }else {
-//        showAssignedEditors.innerHTML += `
-//        <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
-//        `;
-//      }
-//    }
-//  }
-//}
 
 
 function renderAssignedTo(index){

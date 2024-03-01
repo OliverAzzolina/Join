@@ -31,7 +31,6 @@ function renderAssignedToEdit(index){
   assignedTo.innerHTML = '';
     if(tasks[index]['assignedTo'].length > 3){
       checkIfToMuchEditorsEdit(assignedTo, index);
-    
     }else {
       notToMuchEditorsEdit(assignedTo, index);
     }

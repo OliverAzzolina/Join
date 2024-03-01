@@ -72,18 +72,27 @@ function closeAddTaskCard() {
 //ASSIGN CONTACTS START
 function showDropdownContactsAddOverlay() {
   let dropdown = document.getElementById("add-assigned-editors");
+  let backgroundOverlay = document.getElementById('background-overlay');
   if (dropdown.style.display == "none") {
     let tooMuchEditors = document.getElementById('tooMuchEditors');
     if(tooMuchEditors.style.display !== 'none'){
       tooMuchEditors.style.display = 'none';
     }
     dropdown.style.display = "block";
+    backgroundOverlay.style.display = 'block';
     checkedArray = [];
     clearAssignedToAddOverlay();
   } else {
-    dropdown.style.display = "none";
-    addAssignedEditorsAddOverlay();
+    hideDropdownContacts();
   }
+}
+
+function hideDropdownContacts(){
+  let dropdown = document.getElementById("add-assigned-editors");
+  let backgroundOverlay = document.getElementById('background-overlay');
+  dropdown.style.display = "none";
+  backgroundOverlay.style.display = 'none';
+  addAssignedEditorsAddOverlay();
 }
 
 function addAssignedEditorsAddOverlay() {
@@ -111,30 +120,6 @@ function checkIfContactCheckboxChecked(checkedEditor, i) {
 }
 }
 
-//function pushAssignedToAddOverlay(initials, userColor, firstName, lastName, userId) {
-//  let assignedToTask = {
-//    firstName: firstName,
-//    lastName: lastName,
-//    initials: initials,
-//    userColor: userColor,
-//    userId: userId,
-//  };
-//  temporaryAssignedTo.push(assignedToTask);
-//}
-
-//function renderAssignedTo(index) {
-//  let assignedTo = document.getElementById(`todo-assigned-to${index}`);
-//  assignedTo.innerHTML = "";
-//
-//  for (let i = 0; i < tasks[index]["assignedTo"].length; i++) {
-//    const checkedEditor = contacts[i];
-//    let initials = checkedEditor.initials;
-//    let userColor = checkedEditor.userColor;
-//    assignedTo.innerHTML += `
-//      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
-//      `;
-//  }
-//}
 
 function clearAssignedToAddOverlay() {
   document.getElementById("show-assigned-editors-container").innerHTML = "";

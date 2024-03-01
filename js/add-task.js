@@ -101,18 +101,27 @@ function saveTask() {
 
 function showDropdownContacts() {
   let dropdown = document.getElementById('assigned-editors');
+  let backgroundOverlay = document.getElementById('background-overlay');
   let tooMuchEditors = document.getElementById(`tooMuchEditors`);
   if (dropdown.style.display == 'none') {
     dropdown.style.display = 'block';
+    backgroundOverlay.style.display = 'block';
     checkedArray = [];
     clearAssignedToAddOverlay();
     if(tooMuchEditors.style.display !== 'none'){
       tooMuchEditors.style.display = 'none';
     }
   } else {
-    dropdown.style.display = 'none';
-    addAssignedEditors();
+    hideDropdownContacts();
   }
+}
+
+function hideDropdownContacts(){
+  let dropdown = document.getElementById('assigned-editors');
+  let backgroundOverlay = document.getElementById('background-overlay');
+  dropdown.style.display = 'none';
+  backgroundOverlay.style.display = 'none';
+  addAssignedEditors();
 }
 
 

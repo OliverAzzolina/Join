@@ -360,7 +360,7 @@ function generateEditTaskOverlay(i, title, description, dueDate) {
                 <img src="assets/img/arrow_drop_down.png" alt="">
               </div>
               <ul style="display: none;" id="assigned-editors" class="assigned-editors"></ul>
-
+              <div id="background-overlay" onclick="hideDropdownContacts(${i})"></div>
               <div style="display: flex; flex-direction: row;">              
               <div id="show-assigned-editors-edit-container"></div>
               <div style="display: none;" id="tooMuchEditorsEdit${i}" class="mini-logo-dummy"></div>

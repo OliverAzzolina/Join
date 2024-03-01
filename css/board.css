@@ -540,6 +540,7 @@ ul li div{
   gap: 8px;
   margin-top: 12px;
   margin-bottom: 12px;
+  position: relative;
 }
 
 #add-task-prio-container{
@@ -692,12 +693,28 @@ cursor: pointer;
 }
 
 .assigned-editors {
+  top: 80px;
+  width: 100%;
+  background-color: #ffffff;
   list-style-type: none; /* Remove bullets */
   padding: 0; /* Remove padding */
   margin: 0; /* Remove margins */
   overflow-y: scroll;
   height: 200px;
+  z-index: 500;
+  position:absolute;
 }
+
+#background-overlay{
+  background-color:transparent;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  display: none;
+}
+
 
 .assigned-editors li {
   display: flex;
