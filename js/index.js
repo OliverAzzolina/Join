@@ -30,7 +30,7 @@ async function loginUser() {
         localStorage.setItem("userId", user.userId);
         window.location.href = 'summary.html';
     } else {
-        inputAlert('email-input', 'Unknown user or wrong password. Please try again.');
+        inputAlert('email-input', 'Wrong password Ups! Try again.');
     }
 }
 
