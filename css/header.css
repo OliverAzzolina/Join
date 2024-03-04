@@ -20,6 +20,10 @@ body {
 
 }
 
+#mobile-logo {
+    cursor: pointer;
+}
+
 .header {
     width: 100%;
     height: 96px;
@@ -33,8 +37,6 @@ body {
     top: 0;
     left: 0;
     box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
-    position: sticky;
-    z-index: 1000;
 }
 
 /* Link-Standardfarbe und Hintergrund */
@@ -187,24 +189,5 @@ body {
 
     .content {
         margin-left: 0;
-    }
-}
-
-@media screen and (max-width: 370px) {
-
-    .header {
-        width: 100%;
-        height: 96px;
-        background-color: white;
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 10px;
-        position: fixed; /* Position fixed für alle Bildschirmgrößen */
-        top: 0;
-        left: 0;
-        box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
     }
 }

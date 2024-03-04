@@ -21,6 +21,17 @@ async function loadUserContacts(){
   loadContactList();
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  // Auswahl des Bildes über die ID 'mobile-logo'
+  var image = document.getElementById('mobile-logo');
+
+  // Hinzufügen des EventListeners
+  image.addEventListener('click', function() {
+      // Weiterleitung zur 'summary.html'-Seite
+      window.location.href = 'summary.html';
+  });
+});
+
 
 //LOAD Tasks from Storage
 async function loadTasksfromStorage(){
