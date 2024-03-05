@@ -22,16 +22,12 @@ async function checkIfUserIdAlreadyExists(newUserId) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Auswahl des Bildes über die ID 'mobile-logo'
-    var image = document.getElementById('mobile-logo');
-  
-    // Hinzufügen des EventListeners
-    image.addEventListener('click', function() {
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.id == 'mobile-logo') {
         // Weiterleitung zur 'summary.html'-Seite
         window.location.href = 'summary.html';
-    });
-  });
+    }
+});
 
 
 function clearDataBase() {
