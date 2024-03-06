@@ -9,149 +9,176 @@
     align-items: flex-start;
     justify-content: center;
     gap: 35px;
-}
-
-.p-content {
-    background-color:  #f6f7f8;
+  }
+  
+  .p-content {
+    background-color: #f6f7f8;
     width: 100%;
     color: black;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     padding: 20px;
     box-sizing: border-box;
     margin-left: -12px;
     margin-right: 20px;
     margin-top: 25px;
-}
-
-h1 {
+  }
+  
+  h1 {
     font-size: 27px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 700;
     margin-top: 50px;
-}
-
-p {
+  }
+  
+  p {
     font-size: 16px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 400;
-}
-
-.title {
+  }
+  
+  .title {
     font-size: 47px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 400;
-}
-
-.redirect-icon {
+  }
+  
+  .redirect-icon {
     position: absolute;
     right: 57px;
     top: 151px;
     cursor: pointer;
     width: 32px;
     height: 32px;
-}
-
-.title {
+  }
+  
+  .title {
     position: absolute;
     font-size: 47px;
     font-weight: 700;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     margin-top: -35px;
     color: black;
-}
-
-#header-icons img {
+  }
+  
+  #header-icons img {
     cursor: pointer;
     display: none;
-}
-
-@media screen and (max-width: 1050px) {
+  }
+  
+  @media screen and (max-width: 1050px) {
     .pcontent-container {
-        position: absolute; /* Oder 'relative', je nach Bedarf */
-        top: 160px;
-        left: 50%; /* Zentriert den Container horizontal */
-        transform: translateX(-50%); /* Verschiebt den Container zurück, um eine exakte Zentrierung zu erreichen */
-        width: 396px; /* Oder eine andere feste Breite, falls gewünscht */
-        height: auto;
-        overflow: auto;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
+      position: absolute; /* Oder 'relative', je nach Bedarf */
+      top: 160px;
+      left: 50%; /* Zentriert den Container horizontal */
+      transform: translateX(
+        -50%
+      ); /* Verschiebt den Container zurück, um eine exakte Zentrierung zu erreichen */
+      width: 396px; /* Oder eine andere feste Breite, falls gewünscht */
+      height: auto;
+      overflow: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
     }
-
+  
     .p-content {
-        background-color: #f6f7f8;
-        width: 396px;
-        color: black;
-        font-family: 'Inter', sans-serif;
-        padding: 15px;
-        box-sizing: border-box;
-        margin-left: -14px;
-        margin-right: 26px;
-        margin-top: 38px;
+      background-color: #f6f7f8;
+      width: 396px;
+      color: black;
+      font-family: "Inter", sans-serif;
+      padding: 15px;
+      box-sizing: border-box;
+      margin-left: -14px;
+      margin-right: 26px;
+      margin-top: 38px;
     }
-
+  
     .title {
-        position: absolute;
-        font-size: 47px;
-        font-weight: 700;
-        font-family: 'Inter', sans-serif;
-        margin-top: -50px;
-        color: black;
+      position: absolute;
+      font-size: 47px;
+      font-weight: 700;
+      font-family: "Inter", sans-serif;
+      margin-top: -50px;
+      color: black;
     }
-
+  
     h1 {
-        font-size: 27px;
-        font-family: 'Inter', sans-serif;
-        font-weight: 700;
-        margin-top: 25px;
+      font-size: 27px;
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      margin-top: 25px;
     }
-
-   
-   
-}
-
-
-@media screen and (max-width: 500px) {
-    .title {
-        position: absolute;
-        font-size: 47px;
-        font-weight: 700;
-        font-family: 'Inter', sans-serif;
-        margin-top: -50px;
-        color: black;
+  }
+  
+  @media screen and (max-width: 1050px) {
+    .redirect-icon {
+      right: 10px; /* Position 10px vom rechten Rand für Bildschirme 1050px oder kleiner */
     }
+  }
+  
+  @media screen and (max-width: 500px) {
+    .redirect-icon {
+      right: 10px; /* Sicherstellen, dass diese Regel beibehalten wird */
+    }
+  
     .pcontent-container {
-        /* Anpassungen, um sicherzustellen, dass der Container bei kleineren Bildschirmen zentriert bleibt */
-        left: 50%;
-        transform: translateX(-50%);
-        margin-right: auto; /* Entfernen, wenn 'transform' verwendet wird */
-        margin-left: auto; /* Entfernen, wenn 'transform' verwendet wird */
-        margin-top: 16px;
+      /* position: absolute; */
+      top: 134px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+      /* max-width: 371px; */
+      height: 90vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 33px;
+      margin-top: 16px;
     }
-
+  
     .p-content {
-        background-color: #f6f7f8;
-        width: 396px;
-        color: black;
-        font-family: 'Inter', sans-serif;
-        padding: 0px;
-        box-sizing: border-box;
-        margin-left: 5px;
-        margin-right: 26px;
-        margin-top: 38px;
+      background-color: #f6f7f8;
+      width: 268px;
+      color: black;
+      font-family: "Inter", sans-serif;
+      padding: 0px;
+      box-sizing: border-box;
+      margin-left: 5px;
+      margin-right: 26px;
+      margin-top: 38px;
+      /* overflow: hidden; */
+      overflow-x: hidden;
     }
-}
-
-@media screen and (max-width: 1050px) {
-    .redirect-icon {
-        right: 10px; /* Position 10px vom rechten Rand für Bildschirme 1050px oder kleiner */
+    p {
+      font-size: 15px;
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
     }
-}
-
-@media screen and (max-width: 500px) {
-    .redirect-icon {
-        right: 10px; /* Sicherstellen, dass diese Regel beibehalten wird */
+  
+    h1 {
+      font-size: 20px;
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      margin-top: 25px;
     }
-    
-}
+  
+    .title {
+      position: absolute;
+      font-size: 30px;
+      font-weight: 700;
+      font-family: "Inter", sans-serif;
+      margin-top: -41px;
+      color: black;
+    }
+  
+    .pcontent-container::-webkit-scrollbar {
+      display: none; /* Scrollbar nicht anzeigen, aber Scroll-Funktionalität beibehalten */
+    }
+  
+    .pcontent-container {
+      -ms-overflow-style: none; /* Für IE und Edge */
+      scrollbar-width: none; /* Für Firefox */
+    }
+  }
