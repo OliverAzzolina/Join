@@ -41,17 +41,16 @@ body {
 
 /* Link-Standardfarbe und Hintergrund */
 #mobile-menu-container a {
-    color: #fbfbfb; /* Standardlinkfarbe, behalten Sie dies bei oder passen Sie es nach Bedarf an */
-    text-decoration: none; /* Entfernt die Unterstreichung von Links */
-    background-color: transparent; /* Standard Hintergrundfarbe */
-    display: inline-block; /* Ermöglicht die Anwendung von Padding und korrekter Hintergrundfarbe */
-    width: 100%; /* Stellt sicher, dass der gesamte Linkbereich klickbar ist */
-    padding: 10px 0; /* Fügt etwas Platz um den Text hininzu */
-    box-sizing: border-box; /* Stellt sicher, dass Padding im definierten width enthalten ist */
-    display: flex; /* Macht den Link zu einem Flex-Container */
-  align-items: center; /* Zentriert die Inhalte vertikal */
-  justify-content: flex-start; /* Ausrichtung der Inhalte am Anfang */
-  padding: 10px 0;
+    color: #fbfbfb;
+    text-decoration: none;
+    background-color: transparent;
+    display: inline-block;
+    padding: 10px 0;
+    /* box-sizing: border-box; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: flex-start; */
+    padding: 10px 0;
 }
 
 /* Link-Hover- und Aktivzustand */
