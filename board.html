@@ -70,7 +70,7 @@
                 <div class="todos-section">
                   <div class="todos-header">
                     <p>To Do</p>
-                    <button onclick="openAddTaskCard()" onmouseover="hover(`add-task-board-button1`)" onmouseout="unhover('add-task-board-button1')"><img id="add-task-board-button1" src="assets/img/plus_icon.png" alt=""></button>
+                    <button onclick="openAddTaskCard('open')" onmouseover="hover(`add-task-board-button1`)" onmouseout="unhover('add-task-board-button1')"><img id="add-task-board-button1" src="assets/img/plus_icon.png" alt=""></button>
                   </div>
                   <div ondrop="moveTo('open')" ondragover="allowDrop(event)" class="drag-here-container" style="display: none;"><span>drag here to change status</span></div>
                   <div id="open-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>
@@ -80,7 +80,7 @@
                 <div class="todos-section">
                   <div class="todos-header">
                     <p>In progress</p>
-                    <button onclick="openAddTaskCard()" onmouseover="hover('add-task-board-button2')" onmouseout="unhover('add-task-board-button2')"><img id="add-task-board-button2" src="assets/img/plus_icon.png" alt=""></button>
+                    <button onclick="openAddTaskCard('in-progress')" onmouseover="hover('add-task-board-button2')" onmouseout="unhover('add-task-board-button2')"><img id="add-task-board-button2" src="assets/img/plus_icon.png" alt=""></button>
                   </div>
                   <div ondrop="moveTo('in-progress')" ondragover="allowDrop(event)" class="drag-here-container" style="display: none;"><span>drag here to change status</span></div>
                   <div id="in-progress-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>
@@ -90,7 +90,7 @@
                 <div class="todos-section">
                   <div class="todos-header">
                     <p>Await feedback</p>
-                    <button onclick="openAddTaskCard()" onmouseover="hover('add-task-board-button3')" onmouseout="unhover('add-task-board-button3')"><img id="add-task-board-button3" src="assets/img/plus_icon.png" alt=""></button>
+                    <button onclick="openAddTaskCard('await-feedback')" onmouseover="hover('add-task-board-button3')" onmouseout="unhover('add-task-board-button3')"><img id="add-task-board-button3" src="assets/img/plus_icon.png" alt=""></button>
                 </div>
                   <div ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)" class="drag-here-container" style="display: none;"><span>drag here to change status</span></div>
                   <div id="await-feedback-empty" class="todos-container-empty" style="display: none;"><span>No tasks to do</span></div>

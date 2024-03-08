@@ -2,6 +2,7 @@ let temporaryAssignedTo = [];
 let newTaskPrio = "medium";
 let temporarySubtasks = [];
 let temporarySubtasksDone = [];
+let temporaryTaskStatus = "";
 
 //LOAD CONTACTS START
 function loadContactsForAddOverlay() {
@@ -25,8 +26,9 @@ function loadContactsForAddOverlay() {
 //LOAD CONTACTS END
 
 //ADD NEW TASK START
-function openAddTaskCard() {
+function openAddTaskCard(taskStatus) {
   document.getElementById("add-task-overlay").style.display = "flex";
+  temporaryTaskStatus = taskStatus;
   loadContactsForAddOverlay();
 }
 
@@ -38,7 +40,7 @@ function addNewTask() {
     dueDate: document.getElementById("add-task-date-input").value,
     prio: newTaskPrio,
     category: document.getElementById("add-new-task-category").value,
-    status: "open",
+    status: temporaryTaskStatus,
     subtasks: temporarySubtasks,
     subTasksDone: temporarySubtasksDone,
   };
@@ -50,6 +52,7 @@ function saveNewAddedTask(newTask) {
   tasks.push(newTask);
   console.log(newTask, tasks);
   temporaryAssignedTo = [];
+  temporaryTaskStatus = "";
   newTaskPrio = "";
   showMessageOverlay('Task added to Board');
   setTimeout(() => {
@@ -128,7 +131,12 @@ function clearAssignedToAddOverlay() {
 
 //SET PRIORITY START
 function setNewTaskPrio(newPrio, buttonColor) {
-  newTaskPrio = newPrio;
+  if(newPrio == ''){
+    newTaskPrio = "medium";
+  }else{
+    newTaskPrio = newPrio;
+  }
+  
   resetPrioColors();
   document.getElementById(newPrio).style.backgroundColor = buttonColor;
   document.getElementById(`${newPrio}-text-add`).style.color = "#FFFFFF";
