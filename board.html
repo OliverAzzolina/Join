@@ -60,8 +60,7 @@
                         <h1>Board</h1>
                     <div id="board-header-right">              
                         <input class="input" id="search" onkeyup="filterTasks()" type="text" placeholder="Find Task">
-                        
-                        <button class="mobile-button" onclick="openAddTaskCard()">Add task +</button>
+                        <input id="add-task-plus" class="mobile-button" type="button" onclick="location.href='/add-task.html';" value="Add task +" />
                     </div>
                 </div>
             </div>
@@ -143,7 +142,7 @@
                     <img src="assets/img/arrow_drop_down.png" alt="">
                   </div>
                   <ul style="display: none;" id="add-assigned-editors" class="assigned-editors"></ul>
-                  <div id="background-overlay" onclick="hideDropdownContacts()"></div>
+                  <div id="background-overlay" onclick="hideDropdownContactsAdd()"></div>
                   <div style="display: flex; flex-direction: row; align-items: center;">              
                     <div id="show-assigned-editors-container"></div>
                     <div style="display: none;" id="tooMuchEditors" class="mini-logo-dummy-add-task-overlay"></div>

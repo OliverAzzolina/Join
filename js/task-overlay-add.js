@@ -90,7 +90,7 @@ function showDropdownContactsAddOverlay() {
   }
 }
 
-function hideDropdownContacts(){
+function hideDropdownContactsAdd(){
   let dropdown = document.getElementById("add-assigned-editors");
   let backgroundOverlay = document.getElementById('background-overlay');
   dropdown.style.display = "none";

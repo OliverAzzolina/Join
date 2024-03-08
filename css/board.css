@@ -42,7 +42,7 @@ body {
   font-weight: 700;
 }
 
-#board-header-right button {
+#board-header-right .mobile-button{
   width: 160px;
   height: 48px;
   background-color: #2a3647;
