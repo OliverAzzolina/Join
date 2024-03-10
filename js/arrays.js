@@ -322,17 +322,6 @@ let rescueUserArray = [
         "userId": 654122,
         "password": null,
         "userContacts": null
-      },
-      {
-        "email": "GuestUser@test.com",
-        "phone": "0171-1234567",
-        "userColor": "#ff0000",
-        "firstName": "Guest",
-        "lastName": "User",
-        "initials": "GU",
-        "userId": 123456,
-        "password": "guest",
-        "userContacts": preRegisteredContacts
       }
   ];
 
@@ -439,13 +428,6 @@ let rescueTaskArray = [
         "description": "Create an engaging and interactive platform for learning programming concepts.",
         "assignedTo": [
           {
-            "firstName": "Guest",
-            "lastName": "User",
-            "initials": "GU",
-            "userColor": "#ff0000",
-            "userId": 123456
-          },
-          {
             "firstName": "Hatice",
             "lastName": "Heinz",
             "initials": "HH",
@@ -483,13 +465,6 @@ let rescueTaskArray = [
         "title": "Optimize Database Performance",
         "description": "Enhance the database architecture for optimal performance and scalability.",
         "assignedTo": [
-          {
-            "firstName": "Guest",
-            "lastName": "User",
-            "initials": "GU",
-            "userColor": "#ff0000",
-            "userId": 123456
-          },
           {
             "firstName": "Diethelm",
             "lastName": "Fiebig",
@@ -585,13 +560,6 @@ let rescueTaskArray = [
         "title": "Improve Accessibility Standards",
         "description": "Audit and improve the application to meet modern web accessibility standards.",
         "assignedTo": [
-          {
-            "firstName": "Guest",
-            "lastName": "User",
-            "initials": "GU",
-            "userColor": "#ff0000",
-            "userId": 123456
-          },
           {
             "firstName": "Kai-Uwe",
             "lastName": "Tschentscher",
