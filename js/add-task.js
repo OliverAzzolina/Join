@@ -5,6 +5,11 @@ contacts = [];
 assignedToTempArray = [];
 
 
+/**
+ * Adds an event listener that triggers when the DOM is fully loaded and sequentially
+ * executes a series of functions related to user validation, user data loading,
+ * header and sidebar generation, and contacts and tasks loading.
+ */
 document.addEventListener('DOMContentLoaded', async function () {
   console.log('DOM loaded');
   await userIsAllowed();
@@ -16,15 +21,19 @@ document.addEventListener('DOMContentLoaded', async function () {
 });
 
 
+/**
+ * Asynchronously loads user contacts. It first sorts the contacts and then loads the contact list.
+ */
 async function loadUserContacts(){
   sortContacts();
   loadContactList();
 }
 
 
-
-
-//LOAD Tasks from Storage
+/**
+ * Asynchronously loads tasks from storage. Attempts to parse the 'tasks' item from storage as JSON.
+ * If an error occurs during loading or parsing, it logs a warning message.
+ */
 async function loadTasksfromStorage(){
   try{
     tasks = JSON.parse(await getItem('tasks'));
@@ -34,7 +43,11 @@ async function loadTasksfromStorage(){
 }
 
 
-//EVENT LISTENERS
+/**
+ * Adds an event listener to the window object that intercepts 'Enter' keydown events.
+ * If the 'Enter' key is pressed while focusing on an input element of type 'text',
+ * the event's default action is prevented.
+ */
 window.addEventListener('keydown',function(e) {
   if (e.keyIdentifier=='U+000A' || e.keyIdentifier=='Enter' || e.keyCode==13) {
       if (e.target.nodeName=='INPUT' && e.target.type=='text') {
@@ -46,6 +59,11 @@ window.addEventListener('keydown',function(e) {
 }, true);
 
 
+/**
+ * Checks if the Enter key is pressed and triggers the addition of a subtask.
+ *
+ * @param {Event} e - The event object associated with the key press.
+ */
 function checkForEnter(e){
   if(e.keyCode == 13 || e.which == 13){
     addSubtask();
@@ -53,6 +71,13 @@ function checkForEnter(e){
 }
 
 
+/**
+ * Adds a task based on user input from form elements.
+ * This function prevents the default form submission behavior, gathers the task data from various input fields and predefined variables,
+ * then logs and saves the task.
+ *
+ * @param {Event} event - The event object associated with the form submission.
+ */
 function addTask(event) {
   event.preventDefault();
   let taskData = {
@@ -72,6 +97,13 @@ function addTask(event) {
 }
 
 
+/**
+ * Retrieves the selected value from the category dropdown in the task form.
+ * If the dropdown is present and an option is selected, it returns the value of the selected option.
+ * Otherwise, it returns null.
+ *
+ * @returns {string|null} The value of the selected option in the category dropdown, or null if no option is selected.
+ */
 function getCategoryValue() {
   var categoryDropdown = document.querySelector('.add-task-form-dropdown');
   if (categoryDropdown && categoryDropdown.selectedIndex >= 0) {
@@ -82,6 +114,12 @@ function getCategoryValue() {
 }
 
 
+/**
+ * Generates an array of subtasks with their completion status set to false.
+ * It iterates over the `subtaskTempArray`, creating a new object for each subtask with a name and a checked property.
+ *
+ * @returns {Array<Object>} An array of objects where each object represents a subtask with its name and checked status.
+ */
 function getSubTasksDone() {
   returnArray = [];
   subtaskTempArray.forEach(subtask => {
@@ -94,13 +132,24 @@ function getSubTasksDone() {
 };
 
 
+/**
+ * Saves the current tasks array to storage.
+ * The tasks array is stringified and stored using `setItem` function
+ * and shows a user-friendly message indicating the task was added successfully.
+ */
 function saveTask() {
   setItem('tasks', JSON.stringify(tasks));
-  console.log("Task gespeichert");
+
   showMessageOverlay('Task added to Board');
 }
 
 
+/**
+ * Toggles the visibility of the contacts dropdown and the background overlay.
+ * Shows the contacts dropdown and the background overlay if they are not already visible,
+ * and hides them otherwise. Also, resets the `checkedArray` and clears the assigned overlay
+ * when showing the dropdown. If the `tooMuchEditors` warning is visible, it will be hidden.
+ */
 function showDropdownContacts() {
   let dropdown = document.getElementById('assigned-editors');
   let backgroundOverlay = document.getElementById('background-overlay');
@@ -118,6 +167,12 @@ function showDropdownContacts() {
   }
 }
 
+
+/**
+ * Hides the contacts dropdown and the background overlay.
+ * Sets the display style of both elements to 'none' and calls `addAssignedEditors`
+ * to update the list of assigned editors based on the current selection.
+ */
 function hideDropdownContacts(){
   let dropdown = document.getElementById('assigned-editors');
   let backgroundOverlay = document.getElementById('background-overlay');
@@ -127,6 +182,12 @@ function hideDropdownContacts(){
 }
 
 
+/**
+ * Adds the selected editors to the assigned editors list and updates the UI accordingly.
+ * Iterates through the `contacts` array to check which editors are selected and adds them to `checkedArray`.
+ * If more than three editors are selected, it displays a warning message. Otherwise, it adds the selected editors
+ * to the displayed list with their initials and background color. The list is limited to showing a maximum of three editors.
+ */
 function addAssignedEditors() {
   let showAssignedEditors = document.getElementById('show-assigned-editors-container');
   let tooMuchEditors = document.getElementById('tooMuchEditors');
@@ -151,11 +212,23 @@ function addAssignedEditors() {
 }
 
 
+/**
+ * Prevents the event from propagating further in the event hierarchy.
+ * This function can be used to stop the event from bubbling up and triggering parent event listeners.
+ *
+ * @param {Event} event - The event object to stop propagation for.
+ */
 function doNotClose(event) {
   event.stopPropagation();
 }
 
 
+/**
+ * Checks the assignment status of a contact based on the checkbox state and updates the assignment accordingly.
+ * If the checkbox is unchecked, it triggers the unassignment function, and if checked, it triggers the assignment function.
+ *
+ * @param {number} i - The index of the contact to check the assignment status for.
+ */
 function checkIfAssigned(i) {
   let checkbox = document.getElementById(`checkbox${i}`).checked;
 
@@ -169,12 +242,21 @@ function checkIfAssigned(i) {
 }
 
 
+/**
+ * Clears the content of the assigned editors display container.
+ * This function removes all child elements of the container, effectively resetting the display of assigned editors.
+ */
 function clearAssignedToAddOverlay() {
   document.getElementById("show-assigned-editors-container").innerHTML = "";
 }
 
 
-//LOAD Contacts
+/**
+ * Populates the contact list in the UI with contacts data.
+ * Iterates through the `contacts` array to create and append contact elements to the contact list element.
+ * Each contact is represented by their initials and user color. This function also calls `renderContacts`
+ * to generate the HTML structure for each contact and `sortContacts` to order the contacts list.
+ */
 function loadContactList() {
   let contactList = document.getElementById('assigned-editors');
   for (let i = 0; i < contacts.length; i++) {
@@ -190,25 +272,46 @@ function loadContactList() {
 }
 
 
+/**
+ * Sets the visual state of a contact to "assigned" by changing the background color and the checkmark icon.
+ * It updates the contact's style to indicate that it has been assigned and changes the checkmark icon to a checked state.
+ *
+ * @param {number} i - The index of the contact to be marked as assigned.
+ */
 function setAssigned(i){
   document.getElementById(`assigned-contact${i}`).style = "background-color: #2A3647; color: white";
   document.getElementById(`checked${i}`).src ="assets/img/check_checked.png";
 }
 
 
+/**
+ * Sets the visual state of a contact to "unassigned" by changing the text color and the checkmark icon.
+ * It updates the contact's style to indicate that it has been unassigned and changes the checkmark icon to an unchecked state.
+ *
+ * @param {number} i - The index of the contact to be marked as unassigned.
+ */
 function setUnAssigned(i){
   document.getElementById(`assigned-contact${i}`).style = "color: black";;
   document.getElementById(`checked${i}`).src ="assets/img/check_unchecked.png";
 }
 
 
-//ADD SUBTASK START
+/**
+ * Activates the check and cancel buttons while hiding the create subtask button.
+ * It removes the 'd-none' class from the check cancel button container to make it visible
+ * and adds the 'd-none' class to the create subtask button container to hide it.
+ */
 function activateCheckCancelButtons(){
   document.getElementById('add-task-active-subtask-icon-box').classList.remove('d-none');
   document.getElementById('add-task-create-subtask-icon-box').classList.add('d-none');
 }
 
 
+/**
+ * Clears the subtask input field and toggles the visibility of the subtask action icons.
+ * It sets the subtask input field to an empty string, hides the active subtask icon box,
+ * and shows the create subtask icon box by manipulating their 'd-none' class.
+ */
 function clearSubtaskInput(){
   document.getElementById('add-task-subtask-input').value = '';
   document.getElementById('add-task-active-subtask-icon-box').classList.add('d-none');
@@ -216,6 +319,11 @@ function clearSubtaskInput(){
 }
 
 
+/**
+ * Adds the input value as a subtask to the temporary subtask array if it is not empty.
+ * It retrieves the subtask input value, checks if it is not empty, and then adds it to the `subtaskTempArray`.
+ * After adding, it logs the updated array, calls `renderSubtasks` to update the UI, and clears the subtask input field.
+ */
 function addSubtask(){
   let subtask = document.getElementById('add-task-subtask-input').value;
   if(subtask !== ''){
@@ -227,6 +335,11 @@ function addSubtask(){
 }
 
 
+/**
+ * Renders the subtasks in the UI from the temporary subtask array.
+ * It clears the current subtasks list in the container and iterates over the `subtaskTempArray`,
+ * appending the HTML representation of each subtask using `subtaskHTML` function.
+ */
 function renderSubtasks(){
   let subtasksContainer = document.getElementById('add-task-subtasks-container');
   subtasksContainer.innerHTML = '';
@@ -237,6 +350,13 @@ function renderSubtasks(){
 }
 
 
+/**
+ * Initiates the edit mode for a specified subtask.
+ * If there are subtasks in the array, it hides the display element of the subtask and
+ * shows the edit container to allow modification of the subtask content.
+ *
+ * @param {number} i - The index of the subtask in the `subtaskTempArray` to be edited.
+ */
 function editSubtask(i){
   if(!subtaskTempArray.length == 0){
     document.getElementById(`editable-subtask${i}`).style.display = "none";
@@ -245,6 +365,13 @@ function editSubtask(i){
 }
 
 
+/**
+ * Deletes a subtask from the temporary subtask array and updates the UI.
+ * It removes the subtask at the specified index using `splice`, then re-renders the subtask list
+ * and clears the subtask input field.
+ *
+ * @param {number} i - The index of the subtask in the `subtaskTempArray` to be deleted.
+ */
 function deleteSubtask(i){
   subtaskTempArray.splice(i, 1)
   renderSubtasks();
@@ -252,6 +379,13 @@ function deleteSubtask(i){
 }
 
 
+/**
+ * Updates the content of an existing subtask in the temporary array and refreshes the UI.
+ * It checks if the new subtask content is not empty, then replaces the subtask at the given index
+ * with the new content, re-renders the subtask list, and clears the subtask input field.
+ *
+ * @param {number} i - The index of the subtask in the `subtaskTempArray` to be updated.
+ */
 function changeSubtask(i){
   let subtask = document.getElementById(`editSubtaskInput${i}`).value;
   if(subtask !== ''){
@@ -262,6 +396,11 @@ function changeSubtask(i){
 }
 
 
+/**
+ * Creates an array of subtasks with a 'checked' status, initializing all as not done.
+ * Iterates through the `subtaskTempArray`, creating an object for each subtask with its name and a false 'checked' status,
+ * then pushes this object to `subtaskDoneTempArray` and logs it to the console.
+ */
 function createSubtasksDoneArray(){
   for (let i = 0; i < subtaskTempArray.length; i++) {
     const subtask = subtaskTempArray[i];
@@ -275,12 +414,23 @@ function createSubtasksDoneArray(){
 }
 
 
+/**
+ * Increases the opacity of the active subtask icon box to make it fully visible.
+ * Targets the specific active subtask icon box by its index and sets its opacity to 1.
+ *
+ * @param {number} i - The index of the subtask icon box to be modified.
+ */
 function showIcons(i){
   document.getElementById(`edit-task-active-subtask-icon-box${i}`).style.opacity = 1;
  }
  
 
+ /**
+ * Reduces the opacity of the active subtask icon box to make it fully transparent.
+ * Targets the specific active subtask icon box by its index and sets its opacity to 0.
+ *
+ * @param {number} i - The index of the subtask icon box to be modified.
+ */
  function hideIcons(i){
      document.getElementById(`edit-task-active-subtask-icon-box${i}`).style.opacity = 0;
  }
-//ADD SUBTASK END

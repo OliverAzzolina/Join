@@ -1,5 +1,11 @@
 let currentDraggedElement;
 
+
+/**
+ * Initializes the application by running a series of asynchronous tasks in sequence.
+ * Waits for each task to complete before moving to the next. The tasks include checking user permissions,
+ * loading user data, generating the header and sidebar UI components, sorting contacts, and loading tasks from storage.
+ */
 async function init(){
     await userIsAllowed();
     await loadUserData();
@@ -9,7 +15,11 @@ async function init(){
     loadTasksfromStorage();
 }
 
-//LOAD Tasks from Storage
+/**
+ * Asynchronously loads tasks from storage and parses them into the `tasks` variable.
+ * It tries to retrieve and parse the 'tasks' item from storage. If successful, it logs the loaded tasks.
+ * In case of an error, it catches and logs the error as a warning. Finally, it calls `renderTasks` to update the UI.
+ */
 async function loadTasksfromStorage(){
   try{
     tasks = JSON.parse(await getItem('tasks'));
@@ -20,7 +30,12 @@ async function loadTasksfromStorage(){
   renderTasks();
 }
 
-//LOAD Contacts
+/**
+ * Populates the contact list in the UI with contacts data.
+ * Iterates through the `contacts` array, creating an HTML representation for each contact that includes their
+ * initials, name, and user color. This representation is then appended to the contact list element in the UI.
+ * After populating the list, it calls `sortContacts` to order the contacts.
+ */
 function loadContactList(){
   let contactList = document.getElementById('assigned-editors');
   for (let i = 0; i < contacts.length; i++) {
@@ -37,6 +52,11 @@ function loadContactList(){
 }
 
 
+/**
+ * Asynchronously checks if the editors assigned to tasks still exist in the contacts list.
+ * Iterates through each task and its assigned editors, verifying if each editor exists in the contacts.
+ * If an editor does not exist in the contacts, they are removed from the task's assignedTo list.
+ */
 async function checkIfEditorsExist(){
   for (let i = 0; i < tasks.length; i++) {
     const task = tasks[i];
@@ -51,11 +71,25 @@ async function checkIfEditorsExist(){
 }
 
 
+/**
+ * Asynchronously searches for an editor in the contacts list by user ID.
+ * It returns the contact object if a matching user ID is found, otherwise returns undefined.
+ *
+ * @param {string} editor - The user ID of the editor to search for in the contacts list.
+ * @returns {Promise<Object|undefined>} A promise that resolves to the contact object if found, or undefined if not found.
+ */
 async function findEditorInContacts(editor){ 
     return contacts.find(contact => contact.userId === parseInt(editor));
 }
 
 
+/**
+ * Asynchronously renders tasks on the UI after verifying the existence of their assigned editors.
+ * It first checks if the assigned editors for each task exist, refreshes the tasks list, and then iterates
+ * through the tasks array to render each task based on its status. It also sets priority images, updates
+ * completed subtasks, generates subtasks, checks task categories, and renders the assigned editors for each task.
+ * Finally, it checks if the task board is empty and updates the UI accordingly.
+ */
 async function renderTasks() {
   await checkIfEditorsExist();
   refreshTasks();
@@ -74,6 +108,11 @@ async function renderTasks() {
 }
 
 
+/**
+ * Checks if each board section is empty and updates the display accordingly.
+ * Calls `checkOpen` for each task status ('open', 'in-progress', 'await-feedback', 'done')
+ * to verify if there are any tasks in these categories and updates the UI to reflect the current state.
+ */
 function checkIfBoardEmpty(){
   checkOpen('open');
   checkOpen('in-progress');
@@ -82,6 +121,10 @@ function checkIfBoardEmpty(){
 }
 
 
+/**
+ * Checks if a checkbox is checked and calls corresponding functions to update its state.
+ * @param {number} i - The index number of the checkbox.
+ */
 function checkIfAssigned(i){
   let checkbox = document.getElementById(`checkbox${i}`).checked;
   if(checkbox == false){
@@ -94,18 +137,30 @@ function checkIfAssigned(i){
 }
 
 
+/**
+ * Sets the assigned state for a given element identified by index.
+ * @param {number} i - The index number of the element.
+ */
 function setAssigned(i){
   document.getElementById(`assigned-contact${i}`).style = "background-color: #2A3647; color: white";
   document.getElementById(`checked${i}`).src ="assets/img/check_checked.png";
 }
 
 
+/**
+ * Sets the unassigned state for a given element identified by index.
+ * @param {number} i - The index number of the element.
+ */
 function setUnAssigned(i){
   document.getElementById(`assigned-contact${i}`).style = "color: black";;
   document.getElementById(`checked${i}`).src ="assets/img/check_unchecked.png";
 }
 
 
+/**
+ * Displays a dropdown list of contacts and shows a overlay.
+ * @param {number} index - The index of the dropdown.
+ */
 function showDropdownContacts(index){
   let dropdown = document.getElementById('assigned-editors');
   let backgroundOverlay = document.getElementById('background-overlay');
@@ -120,6 +175,10 @@ function showDropdownContacts(index){
 }
 
 
+/**
+ * Hides the dropdown list of contacts and removes the background overlay.
+ * @param {number} index - The index of the dropdown.
+ */
 function hideDropdownContacts(index){
   let dropdown = document.getElementById('assigned-editors');
   let backgroundOverlay = document.getElementById('background-overlay');
@@ -128,6 +187,12 @@ function hideDropdownContacts(index){
   addAssignedEditors(index);
 }
 
+
+
+/**
+ * Adds assigned editors to the display and updates associated data.
+ * @param {number} index - The index associated with the dropdown.
+ */
 function addAssignedEditors(index){
   let showAssignedEditors = document.getElementById('show-assigned-editors-edit-container');
   for (let i = 0; i < contacts.length; i++) {
@@ -148,6 +213,10 @@ function addAssignedEditors(index){
 }
 
 
+/**
+ * Renders the assigned editors for a specific task.
+ * @param {number} index - The index of the task.
+ */
 function renderAssignedTo(index){
   let assignedTo = document.getElementById(`todo-assigned-to${index}`);
   assignedTo.innerHTML = '';
@@ -160,34 +229,48 @@ function renderAssignedTo(index){
   }
 
 
-  function checkIfToMuchEditors(assignedTo, index){
-    for (let i = 0; i < 3; i++) {
-      const checkedEditor = tasks[index]['assignedTo'][i];
-      let initials = checkedEditor.initials;
-      let userColor = checkedEditor.userColor;
-      let tooMuchEditors = document.getElementById(`tooMuchEditors${index}`);
-      tooMuchEditors.style.display = 'flex';
-      tooMuchEditors.innerHTML = `+${tasks[index]['assignedTo'].length - 3}`;
-    
-      assignedTo.innerHTML += `
-      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
-      `;
-    }
+/**
+ * Checks if there are too many assigned editors for a task and renders a limited number of them.
+ * @param {HTMLElement} assignedTo - The HTML element to render the assigned editors.
+ * @param {number} index - The index of the task.
+ */
+function checkIfToMuchEditors(assignedTo, index){
+  for (let i = 0; i < 3; i++) {
+    const checkedEditor = tasks[index]['assignedTo'][i];
+    let initials = checkedEditor.initials;
+    let userColor = checkedEditor.userColor;
+    let tooMuchEditors = document.getElementById(`tooMuchEditors${index}`);
+    tooMuchEditors.style.display = 'flex';
+    tooMuchEditors.innerHTML = `+${tasks[index]['assignedTo'].length - 3}`;
+  
+    assignedTo.innerHTML += `
+    <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
+    `;
   }
+}
 
 
-  function notToMuchEditors(assignedTo, index){
-    for (let i = 0; i < tasks[index]['assignedTo'].length; i++) {
-      const checkedEditor = tasks[index]['assignedTo'][i];
-      let initials = checkedEditor.initials;
-      let userColor = checkedEditor.userColor;
-      assignedTo.innerHTML += `
-      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
-      `;
-    }
+/**
+ * Renders assigned editors when the number of editors is not excessive for a task.
+ * @param {HTMLElement} assignedTo - The HTML element to render the assigned editors.
+ * @param {number} index - The index of the task.
+ */
+function notToMuchEditors(assignedTo, index){
+  for (let i = 0; i < tasks[index]['assignedTo'].length; i++) {
+    const checkedEditor = tasks[index]['assignedTo'][i];
+    let initials = checkedEditor.initials;
+    let userColor = checkedEditor.userColor;
+    assignedTo.innerHTML += `
+    <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
+    `;
   }
+}
 
 
+/**
+ * Checks if a specific board section is empty and adjusts its visibility accordingly.
+ * @param {string} id - The ID of the board section to check.
+ */
 function checkOpen(id){
 let board = document.getElementById(`${id}`);
     if(board.innerHTML == ''){
@@ -200,6 +283,10 @@ let board = document.getElementById(`${id}`);
 }
 
 
+/**
+ * Checks the category of a task and adjusts the background color accordingly.
+ * @param {number} i - The index of the task.
+ */
 function checkCategory(i){
   let category = tasks[i]["category"];
   if(category == 'User Story'){
@@ -211,6 +298,9 @@ function checkCategory(i){
 }
 
 
+/**
+ * Refreshes the task boards by clearing their contents.
+ */
 function refreshTasks(){
   document.getElementById("open").innerHTML = '';
   document.getElementById("in-progress").innerHTML = '';
@@ -219,6 +309,10 @@ function refreshTasks(){
 }
 
 
+/**
+ * Sets the priority image for a task based on its priority level.
+ * @param {number} i - The index of the task.
+ */
 function setPrioImg(i){
   let prioImg = document.getElementById(`prioImg${i}`);
   let prio = tasks[i]['prio'];
@@ -226,6 +320,10 @@ function setPrioImg(i){
 }
 
 
+/**
+ * Generates subtasks progress for a given task.
+ * @param {number} i - The index of the task.
+ */
 function generateSubtasks(i){
   let subProgressBar = document.getElementById(`subtasks-progress${i}`);
   subProgressBar.innerHTML = '';
@@ -243,6 +341,11 @@ function generateSubtasks(i){
 }
 
 
+/**
+ * Updates the information about completed subtasks for a given task.
+ * @param {number} i - The index of the task.
+ * @param {number} checkedTrue - The number of subtasks that are checked (completed).
+ */
 function updateDoneSubs(i, checkedTrue){
   if(checkedTrue == undefined){
     document.getElementById(`subsDoneOfAll${i}`).innerHTML = '0';
@@ -257,29 +360,49 @@ function updateDoneSubs(i, checkedTrue){
 }
 
 
+/**
+ * Displays information about subtasks for a given task.
+ * @param {number} i - The index of the task.
+ */
 function showSubInfo(i){
   let subInfo = document.getElementById(`subtasks-info${i}`);
   subInfo.style.display = 'block';
 }
 
+
+/**
+ * Hides information about subtasks for a given task.
+ * @param {number} i - The index of the task.
+ */
 function hideSubInfo(i){
   let subInfo = document.getElementById(`subtasks-info${i}`);
   subInfo.style.display = 'none';
 }
 
 
-//drag&drop
+/**
+ * Initiates the dragging process for a todo card element.
+ * @param {number} i - The index of the todo card being dragged.
+ */
 function startDragging(i){
  currentDraggedElement = i;
  document.getElementById(`todo-card${i}`).classList.add('todo-card-dragging');
  showDragHereContainer();
 }
 
+
+/**
+ * Ends the dragging process for a todo card element.
+ * @param {number} i - The index of the todo card being dragged.
+ */
 function stopDragging(i){
   document.getElementById(`todo-card${i}`).classList.remove('todo-card-dragging');
 }
 
 
+/**
+ * Displays the "Drag Here" container.
+ */
 function showDragHereContainer(){
   let dragContainer = document.getElementsByClassName('drag-here-container');
   for (let i = 0; i < dragContainer.length; i++) {
@@ -289,6 +412,9 @@ function showDragHereContainer(){
 }
 
 
+/**
+ * Hides the "Drag Here" container.
+ */
 function hideDragHereContainer(){
   let dragContainer = document.getElementsByClassName('drag-here-container');
   for (let i = 0; i < dragContainer.length; i++) {
@@ -298,11 +424,19 @@ function hideDragHereContainer(){
 }
 
 
+/**
+ * Allows dropping elements into a drop zone.
+ * @param {Event} ev - The dragover event.
+ */
 function allowDrop(ev){
   ev.preventDefault();
 }
 
 
+/**
+ * Moves the current dragged element to a new status.
+ * @param {string} status - The status to move the element to.
+ */
 function moveTo(status){
   hideDragHereContainer();
   tasks[currentDraggedElement]['status'] = status;
@@ -312,7 +446,10 @@ function moveTo(status){
 }
 
 
-//Slide IN OUT
+/**
+ * Slides out the overlay for a todo card detail.
+ * @param {number} i - The index of the todo card detail.
+ */
 function slideOutOverlay(i){
 
     var $slider = document.getElementById(`todo-card-detail${i}`);
@@ -327,7 +464,15 @@ function slideOutOverlay(i){
 }
 
 
-
+/**
+ * Pushes assigned editor details to a task.
+ * @param {number} index - The index of the task.
+ * @param {string} initials - The initials of the assigned editor.
+ * @param {string} userColor - The color associated with the assigned editor.
+ * @param {string} firstName - The first name of the assigned editor.
+ * @param {string} lastName - The last name of the assigned editor.
+ * @param {string} userId - The ID of the assigned editor.
+ */
 function pushAssignedTo(index, initials, userColor, firstName, lastName, userId){
   let assignedToTask = {
     firstName: firstName,
@@ -341,6 +486,10 @@ function pushAssignedTo(index, initials, userColor, firstName, lastName, userId)
 }
 
 
+/**
+ * Renders assigned editor cards for a task.
+ * @param {number} index - The index of the task.
+ */
 function renderAssignedToCards(index){
   let showAssignedEditors = document.getElementById('show-assigned-editors-container');
   for (let i = 0; i < tasks[index]['assignedTo'].length; i++) {
@@ -352,6 +501,10 @@ function renderAssignedToCards(index){
 }
 
 
+/**
+ * Displays the priority of a task.
+ * @param {number} i - The index of the task.
+ */
 function showPrio(i){
  let newPrio = tasks[i]['prio'];
  if(newPrio == 'urgent'){
@@ -364,7 +517,9 @@ function showPrio(i){
 }
 
 
-//SEARCH
+/**
+ * Filters tasks based on the search input.
+ */
 function filterTasks() {
   let search = document.getElementById("search").value.toLowerCase();
   let searchSection = document.getElementById(`search-section`);
@@ -381,6 +536,10 @@ function filterTasks() {
 }
 
 
+/**
+ * Filters tasks based on the search input and renders filtered tasks.
+ * @param {string} search - The search query.
+ */
 function FilteredTasks(search){ 
   refreshTasks();
   for (let i = 0; i < tasks.length; i++) {
@@ -398,6 +557,10 @@ function FilteredTasks(search){
 }
 
 
+/**
+ * Renders filtered tasks in the search section.
+ * @param {number} i - The index of the task to render.
+ */
 function renderFilteredTasks(i){
   document.getElementById(`search-section`).innerHTML += generateTask(i);
   setPrioImg(i);
@@ -408,6 +571,10 @@ function renderFilteredTasks(i){
 }
 
 
+/**
+ * Handles hover effect for buttons by changing their image source.
+ * @param {string} id - The ID of the button.
+ */
 function hover(id){
   let button = document.getElementById(id);
   if(id == 'edit-img'){
@@ -424,6 +591,10 @@ function hover(id){
 }
 
 
+/**
+ * Handles unhover effect for buttons by restoring their original image source.
+ * @param {string} id - The ID of the button.
+ */
 function unhover(id){
   let button = document.getElementById(id);
   if(id == 'edit-img'){
@@ -440,11 +611,18 @@ function unhover(id){
 }
 
 
+/**
+ * Prevents the event from bubbling up the DOM tree, stopping further propagation.
+ * @param {Event} event - The event object.
+ */
 function doNotClose(event){
   event.stopPropagation();
 }
 
-//EVENT LISTENERS
+/**
+ * Listens for keydown events and prevents form submission when Enter key is pressed.
+ * @param {Event} e - The keydown event object.
+ */ 
 window.addEventListener('keydown',function(e) {
   if (e.keyIdentifier=='U+000A' || e.keyIdentifier=='Enter' || e.keyCode==13) {
       if (e.target.nodeName=='INPUT' && e.target.type=='text') {
