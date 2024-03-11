@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>utils.js - Documentation</title>
+    <title>summary.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -35,7 +35,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">utils.js</h1>
+    <h1 class="page-title">summary.js</h1>
     
 
     
@@ -46,168 +46,255 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Toggles the display of the header-dropdown menu.
+ * Adds an event listener to the "DOMContentLoaded" event of the document, triggering the initialization process when the DOM content is loaded.
  */
-function toggleDropdown() {
-    var dropdown = document.getElementById("dropdownMenu");
-    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-}
-
-
-/**
- * Generates a random 6-digit user ID.
- * @returns {Promise&lt;number>} A promise that resolves to the generated 6-digit user ID.
- */
-async function generateRandomId() {
-    newUserId = Math.floor(100000 + Math.random() * 900000)
-    if (!await checkIfUserIdAlreadyExists(newUserId)) {
-        return newUserId;
-    } else {
-    }
-}
-
-
-/**
- * Checks if a user ID already exists in the user array.
- * @param {number} newUserId - The user ID to check.
- * @returns {Promise&lt;boolean>} A promise that resolves to true if the user ID already exists, otherwise false.
- */
-async function checkIfUserIdAlreadyExists(newUserId) {
-    let users = await getUserArray()
-    let user = users.find(user => user.userId === newUserId);
-    if (user) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-
-/**
- * Adds a click event listener to redirect to the summary page when the mobile logo is clicked.
- * @param {Event} e - The click event object.
- */
-document.addEventListener('click', function(e) {
-    if (e.target &amp;&amp; e.target.id == 'mobile-logo') {
-        // Weiterleitung zur 'summary.html'-Seite
-        window.location.href = 'summary.html';
-    }
+document.addEventListener("DOMContentLoaded", function () {
+  init();
 });
 
-/**
- * Clears the data stored in the local storage and reloads the page.
- */
-function clearDataBase() {
-    localStorage.clear();
-    location.reload();
-}
-
-
 
 /**
- * Generates a random hexadecimal color code.
- * @returns {string} A random hexadecimal color code.
+ * Initializes the summary page.
+ * Checks if the user is allowed to access the page, generates the sidebar and summary, loads user data, and generates the header with user initials.
  */
-async function generateRandomColor() {
-    let randomColor = Math.floor(Math.random()*16777215).toString(16);
-    while (randomColor.length &lt; 6) {
-        randomColor = "0" + randomColor;
-    }
-    return "#" + randomColor;
+async function init() {
+  await userIsAllowed();
+  await generateSidebar();
+  await generateSummary();
+  await loadUserData();
+  generateHeader(userInitials);
 }
 
 
 /**
- * Generates the header.
- * If the user is logged in, it displays the header with user initials.
- * If the user is not logged in, it displays the header for logged out state.
- * 
- * @param {string} userInitials - The initials of the logged-in user.
+ * Retrieves user data based on the stored user ID in localStorage.
+ * Redirects to the index page if the user ID is not found.
+ * @returns {Object|null} The user data object if found, otherwise null.
  */
-async function generateHeader(userInitials) {
-    let header = document.getElementById("header-container");
-    if (await userIsLoggedIn()) {
-        header.innerHTML = headerHTML(userInitials);
-    } else {
-        header.innerHTML = headerLoggedOutHTML();
-    }
-}
+async function getUserData() {
+  let userId = Number(localStorage.getItem("userId"));
 
-
-/**
- * Generates the sidebar.
- * If the user is logged in, it displays the sidebar with logged-in user options.
- * If the user is not logged in, it displays the sidebar for logged-out state.
- */
-async function generateSidebar() {
-    let sidebar = document.getElementById("sidebar-container");
-    if (await userIsLoggedIn()){
-        sidebar.innerHTML = sidebarHTML();
-    } else {
-        sidebar.innerHTML = sidebarLoggedOutHTML();
-    }
-}
-
-
-/**
- * Checks if the user is logged in by verifying if the userId is stored in the localStorage.
- * Placeholder function for user authentication once we know how a Backend will handle user authentication.
- * @returns {boolean} True if the user is logged in, otherwise false.
- */
-async function userIsLoggedIn() {
-    if (await localStorage.getItem('userId') === null) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-
-/**
- * Checks if the user is allowed to access the current page by verifying if they are logged in.
- * If not logged in, redirects the user to the index page.
- */
-async function userIsAllowed() {
-    if (!await userIsLoggedIn()) {
-        window.location.href = 'index.html';
-    }
-}
-
-
-/**
- * Logs out the user by clearing local storage and redirecting them to the index page.
- */
-function logout() {
-    localStorage.clear();
-    window.location.href = 'index.html';
+  if (!userId) {
+    window.location.href = "index.html";
+    return null;
   }
+  let users = await getUserArray()
+  const userWithSameId = users.find(user => user.userId === userId);
+  return userWithSameId;
+}
 
 
 /**
- * Redirects the user to the summary page if logged in, otherwise to the index page.
+ * Generates the summary page content based on various counters and user information.
+ * @returns {void}
  */
-async function goHome() {
-    if (await userIsLoggedIn()) {
-        window.location.href = 'summary.html';
+async function generateSummary() {
+    let main = document.getElementById("main-container");
+    main.innerHTML = summaryHTML(await toDoCounter(), await doneCounter(), await urgentCounter(), await urgentDeadline(), await tibCounter(), await tipCounter(), await awaitingFeedbackCounter(), await greetingDaytime(), await userGreetingName());
+}
+
+
+/**
+ * Counts the number of tasks that are in "Open" or "In Progress" status and assigned to the logged-in user.
+ * @returns {Promise&lt;number>} The count of tasks in "Open" or "In Progress" status assigned to the user.
+ */
+async function toDoCounter() {
+  let tasks = await getTaskArray();
+  let userId = parseInt(localStorage.getItem("userId"), 10);
+  
+  let tasksInOpenStatus = tasks.filter((task) => {
+    return (
+        task.assignedTo &amp;&amp; task.assignedTo.some((user) => user.userId &amp;&amp; parseInt(user.userId, 10) === userId) &amp;&amp;
+        (task.status === "open" || task.status === "in-progress")
+    );
+  });
+
+  tasksInOpenStatus.forEach(task => {
+    console.log(task);
+  });
+
+  let count = tasksInOpenStatus.length;
+  return count;
+}
+
+
+/**
+ * Counts the number of tasks that are in "Done" status and assigned to the logged-in user.
+ * @returns {Promise&lt;number>} The count of tasks in "Done" status assigned to the user.
+ */
+async function doneCounter() {
+    let tasks = await getTaskArray();
+    let userId = parseInt(localStorage.getItem("userId"), 10);
+
+    let tasksInProgressStatus = tasks.filter((task) => {
+        return (
+            task.assignedTo &amp;&amp; task.assignedTo.some((user) => user &amp;&amp; user.userId === userId) &amp;&amp;
+            task.status === "done"
+        );
+    });
+    
+    let count = tasksInProgressStatus.length;
+    return count;
+}
+
+
+/**
+ * Counts the number of tasks that are marked as "urgent" and assigned to the logged-in user.
+ * @returns {Promise&lt;number>} The count of tasks marked as "urgent" assigned to the user.
+ */
+async function urgentCounter() {
+    let tasks = await getTaskArray();
+    let userId = parseInt(localStorage.getItem("userId"), 10);
+
+    let tasksInUrgentStatus = tasks.filter((task) => {
+        return (
+            task.assignedTo &amp;&amp; task.assignedTo.some((user) => user &amp;&amp; user.userId === userId) &amp;&amp;
+            task.prio === "urgent"
+        );
+    });
+    
+    let count = tasksInUrgentStatus.length;
+    return count;
+}
+
+
+/**
+ * Retrieves the due date of the nearest task marked as "urgent".
+ * @returns {Promise&lt;string>} The formatted due date of the nearest urgent task.
+ */
+async function urgentDeadline() {
+    let tasks = await getTaskArray();
+    let urgentTasks = tasks.filter(task => task.prio === "urgent");
+
+    let nearestUrgentTask = urgentTasks.reduce((prev, current) => {
+        return (new Date(prev.dueDate) &lt; new Date(current.dueDate)) ? prev : current;
+    }, urgentTasks[0]);
+
+    let dueDateFormatted = formatDate(nearestUrgentTask.dueDate);
+
+    return dueDateFormatted;
+}
+
+
+/**
+ * Formats a given date string to a human-readable format.
+ * @param {string} dateString - The date string to format.
+ * @returns {string} The formatted date string in the format "Month Day, Year".
+ */
+function formatDate(dateString) {
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+    let date = new Date(dateString);
+    return date.toLocaleDateString('en-EN', options);
+}
+
+
+/**
+ * Counts the total number of tasks in the backlog.
+ * @returns {number} The total number of tasks in the backlog.
+ */
+async function tibCounter() {
+    let tasks = await getTaskArray();
+    let count = tasks.length;
+    return count;
+}
+
+
+/**
+ * Counts the total number of tasks currently in progress.
+ * @returns {number} The total number of tasks in progress.
+ */
+async function tipCounter() {
+    let tasks = await getTaskArray();
+    let allTasksInProgressStatus = tasks.filter(task => task.status === "in-progress");
+    let count = allTasksInProgressStatus.length;
+    return count;
+}
+
+
+/**
+ * Counts the total number of tasks awaiting feedback.
+ * @returns {number} The total number of tasks awaiting feedback.
+ */
+async function awaitingFeedbackCounter() {
+    let tasks = await getTaskArray();
+    let allTasksInProgressStatus = tasks.filter(task => task.status === "await-feedback");
+    let count = allTasksInProgressStatus.length;
+    return count;
+}
+
+
+/**
+ * Determines the appropriate greeting based on the current time of the day.
+ * @returns {string} The greeting message for the current time of the day.
+ */
+function greetingDaytime() {
+    let today = new Date();
+    let hour = today.getHours();
+  
+    let greetingText;
+    if (hour >= 5 &amp;&amp; hour &lt; 12) {
+      greetingText = "Guten Morgen";
+    } else if (hour >= 12 &amp;&amp; hour &lt; 17) {
+      greetingText = "Guten Tag";
     } else {
-        window.location.href = 'index.html';
+      greetingText = "Guten Abend";
     }
+    return greetingText;
 }
 
 
 /**
- * Displays a message overlay with the given message for a short period of time.
- * @param {string} message - The message to be displayed in the overlay.
+ * Retrieves the user's greeting name based on their first and last name.
+ * @returns {string} The user's greeting name.
  */
-function showMessageOverlay(message){
-    let messageOverlay = document.getElementById("message");
-    messageOverlay.style.display = "flex";
-    messageOverlay.innerHTML = `&lt;span>${message}&lt;/span>&lt;img src="assets/img/sidebar_board_icon.svg" alt="">`;
-    setTimeout(() => {
-        messageOverlay.style.display = "none";
-      }, "2000");
+async function userGreetingName() {
+  let user = await getUserData();
+  if (!user) {
+    console.log("User not found.");
+    return "User not found";
+  }
+  if (user.firstName &amp;&amp; !user.lastName) {
+      return user.firstName;
+  } else if (user.firstName &amp;&amp; user.lastName) {
+      return `${user.firstName} ${user.lastName}`;
+  }
 }
 
+
+/**
+ * Changes the image source of the given element.
+ * @param {HTMLElement} element - The HTML element whose image source will be changed.
+ */
+function changeImage(element) {
+  element.querySelector(".icon").src = "assets/img/todo_white_icon.png";
+}
+
+
+/**
+ * Resets the image source of the given element.
+ * @param {HTMLElement} element - The HTML element whose image source will be reset.
+ */
+function resetImage(element) {
+  element.querySelector(".icon").src = "assets/img/todo_black_icon.png";
+}
+
+
+/**
+ * Changes the image source of the given element to a white "done" icon.
+ * @param {HTMLElement} element - The HTML element whose image source will be changed.
+ */
+function changeImageDoneRight(element) {
+  element.querySelector(".icon").src = "assets/img/done_white_icon.png";
+}
+
+
+/**
+ * Resets the image source of the given element to a black "done" icon.
+ * @param {HTMLElement} element - The HTML element whose image source will be reset.
+ */
+function resetImageDoneRight(element) {
+  element.querySelector(".icon").src = "assets/img/done_black_icon.png";
+}
 </code></pre>
         </article>
     </section>

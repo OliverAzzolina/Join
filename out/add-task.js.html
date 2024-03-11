@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <title>JSDoc: Source: add-task.js</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>add-task.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-    <h1 class="page-title">Source: add-task.js</h1>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#FilteredTasks">FilteredTasks</a></li><li><a href="global.html#activateCheckCancelButtons">activateCheckCancelButtons</a></li><li><a href="global.html#addAssignedEditors">addAssignedEditors</a></li><li><a href="global.html#addAssignedEditorsAddOverlay">addAssignedEditorsAddOverlay</a></li><li><a href="global.html#addNewTask">addNewTask</a></li><li><a href="global.html#addSubtask">addSubtask</a></li><li><a href="global.html#addSubtaskEditOverlay">addSubtaskEditOverlay</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addUserToDatabase">addUserToDatabase</a></li><li><a href="global.html#addUserToUserContacts">addUserToUserContacts</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#awaitingFeedbackCounter">awaitingFeedbackCounter</a></li><li><a href="global.html#changeImage">changeImage</a></li><li><a href="global.html#changeImageDoneRight">changeImageDoneRight</a></li><li><a href="global.html#changeSubtask">changeSubtask</a></li><li><a href="global.html#changeTask">changeTask</a></li><li><a href="global.html#checkCategory">checkCategory</a></li><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkForEnter">checkForEnter</a></li><li><a href="global.html#checkForm">checkForm</a></li><li><a href="global.html#checkIfAssigned">checkIfAssigned</a></li><li><a href="global.html#checkIfBoardEmpty">checkIfBoardEmpty</a></li><li><a href="global.html#checkIfContactCheckboxChecked">checkIfContactCheckboxChecked</a></li><li><a href="global.html#checkIfEditorsExist">checkIfEditorsExist</a></li><li><a href="global.html#checkIfSubChecked">checkIfSubChecked</a></li><li><a href="global.html#checkIfSubsDone">checkIfSubsDone</a></li><li><a href="global.html#checkIfToMuchEditors">checkIfToMuchEditors</a></li><li><a href="global.html#checkIfToMuchEditorsDetail">checkIfToMuchEditorsDetail</a></li><li><a href="global.html#checkIfToMuchEditorsEdit">checkIfToMuchEditorsEdit</a></li><li><a href="global.html#checkIfUserAlreadyExists">checkIfUserAlreadyExists</a></li><li><a href="global.html#checkIfUserIdAlreadyExists">checkIfUserIdAlreadyExists</a></li><li><a href="global.html#checkName">checkName</a></li><li><a href="global.html#checkOpen">checkOpen</a></li><li><a href="global.html#checkOverlayCategory">checkOverlayCategory</a></li><li><a href="global.html#checkPasswords">checkPasswords</a></li><li><a href="global.html#checkPrivacyCheckbox">checkPrivacyCheckbox</a></li><li><a href="global.html#checkRemoteStorage">checkRemoteStorage</a></li><li><a href="global.html#checkRemoteStorageTasks">checkRemoteStorageTasks</a></li><li><a href="global.html#checkRemoteStorageUsers">checkRemoteStorageUsers</a></li><li><a href="global.html#checkboxAlert">checkboxAlert</a></li><li><a href="global.html#clearAssignedTo">clearAssignedTo</a></li><li><a href="global.html#clearAssignedToAddOverlay">clearAssignedToAddOverlay</a></li><li><a href="global.html#clearDataBase">clearDataBase</a></li><li><a href="global.html#clearSubtaskInput">clearSubtaskInput</a></li><li><a href="global.html#closeAddTaskCard">closeAddTaskCard</a></li><li><a href="global.html#closeDetailCard">closeDetailCard</a></li><li><a href="global.html#closeEditOverlay">closeEditOverlay</a></li><li><a href="global.html#createSubtasksDoneArray">createSubtasksDoneArray</a></li><li><a href="global.html#createSubtasksDoneArrayEditOverlay">createSubtasksDoneArrayEditOverlay</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#deleteSubtaskEditOverlay">deleteSubtaskEditOverlay</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#doNotClose">doNotClose</a></li><li><a href="global.html#doneCounter">doneCounter</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#editSubtaskEditOverlay">editSubtaskEditOverlay</a></li><li><a href="global.html#filterTasks">filterTasks</a></li><li><a href="global.html#findEditorInContacts">findEditorInContacts</a></li><li><a href="global.html#findUser">findUser</a></li><li><a href="global.html#formatDate">formatDate</a></li><li><a href="global.html#generateHeader">generateHeader</a></li><li><a href="global.html#generateLogin">generateLogin</a></li><li><a href="global.html#generateRandomColor">generateRandomColor</a></li><li><a href="global.html#generateRandomId">generateRandomId</a></li><li><a href="global.html#generateRegister">generateRegister</a></li><li><a href="global.html#generateSidebar">generateSidebar</a></li><li><a href="global.html#generateSubtasks">generateSubtasks</a></li><li><a href="global.html#generateSummary">generateSummary</a></li><li><a href="global.html#getCategoryValue">getCategoryValue</a></li><li><a href="global.html#getItem">getItem</a></li><li><a href="global.html#getSubTasksDone">getSubTasksDone</a></li><li><a href="global.html#getTaskArray">getTaskArray</a></li><li><a href="global.html#getUserArray">getUserArray</a></li><li><a href="global.html#getUserData">getUserData</a></li><li><a href="global.html#goHome">goHome</a></li><li><a href="global.html#greetingDaytime">greetingDaytime</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#hideDragHereContainer">hideDragHereContainer</a></li><li><a href="global.html#hideDropdownContacts">hideDropdownContacts</a></li><li><a href="global.html#hideDropdownContactsAdd">hideDropdownContactsAdd</a></li><li><a href="global.html#hideIcons">hideIcons</a></li><li><a href="global.html#hideSubInfo">hideSubInfo</a></li><li><a href="global.html#hover">hover</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#inputAlert">inputAlert</a></li><li><a href="global.html#loadContactList">loadContactList</a></li><li><a href="global.html#loadContactsForAddOverlay">loadContactsForAddOverlay</a></li><li><a href="global.html#loadLoginListeners">loadLoginListeners</a></li><li><a href="global.html#loadRegisterListeners">loadRegisterListeners</a></li><li><a href="global.html#loadTaskData">loadTaskData</a></li><li><a href="global.html#loadTasksfromStorage">loadTasksfromStorage</a></li><li><a href="global.html#loadUserContacts">loadUserContacts</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#logoutRemoteArray">logoutRemoteArray</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#notToMuchEditors">notToMuchEditors</a></li><li><a href="global.html#notToMuchEditorsDetail">notToMuchEditorsDetail</a></li><li><a href="global.html#notToMuchEditorsEdit">notToMuchEditorsEdit</a></li><li><a href="global.html#openAddTaskCard">openAddTaskCard</a></li><li><a href="global.html#openChangeTaskPopup">openChangeTaskPopup</a></li><li><a href="global.html#openEditOverlay">openEditOverlay</a></li><li><a href="global.html#openTaskDetails">openTaskDetails</a></li><li><a href="global.html#pushAssignedTo">pushAssignedTo</a></li><li><a href="global.html#refreshTasks">refreshTasks</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeAllAlerts">removeAllAlerts</a></li><li><a href="global.html#removeInitFadeIn">removeInitFadeIn</a></li><li><a href="global.html#removeInputAlert">removeInputAlert</a></li><li><a href="global.html#removeLogoTransition">removeLogoTransition</a></li><li><a href="global.html#renderAssignedTo">renderAssignedTo</a></li><li><a href="global.html#renderAssignedToCards">renderAssignedToCards</a></li><li><a href="global.html#renderAssignedToDetail">renderAssignedToDetail</a></li><li><a href="global.html#renderAssignedToEdit">renderAssignedToEdit</a></li><li><a href="global.html#renderDetailSubtasks">renderDetailSubtasks</a></li><li><a href="global.html#renderEditSubtasks">renderEditSubtasks</a></li><li><a href="global.html#renderFilteredTasks">renderFilteredTasks</a></li><li><a href="global.html#renderSubtasks">renderSubtasks</a></li><li><a href="global.html#renderTasks">renderTasks</a></li><li><a href="global.html#resetColors">resetColors</a></li><li><a href="global.html#resetImage">resetImage</a></li><li><a href="global.html#resetImageDoneRight">resetImageDoneRight</a></li><li><a href="global.html#resetPrioColors">resetPrioColors</a></li><li><a href="global.html#resetTaskArray">resetTaskArray</a></li><li><a href="global.html#resetUserArray">resetUserArray</a></li><li><a href="global.html#saveNewAddedTask">saveNewAddedTask</a></li><li><a href="global.html#saveTask">saveTask</a></li><li><a href="global.html#setAssigned">setAssigned</a></li><li><a href="global.html#setChecked">setChecked</a></li><li><a href="global.html#setGuestUser">setGuestUser</a></li><li><a href="global.html#setItem">setItem</a></li><li><a href="global.html#setNewTaskPrio">setNewTaskPrio</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setPrioDetailImg">setPrioDetailImg</a></li><li><a href="global.html#setPrioImg">setPrioImg</a></li><li><a href="global.html#setUnAssigned">setUnAssigned</a></li><li><a href="global.html#setUnChecked">setUnChecked</a></li><li><a href="global.html#showDragHereContainer">showDragHereContainer</a></li><li><a href="global.html#showDropdownContacts">showDropdownContacts</a></li><li><a href="global.html#showDropdownContactsAddOverlay">showDropdownContactsAddOverlay</a></li><li><a href="global.html#showEditPrio">showEditPrio</a></li><li><a href="global.html#showIcons">showIcons</a></li><li><a href="global.html#showMessageOverlay">showMessageOverlay</a></li><li><a href="global.html#showPrio">showPrio</a></li><li><a href="global.html#showSubInfo">showSubInfo</a></li><li><a href="global.html#showUsersOnRemoteStorage">showUsersOnRemoteStorage</a></li><li><a href="global.html#slideOutOverlay">slideOutOverlay</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#stopDragging">stopDragging</a></li><li><a href="global.html#switchToLogin">switchToLogin</a></li><li><a href="global.html#switchToRegister">switchToRegister</a></li><li><a href="global.html#tibCounter">tibCounter</a></li><li><a href="global.html#tipCounter">tipCounter</a></li><li><a href="global.html#toDoCounter">toDoCounter</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#toggleFadeIn">toggleFadeIn</a></li><li><a href="global.html#toggleFadeOut">toggleFadeOut</a></li><li><a href="global.html#unhover">unhover</a></li><li><a href="global.html#updateDoneSubs">updateDoneSubs</a></li><li><a href="global.html#urgentCounter">urgentCounter</a></li><li><a href="global.html#urgentDeadline">urgentDeadline</a></li><li><a href="global.html#userGreetingName">userGreetingName</a></li><li><a href="global.html#userIsAllowed">userIsAllowed</a></li><li><a href="global.html#userIsLoggedIn">userIsLoggedIn</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validateForm">validateForm</a></li><li><a href="global.html#validateName">validateName</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#validatePrivacyCheckbox">validatePrivacyCheckbox</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">add-task.js</h1>
+    
 
     
 
@@ -468,19 +487,21 @@ function showIcons(i){
 
 
 
+    
+    
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#activateCheckCancelButtons">activateCheckCancelButtons</a></li><li><a href="global.html#addAssignedEditors">addAssignedEditors</a></li><li><a href="global.html#addSubtask">addSubtask</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#changeSubtask">changeSubtask</a></li><li><a href="global.html#checkForEnter">checkForEnter</a></li><li><a href="global.html#checkIfAssigned">checkIfAssigned</a></li><li><a href="global.html#clearAssignedToAddOverlay">clearAssignedToAddOverlay</a></li><li><a href="global.html#clearSubtaskInput">clearSubtaskInput</a></li><li><a href="global.html#createSubtasksDoneArray">createSubtasksDoneArray</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#doNotClose">doNotClose</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#getCategoryValue">getCategoryValue</a></li><li><a href="global.html#getSubTasksDone">getSubTasksDone</a></li><li><a href="global.html#hideDropdownContacts">hideDropdownContacts</a></li><li><a href="global.html#hideIcons">hideIcons</a></li><li><a href="global.html#loadContactList">loadContactList</a></li><li><a href="global.html#loadTasksfromStorage">loadTasksfromStorage</a></li><li><a href="global.html#loadUserContacts">loadUserContacts</a></li><li><a href="global.html#renderSubtasks">renderSubtasks</a></li><li><a href="global.html#saveTask">saveTask</a></li><li><a href="global.html#setAssigned">setAssigned</a></li><li><a href="global.html#setUnAssigned">setUnAssigned</a></li><li><a href="global.html#showDropdownContacts">showDropdownContacts</a></li><li><a href="global.html#showIcons">showIcons</a></li></ul>
-</nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Mar 11 2024 23:02:16 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Tue Mar 12 2024 00:35:54 GMT+0100 (Mitteleuropäische Normalzeit) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
 </body>
 </html>
