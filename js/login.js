@@ -1,3 +1,6 @@
+/**
+ * Logs in as a guest user. If the guest user already exists, it sets the user ID and redirects to the summary page. Otherwise, it creates a new guest user and calls the init() function.
+ */
 async function guestLogin() {
     let usersJson = await getItem('users');
     try {
@@ -16,6 +19,9 @@ async function guestLogin() {
 }
 
 
+/**
+ * Sets up a guest user by adding it to the list of users. If the user already exists, it logs a message and does nothing.
+ */
 async function setGuestUser() {
     let usersJson = await getItem('users');
     let users = JSON.parse(usersJson);
@@ -37,6 +43,11 @@ async function setGuestUser() {
 };
 
 
+/**
+ * Retrieves user data from remote storage and logs it to the console.
+ * If no user data is found, it logs a message indicating so.
+ * Handles errors that occur during retrieval or parsing of user data.
+ */
 async function showUsersOnRemoteStorage() {
     try {
         let usersJson = await getItem('users');

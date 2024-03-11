@@ -2,7 +2,7 @@ let currentDraggedElement;
 
 
 /**
- * Initializes the application by running a series of asynchronous tasks in sequence.
+ * Initializes the board page by running a series of asynchronous tasks in sequence.
  * Waits for each task to complete before moving to the next. The tasks include checking user permissions,
  * loading user data, generating the header and sidebar UI components, sorting contacts, and loading tasks from storage.
  */

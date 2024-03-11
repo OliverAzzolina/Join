@@ -4,7 +4,10 @@ let temporarySubtasks = [];
 let temporarySubtasksDone = [];
 let temporaryTaskStatus = "";
 
-//LOAD CONTACTS START
+/**
+ * Loads contacts for the add overlay.
+ * Renders the list of contacts available for assignment in the add overlay.
+ */
 function loadContactsForAddOverlay() {
   let contactList = document.getElementById("add-assigned-editors");
   for (let i = 0; i < contacts.length; i++) {
@@ -23,15 +26,26 @@ function loadContactsForAddOverlay() {
   }
   sortContacts();
 }
-//LOAD CONTACTS END
 
-//ADD NEW TASK START
+
+/**
+ * Opens the add task card overlay.
+ * Displays the add task card overlay and loads contacts for assignment.
+ * 
+ * @param {string} taskStatus - The status of the task to be added.
+ */
 function openAddTaskCard(taskStatus) {
   document.getElementById("add-task-overlay").style.display = "flex";
   temporaryTaskStatus = taskStatus;
   loadContactsForAddOverlay();
 }
 
+
+/**
+ * Adds a new task.
+ * Retrieves task details from the input fields and creates a new task object.
+ * Saves the new task to the task array.
+ */
 function addNewTask() {
   let newTask = {
     title: document.getElementById("add-task-title-input").value,
@@ -48,6 +62,11 @@ function addNewTask() {
   saveNewAddedTask(newTask);
 }
 
+
+/**
+ * Saves the newly added task to the task array.
+ * @param {object} newTask - The new task object containing task details.
+ */
 function saveNewAddedTask(newTask) {
   tasks.push(newTask);
   console.log(newTask, tasks);
@@ -64,15 +83,21 @@ function saveNewAddedTask(newTask) {
 }
 
 
+/**
+ * Closes the add task card overlay and resets temporary data.
+ */
 function closeAddTaskCard() {
   temporarySubtasks = [];
   document.getElementById("add-task-subtasks-container").innerHTML = "";
   document.getElementById("add-assigned-editors").innerHTML = "";
   document.getElementById("add-task-overlay").style.display = "none";
 }
-//ADD NEW TASK END
 
-//ASSIGN CONTACTS START
+
+/**
+ * Shows the dropdown list of contacts in the add task overlay.
+ * Resets the checkedArray and clears the assigned contacts in the overlay.
+ */
 function showDropdownContactsAddOverlay() {
   let dropdown = document.getElementById("add-assigned-editors");
   let backgroundOverlay = document.getElementById('background-overlay');
@@ -90,6 +115,11 @@ function showDropdownContactsAddOverlay() {
   }
 }
 
+
+/**
+ * Hides the dropdown list of contacts in the add task overlay.
+ * Resets the checkedArray and adds the assigned contacts to the overlay.
+ */
 function hideDropdownContactsAdd(){
   let dropdown = document.getElementById("add-assigned-editors");
   let backgroundOverlay = document.getElementById('background-overlay');
@@ -98,6 +128,10 @@ function hideDropdownContactsAdd(){
   addAssignedEditorsAddOverlay();
 }
 
+
+/**
+ * Adds the assigned contacts to the add task overlay.
+ */
 function addAssignedEditorsAddOverlay() {
   for (let i = 0; i < contacts.length; i++) {
     const checkedEditor = contacts[i];
@@ -105,6 +139,12 @@ function addAssignedEditorsAddOverlay() {
   }
 }
 
+
+/**
+ * Checks if the contact checkbox is checked and adds the assigned editors to the add task overlay.
+ * @param {object} checkedEditor - The contact object.
+ * @param {number} i - The index of the contact in the contacts array.
+ */
 function checkIfContactCheckboxChecked(checkedEditor, i) {
   let checkbox = document.getElementById(`checkbox${i}`).checked;
   let showAssignedEditors = document.getElementById( "show-assigned-editors-container");
@@ -124,12 +164,20 @@ function checkIfContactCheckboxChecked(checkedEditor, i) {
 }
 
 
+/**
+ * Clears the assigned editors displayed in the add task overlay.
+ */
+
 function clearAssignedToAddOverlay() {
   document.getElementById("show-assigned-editors-container").innerHTML = "";
 }
-//ASSIGN CONTACTS END
 
-//SET PRIORITY START
+
+/**
+ * Sets the priority of the new task and updates the UI accordingly.
+ * @param {string} newPrio - The priority of the new task.
+ * @param {string} buttonColor - The color of the priority button.
+ */
 function setNewTaskPrio(newPrio, buttonColor) {
   if(newPrio == ''){
     newTaskPrio = "medium";
@@ -145,6 +193,10 @@ function setNewTaskPrio(newPrio, buttonColor) {
   ).src = `/assets/img/prio_${newPrio}_white_icon.png`;
 }
 
+
+/**
+ * Resets the color and styles of all priority buttons to their default state.
+ */
 function resetPrioColors() {
   ["urgent", "medium", "low"].forEach((priority) => {
     document.getElementById(priority).style.backgroundColor = "";
@@ -154,9 +206,11 @@ function resetPrioColors() {
     ).src = `/assets/img/prio_${priority}_icon.png`;
   });
 }
-////SET PRIORITY END
 
-//ADD SUBTASK START
+
+/**
+ * Activates the check and cancel buttons for adding a subtask.
+ */
 function activateCheckCancelButtons() {
   document
     .getElementById("add-task-active-subtask-icon-box")
@@ -166,6 +220,10 @@ function activateCheckCancelButtons() {
     .classList.add("d-none");
 }
 
+
+/**
+ * Clears the input field for adding a subtask and hides the check button while showing the create button.
+ */
 function clearSubtaskInput() {
   document.getElementById("add-task-subtask-input").value = "";
   document
@@ -176,6 +234,10 @@ function clearSubtaskInput() {
     .classList.remove("d-none");
 }
 
+
+/**
+ * Adds a new subtask to the temporarySubtasks array and renders the updated list of subtasks.
+ */
 function addSubtask() {
   let subtask = document.getElementById("add-task-subtask-input").value;
   if(subtask !== ''){
@@ -186,6 +248,10 @@ function addSubtask() {
   }
 }
 
+
+/**
+ * Renders the list of subtasks in the add task overlay.
+ */
 function renderSubtasks() {
   let subtasksContainer = document.getElementById(
     "add-task-subtasks-container"
@@ -219,6 +285,11 @@ function renderSubtasks() {
   }
 }
 
+
+/**
+ * Allows editing of a subtask in the add task overlay.
+ * @param {number} i - The index of the subtask to edit.
+ */
 function editSubtask(i) {
   if (!temporarySubtasks.length == 0) {
     document.getElementById(`editable-subtask${i}`).style.display = "none";
@@ -226,12 +297,22 @@ function editSubtask(i) {
   }
 }
 
+
+/**
+ * Deletes a subtask from the temporary subtasks array and re-renders the subtasks in the add task overlay.
+ * @param {number} i - The index of the subtask to delete.
+ */
 function deleteSubtask(i) {
   temporarySubtasks.splice(i, 1);
   renderSubtasks();
   clearSubtaskInput();
 }
 
+
+/**
+ * Updates the value of a subtask in the temporary subtasks array and re-renders the subtasks in the add task overlay.
+ * @param {number} i - The index of the subtask to change.
+ */
 function changeSubtask(i) {
   let subtask = document.getElementById(`editSubtaskInput${i}`).value;
   if(subtask !== ''){
@@ -241,6 +322,10 @@ function changeSubtask(i) {
   }
 }
 
+
+/**
+ * Creates an array of subtasks with initial checked status as false based on the temporarySubtasks array.
+ */
 function createSubtasksDoneArray() {
   for (let i = 0; i < temporarySubtasks.length; i++) {
     const subtask = temporarySubtasks[i];
@@ -253,15 +338,24 @@ function createSubtasksDoneArray() {
   }
 }
 
+
+/**
+ * Shows the edit and delete icons for a specific subtask when hovered over.
+ * @param {number} i - The index of the subtask to show icons for.
+ */
 function showIcons(i) {
   document.getElementById(
     `edit-task-active-subtask-icon-box${i}`
   ).style.opacity = 1;
 }
 
+
+/**
+ * Hides the edit and delete icons for a specific subtask when mouse is moved out.
+ * @param {number} i - The index of the subtask to hide icons for.
+ */
 function hideIcons(i) {
   document.getElementById(
     `edit-task-active-subtask-icon-box${i}`
   ).style.opacity = 0;
 }
-//ADD SUBTASK END

@@ -2,17 +2,22 @@
 let contactList = [];
 let contactLetterGroup = [];
 
+
+/**
+ * Initializes the contact page by loading user data, generating header and sidebar, sorting contacts, and loading contacts.
+ */
 async function init() {
   await loadUserData();
   await generateHeader(userInitials);
   await generateSidebar();  
   sortContacts();
   loadContacts();
-  //loadContactsFromStorage();
 }
 
 
-//LOAD Contacts
+/**
+ * Loads contacts by initializing the contact list, grouping names, and rendering the contact list.
+ */
 function loadContacts() {
   contactList = [];
   groupNames();
@@ -20,7 +25,9 @@ function loadContacts() {
 }
 
 
-//RENDER CONTACT LIST
+/**
+ * Renders the contact list by populating the contact list container with categorized contacts.
+ */
 function renderContactList() {
   let contactListComplete = document.getElementById("contact-list-container");
   contactListComplete.innerHTML = "";
@@ -36,7 +43,10 @@ function renderContactList() {
 }
 
 
-//RENDER CONTACT JS
+/**
+ * Renders contacts within a specific category.
+ * @param {number} i - The index of the category.
+ */
 function renderContact(i) {
   let newContactList = document.getElementById(`contacts${i}`);
   newContactList.innerHTML = "";
@@ -52,7 +62,17 @@ function renderContact(i) {
 }
 
 
-//RENDER CONTACT HTML
+/**
+ * Generates HTML markup for a contact.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ * @param {string} initials - The initials of the contact.
+ * @param {string} firstName - The first name of the contact.
+ * @param {string} lastName - The last name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @param {string} userColor - The color associated with the contact.
+ * @returns {string} The HTML markup for the contact.
+ */
 function generateContact(i, j, initials, firstName, lastName, email, userColor) {
   return `
   <div id="contact${i},${j}" class="contact contact-hover" onclick="openContactInfo(${i},${j})">
@@ -66,7 +86,9 @@ function generateContact(i, j, initials, firstName, lastName, email, userColor) 
 }
 
 
-//GROUPING CONTACTS TO THEIR CATEGORY LETTERS
+/**
+ * Groups contacts by their first name initials.
+ */
 function groupNames() {
   for (let i = 0; i < contacts.length; i++) {
     const letter = contacts[i].firstName[0].toUpperCase();
@@ -112,7 +134,9 @@ function groupNames() {
 }
 
 
-//SORT CONTACTS
+/**
+ * Sorts contacts alphabetically by first name.
+ */
 function sortContacts() {
   contacts.sort((a, b) => {
     if (a.firstName.toUpperCase() < b.firstName.toUpperCase()) {
@@ -126,7 +150,11 @@ function sortContacts() {
 }
 
 
-//OPEN CONTACT INFO
+/**
+ * Opens the contact information for a specific contact.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ */
 function openContactInfo(i, j) {
   let contactDetail = document.getElementById("contact-detail");
   if (
@@ -141,6 +169,12 @@ function openContactInfo(i, j) {
 }
 
 
+/**
+ * Loads contact data and renders contact information.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ * @param {HTMLElement} contactDetail - The container element for contact details.
+ */
 function loadContactData(i, j, contactDetail) {
   contactDetail.innerHTML = "";
   const contact = contactList[i]["contacts"][j];
@@ -155,7 +189,10 @@ function loadContactData(i, j, contactDetail) {
 }
 
 
-//ADD NEW CONTACT
+/**
+ * Adds a new contact to the user's contacts.
+ * @returns {Promise<void>} A promise that resolves after the contact is added.
+ */
 async function addNewContact() {
   let users = JSON.parse(await getItem("users"));
   let fullName = contactname.value.split(' ');
@@ -180,7 +217,12 @@ async function addNewContact() {
 }
 
 
-//DELETE CONTACT
+/**
+ * Deletes a contact from the user's contacts.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ * @returns {Promise<void>} A promise that resolves after the contact is deleted.
+ */
 async function deleteContact(i, j) {
   let users = JSON.parse(await getItem("users"));
   let contactForDelete = contactList[i]["contacts"][j].id;
@@ -192,6 +234,10 @@ async function deleteContact(i, j) {
 }
 
 
+/**
+ * Finds the contact to be deleted from the user's contacts.
+ * @param {string} contactForDelete - The ID of the contact to be deleted.
+ */
 function findContactForDelete(contactForDelete){
     for (let x = 0; x < user.userContacts.length; x++) {
       const contact = user.userContacts[x];
@@ -202,7 +248,11 @@ function findContactForDelete(contactForDelete){
 }
 
 
-//EDIT CONTACT
+/**
+ * Opens an overlay for editing a contact.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ */
 function EditContact(i, j) {
   document.getElementById("overlay").style.display = "flex";
   const contact = contactList[i]["contacts"][j];
@@ -216,6 +266,10 @@ function EditContact(i, j) {
 }
 
 
+/**
+ * Finds the contact to be updated in the user's contacts and updates its information.
+ * @param {Object} updatingContact - The contact object containing updated information.
+ */
 function findUpdatingContact(updatingContact){
   for (let x = 0; x < user.userContacts.length; x++) {
     const contact = user.userContacts[x];
@@ -232,7 +286,12 @@ function findUpdatingContact(updatingContact){
 }
 
 
-//SAVE CONTACT
+/**
+ * Saves the updated contact information.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ * @returns {Promise<void>} A promise that resolves after the contact information is saved.
+ */
 async function saveContact(i, j) {
   let users = JSON.parse(await getItem("users"));
   let updatingContact = contactList[i]["contacts"][j];
@@ -244,7 +303,18 @@ async function saveContact(i, j) {
 }
 
 
-//CONTACT INFO HTML
+/**
+ * Generates HTML markup for displaying contact information.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ * @param {string} initials - The initials of the contact.
+ * @param {string} firstName - The first name of the contact.
+ * @param {string} lastName - The last name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @param {string} phone - The phone number of the contact.
+ * @param {string} userColor - The color associated with the contact.
+ * @returns {string} The HTML markup for displaying contact information.
+ */
 function renderContactInfo(i,j,initials,firstName,lastName,email,phone,userColor) {
   return `
     <div class="name-section">
@@ -276,7 +346,10 @@ function renderContactInfo(i,j,initials,firstName,lastName,email,phone,userColor
 }
 
 
-//ADD NEW CONTACT OVERLAY
+/**
+ * Generates HTML markup for the overlay to add a new contact.
+ * @returns {string} The HTML markup for the add new contact overlay.
+ */
 function generateAddNewOverlay() {
   return `
   <div class="add-contact-card" onclick="doNotClose(event)">
@@ -313,7 +386,17 @@ function generateAddNewOverlay() {
 }
 
 
-//EDIT CONTACT OVERLAY
+/**
+ * Generates HTML markup for the overlay to edit a contact.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ * @param {string} initials - The initials of the contact.
+ * @param {string} fullName - The full name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @param {string} phone - The phone number of the contact.
+ * @param {string} userColor - The color associated with the contact.
+ * @returns {string} The HTML markup for the edit contact overlay.
+ */
 function generateEditOverlay(i,j,initials,fullName,email,phone,userColor) {
   return `
   <div class="add-contact-card" onclick="doNotClose(event)">
@@ -353,6 +436,11 @@ function generateEditOverlay(i,j,initials,fullName,email,phone,userColor) {
 }
 
 
+/**
+ * Opens the contact information for a specific contact.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ */
 function openContactInfo(i, j) {
   if (window.innerWidth <= 1049) {
     // Kontaktinformationen laden für kleinere Bildschirme im Popup
@@ -369,11 +457,18 @@ function openContactInfo(i, j) {
 }
 
 
+/**
+ * Closes the contact information popup.
+ */
 function closePopup() {
   document.getElementById("contact-info-popup").style.display = "none";
 }
 
 
+/**
+ * Changes the image source to the hover version when hovering over an element.
+ * @param {string} img - The identifier of the element being hovered over.
+ */
 function hover(img) {
   if (img == "a") {
     document
@@ -387,6 +482,10 @@ function hover(img) {
 }
 
 
+/**
+ * Changes the image source back to the original version when hovering out of an element.
+ * @param {string} img - The identifier of the element being hovered out of.
+ */
 function unhover(img) {
   if (img == "a") {
     document
@@ -400,12 +499,20 @@ function unhover(img) {
 }
 
 
+/**
+ * Prevents the default behavior of an event to stop propagation.
+ * @param {Event} event - The event object.
+ */
 function doNotClose(event) {
   event.stopPropagation();
 }
 
 
-//CHANGES BG COLOR OF OPEN CONTACT
+/**
+ * Changes the background color of a contact element and removes hover effect.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ */
 function changeContactBackgroundColor(i, j) {
   let contact = document.getElementById(`contact${i},${j}`);
   contact.style.backgroundColor = "#2A3647";
@@ -414,40 +521,35 @@ function changeContactBackgroundColor(i, j) {
 }
 
 
-//OPEN ADD NEW CONTACT OVERLAY
+/**
+ * Opens the overlay to add a new contact.
+ */
 function openAddNewContact() {
-  // Überprüfe die Fensterbreite
   const windowWidth =
     window.innerWidth ||
     document.documentElement.clientWidth ||
     document.body.clientWidth;
-
-  // Überprüfe, ob die Fensterbreite kleiner oder gleich 1050px ist
   if (windowWidth <= 1050) {
-    // Verstecke den Button, indem du seine Anzeige auf "none" setzt
     document.querySelector(".add-contact-button").style.display = "none";
   }
 
-  // Öffne das Overlay
   document.getElementById("overlay").style.display = "flex";
   document.getElementById("overlay").innerHTML = generateAddNewOverlay();
 }
 
 
-// CLOSE ADD NEW CONTACT OVERLAY
+/**
+ * Closes the overlay for adding a new contact.
+ */
 function closeAddContact() {
-  // Stelle sicher, dass das Overlay geschlossen wird
   document.getElementById("overlay").style.display = "none";
 
-  // Überprüfe die Fensterbreite
   const windowWidth =
     window.innerWidth ||
     document.documentElement.clientWidth ||
     document.body.clientWidth;
 
-  // Überprüfe, ob die Fensterbreite kleiner oder gleich 1050px ist
   if (windowWidth <= 1050) {
-    // Zeige den Button wieder an, indem du seine Anzeige auf "block" setzt
     document.querySelector(".add-contact-button").style.display = "block";
   }
 }
