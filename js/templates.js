@@ -107,7 +107,7 @@ function summaryHTML(toDoCounter, doneCounter, urgentCounter, urgentDeadline, ti
     </div>
     <div class="todo2">
       <a href="board.html" class="todo2-left">
-        <img src="assets/img/prio_urgent_icon_big.png" alt="Icon" class="icon" onmouseover="changeImage(this)" onmouseout="resetImage(this)">
+        <img src="assets/img/prio_urgent_icon_big.png" alt="Icon" class="icon">
         <div class="text-container">
           <span id="urgent-counter" class="number">${urgentCounter}</span>
           <span class="label">Urgent</span>
