@@ -1,3 +1,9 @@
+let contacts = [];
+let tasks = [];
+let userInitials = '';
+let checkedArray = [];
+
+
 /**
  * Toggles the display of the header-dropdown menu.
  */
@@ -161,3 +167,42 @@ function showMessageOverlay(message){
       }, "2000");
 }
 
+
+/**
+ * Loads user data.
+ */
+async function loadUserData() {
+    let userId = localStorage.getItem('userId');
+    user = await findUserData(userId);
+    if(user){
+        userInitials = user.initials;
+        contacts = user.userContacts;
+    }
+}
+
+
+/**
+ * Finds user with userId.
+ * @param {number} userId 
+ * @returns {json} - user data.
+ */
+async function findUserData(userId){
+    let users = JSON.parse(await getItem("users"));
+    return users.find(user => user.userId === parseInt(userId));
+}
+
+
+/**
+ * Saves user data to users array.
+ * @param {json} users 
+ */
+async function saveUserData(users){
+    let userId = user.userId;
+    await findUserData(userId);
+        if (user){
+                const pos = users.findIndex(user => user.userId === userId);
+                users[pos].userContacts = user.userContacts;
+                users.push();
+                await setItem('users', JSON.stringify(users));
+    }
+}

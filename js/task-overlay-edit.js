@@ -189,29 +189,7 @@ function renderEditSubtasks(index) {
   subtasksContainer.innerHTML = "";
   for (let i = 0; i < tasks[index]["subtasks"].length; i++) {
     const subtask = tasks[index]["subtasks"][i];
-    subtasksContainer.innerHTML += `
-        <div class="edit-subtask">
-        
-            <div onclick="editSubtaskEditOverlay(${i})" class="subtask-list-item" id="editable-subtask${i}" onMouseOver="showIcons(${i})" onMouseOut="hideIcons(${i})">
-                <span>• ${subtask}</span>            
-                <div id="edit-task-active-subtask-icon-box${i}" class="edit-task-active-subtask-icon-box" style="opacity:0;" >                
-                <img src="assets/img/subtask_edit_icon.png" alt="" onclick="editSubtaskEditOverlay(${i})" />
-                <div class="sub-divider"></div>
-                <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
-            </div>
-       
-
-        </div>
-            <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
-              <input id="editSubtaskInput${i}" value="${subtask}" class="edit-subtask-input">    
-                <div class="edit-task-active-subtask-icon-box">                
-                    <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
-                    <div class="sub-divider"></div>
-                    <img src="assets/img/subtask_check_icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
-                </div>
-            </div>
-        </div>
-          `;
+    subtasksContainer.innerHTML += generateEditSubtasks(i, index, subtask);
   }
 }
 
@@ -235,8 +213,8 @@ function addSubtaskEditOverlay(i) {
  * Displays the input field for editing a subtask in the edit task overlay.
  * @param {number} i - The index of the subtask to edit.
  */
-function editSubtaskEditOverlay(i) {
-  if (!tasks[i]['subtasks'].length == 0) {
+function editSubtaskEditOverlay(i, index) {
+  if (!tasks[index]['subtasks'].length == 0) {
     document.getElementById(`editable-subtask${i}`).style.display = "none";
     document.getElementById(`editSubtaskContainer${i}`).style.display = "flex";
   }
@@ -257,11 +235,12 @@ function deleteSubtaskEditOverlay(i, index) {
   refreshTasks();
 }
 
+
 function changeSubtaskEditOverlay(i, index) {
   let subtask = document.getElementById(`editSubtaskInput${i}`).value;
   if(subtask !== ''){
   tasks[index]["subtasks"][i] = document.getElementById(`editSubtaskInput${i}`).value;
-  tasks[index]["subTasksDone"][i]["subname"] = document.getElementById(`editSubtaskInput${i}`).value;
+  tasks[index]["subTasksDone"][i] = document.getElementById(`editSubtaskInput${i}`).value;
   setItem("tasks", JSON.stringify(tasks));
   renderEditSubtasks(index);
   clearSubtaskInput();

@@ -217,9 +217,7 @@ function sidebarLoggedOutHTML() {
 }
 
 
-
 // ADD TASK HTML TEMPLATES
-
 function subtaskHTML(subtask, i) {
   return `
   <div class="edit-subtask">
@@ -247,7 +245,7 @@ function subtaskHTML(subtask, i) {
 }
 
 
-// CONTACTS HTML TEMPLATES
+
 
 
 //BOARD TEMPLATES
@@ -306,12 +304,10 @@ function generateDetailOverlay(i) {
 
 function generateEditTaskOverlay(i, title, description, dueDate) {
   return `
-    <div id="edit-task-overlay"  onclick="closeDetailCard()">
+    <div id="edit-task-overlay">
     <div class= "detail-todo-card" onclick="doNotClose(event)">
       
     <div id="edit-task-overlay-header">
-    <button onclick="closeEditOverlay()" class="close-button">
-    <img src="assets/img/close_icon.png" alt=""></button>
     </div>
       <form id="edit-task-form" onsubmit="saveTask(${i}); return false"> 
         <div id="edit-input-container-tasks">
@@ -402,6 +398,32 @@ function generateAssignedTo(i, userColor, initials) {
     `;
 }
 
+function generateEditSubtasks(i, index, subtask){
+  return`
+  <div class="edit-subtask">
+  
+      <div onclick="editSubtaskEditOverlay(${i}, ${index})" class="subtask-list-item" id="editable-subtask${i}" onMouseOver="showIcons(${i})" onMouseOut="hideIcons(${i})">
+          <span>• ${subtask}</span>            
+          <div id="edit-task-active-subtask-icon-box${i}" class="edit-task-active-subtask-icon-box" style="opacity:0;" >                
+          <img src="assets/img/subtask_edit_icon.png" alt="" onclick="editSubtaskEditOverlay(${i}, ${index})" />
+          <div class="sub-divider"></div>
+          <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
+      </div>
+ 
+
+  </div>
+      <div id="editSubtaskContainer${i}"  style="display: none" class="edit-task-subtask-input-container">
+        <input id="editSubtaskInput${i}" value="${subtask}" class="edit-subtask-input">    
+          <div class="edit-task-active-subtask-icon-box">                
+              <img src="assets/img/subtask_delete_icon.png" alt="Delete" onclick="deleteSubtaskEditOverlay(${i}, ${index})" />
+              <div class="sub-divider"></div>
+              <img src="assets/img/subtask_check_icon.png" alt="Check" onclick="changeSubtaskEditOverlay(${i}, ${index})" />
+          </div>
+      </div>
+  </div>
+    `;
+}
+
 function generateDetailSubtasks(i, j, subtask) {
   return `
         <li id="subtaskIndex${j}" class="detailSub" onclick="checkIfSubChecked(${j}, ${i})">
@@ -427,3 +449,5 @@ function renderContacts(i, userColor, firstName, lastName, initials) {
     </label>
  `;
 }
+
+// CONTACTS HTML TEMPLATES
