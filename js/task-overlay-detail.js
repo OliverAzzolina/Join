@@ -5,6 +5,8 @@
 function openTaskDetails(i){
     document.getElementById('overlay').style.display = "flex"; 
     document.getElementById('overlay').innerHTML = generateDetailOverlay(i);
+    document.body.style.overflow = "hidden";
+    window.scrollTo(0, 0);
     setPrioDetailImg(i);
     checkOverlayCategory(i);
     renderDetailSubtasks(i);
@@ -19,6 +21,7 @@ function openTaskDetails(i){
  */
 function closeDetailCard(){
     document.getElementById('overlay').style.display = "none";
+    document.body.style.overflow = "auto";
 }
 
 
