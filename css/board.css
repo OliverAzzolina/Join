@@ -185,7 +185,6 @@ body {
   flex-direction: column;
   background-color: white;
   width: 525px;
-  height: 754px;
   padding: 48px 40px 48px 40px;
   box-sizing: border-box;
   border-radius: 30px;
@@ -1357,7 +1356,6 @@ textarea:hover {
     background-color: rgba(0, 0, 0, 0.542);
     width: 100vw;
     height: 100vh;
-    top: 32px;
   }
 
   .detail-title {
@@ -1391,8 +1389,7 @@ textarea:hover {
     justify-content: space-between;
     flex-direction: column;
     background-color: white;
-    width: 301px;
-    height: 700px;
+
     padding: 48px 40px 48px 40px;
     box-sizing: border-box;
     border-radius: 30px;
@@ -1429,7 +1426,6 @@ textarea:hover {
     background-color: rgba(0, 0, 0, 0.542);
     width: 100vw;
     height: 100vh;
-    top: 31px;
 }
 
   .f-s20-w400 {
@@ -1457,8 +1453,7 @@ textarea:hover {
     justify-content: space-between;
     flex-direction: column;
     background-color: white;
-    width: 301px;
-    height: 704px;
+
     padding: 48px 40px 48px 40px;
     box-sizing: border-box;
     border-radius: 30px;
