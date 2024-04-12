@@ -1221,6 +1221,9 @@ textarea:hover {
 
   #edit-task-overlay {
     width: 90%;
+    height: 95%;
+    display: flex;
+    align-items: center;
   }
   .detail-todo-card {
     width: 95%;
@@ -1263,6 +1266,7 @@ textarea:hover {
     height: 100%;
     margin-top: 96px;
   }
+
 
   #header-container {
     z-index: 995;
@@ -1451,13 +1455,17 @@ textarea:hover {
     display: flow-root;
   }
 
+  #edit-task-form{
+    height: 100%;
+    overflow: auto;
+  }
+
   .detail-todo-card {
     z-index: 9999;
     /* display: flex; */
     justify-content: space-between;
     flex-direction: column;
     background-color: white;
-
     padding: 48px 40px 48px 40px;
     box-sizing: border-box;
     border-radius: 30px;
