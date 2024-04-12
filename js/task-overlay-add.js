@@ -35,6 +35,8 @@ function loadContactsForAddOverlay() {
  * @param {string} taskStatus - The status of the task to be added.
  */
 function openAddTaskCard(taskStatus) {
+  document.body.style.overflow = "hidden";
+  window.scrollTo(0, 0);
   document.getElementById("add-task-overlay").style.display = "flex";
   temporaryTaskStatus = taskStatus;
   loadContactsForAddOverlay();
@@ -91,6 +93,7 @@ function closeAddTaskCard() {
   document.getElementById("add-task-subtasks-container").innerHTML = "";
   document.getElementById("add-assigned-editors").innerHTML = "";
   document.getElementById("add-task-overlay").style.display = "none";
+  document.body.style.overflow = "auto";
 }
 
 

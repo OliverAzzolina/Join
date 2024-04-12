@@ -736,6 +736,7 @@ ul#checklistSubDetail {
     top: 0;
     left: 0;
     box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+    z-index: 2;
   }
 
   .add-task-form-input {
@@ -928,6 +929,7 @@ ul#checklistSubDetail {
     align-items: center;
     box-sizing: border-box;
     margin-left: 0px;
+    z-index: 1;
   }
 
   #add-task-form-btn-container {
@@ -998,7 +1000,7 @@ ul#checklistSubDetail {
   }
 
   .create-button {
-    width: 140px;
+    width: 170%;
     background-color: #2a3647;
     color: white;
     border: none;

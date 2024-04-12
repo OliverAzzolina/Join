@@ -3,6 +3,8 @@
  * @param {number} i - The index of the task to edit.
  */
 function openEditOverlay(i) {
+  document.body.style.overflow = "hidden";
+  window.scrollTo(0, 0);
   loadTaskData(i);
   loadContactList();
 }
@@ -117,6 +119,7 @@ function saveTask(i) {
  */
 function closeEditOverlay() {
   document.getElementById("overlay").style.display = "none";
+  document.body.style.overflow = "auto";
 }
 
 

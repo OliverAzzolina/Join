@@ -176,6 +176,7 @@ body {
   width: 100vw;
   height: 100vh;
   top: 0;
+  overflow: hidden;
 }
 
 .detail-todo-card {
@@ -184,11 +185,13 @@ body {
   justify-content: space-between;
   flex-direction: column;
   background-color: white;
-  width: 525px;
+  width: 60%;
+  height: 70%;
   padding: 48px 40px 48px 40px;
   box-sizing: border-box;
   border-radius: 30px;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .slider {
@@ -1220,7 +1223,8 @@ textarea:hover {
     width: 90%;
   }
   .detail-todo-card {
-    width: 90%;
+    width: 95%;
+    height: 95%;
   }
 
   #add-task-sub-container {
@@ -1393,7 +1397,7 @@ textarea:hover {
     padding: 48px 40px 48px 40px;
     box-sizing: border-box;
     border-radius: 30px;
-    margin-top: -61px;
+
 }
 
   .category {
@@ -1477,5 +1481,10 @@ textarea:hover {
     align-items: center;
     justify-content: space-between;
     margin-top: -31px;
+  }
+
+  #add-task-container{
+    padding: 16px 24px;
+    height: 90%;
   }
 }
