@@ -1,4 +1,4 @@
-selectedPriority = 'medium';
+newTaskPrio = "medium";
 subtaskTempArray = [];
 subtaskDoneTempArray = [];
 contacts = [];
@@ -85,7 +85,7 @@ function addTask(event) {
     description: document.getElementById('add-task-description-input').value,
     assignedTo: checkedArray,
     dueDate: document.getElementById('add-task-date-input').value,
-    prio: selectedPriority,
+    prio: newTaskPrio,
     category: getCategoryValue(),
     subtasks: subtaskTempArray,
     subTasksDone: getSubTasksDone(),
@@ -111,6 +111,35 @@ function getCategoryValue() {
   } else {
     return null;
   }
+}
+
+/**
+ * Sets the priority of the new task and updates the UI accordingly.
+ * @param {string} newPrio - The priority of the new task.
+ * @param {string} buttonColor - The color of the priority button.
+ */
+function setNewTaskPrio(newPrio, buttonColor) {
+  if(newPrio == ''){
+    newTaskPrio = "medium";
+  }else{
+    newTaskPrio = newPrio;
+  }
+  resetPrioColors();
+  document.getElementById(newPrio).style.backgroundColor = buttonColor;
+  document.getElementById(`${newPrio}-text-add`).style.color = "#FFFFFF";
+  document.getElementById(`${newPrio}-img-add`).src = `/assets/img/prio_${newPrio}_white_icon.png`;
+}
+
+
+/**
+ * Resets the color and styles of all priority buttons to their default state.
+ */
+function resetPrioColors() {
+  ["urgent", "medium", "low"].forEach((priority) => {
+    document.getElementById(priority).style.backgroundColor = "";
+    document.getElementById(`${priority}-text-add`).style.color = "";
+    document.getElementById(`${priority}-img-add`).src = `/assets/img/prio_${priority}_icon.png`;
+  });
 }
 
 

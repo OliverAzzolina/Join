@@ -99,17 +99,17 @@
             <div id="add-task-prio-container">
               <span id="add-task-prio-headline" class="add-task-form-title">Prio</span>
               <div id="add-task-form-btn-container">
-                <button class="add-task-form-btn" type="button" task-priority="urgent">
-                  <span class="add-task-form-btn-text">Urgent</span>
-                  <img src="assets/img/prio_urgent_icon.png" alt="" />
+                <button id="urgent" class="add-task-form-btn" type="button" onclick="setNewTaskPrio('urgent', '#FF3D00')">
+                  <span id="urgent-text-add" class="add-task-form-btn-text">Urgent</span>
+                  <img id="urgent-img-add" src="assets/img/prio_urgent_icon.png" alt="" />
                 </button>
-                <button class="add-task-form-btn" type="button" task-priority="medium">
-                  <span class="add-task-form-btn-text">Medium</span>
-                  <img src="assets/img/prio_medium_icon.png" alt="" />
+                <button id="medium" class="add-task-form-btn" type="button" style="background-color: #FFA800;" onclick="setNewTaskPrio('medium', '#FFA800')">
+                  <span id="medium-text-add" class="add-task-form-btn-text" style="color: #FFFFFF;">Medium</span>
+                  <img id="medium-img-add" src="/assets/img/prio_medium_white_icon.png" alt="" />
                 </button>
-                <button class="add-task-form-btn" type="button" task-priority="low">
-                  <span class="add-task-form-btn-text">Low</span>
-                  <img src="assets/img/prio_low_icon.png" alt="" />
+                <button id="low" class="add-task-form-btn" type="button" onclick="setNewTaskPrio('low', '#7AE229')" task-priority="low">
+                  <span id="low-text-add" class="add-task-form-btn-text">Low</span>
+                  <img id="low-img-add" src="assets/img/prio_low_icon.png" alt="" />
                 </button>
               </div>
             </div>
