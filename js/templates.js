@@ -305,7 +305,7 @@ function generateDetailOverlay(i) {
 function generateEditTaskOverlay(i, title, description, dueDate) {
   return `
     <div id="edit-task-overlay">
-    <div class= "detail-todo-card" onclick="doNotClose(event)">
+    <div class= "detail-todo-card-edit" onclick="doNotClose(event)">
       
     <div id="edit-task-overlay-header">
     </div>
