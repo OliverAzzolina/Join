@@ -1,4 +1,4 @@
-body{
+body {
   font-family: "Inter", sans-serif;
   margin: 0;
   background-color: rgb(246, 247, 248);
@@ -21,10 +21,6 @@ main {
   box-sizing: border-box;
   background-color: white;
 }
-
-
-
-
 
 #contact-list {
   width: 100%;
@@ -61,7 +57,6 @@ main {
   position: sticky;
 }
 
-
 .contact-popup {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -70,8 +65,8 @@ main {
   top: 0;
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 .contact-popup-content {
@@ -86,7 +81,7 @@ main {
   overflow-y: auto;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 /* The Close Button */
@@ -109,7 +104,7 @@ main {
   background-color: rgb(41, 171, 226);
 }
 
-.category-letter{
+.category-letter {
   width: 80%;
   display: flex;
   align-items: center;
@@ -122,9 +117,9 @@ main {
   line-height: 24px;
 }
 
-.contacts-splitter{
+.contacts-splitter {
   width: 100%;
-  border: 1px solid #D1D1D1;
+  border: 1px solid #d1d1d1;
 }
 
 .contacts-list {
@@ -151,13 +146,13 @@ main {
   text-decoration: none;
   color: #007cee;
   font-size: 16px;
-  overflow: hidden; 
+  overflow: hidden;
   overflow-wrap: break-word;
   max-width: 290px;
 }
 
 .contact-hover:hover {
-  background-image: linear-gradient(#F9F9F9 100%, #F0F0F0 100%)
+  background-image: linear-gradient(#f9f9f9 100%, #f0f0f0 100%);
 }
 
 .contact-name {
@@ -367,7 +362,7 @@ main {
   flex-direction: column;
 }
 
-.add-contact-container{
+.add-contact-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -375,7 +370,7 @@ main {
   width: 100%;
 }
 
-.close-button{
+.close-button {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -385,7 +380,7 @@ main {
   transition: 0.1s ease-in;
 }
 
-.close-button button{
+.close-button button {
   border: unset;
   background-color: unset;
   border-radius: 56px;
@@ -396,8 +391,8 @@ main {
   justify-content: center;
 }
 
-.close-button button:hover{
-  background-color: #EEEEEE;
+.close-button button:hover {
+  background-color: #eeeeee;
   transform: translateY(1px);
 }
 
@@ -498,12 +493,11 @@ main {
   display: none;
 }
 
-#mobile-logo{
+#mobile-logo {
   display: none;
 }
 
 @media screen and (max-width: 1050px) {
-
   .right {
     display: none;
   }
@@ -533,7 +527,6 @@ main {
     padding: 32px 24px 32px 24px;
     box-sizing: border-box;
     justify-content: unset;
-
   }
 
   .add-contact-button {
@@ -552,7 +545,7 @@ main {
     position: fixed;
     bottom: 150px;
     right: 35px;
-}
+  }
   .add-contact-button span {
     display: none; /* Verstecke den Text */
   }
@@ -578,7 +571,7 @@ main {
     box-sizing: border-box;
     height: 352px;
     border-top-right-radius: 30px;
-}
+  }
 
   .add-contact-card-right {
     width: 396px;
@@ -598,7 +591,7 @@ main {
     font-size: 20px;
     font-weight: 400;
     color: white;
-}
+  }
   .mobile-none {
     display: none;
   }
@@ -626,7 +619,6 @@ main {
     padding: 13px 21px 13px 21px;
     color: #d1d1d1;
     margin-left: 1px;
-    
   }
 
   .add-contact-inputs {
@@ -640,7 +632,7 @@ main {
   .container {
     position: relative;
   }
-  
+
   .profile-icon {
     top: 50%;
     transform: translateY(-50%);
@@ -658,7 +650,7 @@ main {
   .mobile-view {
     font-size: 47px;
   }
-  
+
   .create-button {
     width: 204px;
     height: 51px;
@@ -684,7 +676,7 @@ main {
   .input-icon-mail {
     background: url(/assets/img/mail_icon.png) no-repeat right;
     background-size: 24px 24px;
-    background-position-x: 320px; 
+    background-position-x: 320px;
   }
 
   .input-icon-name {
@@ -735,7 +727,6 @@ main {
     /* margin: 0; */
     margin-top: 65px;
   }
-  
 }
 
 /* width */
@@ -752,12 +743,12 @@ main {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #A8A8A8;
+  background: #a8a8a8;
   border-radius: 10px;
 }
 
 @media screen and (max-width: 496px) {
-  .contact a{
+  .contact a {
     display: none;
   }
   .mobile-logo-small {
@@ -796,7 +787,6 @@ main {
     gap: 24px;
     height: 120px;
     margin-top: 80px;
-    
   }
 
   .mobile-logo-small {
@@ -805,7 +795,6 @@ main {
     margin-right: 80px;
     padding-top: 0px;
   }
- 
 
   .detail-headline h1 {
     font-size: 47px;
@@ -818,8 +807,6 @@ main {
     gap: 30px;
     align-items: center;
   }
-  
-
 }
 
 .blue-line-vertical-mobile {
@@ -883,111 +870,115 @@ h5 {
 }
 
 #name-logo {
- display: none;
+  display: none;
 }
 
 .add-contact-container .name-logo-detail {
   /* display: flex; */
   position: absolute;
   margin-bottom: 455px;
+}
+
+.logo-mobile-edit {
+  display: none;
+}
+
+@media screen and (max-width: 396px) {
+  .add-contact-card-left {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 0px;
+    background-color: #2a3647;
+    width: 310px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 66px 48px 66px 48px;
+    box-sizing: border-box;
+    height: 352px;
+    border-top-right-radius: 30px;
   }
 
-  .logo-mobile-edit {
-    display: none;
-   }
-
-
-
-  @media screen and (max-width: 396px) {
-    .add-contact-card-left {
-      border-top-left-radius: 30px;
-      border-bottom-left-radius: 0px;
-      background-color: #2a3647;
-      width: 310px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      flex-direction: column;
-      padding: 66px 48px 66px 48px;
-      box-sizing: border-box;
-      height: 352px;
-      border-top-right-radius: 30px;
-    }
-
-    .close-button button {
-      border: unset;
-      background-color: white;
-      border-radius: 56px;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: -743px;
-      position: absolute;
-      padding-left: -36px;
-      color: white;
-      z-index: 999999;
-      margin-right: 50px;
-      margin-bottom: -10px;
+  .close-button button {
+    border: unset;
+    background-color: white;
+    border-radius: 56px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -743px;
+    position: absolute;
+    padding-left: -36px;
+    color: white;
+    z-index: 999999;
+    margin-right: 50px;
+    margin-bottom: -10px;
   }
 
-    .add-contact-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0px;
-      width: 310px;
-      height: 760px;
-    }
-
-    .input-icon-name {
-      background: url(/assets/img/person_icon.png) no-repeat right;
-      background-size: 24px 24px;
-      background-position-x: 270px;
-    }
-
-    .input-icon-mail {
-      background: url(/assets/img/mail_icon.png) no-repeat right;
-      background-size: 24px 24px;
-      background-position-x: 270px;
-    }
-
-    .input-icon-phone {
-      background: url(/assets/img/call_icon.png) no-repeat right;
-      background-size: 24px 24px;
-      background-position-x: 270px;
-    }
-
-    .add-contact-inputs input {
-      width: 255px;
-      border: 1px solid #d1d1d1;
-      border-radius: 10px;
-      padding: 13px 21px 13px 21px;
-      color: #d1d1d1;
-      margin-left: 1px;
-    }
-    .subtitle {
-      font-size: 15px;
-      font-weight: 400;
-      color: white;
-    }
-
-    .title {
-      font-size: 32px;
-      font-weight: 700;
-      color: white;
-      margin-top: -92px;
-    }
-
-    .mobile-logo-small {
-      margin-bottom: 120px;
-      margin-left: 80px;
-      margin-right: 80px;
-      padding-top: 0px;
-    }
-
-
+  .add-contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    width: 310px;
+    height: 760px;
   }
 
+  .input-icon-name {
+    background: url(/assets/img/person_icon.png) no-repeat right;
+    background-size: 24px 24px;
+    background-position-x: 270px;
+  }
 
+  .input-icon-mail {
+    background: url(/assets/img/mail_icon.png) no-repeat right;
+    background-size: 24px 24px;
+    background-position-x: 270px;
+  }
+
+  .input-icon-phone {
+    background: url(/assets/img/call_icon.png) no-repeat right;
+    background-size: 24px 24px;
+    background-position-x: 270px;
+  }
+
+  .add-contact-inputs input {
+    width: 255px;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    padding: 13px 21px 13px 21px;
+    color: #d1d1d1;
+    margin-left: 1px;
+  }
+  .subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    color: white;
+  }
+
+  .title {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    margin-top: -92px;
+  }
+
+  .mobile-logo-small {
+    margin-bottom: 120px;
+    margin-left: 80px;
+    margin-right: 80px;
+    padding-top: 0px;
+  }
+}
+
+.last-contact {
+  padding-bottom: 40px;
+}
+
+#contact-list-container {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-bottom: 110px;
+}
