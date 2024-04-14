@@ -174,27 +174,37 @@ function headerLoggedOutHTML() {
 }
 
 function sidebarHTML() {
-  return/*html*/`
+  return /*html*/`
         <div>
-            <img id="sidebar-logo" src="assets/img/logo_white.svg" alt="Logo" onclick="goHome()">
+            <a href="./home.html">
+                <img id="sidebar-logo" src="assets/img/logo_white.svg" alt="Logo">
+            </a>
         </div>
         <div id="menu-section">
             <ul>
                 <li>
-                    <img src="assets/img/sidebar_summary_icon.svg" alt="Summary Icon">
-                    <a href="./summary.html">Summary</a>
+                    <a href="./summary.html">
+                        <img src="assets/img/sidebar_summary_icon.svg" alt="Summary Icon">
+                        Summary
+                    </a>
                 </li>
                 <li>
-                    <img src="assets/img/sidebar_addtask_icon.svg" alt="Add Task Icon">
-                    <a href="./add-task.html">Add Task</a>
+                    <a href="./add-task.html">
+                        <img src="assets/img/sidebar_addtask_icon.svg" alt="Add Task Icon">
+                        Add Task
+                    </a>
                 </li>
                 <li>
-                    <img src="assets/img/sidebar_board_icon.svg" alt="Board Icon">
-                    <a href="./board.html">Board</a>
+                    <a href="./board.html">
+                        <img src="assets/img/sidebar_board_icon.svg" alt="Board Icon">
+                        Board
+                    </a>
                 </li>
                 <li>
-                    <img src="assets/img/sidebar_contacts_icon.svg" alt="Contacts Icon">
-                    <a href="./contacts.html">Contacts</a>
+                    <a href="./contacts.html">
+                        <img src="assets/img/sidebar_contacts_icon.svg" alt="Contacts Icon">
+                        Contacts
+                    </a>
                 </li>
             </ul>
         </div>
