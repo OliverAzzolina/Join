@@ -1282,6 +1282,7 @@ textarea:hover {
   .todos-container {
     flex-direction: row;
     overflow-x: scroll;
+    gap: 50px;
   }
 
   main {
