@@ -242,7 +242,6 @@ function checkIfToMuchEditors(assignedTo, index){
     let tooMuchEditors = document.getElementById(`tooMuchEditors${index}`);
     tooMuchEditors.style.display = 'flex';
     tooMuchEditors.innerHTML = `+${tasks[index]['assignedTo'].length - 3}`;
-  
     assignedTo.innerHTML += `
     <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
     `;
@@ -532,6 +531,7 @@ function filterTasks() {
     renderTasks();
   }else{
     FilteredTasks(search);
+    checkIfNoTasksFound(searchSection);
   }
 }
 
@@ -546,13 +546,19 @@ function FilteredTasks(search){
     let title = tasks[i]['title'].toLowerCase();
     let description = tasks[i]['description'].toLowerCase();
     let boardSection = document.getElementById('board-section');
+    let searchSection = document.getElementById(`search-section`);
     if (title.toLowerCase().includes(search)||description.toLowerCase().includes(search)) {
       boardSection.style.display = 'none';
       renderFilteredTasks(i);
-    }else{
-      boardSection.style.display = 'none';
-      document.getElementById(`search-section`).innerHTML = '<div>No tasks found</div>';
     }
+    
+  }
+}
+
+
+function checkIfNoTasksFound(searchSection){
+  if(searchSection.innerHTML == ''){
+    searchSection.innerHTML = `<span>No tasks found</span>`;
   }
 }
 
