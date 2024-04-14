@@ -251,7 +251,8 @@ function subtaskHTML(subtask, i) {
 //BOARD TEMPLATES
 function generateTask(i){
     return `
-    <div id="todo-card${i}" draggable="true" class="todo-card" ondragstart="startDragging(${i})" ondragend="stopDragging(${i})" onclick="openTaskDetails(${i})">
+    <div >
+    <div id="todo-card${i}" draggable="true" ondrag="startDragging(${i})" ondragend="stopDragging(${i})" class="todo-card" onclick="openTaskDetails(${i})">
 
       <span id="category${i}" class="category">${tasks[i]["category"]}</span>
       <div class="title-description">
@@ -272,6 +273,7 @@ function generateTask(i){
         </div>
         <img id="prioImg${i}" src="" alt="">
       </div>
+    </div>
     </div>
     `;
 }
