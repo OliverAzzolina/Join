@@ -161,7 +161,7 @@ function headerHTML(userInitials) {
             
             <div id="dropdownMenu">
             <a href="legal-notice.html">Legal Notice</a>
-            <a href="private.html">Private</a>
+            <a href="privacy.html">Privacy</a>
             <a onclick="logout()">Log Out</a>
         </div>
         </div>`;
