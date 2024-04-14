@@ -176,7 +176,7 @@ function headerLoggedOutHTML() {
 function sidebarHTML() {
   return /*html*/`
         <div>
-            <a href="./home.html">
+            <a href="./summary.html">
                 <img id="sidebar-logo" src="assets/img/logo_white.svg" alt="Logo">
             </a>
         </div>
