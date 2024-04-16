@@ -191,4 +191,23 @@ function deleteTask(i){
     refreshTasks();
     renderTasks();
   }
+
+
+  /**
+ * Slides out the overlay for a todo card detail.
+ * @param {number} i - The index of the todo card detail.
+ */
+function slideOutOverlay(i){
+
+  var $slider = document.getElementById(`todo-card-detail${i}`);
+  var $toggle = document.getElementById(`slide-out-toggle${i}`);
+  
+  $toggle.addEventListener('click', function() {
+      var isOpen = $slider.classList.contains('slide-in');
+  
+      $slider.setAttribute('class', isOpen ? 'slide-out' +' '+ 'detail-todo-card' +' '+ 'slider'  : 'slide-in');
+     setTimeout(()=>{closeDetailCard()},170); 
+  });
+}
+
   

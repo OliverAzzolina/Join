@@ -220,7 +220,6 @@ function hideDropdownContacts(){
 function addAssignedEditors() {
   let showAssignedEditors = document.getElementById('show-assigned-editors-container');
   let tooMuchEditors = document.getElementById('tooMuchEditors');
-
   for (let i = 0; i < contacts.length; i++) {
     const checkedEditor = contacts[i];
     let userColor = checkedEditor.userColor;
@@ -260,11 +259,9 @@ function doNotClose(event) {
  */
 function checkIfAssigned(i) {
   let checkbox = document.getElementById(`checkbox${i}`).checked;
-
   if (checkbox == false) {
     setUnAssigned(i);
   }
-
   if (checkbox == true) {
     setAssigned(i);
   }

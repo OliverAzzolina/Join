@@ -283,7 +283,6 @@ main {
   justify-content: space-between;
   flex-direction: row;
   width: 159px;
-  display: none;
 }
 
 .edit-contact button {

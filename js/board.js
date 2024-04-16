@@ -23,32 +23,10 @@ async function init(){
 async function loadTasksfromStorage(){
   try{
     tasks = JSON.parse(await getItem('tasks'));
-    console.log('tasks loaded from storage', tasks)
   }catch(e){
     console.warn('loading error:', e)
   }
   renderTasks();
-}
-
-/**
- * Populates the contact list in the UI with contacts data.
- * Iterates through the `contacts` array, creating an HTML representation for each contact that includes their
- * initials, name, and user color. This representation is then appended to the contact list element in the UI.
- * After populating the list, it calls `sortContacts` to order the contacts.
- */
-function loadContactList(){
-  let contactList = document.getElementById('assigned-editors');
-  for (let i = 0; i < contacts.length; i++) {
-      //let initials = contacts[i]['name'].split(" ").map((n)=>n[0]).join("");
-      let contact = contacts[i];
-      let initials = contact.firstName.charAt(0) + contact.lastName.charAt(0);
-      let userColor = contact.userColor;
-      let firstName = contact.firstName;
-      let lastName = contact.lastName;
-      let userId = contact.userId;
-      contactList.innerHTML += renderContacts(i, userColor, firstName, lastName, initials);
-  }
-    sortContacts();
 }
 
 
@@ -113,103 +91,8 @@ async function renderTasks() {
  * Calls `checkOpen` for each task status ('open', 'in-progress', 'await-feedback', 'done')
  * to verify if there are any tasks in these categories and updates the UI to reflect the current state.
  */
-function checkIfBoardEmpty(){
-  checkOpen('open');
-  checkOpen('in-progress');
-  checkOpen('await-feedback');
-  checkOpen('done');
-}
-
-
-/**
- * Checks if a checkbox is checked and calls corresponding functions to update its state.
- * @param {number} i - The index number of the checkbox.
- */
-function checkIfAssigned(i){
-  let checkbox = document.getElementById(`checkbox${i}`).checked;
-  if(checkbox == false){
-    setUnAssigned(i); 
-  }
-
-  if(checkbox == true){
-    setAssigned(i);
-  }
-}
-
-
-/**
- * Sets the assigned state for a given element identified by index.
- * @param {number} i - The index number of the element.
- */
-function setAssigned(i){
-  document.getElementById(`assigned-contact${i}`).style = "background-color: #2A3647; color: white";
-  document.getElementById(`checked${i}`).src ="assets/img/check_checked.png";
-}
-
-
-/**
- * Sets the unassigned state for a given element identified by index.
- * @param {number} i - The index number of the element.
- */
-function setUnAssigned(i){
-  document.getElementById(`assigned-contact${i}`).style = "color: black";;
-  document.getElementById(`checked${i}`).src ="assets/img/check_unchecked.png";
-}
-
-
-/**
- * Displays a dropdown list of contacts and shows a overlay.
- * @param {number} index - The index of the dropdown.
- */
-function showDropdownContacts(index){
-  let dropdown = document.getElementById('assigned-editors');
-  let backgroundOverlay = document.getElementById('background-overlay');
-  if(dropdown.style.display == 'none'){
-    dropdown.style.display = 'block';
-    backgroundOverlay.style.display = 'block';
-    clearAssignedTo(index);
-    document.getElementById(`tooMuchEditorsEdit${index}`).style.display = 'none';
-  }else{
-    hideDropdownContacts(index);
-  } 
-}
-
-
-/**
- * Hides the dropdown list of contacts and removes the background overlay.
- * @param {number} index - The index of the dropdown.
- */
-function hideDropdownContacts(index){
-  let dropdown = document.getElementById('assigned-editors');
-  let backgroundOverlay = document.getElementById('background-overlay');
-  dropdown.style.display = "none";
-  backgroundOverlay.style.display = 'none';
-  addAssignedEditors(index);
-}
-
-
-
-/**
- * Adds assigned editors to the display and updates associated data.
- * @param {number} index - The index associated with the dropdown.
- */
-function addAssignedEditors(index){
-  let showAssignedEditors = document.getElementById('show-assigned-editors-edit-container');
-  for (let i = 0; i < contacts.length; i++) {
-    const checkedEditor = contacts[i];
-    let checkbox = document.getElementById(`checkbox${i}`).checked;
-    if(checkbox == true){
-      let firstName = checkedEditor.firstName;
-      let lastName = checkedEditor.lastName;
-      let userColor = checkedEditor.userColor;
-      let initials = checkedEditor.firstName[0] + checkedEditor.lastName[0];
-      let userId = checkedEditor.userId;
-      showAssignedEditors.innerHTML += `
-      <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
-      `;
-      pushAssignedTo(index, initials, userColor, firstName, lastName, userId);
-    }
-  }
+function checkIfBoardEmpty() {
+  ['open', 'in-progress', 'await-feedback', 'done'].forEach(checkOpen);
 }
 
 
@@ -222,7 +105,6 @@ function renderAssignedTo(index){
   assignedTo.innerHTML = '';
     if(tasks[index]['assignedTo'].length > 3){
       checkIfToMuchEditors(assignedTo, index);
-    
     }else {
       notToMuchEditors(assignedTo, index);
     }
@@ -270,15 +152,14 @@ function notToMuchEditors(assignedTo, index){
  * Checks if a specific board section is empty and adjusts its visibility accordingly.
  * @param {string} id - The ID of the board section to check.
  */
-function checkOpen(id){
-let board = document.getElementById(`${id}`);
-    if(board.innerHTML == ''){
-      document.getElementById(`${id}-empty`).style.display = "flex";
-      document.getElementById(`${id}`).style.display = "none";
-     }else{
-      document.getElementById(`${id}-empty`).style.display = "none";
-      document.getElementById(`${id}`).style.display = "flex";
-     }
+
+function checkOpen(id) {
+  const board = document.getElementById(id);
+  const isEmpty = board.innerHTML === '';
+  const displayStyle = isEmpty ? 'flex' : 'none';
+
+  document.getElementById(`${id}-empty`).style.display = displayStyle;
+  board.style.display = isEmpty ? 'none' : 'flex';
 }
 
 
@@ -446,24 +327,6 @@ function moveTo(status){
 
 
 /**
- * Slides out the overlay for a todo card detail.
- * @param {number} i - The index of the todo card detail.
- */
-function slideOutOverlay(i){
-
-    var $slider = document.getElementById(`todo-card-detail${i}`);
-    var $toggle = document.getElementById(`slide-out-toggle${i}`);
-    
-    $toggle.addEventListener('click', function() {
-        var isOpen = $slider.classList.contains('slide-in');
-    
-        $slider.setAttribute('class', isOpen ? 'slide-out' +' '+ 'detail-todo-card' +' '+ 'slider'  : 'slide-in');
-       setTimeout(()=>{closeDetailCard()},170); 
-    });
-}
-
-
-/**
  * Pushes assigned editor details to a task.
  * @param {number} index - The index of the task.
  * @param {string} initials - The initials of the assigned editor.
@@ -581,19 +444,15 @@ function renderFilteredTasks(i){
  * Handles hover effect for buttons by changing their image source.
  * @param {string} id - The ID of the button.
  */
-function hover(id){
-  let button = document.getElementById(id);
-  if(id == 'edit-img'){
-    button.setAttribute('src', 'assets/img/edit_hover_icon.png');
-  }else 
-  if(id == 'change-img'){
-    button.setAttribute('src', 'assets/img/change_hover.png');
-  }else
-  if(id == 'delete-img'){
-    button.setAttribute('src', 'assets/img/delete_hover_icon.png');
-  }else{
-    document.getElementById(id).setAttribute('src', 'assets/img/plus_hover_icon.png');
-  }
+function hover(id) {
+  const button = document.getElementById(id);
+  const imageMap = {
+    'edit-img': 'edit_hover_icon.png',
+    'change-img': 'change_hover.png',
+    'delete-img': 'delete_hover_icon.png'
+  };
+
+  button.setAttribute('src', `assets/img/${imageMap[id] || 'plus_hover_icon.png'}`);
 }
 
 
@@ -601,19 +460,15 @@ function hover(id){
  * Handles unhover effect for buttons by restoring their original image source.
  * @param {string} id - The ID of the button.
  */
-function unhover(id){
-  let button = document.getElementById(id);
-  if(id == 'edit-img'){
-    button.setAttribute('src', 'assets/img/edit_icon.png');
-  }else  
-  if(id == 'change-img'){
-    button.setAttribute('src', 'assets/img/change_unhovered.png');
-  }else
-  if(id == 'delete-img'){
-    button.setAttribute('src', 'assets/img/delete_icon.png');
-  }else{
-    document.getElementById(id).setAttribute('src', 'assets/img/plus_icon.png');
-  }
+function unhover(id) {
+  const button = document.getElementById(id);
+  const imageMap = {
+    'edit-img': 'edit_icon.png',
+    'change-img': 'change_unhovered.png',
+    'delete-img': 'delete_icon.png'
+  };
+
+  button.setAttribute('src', `assets/img/${imageMap[id] || 'plus_icon.png'}`);
 }
 
 

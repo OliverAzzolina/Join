@@ -31,6 +31,106 @@ function loadTaskData(i) {
 
 
 /**
+ * Checks if a checkbox is checked and calls corresponding functions to update its state.
+ * @param {number} i - The index number of the checkbox.
+ */
+function checkIfAssigned(i){
+  let checkbox = document.getElementById(`checkbox${i}`).checked;
+  if(checkbox == false){
+    setUnAssigned(i); 
+  }
+
+  if(checkbox == true){
+    setAssigned(i);
+  }
+}
+
+
+/**
+ * Sets the assigned state for a given element identified by index.
+ * @param {number} i - The index number of the element.
+ */
+function setAssigned(i){
+  document.getElementById(`assigned-contact${i}`).style = "background-color: #2A3647; color: white";
+  document.getElementById(`checked${i}`).src ="assets/img/check_checked.png";
+}
+
+
+/**
+ * Sets the unassigned state for a given element identified by index.
+ * @param {number} i - The index number of the element.
+ */
+function setUnAssigned(i){
+  document.getElementById(`assigned-contact${i}`).style = "color: black";;
+  document.getElementById(`checked${i}`).src ="assets/img/check_unchecked.png";
+}
+
+
+/**
+ * Displays a dropdown list of contacts and shows a overlay.
+ * @param {number} index - The index of the dropdown.
+ */
+function showDropdownContacts(index){
+  let dropdown = document.getElementById('assigned-editors');
+  let backgroundOverlay = document.getElementById('background-overlay');
+  let tooMuchEditors = document.getElementById(`tooMuchEditorsEdit${index}`);
+  if(dropdown.style.display == 'none'){
+    dropdown.style.display = 'block';
+    backgroundOverlay.style.display = 'block';
+    checkedArray = [];
+    clearAssignedTo(index);
+    document.getElementById(`tooMuchEditorsEdit${index}`).style.display = 'none';
+    if(tooMuchEditors.style.display !== 'none'){
+      tooMuchEditors.style.display = 'none';
+    }
+  }else{
+    hideDropdownContacts(index);
+  } 
+}
+
+
+/**
+ * Hides the dropdown list of contacts and removes the background overlay.
+ * @param {number} index - The index of the dropdown.
+ */
+function hideDropdownContacts(index){
+  let dropdown = document.getElementById('assigned-editors');
+  let backgroundOverlay = document.getElementById('background-overlay');
+  dropdown.style.display = "none";
+  backgroundOverlay.style.display = 'none';
+  addAssignedEditors(index);
+}
+
+
+
+/**
+ * Adds assigned editors to the display and updates associated data.
+ * @param {number} index - The index associated with the dropdown.
+ */
+function addAssignedEditors(index){
+  let showAssignedEditors = document.getElementById('show-assigned-editors-edit-container');
+  let tooMuchEditors = document.getElementById(`tooMuchEditorsEdit${index}`);
+  for (let i = 0; i < contacts.length; i++) {
+    const checkedEditor = contacts[i];
+    let userColor = checkedEditor.userColor;
+    let initials = checkedEditor.firstName.charAt(0) + checkedEditor.lastName.charAt(0);
+    let checkbox = document.getElementById(`checkbox${i}`).checked;
+    if(checkbox == true){
+      checkedArray.push(checkedEditor);
+      if(checkedArray.length > 3){
+        tooMuchEditors.style.display = 'flex';
+        tooMuchEditors.innerHTML = `+${checkedArray.length - 3}`;
+      }else {
+      showAssignedEditors.innerHTML += `
+      <div id="editor${i}" class="drop-initials" style="background-color: ${userColor}">${initials}</div>
+      `;
+    }
+  }
+  }
+}
+
+
+/**
  * Clears the assigned editors section in the edit overlay.
  * @param {number} index - The index of the task.
  */
@@ -68,10 +168,7 @@ function renderAssignedToEdit(index){
       let tooMuchEditors = document.getElementById(`tooMuchEditorsEdit${index}`);
       tooMuchEditors.style.display = 'flex';
       tooMuchEditors.innerHTML = `+${tasks[index]['assignedTo'].length - 3}`;
-    
-      assignedTo.innerHTML += `
-      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
-      `;
+      assignedTo.innerHTML += renderAssignedToInitials(i, userColor, initials);
     }
   }
 
@@ -86,9 +183,7 @@ function renderAssignedToEdit(index){
       const checkedEditor = tasks[index]['assignedTo'][i];
       let initials = checkedEditor.initials;
       let userColor = checkedEditor.userColor;
-      assignedTo.innerHTML += `
-      <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
-      `;
+      assignedTo.innerHTML += renderAssignedToInitials(i, userColor, initials);
     }
   }
 
@@ -102,7 +197,7 @@ function saveTask(i) {
   tasks[i]["description"] = document.getElementById("edit-task-description-input").value;
   tasks[i]["dueDate"] = document.getElementById("edit-task-form-input").value;
   tasks[i]["prio"];
-  tasks[i].assignedTo;
+  tasks[i].assignedTo = checkedArray;
   tasks[i]["subtasks"];
   createSubtasksDoneArrayEditOverlay(i);
   tasks.push();
@@ -128,26 +223,15 @@ function closeEditOverlay() {
  * @param {number} i - The index of the task.
  */
 function showEditPrio(i) {
-  let prio = tasks[i]["prio"];
-  if (prio == "urgent") {
-    document.getElementById(prio).style.backgroundColor = "#FF3D00";
-    document.getElementById(`${prio}-text`).style.color = "#FFFFFF";
-    document.getElementById(
-      `${prio}-img-edit`
-    ).src = `/assets/img/prio_${prio}_white_icon.png`;
-  } else if (prio == "medium") {
-    document.getElementById(prio).style.backgroundColor = "#FFA800";
-    document.getElementById(`${prio}-text`).style.color = "#FFFFFF";
-    document.getElementById(
-      `${prio}-img-edit`
-    ).src = `/assets/img/prio_${prio}_white_icon.png`;
-  } else if (prio == "low") {
-    document.getElementById(prio).style.backgroundColor = "#7AE229";
-    document.getElementById(`${prio}-text`).style.color = "#FFFFFF";
-    document.getElementById(
-      `${prio}-img-edit`
-    ).src = `/assets/img/prio_${prio}_white_icon.png`;
-  }
+  const prio = tasks[i]["prio"];
+  const colorMap = {
+    "urgent": "#FF3D00",
+    "medium": "#FFA800",
+    "low": "#7AE229"
+  };
+  document.getElementById(prio).style.backgroundColor = colorMap[prio];
+  document.getElementById(`${prio}-text`).style.color = "#FFFFFF";
+  document.getElementById(`${prio}-img-edit`).src = `/assets/img/prio_${prio}_white_icon.png`;
 }
 
 
@@ -162,10 +246,9 @@ function setPrio(i, newPrio, buttonColor) {
   tasks[i]["prio"] = newPrio;
   document.getElementById(newPrio).style.backgroundColor = buttonColor;
   document.getElementById(`${newPrio}-text`).style.color = "#FFFFFF";
-  document.getElementById(
-    `${newPrio}-img-edit`
-  ).src = `/assets/img/prio_${newPrio}_white_icon.png`;
+  document.getElementById(`${newPrio}-img-edit`).src = `/assets/img/prio_${newPrio}_white_icon.png`;
 }
+
 
 /**
  * Resets the color and icon of priority buttons to their default state.
@@ -174,9 +257,7 @@ function resetColors() {
   ["urgent", "medium", "low"].forEach((priority) => {
     document.getElementById(priority).style.backgroundColor = "";
     document.getElementById(`${priority}-text`).style.color = "";
-    document.getElementById(
-      `${priority}-img-edit`
-    ).src = `/assets/img/prio_${priority}_icon.png`;
+    document.getElementById(`${priority}-img-edit`).src = `/assets/img/prio_${priority}_icon.png`;
   });
 }
 
@@ -186,9 +267,7 @@ function resetColors() {
  * @param {number} index - The index of the task in the tasks array.
  */
 function renderEditSubtasks(index) {
-  let subtasksContainer = document.getElementById(
-    "edit-task-subtasks-container"
-  );
+  let subtasksContainer = document.getElementById("edit-task-subtasks-container");
   subtasksContainer.innerHTML = "";
   for (let i = 0; i < tasks[index]["subtasks"].length; i++) {
     const subtask = tasks[index]["subtasks"][i];
@@ -274,9 +353,7 @@ function createSubtasksDoneArrayEditOverlay(index) {
  * @param {number} i - The index of the subtask item.
  */
 function showIcons(i) {
-  document.getElementById(
-    `edit-task-active-subtask-icon-box${i}`
-  ).style.opacity = 1;
+  document.getElementById(`edit-task-active-subtask-icon-box${i}`).style.opacity = 1;
 }
 
 
@@ -285,9 +362,7 @@ function showIcons(i) {
  * @param {number} i - The index of the subtask item.
  */
 function hideIcons(i) {
-  document.getElementById(
-    `edit-task-active-subtask-icon-box${i}`
-  ).style.opacity = 0;
+  document.getElementById(`edit-task-active-subtask-icon-box${i}`).style.opacity = 0;
 }
 
 
@@ -297,12 +372,9 @@ function hideIcons(i) {
  * @param {number} i - The index of the task.
  */
 function openChangeTaskPopup(i) {
-  changeTaskButtons = document.getElementById("change-task-buttons");
+  let changeTaskButtons = document.getElementById("change-task-buttons");
   if (changeTaskButtons.innerHTML == "") {
-    changeTaskButtons.innerHTML = ` <button class="change-task-status-button" onclick="changeTask(${i}, 'open')">To Do</button>
-        <button class="change-task-status-button" onclick="changeTask(${i}, 'in-progress')">In Progress</button>
-        <button class="change-task-status-button" onclick="changeTask(${i}, 'await-feedback')">Await Feedback</button>
-        <button class="change-task-status-button" onclick="changeTask(${i}, 'done')">Done</button>`;
+    changeTaskButtons.innerHTML = renderChangeTaskButtons(i);
   } else {
     changeTaskButtons.innerHTML = "";
   }

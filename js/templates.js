@@ -1,7 +1,7 @@
 // INDEX HTML TEMPLATES
 
 function loginHTML() {
-  return /*html*/`
+  return /*html*/ `
   <div id="register-container" class="init-fade-in">
     <p>Not a Join User?</p>
     <button id="sign-up-btn" type="button" onclick="switchToRegister()">Sign Up</button>
@@ -44,7 +44,7 @@ function loginHTML() {
 }
 
 function registerHTML() {
-  return /*html*/`
+  return /*html*/ `
     <img src="assets/img/logo_desktop.png" alt="Logo" id="logo" onclick="goHome()">
 
     <div id="signup-container">
@@ -81,8 +81,18 @@ function registerHTML() {
     </div>`;
 }
 
-function summaryHTML(toDoCounter, doneCounter, urgentCounter, urgentDeadline, tibCounter, tipCounter, awaitingFeedbackCounter, greetingDaytime, userGreetingName) {
-  return /*html*/`
+function summaryHTML(
+  toDoCounter,
+  doneCounter,
+  urgentCounter,
+  urgentDeadline,
+  tibCounter,
+  tipCounter,
+  awaitingFeedbackCounter,
+  greetingDaytime,
+  userGreetingName
+) {
+  return /*html*/ `
   <div class="content-container">
     <div class="summary-content">
       <p class="left-text">Join 360</p>
@@ -143,11 +153,10 @@ function summaryHTML(toDoCounter, doneCounter, urgentCounter, urgentDeadline, ti
 </div>`;
 }
 
-
 // HEADER AND SIDEBAR HTML TEMPLATES
 
 function headerHTML(userInitials) {
-  return /*html*/`
+  return /*html*/ `
     <div>
     <p id="header-headline">Kanban Project Management Tool</p></div>
     <img src="assets/img/logo_mobile.png" alt="Mobile Logo" id="mobile-logo">
@@ -167,14 +176,13 @@ function headerHTML(userInitials) {
         </div>`;
 }
 
-
 function headerLoggedOutHTML() {
-  return /*html*/`
+  return /*html*/ `
     <div><p id="header-headline">Kanban Project Management Tool</p></div>`;
 }
 
 function sidebarHTML() {
-  return /*html*/`
+  return /*html*/ `
         <div>
             <a href="./summary.html">
                 <img id="sidebar-logo" src="assets/img/logo_white.svg" alt="Logo">
@@ -214,9 +222,8 @@ function sidebarHTML() {
         </li>`;
 }
 
-
 function sidebarLoggedOutHTML() {
-  return/*html*/`
+  return /*html*/ `
         <div>
             <img id="sidebar-logo" src="assets/img/logo_white.svg" alt="Logo" onclick="goHome()">
         </div>
@@ -225,7 +232,6 @@ function sidebarLoggedOutHTML() {
             <a href="./legal-notice.html">Legal Notice</a>
         </li>`;
 }
-
 
 // ADD TASK HTML TEMPLATES
 function subtaskHTML(subtask, i) {
@@ -254,26 +260,27 @@ function subtaskHTML(subtask, i) {
 `;
 }
 
-
-
-
-
 //BOARD TEMPLATES
-function generateTask(i){
-    return `
+function generateTask(i) {
+  return `
     <div >
     <div id="todo-card${i}" draggable="true" ondrag="startDragging(${i})" ondragend="stopDragging(${i})" class="todo-card" onclick="openTaskDetails(${i})">
 
       <span id="category${i}" class="category">${tasks[i]["category"]}</span>
       <div class="title-description">
         <span class="todo-title">${tasks[i]["title"]}</span>
-        <span class="todo-description">${tasks[i]["description"].substring(0, 20)}...</span>
+        <span class="todo-description">${tasks[i]["description"].substring(
+          0,
+          20
+        )}...</span>
       </div>
       <div class="sub-progress-container" onmouseover="showSubInfo(${i})" onmouseout="hideSubInfo(${i})">
         <div class="subtasks-progress-bar-container">
           <div class="subtasks-progress-bar" id="subtasks-progress${i}"></div>
         </div>
-        <span><span id="subsDoneOfAll${i}"></span> / ${tasks[i]["subtasks"].length} Subtasks</span>
+        <span><span id="subsDoneOfAll${i}"></span> / ${
+    tasks[i]["subtasks"].length
+  } Subtasks</span>
       </div>
       <div class="subtask-info" id="subtasks-info${i}"></div>
       <div class="assigned-prio">
@@ -289,7 +296,7 @@ function generateTask(i){
 }
 
 function generateDetailOverlay(i) {
-  return/*html*/`
+  return /*html*/ `
   <div id="todo-card-detail${i}" class="detail-todo-card slider slide-in" onclick="doNotClose(event)">
     <div class="detail-card-top">  
       <p id="overlay-category${i}" class="category">${tasks[i]["category"]}</p>
@@ -298,7 +305,9 @@ function generateDetailOverlay(i) {
       <span class="detail-title">${tasks[i]["title"]}</span><br>
       <span class="f-s20-w400">${tasks[i]["description"]}</span><br>
       <span class="f-s20-w400">Due date:  ${tasks[i]["dueDate"]}</span><br>
-      <span class=" prio-img f-s20-w400">Priority:  ${tasks[i]["prio"].charAt(0).toUpperCase() + tasks[i]["prio"].slice(1)}<img class="prio-detail-img" id="prioDetailImg${i}"></span><br>
+      <span class=" prio-img f-s20-w400">Priority:  ${
+        tasks[i]["prio"].charAt(0).toUpperCase() + tasks[i]["prio"].slice(1)
+      }<img class="prio-detail-img" id="prioDetailImg${i}"></span><br>
       <span class="f-s20-w400">Assigned to:</span>
       <div class="d-flex"><div id="detailAssignedTo"></div><div style="display: none;" id="toMuchEditors${i}" class="mini-logo-dummy"></div></div>
       <span class="f-s20-w400">Subtasks<ul id="checklistSubDetail"></ul></span>
@@ -410,8 +419,8 @@ function generateAssignedTo(i, userColor, initials) {
     `;
 }
 
-function generateEditSubtasks(i, index, subtask){
-  return`
+function generateEditSubtasks(i, index, subtask) {
+  return `
   <div class="edit-subtask">
   
       <div onclick="editSubtaskEditOverlay(${i}, ${index})" class="subtask-list-item" id="editable-subtask${i}" onMouseOver="showIcons(${i})" onMouseOut="hideIcons(${i})">
@@ -462,4 +471,194 @@ function renderContacts(i, userColor, firstName, lastName, initials) {
  `;
 }
 
+function renderChangeTaskButtons(i) {
+  return ` <button class="change-task-status-button" onclick="changeTask(${i}, 'open')">To Do</button>
+  <button class="change-task-status-button" onclick="changeTask(${i}, 'in-progress')">In Progress</button>
+  <button class="change-task-status-button" onclick="changeTask(${i}, 'await-feedback')">Await Feedback</button>
+  <button class="change-task-status-button" onclick="changeTask(${i}, 'done')">Done</button>`;
+}
+
+function renderAssignedToInitials(i, userColor, initials) {
+  return `
+  <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
+  `;
+}
+
 // CONTACTS HTML TEMPLATES
+/**
+ * Generates HTML markup for a contact.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ * @param {string} initials - The initials of the contact.
+ * @param {string} firstName - The first name of the contact.
+ * @param {string} lastName - The last name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @param {string} userColor - The color associated with the contact.
+ * @returns {string} The HTML markup for the contact.
+ */
+function generateContact(
+  i,
+  j,
+  initials,
+  firstName,
+  lastName,
+  email,
+  userColor
+) {
+  return `
+  <div id="contact${i},${j}" class="contact contact-hover" onclick="openContactInfo(${i},${j})">
+      <div class="name-logo" style= "background-color: ${userColor}"><span>${initials}</span></div>
+      <div class="contact-name">
+      <span id="contact${i},${j}-name">${firstName} ${lastName}</span>
+      <a href="#">${email}</a>
+      </div>    
+  </div>
+  `;
+}
+
+/**
+ * Generates HTML markup for displaying contact information.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ * @param {string} initials - The initials of the contact.
+ * @param {string} firstName - The first name of the contact.
+ * @param {string} lastName - The last name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @param {string} phone - The phone number of the contact.
+ * @param {string} userColor - The color associated with the contact.
+ * @returns {string} The HTML markup for displaying contact information.
+ */
+function renderContactInfo(
+  i,
+  j,
+  initials,
+  firstName,
+  lastName,
+  email,
+  phone,
+  userColor
+) {
+  return `
+    <div class="name-section">
+        <div class="name-logo name-logo-detail" style= "background-color: ${userColor}">
+        <span>${initials}</span>
+        </div>
+        <div class="flex-row">    
+            <div class="name">
+                <span>${firstName} ${lastName}</span>
+            </div>
+            <div class="edit-contact">
+                <button onclick="EditContact(${i},${j})" onmouseover="hover('a')" onmouseout="unhover('a')"><img id="edit-img" src="assets/img/edit_icon.png" alt=""><span>Edit</span></button>
+                <button onclick="deleteContact(${i},${j})" onmouseover="hover('b')" onmouseout="unhover('b')"><img id="delete-img" src="assets/img/delete_icon.png" alt=""><span>Delete</span></button>
+            </div>
+        </div>
+    </div>        
+    <div class="contact-information">
+        <p id="ci-head">Contact Information</p>
+        <div class="email">
+          <p>Email</p>
+          <a href="mailto:${email}">${email}</a>
+        </div>
+        <div class="phone">
+          <p>Phone</p>
+          <a href="tel:${phone}">${phone}</a>
+        </div>
+    </div>
+    <img src="assets/img/mobile-menu-icon.png" id="roundButton" onclick="EditContact(${i},${j})" alt="Edit" style="cursor: pointer;">`;
+}
+
+/**
+ * Generates HTML markup for the overlay to add a new contact.
+ * @returns {string} The HTML markup for the add new contact overlay.
+ */
+function generateAddNewOverlay() {
+  return `
+  <div class="add-contact-card" onclick="doNotClose(event)">
+
+  <div class="add-contact-card-left">
+      <img class="mobile-none" src="/assets/img/logo_desktop.png" alt="">
+      <div class="titles">
+        <span class="title">Add contact</span>
+        <span class="subtitle">Tasks are better with a Team!</span>
+        <div class="blue-line-horizontal"></div>
+      </div>
+  </div>
+  <div class="add-contact-card-right">
+    <div class="close-button" onclick="closeAddContact()">
+      <button><img src="assets/img/close_icon.png" alt=""></button>
+    </div>
+    <div class="add-contact-container">
+    <img class="profile-icon" src="assets/img/profile_icon.png" alt="">
+    <form onsubmit="addNewContact(); return false">
+      <div class="actions-container">
+        <div class="add-contact-inputs" >
+          <input id="contactname" type="text" placeholder="Name" class="input-icon-name" required>
+          <input id="email" type="email" placeholder="Email" class="input-icon-mail" required>
+          <input id="phone" type="text" placeholder="Phone" class="input-icon-phone" required>
+        </div>
+        <div class="add-contact-buttons">
+          <button type="button" onclick="closeAddContact()" class="cancel-button"><span>Cancel</span><img src="assets/img/cancel_icon.png" alt=""></button>
+          <button type="submit" class="create-button"><span>Create contact</span><img src="assets/img/check_icon_white.png" alt=""></button>
+        </div>
+      </div>
+      </form>
+      </div>
+  </div>`;
+}
+
+/**
+ * Generates HTML markup for the overlay to edit a contact.
+ * @param {number} i - The index of the category.
+ * @param {number} j - The index of the contact within the category.
+ * @param {string} initials - The initials of the contact.
+ * @param {string} fullName - The full name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @param {string} phone - The phone number of the contact.
+ * @param {string} userColor - The color associated with the contact.
+ * @returns {string} The HTML markup for the edit contact overlay.
+ */
+function generateEditOverlay(
+  i,
+  j,
+  initials,
+  fullName,
+  email,
+  phone,
+  userColor
+) {
+  return `
+  <div class="add-contact-card" onclick="doNotClose(event)">
+    <div class="add-contact-card-left">
+      <img class="mobile-logo-small" src="assets/img/logo_small.png" alt="">
+        <div class="titles">
+          <span class="title">Edit contact</span>
+          <span class="subtitle">Tasks are better with a Team!</span>
+          <div class="blue-line-horizontal"></div>
+        </div>
+    </div>
+    
+    <div class="add-contact-card-right">
+      <div class="close-button" onclick="closeAddContact()">
+        <button><img src="assets/img/close_icon.png" alt=""></button>
+      </div>
+
+      <div class="add-contact-container">
+        <div id="name-logo-bg${i}" class="name-logo name-logo-detail" style= "background-color: ${userColor}">
+          <span>${initials}</span>
+        </div>
+        <form onsubmit="saveContact(${i},${j}); return false">
+          <div class="actions-container">
+            <div class="add-contact-inputs" >
+              <input id="editName" type="text" placeholder="Name" class="edit-input input-icon-name" value="${fullName}" required>
+              <input id="editEmail" type="email" placeholder="Email" class="edit-input input-icon-mail" value="${email}" required>
+              <input id="editPhone" type="text" placeholder="Phone" class="edit-input input-icon-phone" value="${phone}" required>
+            </div>
+            <div class="add-contact-buttons">
+              <button type="button" onclick="deleteContact(${i},${j})" class="cancel-button"><span>Delete</span><img src="assets/img/cancel_icon.png" alt=""></button>
+              <button type="submit" class="create-button"><span>Save</span><img src="assets/img/check_icon_white.png" alt=""></button>
+            </div>
+          </div>
+        </form
+      </div>
+  </div>`;
+}

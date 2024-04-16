@@ -206,3 +206,24 @@ async function saveUserData(users){
                 await setItem('users', JSON.stringify(users));
     }
 }
+
+
+/**
+ * Populates the contact list in the UI with contacts data.
+ * Iterates through the `contacts` array, creating an HTML representation for each contact that includes their
+ * initials, name, and user color. This representation is then appended to the contact list element in the UI.
+ * After populating the list, it calls `sortContacts` to order the contacts.
+ */
+function loadContactList(){
+    let contactList = document.getElementById('assigned-editors');
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        let initials = contact.firstName.charAt(0) + contact.lastName.charAt(0);
+        let userColor = contact.userColor;
+        let firstName = contact.firstName;
+        let lastName = contact.lastName;
+        let userId = contact.userId;
+        contactList.innerHTML += renderContacts(i, userColor, firstName, lastName, initials);
+    }
+      sortContacts();
+  }
