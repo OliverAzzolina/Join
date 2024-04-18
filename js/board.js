@@ -15,20 +15,6 @@ async function init(){
     loadTasksfromStorage();
 }
 
-/**
- * Asynchronously loads tasks from storage and parses them into the `tasks` variable.
- * It tries to retrieve and parse the 'tasks' item from storage. If successful, it logs the loaded tasks.
- * In case of an error, it catches and logs the error as a warning. Finally, it calls `renderTasks` to update the UI.
- */
-async function loadTasksfromStorage(){
-  try{
-    tasks = JSON.parse(await getItem('tasks'));
-  }catch(e){
-    console.warn('loading error:', e)
-  }
-  renderTasks();
-}
-
 
 /**
  * Asynchronously checks if the editors assigned to tasks still exist in the contacts list.
@@ -327,28 +313,6 @@ function moveTo(status){
 
 
 /**
- * Pushes assigned editor details to a task.
- * @param {number} index - The index of the task.
- * @param {string} initials - The initials of the assigned editor.
- * @param {string} userColor - The color associated with the assigned editor.
- * @param {string} firstName - The first name of the assigned editor.
- * @param {string} lastName - The last name of the assigned editor.
- * @param {string} userId - The ID of the assigned editor.
- */
-function pushAssignedTo(index, initials, userColor, firstName, lastName, userId){
-  let assignedToTask = {
-    firstName: firstName,
-    lastName: lastName,
-    initials: initials,
-    userColor: userColor,
-    userId: userId
-  };
-  tasks[index]['assignedTo'].push(assignedToTask);
-  renderAssignedToCards(index);
-}
-
-
-/**
  * Renders assigned editor cards for a task.
  * @param {number} index - The index of the task.
  */
@@ -376,67 +340,6 @@ function showPrio(i){
     }else if(newPrio == 'low'){
     document.getElementById(newPrio).style.backgroundColor = "#7AE229"
   }
-}
-
-
-/**
- * Filters tasks based on the search input.
- */
-function filterTasks() {
-  let search = document.getElementById("search").value.toLowerCase();
-  let searchSection = document.getElementById(`search-section`);
-  let boardSection = document.getElementById('board-section');
-  searchSection.innerHTML = '';
-  refreshTasks();
-  if (search == "") {
-    boardSection.style.display = 'flex';
-    searchSection.innerHTML = '';
-    renderTasks();
-  }else{
-    FilteredTasks(search);
-    checkIfNoTasksFound(searchSection);
-  }
-}
-
-
-/**
- * Filters tasks based on the search input and renders filtered tasks.
- * @param {string} search - The search query.
- */
-function FilteredTasks(search){ 
-  refreshTasks();
-  for (let i = 0; i < tasks.length; i++) {
-    let title = tasks[i]['title'].toLowerCase();
-    let description = tasks[i]['description'].toLowerCase();
-    let boardSection = document.getElementById('board-section');
-    let searchSection = document.getElementById(`search-section`);
-    if (title.toLowerCase().includes(search)||description.toLowerCase().includes(search)) {
-      boardSection.style.display = 'none';
-      renderFilteredTasks(i);
-    }
-    
-  }
-}
-
-
-function checkIfNoTasksFound(searchSection){
-  if(searchSection.innerHTML == ''){
-    searchSection.innerHTML = `<span>No tasks found</span>`;
-  }
-}
-
-
-/**
- * Renders filtered tasks in the search section.
- * @param {number} i - The index of the task to render.
- */
-function renderFilteredTasks(i){
-  document.getElementById(`search-section`).innerHTML += generateTask(i);
-  setPrioImg(i);
-  updateDoneSubs(i);
-  generateSubtasks(i);
-  checkCategory(i);
-  renderAssignedTo(i);
 }
 
 
@@ -478,25 +381,4 @@ function unhover(id) {
  */
 function doNotClose(event){
   event.stopPropagation();
-}
-
-/**
- * Listens for keydown events and prevents form submission when Enter key is pressed.
- * @param {Event} e - The keydown event object.
- */ 
-window.addEventListener('keydown',function(e) {
-  if (e.keyIdentifier=='U+000A' || e.keyIdentifier=='Enter' || e.keyCode==13) {
-      if (e.target.nodeName=='INPUT' && e.target.type=='text') {
-          e.preventDefault();
-
-          return false;
-      }
-  }
-}, true);
-
-
-function checkForEnter(e){
-  if(e.keyCode == 13 || e.which == 13){
-    addSubtask();
-  }
 }

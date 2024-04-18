@@ -10,37 +10,14 @@ assignedToTempArray = [];
  * executes a series of functions related to user validation, user data loading,
  * header and sidebar generation, and contacts and tasks loading.
  */
-document.addEventListener('DOMContentLoaded', async function () {
-  console.log('DOM loaded');
+async function initAddTask() {
   await userIsAllowed();
   await loadUserData();
   await generateHeader(userInitials);  
   await generateSidebar();
   loadUserContacts();
-  loadTasksfromStorage();
-});
 
-
-/**
- * Asynchronously loads user contacts. It first sorts the contacts and then loads the contact list.
- */
-async function loadUserContacts(){
-  sortContacts();
-  loadContactList();
-}
-
-
-/**
- * Asynchronously loads tasks from storage. Attempts to parse the 'tasks' item from storage as JSON.
- * If an error occurs during loading or parsing, it logs a warning message.
- */
-async function loadTasksfromStorage(){
-  try{
-    tasks = JSON.parse(await getItem('tasks'));
-  }catch(e){
-    console.warn('loading error:', e)
-  }
-}
+};
 
 
 /**
@@ -57,18 +34,6 @@ window.addEventListener('keydown',function(e) {
       }
   }
 }, true);
-
-
-/**
- * Checks if the Enter key is pressed and triggers the addition of a subtask.
- *
- * @param {Event} e - The event object associated with the key press.
- */
-function checkForEnter(e){
-  if(e.keyCode == 13 || e.which == 13){
-    addSubtask();
-  }
-}
 
 
 /**
@@ -168,7 +133,6 @@ function getSubTasksDone() {
  */
 function saveTask() {
   setItem('tasks', JSON.stringify(tasks));
-
   showMessageOverlay('Task added to Board');
 }
 
@@ -241,17 +205,6 @@ function addAssignedEditors() {
 
 
 /**
- * Prevents the event from propagating further in the event hierarchy.
- * This function can be used to stop the event from bubbling up and triggering parent event listeners.
- *
- * @param {Event} event - The event object to stop propagation for.
- */
-function doNotClose(event) {
-  event.stopPropagation();
-}
-
-
-/**
  * Checks the assignment status of a contact based on the checkbox state and updates the assignment accordingly.
  * If the checkbox is unchecked, it triggers the unassignment function, and if checked, it triggers the assignment function.
  *
@@ -274,27 +227,6 @@ function checkIfAssigned(i) {
  */
 function clearAssignedToAddOverlay() {
   document.getElementById("show-assigned-editors-container").innerHTML = "";
-}
-
-
-/**
- * Populates the contact list in the UI with contacts data.
- * Iterates through the `contacts` array to create and append contact elements to the contact list element.
- * Each contact is represented by their initials and user color. This function also calls `renderContacts`
- * to generate the HTML structure for each contact and `sortContacts` to order the contacts list.
- */
-function loadContactList() {
-  let contactList = document.getElementById('assigned-editors');
-  for (let i = 0; i < contacts.length; i++) {
-      let contact = contacts[i];
-      let initials = contact.firstName.charAt(0) + contact.lastName.charAt(0);
-      let userColor = contact.userColor;
-      let firstName = contact.firstName;
-      let lastName = contact.lastName;
-      let id = contact.userId;
-      contactList.innerHTML += renderContacts(i, userColor, firstName, lastName, initials);
-  }
-    sortContacts();
 }
 
 

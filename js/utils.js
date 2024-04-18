@@ -227,3 +227,88 @@ function loadContactList(){
     }
       sortContacts();
   }
+
+
+  /**
+ * Sorts contacts alphabetically by first name.
+ */
+function sortContacts() {
+    contacts.sort((a, b) => {
+      if (a.firstName.toUpperCase() < b.firstName.toUpperCase()) {
+        return -1;
+      } else if (a.firstName.toUpperCase() > b.firstName.toUpperCase()) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+
+  /**
+ * Prevents the event from propagating further in the event hierarchy.
+ * This function can be used to stop the event from bubbling up and triggering parent event listeners.
+ *
+ * @param {Event} event - The event object to stop propagation for.
+ */
+function doNotClose(event) {
+    event.stopPropagation();
+  }
+
+
+  /**
+ * Checks if the Enter key is pressed and triggers the addition of a subtask.
+ *
+ * @param {Event} e - The event object associated with the key press.
+ */
+function checkForEnter(e){
+    if(e.keyCode == 13 || e.which == 13){
+      addSubtask();
+    }
+  }
+
+
+/**
+ * Asynchronously loads tasks from storage and parses them into the `tasks` variable.
+ * It tries to retrieve and parse the 'tasks' item from storage. If successful, it logs the loaded tasks.
+ * In case of an error, it catches and logs the error as a warning. Finally, it calls `renderTasks` to update the UI.
+ */
+async function loadTasksfromStorage(){
+    try{
+      tasks = JSON.parse(await getItem('tasks'));
+    }catch(e){
+      console.warn('loading error:', e)
+    }
+    renderTasks();
+  }
+
+
+  /**
+ * Pushes assigned editor details to a task.
+ * @param {number} index - The index of the task.
+ * @param {string} initials - The initials of the assigned editor.
+ * @param {string} userColor - The color associated with the assigned editor.
+ * @param {string} firstName - The first name of the assigned editor.
+ * @param {string} lastName - The last name of the assigned editor.
+ * @param {string} userId - The ID of the assigned editor.
+ */
+function pushAssignedTo(index, initials, userColor, firstName, lastName, userId){
+    let assignedToTask = {
+      firstName: firstName,
+      lastName: lastName,
+      initials: initials,
+      userColor: userColor,
+      userId: userId
+    };
+    tasks[index]['assignedTo'].push(assignedToTask);
+    renderAssignedToCards(index);
+  }
+
+
+/**
+ * Asynchronously loads user contacts. It first sorts the contacts and then loads the contact list.
+ */
+async function loadUserContacts(){
+    sortContacts();
+    loadContactList();
+  }
