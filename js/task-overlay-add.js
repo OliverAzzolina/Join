@@ -71,7 +71,6 @@ function addNewTask() {
  */
 function saveNewAddedTask(newTask) {
   tasks.push(newTask);
-  console.log(newTask, tasks);
   temporaryAssignedTo = [];
   temporaryTaskStatus = "";
   newTaskPrio = "";
@@ -245,7 +244,6 @@ function addSubtask() {
   let subtask = document.getElementById("add-task-subtask-input").value;
   if(subtask !== ''){
     temporarySubtasks.push(subtask);
-    console.log(temporarySubtasks);
     renderSubtasks();
     clearSubtaskInput();
   }
@@ -337,7 +335,6 @@ function createSubtasksDoneArray() {
       checked: false,
     };
     temporarySubtasksDone.push(subtaskDoneJson);
-    console.log(subtaskDoneJson);
   }
 }
 

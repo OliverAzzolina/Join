@@ -63,7 +63,6 @@ async function toDoCounter() {
   });
 
   tasksInOpenStatus.forEach(task => {
-    console.log(task);
   });
 
   let count = tasksInOpenStatus.length;
@@ -203,7 +202,6 @@ function greetingDaytime() {
 async function userGreetingName() {
   let user = await getUserData();
   if (!user) {
-    console.log("User not found.");
     return "User not found";
   }
   if (user.firstName && !user.lastName) {

@@ -16,8 +16,22 @@ async function initAddTask() {
   await generateHeader(userInitials);  
   await generateSidebar();
   loadUserContacts();
-
+  loadTasksfromStorageAdd();
 };
+
+
+/**
+ * Asynchronously loads tasks from storage and parses them into the `tasks` variable.
+ * It tries to retrieve and parse the 'tasks' item from storage. If successful, it logs the loaded tasks.
+ * In case of an error, it catches and logs the error as a warning. Finally, it calls `renderTasks` to update the UI.
+ */
+async function loadTasksfromStorageAdd(){
+  try{
+    tasks = JSON.parse(await getItem('tasks'));
+  }catch(e){
+    console.warn('loading error:', e)
+  }
+}
 
 
 /**
@@ -56,7 +70,6 @@ function addTask(event) {
     subTasksDone: getSubTasksDone(),
     status: "open",
   };
-  console.log(taskData)
   tasks.push(taskData);
   saveTask();
 }
@@ -286,7 +299,6 @@ function addSubtask(){
   let subtask = document.getElementById('add-task-subtask-input').value;
   if(subtask !== ''){
     subtaskTempArray.push(subtask);
-    console.log(subtaskTempArray);
     renderSubtasks();
     clearSubtaskInput();
   }
@@ -367,7 +379,6 @@ function createSubtasksDoneArray(){
       checked: false
     }
     subtaskDoneTempArray.push(subtaskDoneJson);
-    console.log(subtaskDoneJson)
   }
 }
 
