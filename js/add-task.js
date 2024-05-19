@@ -72,6 +72,17 @@ function addTask(event) {
   };
   tasks.push(taskData);
   saveTask();
+  clearInput();
+}
+
+function clearInput(){
+  document.getElementById("add-task-form").reset();
+  document.getElementById("show-assigned-editors-container").innerHTML = '';
+  document.getElementById("add-task-subtasks-container").innerHTML = '';
+  subtaskTempArray = [];
+  checkedArray = [];
+  document.getElementById("assigned-editors").innerHTML = '';
+  loadUserContacts();
 }
 
 

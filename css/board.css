@@ -53,6 +53,13 @@ body {
   font-weight: 700;
 }
 
+#board-header-right .mobile-button:hover{
+  cursor: pointer;
+  background-color: rgb(41, 171, 226);
+  transition: all ease-in-out 125ms;
+}
+
+
 #board-header-right button:hover {
   cursor: pointer;
   background-color: #29abe2;
@@ -186,7 +193,6 @@ body {
   flex-direction: column;
   background-color: white;
   width: 60%;
-  height: 70%;
   padding: 48px 40px 48px 40px;
   box-sizing: border-box;
   border-radius: 30px;

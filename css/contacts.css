@@ -102,6 +102,7 @@ main {
 .add-contact-button:hover {
   cursor: pointer;
   background-color: rgb(41, 171, 226);
+  transition: all ease-in-out 125ms;
 }
 
 .category-letter {
