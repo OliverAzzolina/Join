@@ -537,4 +537,95 @@ body {
   
   
   }
+
+  @media screen and (max-width: 650px) {
+
+    #signup-container h2 {
+      text-align: center;
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 17px;
+  }
+  #arrow {
+    width: 21.33px;
+    height: 20.74px;
+    position: absolute;
+    padding-top: 39px;
+    margin-left: 29px;
+    cursor: pointer;
+  }
+
+  }
+
+  @media screen and (max-width: 480px) {
+    #signup-container {
+      opacity: 0;
+      width: 315px;
+      height: 630px;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      border-radius: 30px;
+      padding: 28px 116px 50px;
+      font-family: "Inter", sans-serif;
+    }
+
+    #signup-container {
+      opacity: 0;
+      width: 315px;
+      height: 630px;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      border-radius: 30px;
+      padding: 26px 4px 50px;
+      font-family: "Inter", sans-serif;
+    }
+
+    #checkbox-label {
+      display: flex;
+      gap: 10px;
+      margin-left: 30px;
+    }
+
+    .form-group input {
+      width: 90%;
+      padding: 10px;
+      padding-left: 15px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+    }
+
+    .form-group input[type="email"], .form-group input[type="password"] {
+      width: 87%;
+      padding: 10px;
+      padding-left: 25px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+    }
+    .button-group button {
+      padding: 10px 20px;
+      border-radius: 12px;
+      background-color: #2a3647;
+      color: white;
+      padding-top: 12px;
+      margin-top: 45px;
+      width: -webkit-fill-available;
+    }
+
+    #arrow {
+      width: 21.33px;
+      height: 20.74px;
+      position: absolute;
+      padding-top: 77px;
+      /* margin-left: -35px; */
+      cursor: pointer;
+    }
+
+
+
+  }
+
+
+
   
