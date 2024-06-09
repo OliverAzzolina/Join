@@ -313,7 +313,15 @@ async function loadUserContacts(){
     loadContactList();
   }
 
-  function locateTo(container){
+
+  function locateTo(mainContainer, container){
+    document.getElementById(mainContainer).classList.add('d-none');
     document.getElementById(container).classList.remove('d-none');
-    document.getElementById('login-main-container').classList.add('d-none')
+    
+ 
+  }
+
+  function back(mainContainer, container){
+    document.getElementById(mainContainer).classList.remove('d-none');
+    document.getElementById(container).classList.add('d-none');
   }
