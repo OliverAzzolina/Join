@@ -7,6 +7,10 @@ body {
     justify-content: center;
     align-items: center;
   }
+
+  .d-none{
+    display: none;
+  }
   
   #logo {
     z-index: 2000;

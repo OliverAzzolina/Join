@@ -2,6 +2,7 @@
 
 function loginHTML() {
   return /*html*/ `
+  <div id="login-main-container">
   <div id="register-container" class="init-fade-in">
     <p>Not a Join User?</p>
     <button id="sign-up-btn" type="button" onclick="switchToRegister()">Sign Up</button>
@@ -38,9 +39,101 @@ function loginHTML() {
     </form>
   </div>
 <div class="footer fade-in">
-<a href="privacy.html">Privacy Policy</a>
-<a href="legal-notice.html">Legal Notice</a>
-</div>`;
+<a href="#" onclick="locateTo('privacy-container')">Privacy Policy</a>
+<a href="#" onclick="locateTo('legal-container')">Legal Notice</a>
+</div>
+</div>
+
+<div id="legal-container" class="loginLegal d-none">
+    <img src="assets/img/arrow.png" alt="Arrow Icon" class="redirect-icon" onclick="goHome()"/>
+
+    <div class="pcontent-container">
+      <div class="p-content">
+        <p class="title">Legal Notice</p>
+
+        <h1>Contact</h1>
+        <p>
+          Oliver Azzolina<br />
+          Marcel Arnold<br />
+          Rainer Zaddach<br />
+          9000 Munich
+        </p>
+        <h1>Exploration of the Board</h1>
+        <p>Email: info@developeracademie.de</p>
+
+        <h1>Acceptance of Terms</h1>
+        <p>
+          By accessing and using Join (Product), you acknowledge and agree to the following terms and conditions, as well as any policies, guidelines, or amendments that may be presented to you from time to time. We, the listed students, may update or change the terms and conditions without prior notice.
+        </p>
+        <h1>Scope and Ownership of the Product</h1>
+        <p>
+          Join was developed as part of a student group project in a web development boot camp at Developer Akademie GmbH. It serves an educational purpose and is not intended for comprehensive personal or business use. Therefore, we cannot guarantee continuous availability, reliability, accuracy, or any other aspect of the quality of this product.<br /><br />
+
+          The design of Join is owned by Developer Akademie GmbH. Unauthorized use, reproduction, modification, distribution, or duplication of the design is strictly prohibited.
+        </p>
+        <h1>Copyrights</h1>
+        <p>
+          In addition to the design owned by Developer Akademie GmbH, we, the listed students, retain all copyrights to Join, including all related copyrighted materials, trademarks, and other proprietary information.
+        </p>
+        <h1>Use of the Product</h1>
+        <p>
+          The use of the Join product should only be for lawful purposes, in compliance with all applicable laws and regulations. Any use of Join for illegal activities or to harass, harm, threaten, or intimidate another person is strictly prohibited. You are solely responsible for your interactions with other users of Join.
+        </p>
+        <h1>Disclaimer of Warranties and Limitation of Liability</h1>
+        <p>
+          Join is provided "as is" without any warranty, either expressed or implied, including, but not limited to, the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall we, the listed students, or Developer Akademie be liable for any direct, indirect, incidental, special, exemplary, or consequential damages, including, but not limited to, damages for lost profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of such damages, arising from or in connection with the use or performance of Join.
+        </p>
+      </div>
+    </div>
+    </div>
+    
+    <div id="privacy-container" class="loginPrivacy d-none">
+    <img src="assets/img/arrow.png" alt="Arrow Icon" class="redirect-icon" onclick="goHome()"/>
+    <div class="pcontent-container">
+      <div class="p-content">
+        <p class="title">Privacy Policy</p>
+
+        <h1>1. General</h1>
+        <p>
+          This Privacy Policy describes how personal data is collected, used, processed, and protected when you use the JOIN App. By using the app, you agree to the practices described in this policy.
+        </p>
+        <h1>2. Data Collected</h1>
+        <p>
+          2.1 User Data: We may collect personal data such as your name, email address, and other relevant information you provide while using the JOIN App.
+        </p>
+
+        <h1>Automatically Collected Information</h1>
+        <p>
+          2.2 The JOIN App may automatically collect certain information about your usage, including IP address, device information, location data, and app usage statistics.
+        </p>
+
+        <h1>3. Use of Data</h1>
+        <p>
+          3.1 We use the collected data to provide, improve, and personalize the JOIN App. This includes personalizing content, providing customer support, and analyzing app usage.
+        </p>
+
+        <h1>4. Data Security</h1>
+        <p>
+          4.1 We implement reasonable security measures to ensure the security of your data and prevent unauthorized access, disclosure, alteration, or destruction.
+        </p>
+
+        <h1>5. Data Sharing with Third Parties</h1>
+        <p>
+          5.1 We do not share your personal data with third parties without your consent, unless required by law or necessary to provide and improve the JOIN App.
+        </p>
+
+        <h1>6. Changes to the Privacy Policy</h1>
+        <p>
+          6.1 This Privacy Policy may be updated from time to time. We will inform you about significant changes through the app.
+        </p>
+
+        <h1>7. Contact Information</h1>
+        <p>
+          For questions or inquiries regarding this Privacy Policy, please contact us at info@developeracademie.de.
+        </p>
+      </div>
+    </div>
+    </div>`;
 }
 
 function registerHTML() {
@@ -78,7 +171,8 @@ function registerHTML() {
     <div class="footer">
       <a href="privacy.html">Privacy Policy</a>
       <a href="legal-notice.html">Legal Notice</a>
-    </div>`;
+    </div>
+    `;
 }
 
 function summaryHTML(

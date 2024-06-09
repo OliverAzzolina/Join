@@ -312,3 +312,8 @@ async function loadUserContacts(){
     sortContacts();
     loadContactList();
   }
+
+  function locateTo(container){
+    document.getElementById(container).classList.remove('d-none');
+    document.getElementById('login-main-container').classList.add('d-none')
+  }
