@@ -254,31 +254,37 @@ a {
 .todo-left:hover, .todo-left:hover * {
     background-color: #2A3647;
     color: white;
+    transition: all ease-in-out 125ms;
 }
 
 .done-right:hover, .done-right:hover * {
     background-color: #2A3647;
     color: white;
+    transition: all ease-in-out 125ms;
 }
 
 .todo2:hover, .todo2:hover * {
     background-color: #2A3647;
     color: white;
+    transition: all ease-in-out 125ms;
 }
 
 .to-do:hover, .to-do:hover * {
     background-color: #2A3647;
     color: white;
+    transition: all ease-in-out 125ms;
 }
 
 .to-do2:hover, .to-do2:hover * {
     background-color: #2A3647;
     color: white;
+    transition: all ease-in-out 125ms;
 }
 
 .to-do3:hover, .to-do3:hover * {
     background-color: #2A3647;
     color: white;
+    transition: all ease-in-out 125ms;
 }
 
 

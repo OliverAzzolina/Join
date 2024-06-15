@@ -127,6 +127,7 @@ body {
 
 .todos-header button:hover {
   cursor: pointer;
+  transition: all ease-in-out 125ms;
 }
 
 .todos-container-empty {
@@ -281,6 +282,7 @@ body {
 .close-button:hover {
   background-color: #e7e7e7;
   cursor: pointer;
+  transition: all ease-in-out 125ms;
 }
 
 .detail-title {
@@ -692,6 +694,7 @@ textarea:hover {
 .add-task-form-btn:hover {
   filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
   cursor: pointer;
+  transition: all ease-in-out 125ms;
 }
 
 .add-task-form-btn-text {
@@ -913,6 +916,7 @@ textarea:hover {
   cursor: pointer;
   color: #29abe2;
   font-weight: 700;
+  transition: all ease-in-out 125ms;
 }
 
 .overlay-buttons button img {
