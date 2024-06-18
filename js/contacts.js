@@ -189,6 +189,7 @@ async function addNewContact() {
   })
   await saveUserData(users);
   document.getElementById("overlay").style.display = "none";
+  showMessageOverlay('Contact saved ', 'contacts')
   init();
 }
 
@@ -368,14 +369,13 @@ function changeContactBackgroundColor(i, j) {
  * Opens the overlay to add a new contact.
  */
 function openAddNewContact() {
-  const windowWidth =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-  if (windowWidth <= 1050) {
-    document.querySelector(".add-contact-button").style.display = "none";
-  }
-
+  //const windowWidth =
+  //  window.innerWidth ||
+  //  document.documentElement.clientWidth ||
+  //  document.body.clientWidth;
+  //if (windowWidth <= 1050) {
+  //  document.querySelector(".add-contact-button").style.display = "none";
+  //}
   document.getElementById("overlay").style.display = "flex";
   document.getElementById("overlay").innerHTML = generateAddNewOverlay();
 }

@@ -75,16 +75,6 @@ function addTask(event) {
   clearInput();
 }
 
-function clearInput(){
-  document.getElementById("add-task-form").reset();
-  document.getElementById("show-assigned-editors-container").innerHTML = '';
-  document.getElementById("add-task-subtasks-container").innerHTML = '';
-  subtaskTempArray = [];
-  checkedArray = [];
-  document.getElementById("assigned-editors").innerHTML = '';
-  loadUserContacts();
-}
-
 
 /**
  * Retrieves the selected value from the category dropdown in the task form.
@@ -157,7 +147,7 @@ function getSubTasksDone() {
  */
 function saveTask() {
   setItem('tasks', JSON.stringify(tasks));
-  showMessageOverlay('Task added to Board');
+  showMessageOverlay('Task added to Board', 'board');
 }
 
 

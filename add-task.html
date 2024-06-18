@@ -46,16 +46,18 @@
       </a>
   </div>
 
-
+  <div class="message-overlay" id="message" style="display: none"></div>
  
     <!-- Main -->
     <div id="add-task-container" onclick="doNotClose(event)">
+
+
 
       <div id="add-task-overlay-header">
         <h1 id="add-task-headline">Add Task</h1>
       </div>
  
-      <div class="message-overlay"><div class="added-task-message" id="message" style="display: none"></div></div>
+
       <form id="add-task-form" onsubmit="addTask(event)">
         <div id="input-container-tasks">
           <div id="add-task-overlay-left">

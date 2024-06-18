@@ -74,13 +74,12 @@ function saveNewAddedTask(newTask) {
   temporaryAssignedTo = [];
   temporaryTaskStatus = "";
   newTaskPrio = "";
-  showMessageOverlay('Task added to Board');
+  showMessageOverlay('Task added to Board', 'board');
   setTimeout(() => {
-  closeAddTaskCard();
-  refreshTasks();
-  renderTasks();
-}, "2000");
+    closeAddTaskCard();
+  }, "2000");
   setItem("tasks", JSON.stringify(tasks));
+  renderTasks();
 }
 
 
@@ -93,6 +92,7 @@ function closeAddTaskCard() {
   document.getElementById("add-assigned-editors").innerHTML = "";
   document.getElementById("add-task-overlay").style.display = "none";
   document.body.style.overflow = "auto";
+  clearInput();
 }
 
 

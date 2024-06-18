@@ -158,10 +158,14 @@ async function goHome() {
  * Displays a message overlay with the given message for a short period of time.
  * @param {string} message - The message to be displayed in the overlay.
  */
-function showMessageOverlay(message){
+function showMessageOverlay(message, icon){
     let messageOverlay = document.getElementById("message");
     messageOverlay.style.display = "flex";
-    messageOverlay.innerHTML = `<span>${message}</span><img src="assets/img/sidebar_board_icon.svg" alt="">`;
+    messageOverlay.innerHTML = `
+    <div class="added-task-message" >
+        <span>${message} </span><img src="assets/img/sidebar_${icon}_icon.svg" alt="">
+    </div>
+    `;
     setTimeout(() => {
         messageOverlay.style.display = "none";
       }, "2000");
@@ -314,14 +318,22 @@ async function loadUserContacts(){
   }
 
 
-  function locateTo(mainContainer, container){
-    document.getElementById(mainContainer).classList.add('d-none');
-    document.getElementById(container).classList.remove('d-none');
-    
- 
-  }
+function locateTo(mainContainer, container){
+  document.getElementById(mainContainer).classList.add('d-none');
+  document.getElementById(container).classList.remove('d-none');
+}
 
-  function back(mainContainer, container){
-    document.getElementById(mainContainer).classList.remove('d-none');
-    document.getElementById(container).classList.add('d-none');
-  }
+function back(mainContainer, container){
+  document.getElementById(mainContainer).classList.remove('d-none');
+  document.getElementById(container).classList.add('d-none');
+}
+
+function clearInput(){
+  document.getElementById("add-task-form").reset();
+  document.getElementById("show-assigned-editors-container").innerHTML = '';
+  document.getElementById("add-task-subtasks-container").innerHTML = '';
+  subtaskTempArray = [];
+  checkedArray = [];
+  document.getElementById("assigned-editors").innerHTML = '';
+  loadUserContacts();
+}

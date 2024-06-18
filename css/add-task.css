@@ -202,9 +202,7 @@ h1 {
 }
 
 #add-task-overlay-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
 }
 
 #add-task-overlay-left,
@@ -424,17 +422,23 @@ textarea:hover,
 
 .message-overlay {
   display: flex;
-  height: 100%;
+  height: 100vh;
+  width: 100%;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
   background-color: rgba(0, 0, 0, 0.351);
+  z-index: 999;
 }
 
 .added-task-message {
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: absolute;
+  justify-content: space-evenly;
   width: 326px;
   height: 74px;
   border-radius: 20px;
@@ -443,7 +447,6 @@ textarea:hover,
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
-  z-index: 99;
 }
 
 .added-task-message img {
@@ -489,6 +492,7 @@ textarea:hover,
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  margin-bottom: 32px;
 }
 
 #add-task-requirement-footer {
@@ -637,7 +641,6 @@ ul#checklistSubDetail {
 
 @media screen and (max-width: 1400px) {
   #add-task-container {
-    margin-left: 256px;
     margin-right: auto;
     height: 870px;
     background-color: #f6f7f8;
@@ -647,6 +650,7 @@ ul#checklistSubDetail {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
   }
 
   #add-task-container form {
@@ -717,6 +721,13 @@ ul#checklistSubDetail {
     top: 26px;
     left: 23px;
     gap: 10;
+  }
+
+  #add-task-overlay-header {
+    width: unset;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   #add-task-headline {

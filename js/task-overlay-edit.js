@@ -192,7 +192,7 @@ function renderAssignedToEdit(index){
  * Saves the edited task details to the task array and updates the storage.
  * @param {number} i - The index of the task to be edited.
  */
-function saveTask(i) {
+async function saveTask(i) {
   tasks[i]["title"] = document.getElementById("edit-task-title-input").value;
   tasks[i]["description"] = document.getElementById("edit-task-description-input").value;
   tasks[i]["dueDate"] = document.getElementById("edit-task-form-input").value;
@@ -212,7 +212,7 @@ function saveTask(i) {
 /**
  * Closes the edit task overlay.
  */
-function closeEditOverlay() {
+async function closeEditOverlay() {
   document.getElementById("overlay").style.display = "none";
   document.body.style.overflow = "auto";
 }
