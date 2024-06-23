@@ -420,35 +420,6 @@ textarea:hover,
   border: none;
 }
 
-.message-overlay {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.351);
-  z-index: 999;
-}
-
-.added-task-message {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 326px;
-  height: 74px;
-  border-radius: 20px;
-  background-color: #2a3647;
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 24px;
-}
-
 .added-task-message img {
   height: 30px;
   width: 30px;

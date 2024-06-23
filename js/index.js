@@ -45,7 +45,10 @@ async function loginUser() {
     if (user) {
         removeInputAlert('email-input');
         localStorage.setItem("userId", user.userId);
-        window.location.href = 'summary.html';
+        showMessageOverlay('Login successful', 'check');
+        setTimeout(() => {
+            window.location.href = 'summary.html';
+        }, "2000");
     } else {
         inputAlert('email-input', 'Unknown user or wrong password. Please try again.');
     }

@@ -138,7 +138,12 @@ async function userIsAllowed() {
  */
 function logout() {
     localStorage.clear();
-    window.location.href = 'index.html';
+    showMessageOverlay('Logout successful', 'check');
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, "2000");
+
+    
   }
 
 
@@ -162,7 +167,7 @@ function showMessageOverlay(message, icon){
     let messageOverlay = document.getElementById("message");
     messageOverlay.style.display = "flex";
     messageOverlay.innerHTML = `
-    <div class="added-task-message" >
+    <div class="message-style" >
         <span>${message} </span><img src="assets/img/sidebar_${icon}_icon.svg" alt="">
     </div>
     `;
