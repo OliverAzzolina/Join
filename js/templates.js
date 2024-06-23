@@ -142,8 +142,11 @@ function registerHTML() {
     <img src="assets/img/logo_desktop.png" alt="Logo" id="logo" onclick="goHome()">
 
     <div id="signup-container">
-      <img src="assets/img/arrow.png" alt="arrow" id="arrow" onclick="switchToLogin()">
-      <h2>Sign Up</h2>
+      
+      <div>
+        <img src="assets/img/arrow.png" alt="arrow" id="arrow" onclick="switchToLogin()">
+        <h2>Sign Up</h2>
+      </div>
       <div class="form-underline"></div>
       <form id="registration-Form">
         <div class="form-group">
