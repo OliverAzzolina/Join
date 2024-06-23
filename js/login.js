@@ -8,7 +8,12 @@ async function guestLogin() {
         let user = users.find(user => user.userId === 123456);
         if (user) {
             localStorage.setItem('userId', user.userId);
-            window.location.href = 'summary.html';
+            
+            showMessageOverlay('Login successful', 'summary');
+            setTimeout(() => {
+                window.location.href = 'summary.html';
+                
+            }, "2000");
         } else {
             await setGuestUser();
             init();
