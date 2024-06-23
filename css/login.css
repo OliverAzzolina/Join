@@ -115,6 +115,14 @@ body {
     background-color: #2a3647;
     color: white;
   }
+
+  #register-container button:hover {
+    background-color: #29abe2;
+    border: 2px solid #29abe2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: all ease-in-out 125ms;
+  }
   
   #login-container {
     width: 625px;
@@ -180,6 +188,18 @@ body {
     display: flex;
     flex-direction: row;
   }
+
+  #remember-checkbox-container input:hover{
+    cursor: pointer;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: all ease-in-out 125ms;
+  }
+
+  #privacy-checkbox:hover{
+    cursor: pointer;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: all ease-in-out 125ms;
+  }
   
   #remember-checkbox-container p {
     margin: 0;
@@ -210,6 +230,7 @@ body {
     border: 2px solid #29abe2;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     cursor: pointer;
+    transition: all ease-in-out 125ms;
   }
   
   .button-group button:disabled:hover {

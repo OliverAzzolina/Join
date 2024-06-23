@@ -344,34 +344,23 @@ function showPrio(i){
 
 
 /**
- * Handles hover effect for buttons by changing their image source.
- * @param {string} id - The ID of the button.
+ * Changes the image source to the hover version when hovering over an element.
+ * @param {string} img - The identifier of the element being hovered over.
  */
-function hover(id) {
-  const button = document.getElementById(id);
-  const imageMap = {
-    'edit-img': 'edit_hover_icon.png',
-    'change-img': 'change_hover.png',
-    'delete-img': 'delete_hover_icon.png'
-  };
-
-  button.setAttribute('src', `assets/img/${imageMap[id] || 'plus_hover_icon.png'}`);
+function hover(img, id) {
+  document
+    .getElementById(img+id+"-img")
+    .setAttribute("src", "assets/img/"+img+"_hover_icon.png");
 }
 
-
 /**
- * Handles unhover effect for buttons by restoring their original image source.
- * @param {string} id - The ID of the button.
+ * Changes the image source back to the original version when hovering out of an element.
+ * @param {string} img - The identifier of the element being hovered out of.
  */
-function unhover(id) {
-  const button = document.getElementById(id);
-  const imageMap = {
-    'edit-img': 'edit_icon.png',
-    'change-img': 'change_unhovered.png',
-    'delete-img': 'delete_icon.png'
-  };
-
-  button.setAttribute('src', `assets/img/${imageMap[id] || 'plus_icon.png'}`);
+function unhover(img, id) {
+  document
+    .getElementById(img+id+"-img")
+    .setAttribute("src", "assets/img/"+img+"_icon.png");
 }
 
 

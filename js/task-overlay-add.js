@@ -92,7 +92,8 @@ function closeAddTaskCard() {
   document.getElementById("add-assigned-editors").innerHTML = "";
   document.getElementById("add-task-overlay").style.display = "none";
   document.body.style.overflow = "auto";
-  clearInput();
+  setNewTaskPrio("medium", "#FFA800")
+  clearInputOverlay();
 }
 
 

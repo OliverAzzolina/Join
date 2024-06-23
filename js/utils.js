@@ -337,3 +337,34 @@ function clearInput(){
   document.getElementById("assigned-editors").innerHTML = '';
   loadUserContacts();
 }
+
+function clearInputOverlay(){
+    document.getElementById("add-task-form").reset();
+    document.getElementById("show-assigned-editors-container").innerHTML = '';
+    document.getElementById("add-task-subtasks-container").innerHTML = '';
+    subtaskTempArray = [];
+    checkedArray = [];
+    //document.getElementById("assigned-editors").innerHTML = '';
+    //loadUserContacts();
+  }
+
+/**
+ * Changes the image source to the hover version when hovering over an element.
+ * @param {string} img - The identifier of the element being hovered over.
+ */
+function hover(img) {
+    document
+      .getElementById(img+"-img")
+      .setAttribute("src", "assets/img/"+img+"_hover_icon.png");
+}
+
+
+/**
+ * Changes the image source back to the original version when hovering out of an element.
+ * @param {string} img - The identifier of the element being hovered out of.
+ */
+function unhover(img) {
+    document
+      .getElementById(img +"-img")
+      .setAttribute("src", "assets/img/"+img+"_icon.png");
+}

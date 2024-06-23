@@ -424,6 +424,7 @@ main {
   background-color: #eeeeee;
   transform: translateY(1px);
   transition: all ease-in-out 125ms;
+  cursor: pointer;
 }
 
 .actions-container {

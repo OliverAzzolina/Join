@@ -388,6 +388,7 @@ function openChangeTaskPopup(i) {
  * @param {string} newStatus - The new status to set for the task.
  */
 function changeTask(i, newStatus) {
+  let changeTaskButtons = document.getElementById("change-task-buttons");
   changeTaskButtons.innerHTML = "";
   tasks[i]["status"] = newStatus;
   setItem("tasks", JSON.stringify(tasks));

@@ -499,11 +499,11 @@ function generateDetailOverlay(i) {
       <div class="d-flex"><div id="detailAssignedTo"></div><div style="display: none;" id="toMuchEditors${i}" class="mini-logo-dummy"></div></div>
       <span class="f-s20-w400">Subtasks<ul id="checklistSubDetail"></ul></span>
       <div class="overlay-buttons">
-        <button onclick="openChangeTaskPopup(${i})" onmouseover="hover('change-img')" onmouseout="unhover('change-img')"><img id="change-img" src="assets/img/change_unhovered.png">Change</button>
+        <button onclick="openChangeTaskPopup(${i})" onmouseover="hover('change', ${i})" onmouseout="unhover('change', ${i})"><img id="change${i}-img" src="assets/img/change_icon.png">Change</button>
         <div class="overlay-buttons-splitter"></div>
-        <button onclick="deleteTask(${i})" onmouseover="hover('delete-img')" onmouseout="unhover('delete-img')"><img id="delete-img" src="assets/img/delete_icon.png">Delete</button>
+        <button onclick="deleteTask(${i})" onmouseover="hover('delete', ${i})" onmouseout="unhover('delete', ${i})"><img id="delete${i}-img" src="assets/img/delete_icon.png">Delete</button>
         <div class="overlay-buttons-splitter"></div>
-        <button onclick="openEditOverlay(${i})" onmouseover="hover('edit-img')" onmouseout="unhover('edit-img')"><img id="edit-img" src="assets/img/edit_icon.png">Edit</button>
+        <button onclick="openEditOverlay(${i})" onmouseover="hover('edit', ${i})" onmouseout="unhover('edit', ${i})"><img id="edit${i}-img" src="assets/img/edit_icon.png">Edit</button>
       </div>
       <div id="change-task-buttons" class="change-task-buttons"></div>
   </div>
@@ -735,8 +735,8 @@ function renderContactInfo(
                 <span>${firstName} ${lastName}</span>
             </div>
             <div class="edit-contact">
-                <button onclick="EditContact(${i},${j})" onmouseover="hover('a')" onmouseout="unhover('a')"><img id="edit-img" src="assets/img/edit_icon.png" alt=""><span>Edit</span></button>
-                <button onclick="deleteContact(${i},${j})" onmouseover="hover('b')" onmouseout="unhover('b')"><img id="delete-img" src="assets/img/delete_icon.png" alt=""><span>Delete</span></button>
+                <button onclick="EditContact(${i},${j})" onmouseover="hover('edit')" onmouseout="unhover('edit')"><img id="edit-img" src="assets/img/edit_icon.png" alt=""><span>Edit</span></button>
+                <button onclick="deleteContact(${i},${j})" onmouseover="hover('delete')" onmouseout="unhover('delete')"><img id="delete-img" src="assets/img/delete_icon.png" alt=""><span>Delete</span></button>
             </div>
         </div>
     </div>        

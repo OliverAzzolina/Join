@@ -775,7 +775,8 @@ ul#checklistSubDetail {
   }
 
   .cancel-button {
-    display: none;
+   /* display: none;*/
+   width: 100%;
   }
 
   #contacts-dropdown {
@@ -885,6 +886,7 @@ ul#checklistSubDetail {
 
   .add-task-buttons {
     gap: 24px;
+    flex-direction: column-reverse;
   }
 
   #mobile-menu-container {

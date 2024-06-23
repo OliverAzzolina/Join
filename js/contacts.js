@@ -310,40 +310,6 @@ function closePopup() {
 
 
 /**
- * Changes the image source to the hover version when hovering over an element.
- * @param {string} img - The identifier of the element being hovered over.
- */
-function hover(img) {
-  if (img == "a") {
-    document
-      .getElementById("edit-img")
-      .setAttribute("src", "assets/img/edit_hover_icon.png");
-  } else {
-    document
-      .getElementById("delete-img")
-      .setAttribute("src", "assets/img/delete_hover_icon.png");
-  }
-}
-
-
-/**
- * Changes the image source back to the original version when hovering out of an element.
- * @param {string} img - The identifier of the element being hovered out of.
- */
-function unhover(img) {
-  if (img == "a") {
-    document
-      .getElementById("edit-img")
-      .setAttribute("src", "assets/img/edit_icon.png");
-  } else {
-    document
-      .getElementById("delete-img")
-      .setAttribute("src", "assets/img/delete_icon.png");
-  }
-}
-
-
-/**
  * Prevents the default behavior of an event to stop propagation.
  * @param {Event} event - The event object.
  */
