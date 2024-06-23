@@ -185,11 +185,11 @@ function greetingDaytime() {
   
     let greetingText;
     if (hour >= 5 && hour < 12) {
-      greetingText = "Guten Morgen";
+      greetingText = "Good morning";
     } else if (hour >= 12 && hour < 17) {
-      greetingText = "Guten Tag";
+      greetingText = "Good day";
     } else {
-      greetingText = "Guten Abend";
+      greetingText = "Good evening";
     }
     return greetingText;
 }
