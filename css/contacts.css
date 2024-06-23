@@ -380,7 +380,6 @@ main {
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   padding: 13px 21px 13px 21px;
-  color: #d1d1d1;
 }
 
 .add-contact-card-right {
@@ -530,7 +529,7 @@ main {
   display: none;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1250px) {
   .right {
     display: none;
   }
@@ -579,6 +578,7 @@ main {
     bottom: 150px;
     right: 35px;
   }
+
   .add-contact-button span {
     display: none; /* Verstecke den Text */
   }
@@ -591,6 +591,7 @@ main {
     width: 396px;
     height: 760px;
   }
+
   .add-contact-card-left {
     border-top-left-radius: 30px;
     border-bottom-left-radius: 0px;
