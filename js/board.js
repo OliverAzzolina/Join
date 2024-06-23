@@ -110,9 +110,7 @@ function checkIfToMuchEditors(assignedTo, index){
     let tooMuchEditors = document.getElementById(`tooMuchEditors${index}`);
     tooMuchEditors.style.display = 'flex';
     tooMuchEditors.innerHTML = `+${tasks[index]['assignedTo'].length - 3}`;
-    assignedTo.innerHTML += `
-    <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
-    `;
+    assignedTo.innerHTML += renderAssignedToInitials(i, userColor, initials);
   }
 }
 

@@ -670,7 +670,7 @@ function renderChangeTaskButtons(i) {
 
 function renderAssignedToInitials(i, userColor, initials) {
   return `
-  <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo">${initials}</div>
+  <div id="mini-logo${i}" style="background-color: ${userColor}" class="mini-logo"><span>${initials}</span></div>
   `;
 }
 

@@ -421,7 +421,7 @@ ul#checklistSubDetail {
   color: white;
   font-size: 12px;
   font-weight: 400;
-  line-height: 14.4px;
+  margin-right: -10px;
 }
 
 .mini-logo-dummy {
@@ -435,8 +435,8 @@ ul#checklistSubDetail {
   color: black;
   font-size: 12px;
   font-weight: 400;
-  line-height: 14.4px;
   margin-left: 4px;
+  background-color: #ffffff;
 }
 
 .mini-logo-dummy-add-task-overlay {
