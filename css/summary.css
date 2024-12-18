@@ -571,8 +571,12 @@ a {
         transform: translateX(-50%);
         font-family: 'Inter', sans-serif;
     }
+}
 
-
+@media screen and (max-height: 667px) {
+    #main-container {
+        top: 107px;
+    }
 }
 
 @media screen and (max-width: 1580px) {

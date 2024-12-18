@@ -194,6 +194,10 @@ h1 {
   justify-content: space-between;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 #add-task-description-input {
   min-width: 440px;
   max-width: 440px;
@@ -349,7 +353,7 @@ textarea:hover,
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  z-index: 501;
+  
 }
 
 #assigned-editors {
@@ -997,13 +1001,22 @@ ul#checklistSubDetail {
     line-height: 24px;
   }
 
+  .add-task-buttons{
+   
+    width: 100%;
+  }
+
   .create-button {
-    width: 170%;
+    width: unset;
     background-color: #2a3647;
     color: white;
     border: none;
-    margin-right: -76px;
-    margin-left: 14px;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .cancel-button{
+    width: unset;
   }
 
   #add-task-requirement-footer {
@@ -1022,10 +1035,10 @@ ul#checklistSubDetail {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 290px;
-    height: 39px;
-    /* gap: 0px; */
-    margin-left: 12px;
+    flex-direction: column;
+    width: 100%;
+    height: unset;
+    /* gap: 16px; */
   }
 
   #add-task-headline {
@@ -1077,16 +1090,7 @@ ul#checklistSubDetail {
   margin-left: 16px;
 }
 
-#add-task-form-btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 281px;
-  height: 39px;
-  /* gap: 0px; */
-  margin-left: 27px;
-  flex-direction: initial;
-}
+
 
 .add-task-form-btn-text {
   color: #000;
@@ -1103,13 +1107,13 @@ ul#checklistSubDetail {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: -1px;
+  gap: 5px;
   border: 1px solid #d1d1d1;
   box-sizing: border-box;
   background-color: white;
   /* flex-grow: 1; */
-  width: 89px;
-  margin-left: -16px;
+  width: 100%;
+  margin-left: 1px;
 }
 
  .add-task-form-dropdown {
@@ -1144,13 +1148,11 @@ span {
 }
 
 .create-button {
-  width: 140px;
+  width: unset;
   background-color: #2a3647;
   color: white;
   border: none;
-  margin-right: -76px;
-  margin-left: 79px;
-  margin-top: -69px;
+  margin: 0;
 }
 
 body {

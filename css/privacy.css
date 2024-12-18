@@ -72,7 +72,7 @@ p {
 @media screen and (max-width: 1050px) {
   .pcontent-container {
     position: relative;
-    top: 160px;
+    top: 0;
     left: 0;
     right: 0;
     /* width: calc(100% - 30px); */
@@ -83,14 +83,16 @@ p {
     align-items: flex-start;
     justify-content: center;
     gap: 35px;
-    padding-left: 222px;
+    
     /* overflow-y: hidden; */
   }
 }
 
 @media screen and (max-width: 1050px) {
   .redirect-icon {
-    right: 10px; /* Position 10px vom rechten Rand für Bildschirme 1050px oder kleiner */
+    right: 30px; /* Position 10px vom rechten Rand für Bildschirme 1050px oder kleiner */
+    top: 35px;
+    z-index: 1;
   }
 }
 
@@ -110,24 +112,24 @@ p {
     font-family: "Inter", sans-serif;
     padding: 20px;
     box-sizing: border-box;
-    margin-left: -139px;
-    margin-right: 20px;
+    margin-left: 0;
+    margin-right: 0;
     margin-top: 25px;
   }
   .pcontent-container {
     position: relative;
-    top: 160px;
+    top: 30px;
     /* left: 0; */
     /* right: 0; */
     /* width: calc(100% - 30px); */
     /* padding: 0 15px; */
-    height: 100vh;
+    
     overflow: auto;
     display: flex;
     align-items: flex-start;
     justify-content: center;
     gap: 35px;
-    padding-left: 178px;
+    padding-left: 0;
     /* overflow-y: hidden; */
   }
 }

@@ -1,5 +1,5 @@
 body {
-    width: 100vw;
+    
     height: 100vh;
     margin: 0;
     background-color: #f6f7f8;
@@ -433,7 +433,7 @@ body {
   
     .footer {
       position: absolute;
-      bottom: 45px;
+      bottom: -220px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -477,14 +477,14 @@ body {
     }
   
     body {
-      width: 100vw;
+      
       height: 926px;
       margin: 0;
       background-color: #f6f7f8;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      
     }
     #remember-checkbox-container {
       margin-bottom: 33px;
